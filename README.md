@@ -1,2 +1,2 @@
-oscelot-bpm-project
+ocelot-bpm-project
 ===================
