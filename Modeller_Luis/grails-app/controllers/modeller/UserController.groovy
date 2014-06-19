@@ -1,23 +1,22 @@
 package modeller
 
 class UserController {
-
     static user = new User()
     static projects = []
 
     def index = {
-
-        projects.add new Bpm(name: "BPM-1")
-        projects.add new Bpm(name: "BPM-2")
-        projects.add new Bpm(name: "BPM-3")
-        projects.add new Bpm(name: "BPM-4")
-        projects.add new Bpm(name: "BPM-5")
-        projects.add new Bpm(name: "BPM-6")
-
     }
 
     def list = {
         [projects:projects]
+    }
+
+    def listOwn = {
+        [projects:user.own]
+    }
+
+    def listFav = {
+        [projects:user.fav]
     }
 
     def addFav (bpmId) {
@@ -27,7 +26,13 @@ class UserController {
         }
     }
 
-    def addOwn(bpmName) {
-        user.own.add new Bpm(name: bpmName)
+    def add (String name) {
+        projects.add new Bpm(name: name)
+    }
+
+    def addOwn (String name) {
+        def bpm = new Bpm(name: name)
+        user.own.add bpm
+        projects.add bpm
     }
 }
