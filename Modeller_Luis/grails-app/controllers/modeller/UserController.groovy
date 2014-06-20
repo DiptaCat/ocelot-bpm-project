@@ -12,27 +12,30 @@ class UserController {
     }
 
     def listOwn = {
-        [projects:user.own]
+        [own:user.own]
     }
 
     def listFav = {
-        [projects:user.fav]
+        [fav:user.fav]
     }
 
-    def addFav (bpmId) {
+    void addFav (bpmId) {
+        println "addFav"
         def bpm = Bpm.get(bpmId)
-        if(bpm){
-            user.fav.add bpm
-        }
+        if(bpm) user.fav.add bpm
     }
 
-    def add (String name) {
+    void add (String name) {
+        println "add"
         projects.add new Bpm(name: name)
     }
 
-    def addOwn (String name) {
+    void addOwn (String name) {
+        println "addOwn"
         def bpm = new Bpm(name: name)
+
         user.own.add bpm
+
         projects.add bpm
     }
 }

@@ -6,8 +6,8 @@
 
 <body>
 
-    Projects:
-    <g:each in="${projects}" var="proj">
+    Owned Projects:
+    <g:each in="${own}" var="proj">
         <div id="show">
             <span class="name">${proj.name}</span>
         </div>

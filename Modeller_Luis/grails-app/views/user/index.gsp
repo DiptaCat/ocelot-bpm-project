@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Acctions</title>
+        <title>Actions</title>
     </head>
 
 	<body>
-        <g:formRemote url="[user: 'addOwn']" name="addProjectForm">
-            <g:textField name="name" value=""/>
+
+        <g:formRemote url="[user:'addOwn']" name="ownProjectForm" method="addOwn">
+            <g:textArea name="name" value=""/>
             <g:submitButton name="Add Own Project" id="add_project_button"/>
         </g:formRemote>
 
     <br/>
 
-        <g:formRemote url="[user: 'add']" name="newProjectForm">
-            <g:textField name="name" value=""/>
+        <g:formRemote url="[user: 'add']" name="newProjectForm" method="add">
+            <g:textArea name="name" value=""/>
             <g:submitButton name="Add new Project" id="create_project_button"/>
         </g:formRemote>
+
+    <br/>
+
+        <g:form controller="user" action="list" name="listProjectsForm">
+            <g:submitButton name="List all Projects" id="list_projects_button"/>
+        </g:form>
 
     <br/>
 
@@ -29,10 +36,5 @@
             <g:submitButton name="List Own Projects" id="list_own_button"/>
         </g:form>
 
-    <br/>
-
-        <g:form controller="user" action="list" name="listProjectsForm">
-            <g:submitButton name="List all Projects" id="list_projects_button"/>
-        </g:form>
 	</body>
 </html>

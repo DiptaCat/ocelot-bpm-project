@@ -106,6 +106,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="Modeller_Luis-grailsPlugins" />
+    <orderEntry type="library" name="grails-2.4.1" level="application" />
   </component>
 </module>
 
