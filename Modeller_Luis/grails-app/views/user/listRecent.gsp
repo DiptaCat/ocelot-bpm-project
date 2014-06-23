@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Own Projects</title>
+    <title>Recent Projects</title>
 </head>
 
 <body>

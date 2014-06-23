@@ -8,10 +8,13 @@
         All Projects:
         <g:each in="${projects}" var="proj">
             <div id="show">
-                <g:form controller="User" enctype="multipart/form-data" method="post" id="user" name="addFavForm">
+
+                <span class="name">${proj.name}</span> <g:link id="${proj.id}" action="addFav" controller="User">Add Fav</g:link>
+
+                <%-- <g:form controller="User" enctype="multipart/form-data" method="post" id="user" name="addFavForm">
                     <g:textField name="name" value="${proj.name}" />
                     <g:actionSubmit action="addFav" value="AddFav"/>
-                </g:form>
+                </g:form> --%>
             </div>
         </g:each>
 

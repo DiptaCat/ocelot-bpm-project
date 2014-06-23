@@ -8,14 +8,14 @@
 
         <g:form controller="User" method="post" name="ownProjectForm">
             <g:textField name="name" value="${name}" />
-            <g:actionSubmit action="addOwn" value="Addown"/>
+            <g:actionSubmit action="addOwn" value="AddOwn"/>
         </g:form>
 
     <br/>
 
         <g:form controller="User" enctype="multipart/form-data" method="post" id="user" name="addProjectForm">
             <g:textField name="name" value="${name}" />
-            <g:actionSubmit action="add" value="Addnew"/>
+            <g:actionSubmit action="add" value="AddNew"/>
         </g:form>
 
     <br/>
