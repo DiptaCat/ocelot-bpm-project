@@ -2,7 +2,7 @@
 
 class HelloController {
 
-    def artistList = []
+    Concierto concert = new Concierto()
 
     def index() {
         // Cuando no se especifica se ejecuta el .gsp correspondiente en "views"
@@ -105,7 +105,7 @@ class HelloController {
 
     }
 
-    def guardar(String textNom, String textGrup) {
+    def guardar(String textNom, String textGrup, String checkbox) {
 
 //        render "Ejecutando Accion Guardar"
         println "guardar: Guardando artista..."
@@ -116,22 +116,27 @@ class HelloController {
         artista.setGrup(textGrup)
         artista.say("Hey man!")
 
-        artistList.add(artista)
+        concert.getArtistList().add(artista)
 
         println "guardar: Artista Guardado!"
+
+        if (checkbox.equals("1")){
+            println "guardar: Artista favorito..."
+            concert.getFavoritaList().add(artista)
+        }
 
         // Volvemos al formulario de añadir artistas
         render (view:'jimi.gsp')
 
     }
 
-    def llistar() {
+    def llistarArtistes() {
 
         //def num = 0
 
         println "llistar: Mostrar llista"
         render "Llista Artistes <br>"
-        render "num:nom:grup <br>"
+        render "num : nom : grup <br>"
         render "-------------------<br>"
 
         /*artistList.each { artista ->
@@ -142,7 +147,7 @@ class HelloController {
 
 
         // Recorrer lista usando indice propio del bucle each
-        artistList.eachWithIndex { artista, i ->
+        concert.getArtistList().eachWithIndex { artista, i ->
             //num++
             println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
             render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
@@ -150,5 +155,44 @@ class HelloController {
 
     }
 
+    def llistarFavorits() {
+
+        //def num = 0
+
+        println "llistar: Mostrar llista"
+        render "Llista Artistes Favorits<br>"
+        render "num : nom : grup <br>"
+        render "-------------------<br>"
+
+        // Recorrer lista usando indice propio del bucle each
+        concert.getFavoritaList().eachWithIndex { artista, i ->
+            //num++
+            println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
+            render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
+        }
+
+    }
+
+    def llistarRecents() {
+
+
+        println "llistar: Mostrar llista"
+        render "Llistar Artista Recent <br>"
+        render "nom : grup <br>"
+        render "-------------------<br>"
+
+        def reciente = concert.getArtistList().last()
+
+        render "${reciente.getNom()} :  ${reciente.getGrup()} <br>"
+
+/*
+        // Recorrer lista usando indice propio del bucle each
+        concert.getArtistList().eachWithIndex { artista, i ->
+
+            println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
+            render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
+        }*/
+
+    }
 
 }

@@ -2,7 +2,7 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(GrupoController)
-@Mock(Grupo)
+@Mock(Concierto)
 class GrupoControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -33,7 +33,7 @@ class GrupoControllerSpec extends Specification {
 
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
-        def grupo = new Grupo()
+        def grupo = new Concierto()
         grupo.validate()
         controller.save(grupo)
 
@@ -44,14 +44,14 @@ class GrupoControllerSpec extends Specification {
         when: "The save action is executed with a valid instance"
         response.reset()
         populateValidParams(params)
-        grupo = new Grupo(params)
+        grupo = new Concierto(params)
 
         controller.save(grupo)
 
         then: "A redirect is issued to the show action"
         response.redirectedUrl == '/grupo/show/1'
         controller.flash.message != null
-        Grupo.count() == 1
+        Concierto.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -63,7 +63,7 @@ class GrupoControllerSpec extends Specification {
 
         when: "A domain instance is passed to the show action"
         populateValidParams(params)
-        def grupo = new Grupo(params)
+        def grupo = new Concierto(params)
         controller.show(grupo)
 
         then: "A model is populated containing the domain instance"
@@ -79,7 +79,7 @@ class GrupoControllerSpec extends Specification {
 
         when: "A domain instance is passed to the edit action"
         populateValidParams(params)
-        def grupo = new Grupo(params)
+        def grupo = new Concierto(params)
         controller.edit(grupo)
 
         then: "A model is populated containing the domain instance"
@@ -98,7 +98,7 @@ class GrupoControllerSpec extends Specification {
 
         when: "An invalid domain instance is passed to the update action"
         response.reset()
-        def grupo = new Grupo()
+        def grupo = new Concierto()
         grupo.validate()
         controller.update(grupo)
 
@@ -109,7 +109,7 @@ class GrupoControllerSpec extends Specification {
         when: "A valid domain instance is passed to the update action"
         response.reset()
         populateValidParams(params)
-        grupo = new Grupo(params).save(flush: true)
+        grupo = new Concierto(params).save(flush: true)
         controller.update(grupo)
 
         then: "A redirect is issues to the show action"
@@ -129,16 +129,16 @@ class GrupoControllerSpec extends Specification {
         when: "A domain instance is created"
         response.reset()
         populateValidParams(params)
-        def grupo = new Grupo(params).save(flush: true)
+        def grupo = new Concierto(params).save(flush: true)
 
         then: "It exists"
-        Grupo.count() == 1
+        Concierto.count() == 1
 
         when: "The domain instance is passed to the delete action"
         controller.delete(grupo)
 
         then: "The instance is deleted"
-        Grupo.count() == 0
+        Concierto.count() == 0
         response.redirectedUrl == '/grupo/index'
         flash.message != null
     }
