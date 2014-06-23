@@ -6,17 +6,17 @@
 
 	<body>
 
-        <g:formRemote url="[user:'addOwn']" name="ownProjectForm" method="addOwn">
-            <g:textArea name="name" value=""/>
-            <g:submitButton name="Add Own Project" id="add_project_button"/>
-        </g:formRemote>
+        <g:form controller="User" method="post" name="ownProjectForm">
+            <g:textField name="name" value="${name}" />
+            <g:actionSubmit action="addOwn" value="AddOwn"/>
+        </g:form>
 
     <br/>
 
-        <g:formRemote url="[user: 'add']" name="newProjectForm" method="add">
-            <g:textArea name="name" value=""/>
-            <g:submitButton name="Add new Project" id="create_project_button"/>
-        </g:formRemote>
+        <g:form controller="User" enctype="multipart/form-data" method="post" id="user" name="addProjectForm">
+            <g:textField name="name" value="${name}" />
+            <g:actionSubmit action="add" value="AddNew"/>
+        </g:form>
 
     <br/>
 
@@ -35,6 +35,12 @@
         <g:form controller="user" action="listOwn" name="listOwnProjectForm">
             <g:submitButton name="List Own Projects" id="list_own_button"/>
         </g:form>
+
+    <br/>
+
+    <g:form controller="user" action="listRecent" name="listRecProjectForm">
+        <g:submitButton name="List Recent Projects" id="list_rec_button"/>
+    </g:form>
 
 	</body>
 </html>
