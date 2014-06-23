@@ -1,22 +1,13 @@
-package modeller_beto
+
 
 class HelloController {
+
+    def artistList = []
 
     def index() {
         // Cuando no se especifica se ejecuta el .gsp correspondiente en "views"
         //render "Hey Joe"
         //render (view:'jimi.gsp')
-
-        /*def a = 'John Doe'
-        a = new Object()
-        a = 10
-        println a
-        println "Probando index"*/
-
-
-    }
-
-    def jimi() {
 
         //render "Jimi Hendrix"
 
@@ -82,5 +73,82 @@ class HelloController {
         println mapWithValues.'HendrixExperience'
         println mapWithValues.get('HendrixExperience')
 
+        // -------------------
+        // BUCLES GROOVY
+        // -------------------
+
+        // Realitzar 5 iteraciones
+        5.times {
+            println "5 iteraciones"
+        }
+
+        // Recorrer lista
+
+        def alist3 = [11, 22, 33, 44, 55]
+
+        // Recorrer elementos
+        alist3.each { name ->
+            println name
+        }
+
+        // Recorrer ciertos elementos: output: 3 4 5
+        (3..5).each { number ->
+            println number
+        }
+
+        render (view:'jimi.gsp')
+
     }
+
+    def jimi() {
+
+
+    }
+
+    def guardar(String textNom, String textGrup) {
+
+//        render "Ejecutando Accion Guardar"
+        println "guardar: Guardando artista..."
+
+        Artista artista = new Artista ()
+
+        artista.setNom(textNom)
+        artista.setGrup(textGrup)
+        artista.say("Hey man!")
+
+        artistList.add(artista)
+
+        println "guardar: Artista Guardado!"
+
+        // Volvemos al formulario de añadir artistas
+        render (view:'jimi.gsp')
+
+    }
+
+    def llistar() {
+
+        //def num = 0
+
+        println "llistar: Mostrar llista"
+        render "Llista Artistes"
+        render "num:nom:grup"
+        render "------------------------"
+
+        /*artistList.each { artista ->
+            num++
+            println "$num : ${artista.getNom()} :  ${artista.getGrup()}"
+            render "$num : ${artista.getNom()} :  ${artista.getGrup()}"
+        }*/
+
+
+        // Recorrer lista usando indice propio del bucle each
+        artistList.eachWithIndex { artista, i ->
+            //num++
+            println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
+            render "$i : ${artista.getNom()} :  ${artista.getGrup()}"
+        }
+
+    }
+
+
 }
