@@ -130,9 +130,9 @@ class HelloController {
         //def num = 0
 
         println "llistar: Mostrar llista"
-        render "Llista Artistes"
-        render "num:nom:grup"
-        render "------------------------"
+        render "Llista Artistes <br>"
+        render "num:nom:grup <br>"
+        render "-------------------<br>"
 
         /*artistList.each { artista ->
             num++
@@ -145,7 +145,7 @@ class HelloController {
         artistList.eachWithIndex { artista, i ->
             //num++
             println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
-            render "$i : ${artista.getNom()} :  ${artista.getGrup()}"
+            render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
         }
 
     }
