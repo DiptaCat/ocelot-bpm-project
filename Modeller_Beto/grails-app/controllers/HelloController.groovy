@@ -146,7 +146,6 @@ class HelloController {
             //num++
             println "$i : ${artista.getNom()} :  ${artista.getGrup()}"
             render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
-            render "$i : ${artista.getNom()} :  ${artista.getGrup()} <br>"
         }
 
     }
