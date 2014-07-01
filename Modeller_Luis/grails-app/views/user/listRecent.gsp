@@ -5,7 +5,8 @@
 
 <body>
 
-Recent Projects:
+Recent Projects:<br/>
+
 <g:each in="${rec}" var="proj">
     <div id="show">
         <span class="name">${proj.name}</span>

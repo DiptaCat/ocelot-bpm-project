@@ -1,4 +1,4 @@
-import modeller.Bpm
+import modeller.Bpmn
 
 class BootStrap {
 

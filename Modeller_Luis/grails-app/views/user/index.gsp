@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Actions</title>
-    </head>
+<head>
+    <title>Actions</title>
+</head>
 
-	<body>
+<body>
 
-        <g:form controller="User" method="post" name="ownProjectForm">
-            <g:textField name="name" value="${name}" />
-            <g:actionSubmit action="addOwn" value="AddOwn"/>
-        </g:form>
+Add new project
+<g:form controller="user" method="post" name="addProjectForm">
+    Name: <g:textField name="name" value=""/>
+    <g:actionSubmit action="add" value="Save"/>
+</g:form>
 
-    <br/>
+<br/>
 
-        <g:form controller="User" enctype="multipart/form-data" method="post" id="user" name="addProjectForm">
-            <g:textField name="name" value="${name}" />
-            <g:actionSubmit action="add" value="AddNew"/>
-        </g:form>
+Add own project
+<g:form controller="user" method="post" name="ownProjectForm">
+    Name: <g:textField name="name" value=""/>
+    <g:actionSubmit action="addOwn" value="Save"/>
+</g:form>
 
-    <br/>
+<br/>
 
-        <g:form controller="user" action="list" name="listProjectsForm">
-            <g:submitButton name="List all Projects" id="list_projects_button"/>
-        </g:form>
+<g:form controller="user" method="post">
+    <g:actionSubmit value="List all Projects" action="list"/>
+    <g:actionSubmit value="List own Projects" action="listOwn"/>
+</g:form>
 
-    <br/>
+<g:form controller="user" method="post">
+    <g:actionSubmit value="List fav Projects" action="listFav"/>
+    <g:actionSubmit value="List recent Projects" action="listRecent"/>
+</g:form>
 
-        <g:form controller="user" action="listFav" name="listFavProjectForm">
-            <g:submitButton name="List Fav Projects" id="list_fav_button"/>
-        </g:form>
-
-    <br/>
-
-        <g:form controller="user" action="listOwn" name="listOwnProjectForm">
-            <g:submitButton name="List Own Projects" id="list_own_button"/>
-        </g:form>
-
-    <br/>
-
-    <g:form controller="user" action="listRecent" name="listRecProjectForm">
-        <g:submitButton name="List Recent Projects" id="list_rec_button"/>
-    </g:form>
-
-	</body>
+</body>
 </html>

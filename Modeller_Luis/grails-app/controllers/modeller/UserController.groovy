@@ -1,18 +1,18 @@
 package modeller
 
 class UserController {
-    static user = new User()
-    static projects = []
 
-    def index = {
-    }
+    def user = new User()
+    def projects = []
+
+    def index = {}
 
     def list = {
         [projects:projects]
     }
 
     def listOwn = {
-        [own:user.own]
+        [own:user.hasMany]
     }
 
     def listFav = {
@@ -20,35 +20,38 @@ class UserController {
     }
 
     def listRecent = {
-        if(projects.size()<6){
-            [rec:projects]
-        } else {
-            def max = projects.size() - 1
+
+        if(projects.size()<6) [rec: projects.reverse()]
+        else {
+
+            def max = projects.size()
             def min = max - 5
-            def rec = projects.subList(min, max)
+            def rec = projects.subList(min, max).reverse()
             [rec: rec]
         }
     }
 
     def addFav (long id) {
 
-        def bpm = Bpm.get(id)
+        def bpm = Bpmn.get(id)
 
-        if(user.fav.contains(bpm) == false) user.fav.add bpm
+        user.fav.add bpm
 
         render (view:'index.gsp')
     }
 
     def add (String name) {
 
-        projects.add new Bpm(name: name).save()
+        def bpm = new Bpmn(name: name).save()
+
+        projects.add bpm
 
         render (view:'index.gsp')
     }
 
     def addOwn (String name) {
 
-        def bpm = new Bpm(name: name).save()
+        def bpm = new Bpmn(name: name).save()
 
         user.own.add bpm
 

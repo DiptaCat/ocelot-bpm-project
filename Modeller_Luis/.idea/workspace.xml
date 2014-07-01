@@ -2,28 +2,325 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b3d9eb5-f301-49bf-8bbf-8c2bd4d466cb" name="Default" comment="Everything is working. Needs minor changes.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/Modeller-grailsPlugins.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/Modeller.iml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller_Beto/.idea/Modeller_Beto.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/luis.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/modules.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../.idea/ocelot-bpm-project.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Modeller/.idea/workspace.xml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/ArtistaControllerSpec.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/GrupoControllerSpec.groovy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/modeller_beto/AsdfControllerSpec.groovy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/modeller_beto/CustomerControllerSpec.groovy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/modeller_beto/HelloControllerSpec.groovy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../Modeller_Beto/test/unit/modeller_beto/SFDFGHJControllerSpec.groovy" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/AssetPipelineGrailsPlugin.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/conf/AssetPipelineBootStrap.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/conf/AssetUrlMappings.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/controllers/asset/pipeline/AssetsController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/services/asset/pipeline/AssetProcessorService.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/taglib/asset/pipeline/AssetMethodTagLib.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/grails-app/taglib/asset/pipeline/AssetsTagLib.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/scripts/AssetClean.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/scripts/AssetPrecompile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/scripts/_AssetCompile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/scripts/_Events.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/scripts/_Install.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/configuration.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/extending.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/extending/assetfile.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/extending/postprocessors.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/extending/processors.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/introduction.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/toc.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/usage.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/usage/directives.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/usage/encoding.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/usage/linking.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/docs/guide/usage/organization.gdoc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AbstractAssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AbstractProcessor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AssetCompiler.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AssetHelper.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/AssetPipelineFilter.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/CacheManager.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/CssAssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/DirectiveProcessor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/HtmlAssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/JsAssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/ManifestAssetFile.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/Processor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/grails/AssetResourceLocator.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/grails/CachingLinkGenerator.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/grails/LinkGenerator.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/processors/CssMinifyPostProcessor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/processors/CssProcessor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/asset/pipeline/processors/UglifyJsProcessor.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/README.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/README.org" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/bin/uglifyjs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/docstyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/lib/consolidator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/lib/parse-js.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/lib/process.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/lib/squeeze-more.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/r.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/beautify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/testconsolidator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/testparser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/1e21.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/array1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/array2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/array3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/array4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/assignment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/concatstring.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/const.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/div-with-regexp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/empty-blocks.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/forstatement.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/if-not.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/if.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/ifreturn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/ifreturn2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/infinite.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue10.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue11.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue13.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue14.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue16.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue17.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue20.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue21.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue25.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue27.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue278.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue28.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue29.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue30.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue34.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue349.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue353.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue372.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue471.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue48.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue50.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue53.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue54.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue68.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue69.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issue9.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/issues222_324.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/mangle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/null_string.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/strict-equals.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/var.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/whitespace.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/expected/with.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/1e21.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/array1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/array2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/array3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/array4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/assignment.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/concatstring.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/const.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/div-with-regexp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/empty-blocks.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/forstatement.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/if-not.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/if.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/ifreturn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/ifreturn2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/infinite.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue10.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue11.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue13.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue14.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue16.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue17.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue20.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue21.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue25.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue27.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue278.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue28.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue29.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue30.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue34.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue349.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue353.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue372.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue471.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue48.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue50.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue53.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue54.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue68.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue69.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issue9.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/issues222_324.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/mangle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/null_string.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/strict-equals.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/var.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/whitespace.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/compress/test/with.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/test/unit/scripts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/tmp/hoist.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/tmp/instrument.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/tmp/test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/asset-pipeline-1.8.7/src/groovy/uglifyjs/uglify-js.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/CacheGrailsPlugin.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/grails-app/conf/DefaultCacheConfig.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/grails-app/services/grails/plugin/cache/GrailsCacheAdminService.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/grails-app/taglib/grails/plugin/cache/CacheTagLib.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/groovy/grails/plugin/cache/ConfigBuilder.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/groovy/grails/plugin/cache/ConfigLoader.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/BlockingCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CacheBeanPostProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CacheConfigArtefactHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CacheConfiguration.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CacheEvict.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CachePut.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/Cacheable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/CustomCacheKeyGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsAnnotationCacheOperationSource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsCacheManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsConcurrentMapCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsConcurrentMapCacheManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/GrailsValueWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/SerializableByteArrayOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/SerializableOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/SimpleKeyGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/Timer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/compiler/CacheTransformation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/util/ClassUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/AlreadyGzippedException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/ContentCacheParameters.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/GenericResponseWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/Header.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/HttpDateFormatter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/PageInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/SerializableCookie.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/AbstractFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/CacheExpressionRootObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/CacheOperationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/DefaultWebKeyGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/ExpressionEvaluator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/LazyParamAwareEvaluationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/NoOpFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/PageFragmentCachingFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/WebKeyGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/simple/MemoryBlockingCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/simple/MemoryCacheConfiguration.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/simple/MemoryPageFragmentCachingFilter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/Hibernate4GrailsPlugin.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/scripts/CreateHibernateCfgXml.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/scripts/SchemaExport.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/hibernate4-4.3.5.3/src/java/hibernate.cfg.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/ScaffoldingGrailsPlugin.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/CreateScaffoldController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/GenerateAll.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/GenerateAsyncController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/GenerateController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/GenerateRestfulController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/GenerateViews.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/_Events.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/scripts/_GrailsGenerate.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/groovy/org/codehaus/groovy/grails/scaffolding/DefaultGrailsTemplateGenerator.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/AbstractGrailsTemplateGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/DomainClassPropertyComparator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/GrailsTemplateGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/SimpleDomainClassPropertyComparator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/view/ScaffoldedGroovyPageView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/java/org/codehaus/groovy/grails/scaffolding/view/ScaffoldingViewResolver.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/artifacts/ScaffoldingController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/AsyncController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/AsyncSpec.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/Controller.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/RestfulController.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/RestfulSpec.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/Spec.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/_form.gsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/create.gsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/edit.gsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/index.gsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/renderEditor.template" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/scaffolding-2.1.0/src/templates/scaffolding/show.gsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/TomcatGrailsPlugin.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/application.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/grails-plugin-tomcat-7.0.53.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/scripts/Tomcat.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/scripts/_Events.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/InlineExplodedTomcatServer.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/TomcatLoader.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/TomcatServer.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/TomcatServerFactory.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/fork/ForkedTomcatServer.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/fork/TomcatDevelopmentRunner.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/fork/TomcatExecutionContext.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/groovy/org/grails/plugins/tomcat/fork/TomcatWarRunner.groovy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/java/org/grails/plugins/tomcat/ParentDelegatingClassLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugins/tomcat-7.0.53/src/java/org/grails/plugins/tomcat/TomcatKillSwitch.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/unit/modeller/BpmSpec.groovy" afterPath="$PROJECT_DIR$/test/unit/modeller/BpmnSpec.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/Artista.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/Artista.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure2.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure3.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure4.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure5.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig$_run_closure1_closure5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/BuildConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/HelloController.class" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/HelloController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/grails-app/domain/Artista.groovy" afterPath="$PROJECT_DIR$/../Modeller_Beto/grails-app/domain/Artista.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/../Modeller_Beto/grails-app/conf/BuildConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/grails-app/controllers/HelloController.groovy" afterPath="$PROJECT_DIR$/../Modeller_Beto/grails-app/controllers/HelloController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/Modeller_Beto-grailsPlugins.iml" afterPath="$PROJECT_DIR$/../Modeller_Beto/Modeller_Beto-grailsPlugins.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/Modeller_Beto.iml" afterPath="$PROJECT_DIR$/../Modeller_Beto/Modeller_Beto.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modeller_Luis-grailsPlugins.iml" afterPath="$PROJECT_DIR$/Modeller_Luis-grailsPlugins.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Modeller_Luis.iml" afterPath="$PROJECT_DIR$/Modeller_Luis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/application.properties" afterPath="$PROJECT_DIR$/../Modeller_Beto/application.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/classes/application.properties" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/classes/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/grails-app/views/index.gsp" afterPath="$PROJECT_DIR$/../Modeller_Beto/grails-app/views/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/index.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/index.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/grails-app/views/hello/jimi.gsp" afterPath="$PROJECT_DIR$/../Modeller_Beto/grails-app/views/hello/jimi.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/list.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/listFav.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/listFav.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/listOwn.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/listOwn.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/user/listRecent.gsp" afterPath="$PROJECT_DIR$/grails-app/views/user/listRecent.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../helloworld/.idea/misc.xml" afterPath="$PROJECT_DIR$/../helloworld/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/target/stacktrace.log" afterPath="$PROJECT_DIR$/../Modeller_Beto/target/stacktrace.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/work/web.xml.tmp" afterPath="$PROJECT_DIR$/target/work/web.xml.tmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Modeller_Beto/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Modeller_Beto/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -52,18 +349,21 @@
       <file leaf-file-name="User.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/User.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6086957" vertical-offset="0" max-vertical-offset="225">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="225">
+              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bpm.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+      <file leaf-file-name="Bpmn.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.5652175" vertical-offset="0" max-vertical-offset="240">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="240">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,48 +372,8 @@
       <file leaf-file-name="UserController.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18072289" vertical-offset="270" max-vertical-offset="975">
-              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5106382" vertical-offset="0" max-vertical-offset="405">
-              <caret line="11" column="120" selection-start-line="11" selection-start-column="120" selection-end-line="11" selection-end-column="120" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/index.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9787235" vertical-offset="21" max-vertical-offset="765">
-              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listRecent.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/listRecent.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.787234" vertical-offset="0" max-vertical-offset="315">
-              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listOwn.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/listOwn.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="315">
-              <caret line="11" column="18" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.08928572" vertical-offset="0" max-vertical-offset="1005">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -139,22 +399,27 @@
       <list>
         <option value="$PROJECT_DIR$/grails-app/views/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/modeller/ControlController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/list/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/addOwn.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/listFav.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/listOwn.gsp" />
         <option value="$PROJECT_DIR$/target/stacktrace.log" />
-        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/listRecent.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/domain/modeller/User.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/listOwn.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/user/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/create.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/list.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/listFav.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/listRecent.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/modeller/BpmnController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/application.properties" />
+        <option value="$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/domain/modeller/User.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy" />
       </list>
     </option>
   </component>
@@ -166,6 +431,70 @@
     <option name="y" value="26" />
     <option name="width" value="1442" />
     <option name="height" value="849" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>AOP</id>
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>Google Web Toolkit issues</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript validity issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Numeric issues</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>Probable bugsGroovy</id>
+          </State>
+          <State>
+            <id>Probable bugsJavaScript</id>
+          </State>
+          <State>
+            <id>Serialization issues</id>
+          </State>
+          <State>
+            <id>Threading issues</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -183,7 +512,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -194,128 +523,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modeller" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modeller_Luis" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modeller" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -324,20 +532,21 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.lastSelected" value="preferences.updates" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../grailstwitter-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="Groovy.Shell.LastModule" value="Modeller_Luis" />
+    <property name="LayoutCode.rearrangeEntriesGSP" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -623,7 +832,16 @@
       <workItem from="1403273157829" duration="8788000" />
       <workItem from="1403510504589" duration="6133000" />
       <workItem from="1403517148128" duration="3956000" />
-      <workItem from="1403521202149" duration="2300000" />
+      <workItem from="1403521202149" duration="2640000" />
+      <workItem from="1403707308981" duration="1073000" />
+      <workItem from="1403708424367" duration="4506000" />
+      <workItem from="1403770174754" duration="6203000" />
+      <workItem from="1403777707209" duration="649000" />
+      <workItem from="1404133503399" duration="6432000" />
+      <workItem from="1404202138519" duration="529000" />
+      <workItem from="1404203194261" duration="608000" />
+      <workItem from="1404203814925" duration="679000" />
+      <workItem from="1404207234865" duration="599000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1403169933394</created>
@@ -645,11 +863,15 @@
       <created>1403520927367</created>
       <updated>1403520927367</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Final version.">
+      <created>1403523528856</created>
+      <updated>1403523528856</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42775000" />
+    <option name="totallyTimeSpent" value="64393000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -678,26 +900,27 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2160229" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34903046" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25761774" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25552487" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39889196" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14878398" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Grails View" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16380544" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24099723" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2569061" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32963988" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2700831" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18240343" sideWeight="0.49815497" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18240343" sideWeight="0.49815497" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18240343" sideWeight="0.501845" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -705,10 +928,9 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25637585" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32825485" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32825485" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32825485" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -731,7 +953,8 @@
     <MESSAGE value="Problems with views and controllers communication." />
     <MESSAGE value="Trying" />
     <MESSAGE value="Everything is working. Needs minor changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Everything is working. Needs minor changes." />
+    <MESSAGE value="Final version." />
+    <option name="LAST_COMMIT_MESSAGE" value="Final version." />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -742,36 +965,43 @@
       <option name="time" value="6" />
     </breakpoint-manager>
   </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Modeller_Luis" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Modeller_Luis" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="240">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="585">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1005">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="330">
-          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/User.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="255">
           <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
@@ -791,7 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="330">
           <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,7 +1032,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="210">
           <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
@@ -823,7 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="255">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,7 +1063,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="225">
           <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
@@ -859,7 +1087,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="225">
           <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
@@ -879,7 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="255">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,7 +1118,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="240">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
@@ -915,7 +1142,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="240">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
@@ -939,7 +1166,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
       </provider>
@@ -972,23 +1199,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="10040" max-vertical-offset="29340">
-          <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/unit/modeller/BpmSpec.groovy">
+    <entry file="file://$PROJECT_DIR$/test/unit/modeller/BpmnSpec.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23904383" vertical-offset="0" max-vertical-offset="502">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
@@ -1002,32 +1220,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/work/plugins/cache-1.1.6/src/java/grails/plugin/cache/web/filter/PageFragmentCachingFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44028777" vertical-offset="1659" max-vertical-offset="12285">
-          <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Modeller_Beto/Modeller_Beto-grailsPlugins.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1575">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grailsw">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.09825327" vertical-offset="45" max-vertical-offset="5535">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.14649682" vertical-offset="69" max-vertical-offset="540">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,85 +1234,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0458515" vertical-offset="0" max-vertical-offset="1845">
-          <caret line="93" column="11" selection-start-line="93" selection-start-column="11" selection-end-line="93" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="471">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listFav.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.31914893" vertical-offset="0" max-vertical-offset="315">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0576037" vertical-offset="786" max-vertical-offset="1920">
-          <caret line="83" column="51" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listOwn.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="315">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listRecent.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.787234" vertical-offset="0" max-vertical-offset="315">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/User.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6086957" vertical-offset="0" max-vertical-offset="225">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5106382" vertical-offset="0" max-vertical-offset="405">
-          <caret line="11" column="120" selection-start-line="11" selection-start-column="120" selection-end-line="11" selection-end-column="120" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11516315" vertical-offset="0" max-vertical-offset="521">
           <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpm.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5652175" vertical-offset="0" max-vertical-offset="240">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
+        <state vertical-scroll-proportion="0.33202356" vertical-offset="10046" max-vertical-offset="29340">
+          <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1128,26 +1256,127 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grailsw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.63508064" vertical-offset="315" max-vertical-offset="5535">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modeller_Luis.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1770">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listFav.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5106382" vertical-offset="0" max-vertical-offset="330">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9787235" vertical-offset="21" max-vertical-offset="765">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="615">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listOwn.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="330">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15306123" vertical-offset="0" max-vertical-offset="540">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/UrlMappings.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/listRecent.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37246048" vertical-offset="0" max-vertical-offset="443">
+          <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/list.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41935483" vertical-offset="0" max-vertical-offset="465">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34179688" vertical-offset="1160" max-vertical-offset="1845">
+          <caret line="89" column="43" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5512295" vertical-offset="0" max-vertical-offset="1920">
+          <caret line="83" column="125" selection-start-line="83" selection-start-column="125" selection-end-line="83" selection-end-column="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/User.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="225">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/modeller/Bpmn.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="240">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11516315" vertical-offset="0" max-vertical-offset="521">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.058708414" vertical-offset="0" max-vertical-offset="511">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.031311154" vertical-offset="734" max-vertical-offset="1245">
+          <caret line="50" column="54" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/modeller/UserController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18072289" vertical-offset="270" max-vertical-offset="975">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.08928572" vertical-offset="0" max-vertical-offset="1005">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1159,14 +1388,14 @@
         <entry key="Modeller_Luis">
           <value>
             <GrailsSettings>
-              <option name="buildConfigCrc" value="1133223035" />
+              <option name="buildConfigCrc" value="-2123173299" />
               <option name="pluginDependenciesCrc" value="1682136675" />
               <option name="properties">
                 <map>
-                  <entry key="grails.global.plugins.dir" value="$GRAILS_ROOT$/2.4.0/global-plugins" />
+                  <entry key="grails.global.plugins.dir" value="$GRAILS_ROOT$/2.4.1/global-plugins" />
                   <entry key="grails.project.plugins.dir" value="target/work/plugins" />
                   <entry key="grails.project.work.dir" value="target/work" />
-                  <entry key="grails.work.dir" value="$GRAILS_ROOT$/2.4.0" />
+                  <entry key="grails.work.dir" value="$GRAILS_ROOT$/2.4.1" />
                 </map>
               </option>
             </GrailsSettings>
@@ -1256,6 +1485,17 @@
         </settings>
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">

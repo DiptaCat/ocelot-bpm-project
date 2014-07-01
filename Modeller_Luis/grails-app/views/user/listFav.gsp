@@ -1,16 +1,17 @@
 <html>
-    <head>
-        <title>Favorite Projects</title>
-    </head>
+<head>
+    <title>Favorite Projects</title>
+</head>
 
-    <body>
+<body>
 
-        Favorite Projects:
-        <g:each in="${fav}" var="proj">
-            <div id="show">
-                <span class="name">${proj.name}</span>
-            </div>
-        </g:each>
+Favorite Projects:<br/>
+
+<g:each in="${fav}" var="proj">
+    <div id="show">
+        <span class="name">${proj.name}</span>
+    </div>
+</g:each>
 
 </body>
 </html>

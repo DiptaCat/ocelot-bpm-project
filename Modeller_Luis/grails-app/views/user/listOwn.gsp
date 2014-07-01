@@ -1,16 +1,17 @@
 <html>
-    <head>
-        <title>Own Projects</title>
-    </head>
+<head>
+    <title>Own Projects</title>
+</head>
 
-    <body>
+<body>
 
-        Owned Projects:
-        <g:each in="${own}" var="proj">
-            <div id="show">
-                <span class="name">${proj.name}</span>
-            </div>
-        </g:each>
+Owned Projects:<br/>
 
-    </body>
+<g:each in="${own}" var="proj">
+    <div id="show">
+        <span class="name">${proj.name}</span>
+    </div>
+</g:each>
+
+</body>
 </html>
