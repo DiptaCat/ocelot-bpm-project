@@ -25,6 +25,27 @@
         <naming-strategy-map />
       </configuration>
     </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/templates/war/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/templates/war" relative="/WEB-INF" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/grails-app/conf/hibernate" />
+          <root url="file://$MODULE_DIR$/grails-app/controllers" />
+          <root url="file://$MODULE_DIR$/grails-app/domain" />
+          <root url="file://$MODULE_DIR$/grails-app/services" />
+          <root url="file://$MODULE_DIR$/grails-app/taglib" />
+          <root url="file://$MODULE_DIR$/src/groovy" />
+          <root url="file://$MODULE_DIR$/src/java" />
+          <root url="file://$MODULE_DIR$/grails-app/utils" />
+          <root url="file://$MODULE_DIR$/grails-app/i18n" />
+        </sourceRoots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -46,6 +67,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-provided-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/resources" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/scriptCache" />
+      <excludeFolder url="file://$MODULE_DIR$/target/work/tomcat" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -13,8 +13,8 @@
     <h1><g:message code="default.show.label" args="[entityName]" /></h1>
 </div>
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"/></i> <g:message code="default.new.label" args="[entityName]" /></g:link>
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label" args="[entityName]" /></g:link>
 </div>
 <div id="show-user" class="content scaffold-show" role="main">
     <g:if test="${flash.message}">
@@ -22,7 +22,7 @@
     </g:if>
     <div class="form-horizontal">
         <fieldset>
-            <g:render template="form" model="${['userInstance': userInstance]}" />
+            <g:render template="data" model="${['userInstance': userInstance]}" />
         </fieldset>
     </div>
     <g:form method="delete">

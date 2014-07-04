@@ -6,7 +6,10 @@ class User {
     String login
 
     static hasMany = [bpms: Bpm]
+    //static favs = [favs: Bpm]
 
     static constraints = {
+        name blank: false
+        login blank: false, unique: true
     }
 }

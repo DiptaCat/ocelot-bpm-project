@@ -22,7 +22,7 @@
     </g:if>
     <div class="form-horizontal">
         <fieldset>
-            <g:render template="form" model="${['bpmInstance': bpmInstance]}" />
+            <g:render template="data" model="${['bpmInstance': bpmInstance]}" />
         </fieldset>
     </div>
     <g:form method="delete">

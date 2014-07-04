@@ -1,4 +1,4 @@
-<%@ page import="blank.Bpm" %>
+<%@ page import="blank.User; blank.Bpm" %>
 
 
 <div class="control-group ${hasErrors(bean: bpmInstance, field: 'name', 'error')}  col-xs-12">
@@ -19,8 +19,7 @@
         <span class="required-indicator">*</span>
     </label>
     <div class="controls">
-        <g:select id="user" name="user.id" from="${blank.User.list()}" optionKey="id" required="" value="${bpmInstance?.user?.id}" class="many-to-one"/>
-
+        <g:select id="user" name="user.id" from="${User.list()}" optionKey="id" required="" value="${bpmInstance?.user?.id}" class="many-to-one"/>
     </div>
 </div>
 
