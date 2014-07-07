@@ -24,9 +24,8 @@
 
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'bpms', 'error')}  col-xs-12">
-
-    <label class="control-label" for="bpms" style="font-weight: bold">
-        <g:message code="user.bpms.label" default="Bpms"/>
+    <label class="control-label" style="font-weight: bold">
+        <g:message code="user.bpms.label" default="BPMs"/>
     </label>
 
     <div class="controls" style="font-style: italic">
@@ -40,7 +39,7 @@
 
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'dateCreated', 'error')}  col-xs-12">
-    <label class="control-label" for="name" style="font-weight: bold">
+    <label class="control-label" style="font-weight: bold">
         <g:message code="user.dateCreated.label" default="Date Created"/>
     </label>
 
