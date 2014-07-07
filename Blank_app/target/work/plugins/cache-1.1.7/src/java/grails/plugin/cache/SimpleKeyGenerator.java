@@ -26,7 +26,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Copy of Spring 4.0's {@link org.springframework.cache.interceptor.SimpleKeyGenerator} and {@link org.springframework.cache.interceptor.SimpleKey}
- * 
+ *
  * Simple key generator. Returns the parameter itself if a single non-null value
  * is given, otherwise returns a {@link SimpleKey} of the parameters.
  *
@@ -43,7 +43,7 @@ import org.springframework.util.StringUtils;
  * @see org.springframework.cache.annotation.CachingConfigurer
  */
 public class SimpleKeyGenerator implements KeyGenerator {
-	
+
 	/**
 	 * A simple key as returned from the {@link SimpleKeyGenerator}.
 	 *

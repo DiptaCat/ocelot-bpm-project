@@ -11,26 +11,26 @@
 
 	margin:2px;
 	border:2px solid #333;
-	
+
 	> :first-child {
 		display:block;
 		position:relative;
 	}
-	
+
 	.tags {
 		display:inline-block;
 		position:absolute;
 		bottom:0; right:0; left:0; overflow:visible;
- 
+
 		direction:rtl;
-		
+
 		//set these so that it's not confused with tags plugin
 		padding:0; margin:0;
 		height:auto; width:auto;
 		background-color:transparent;
 		border:none;
 		vertical-align:inherit;
-		
+
 		> .label-holder {
 			.opacity(0.92);
 			display:table;
@@ -38,7 +38,7 @@
 
 			direction:ltr;
 			text-align:left;
-			
+
 			&:hover {
 				.opacity(1);
 			}
@@ -51,14 +51,14 @@
 		 top:0; bottom:0;
 		 left:-30px;
 		 width:24px;
-		 
+
 		 background-color:rgba(0,0,0,0.55);
 
-		 text-align:center; 
+		 text-align:center;
 		 vertical-align:middle;
-		 
+
 		.transition(~"all 0.2s ease");
-		
+
 		&.tools-right {
 			left:auto; right:-30px;
 		}
@@ -85,17 +85,17 @@
 		color:#FFF;
 		font-size:18px; font-weight:normal;
 		padding:0 4px;
-		
+
 		&:hover {
 			text-decoration:none;
 			color:#C9E2EA;
-		}		
+		}
 	}
 	.tools.tools-bottom > a , .tools.tools-top > a {
 		display:inline-block;
 	}
-  
-  
+
+
   /* the custom text on hover */
 	> :first-child > .text {
 		position:absolute;
@@ -107,7 +107,7 @@
 
 		.opacity(0);
 		.transition(~"all 0.2s ease");
-		
+
 		&:before {/* makes the inner text become vertically centered*/
 			content: '';
 			display: inline-block;
@@ -115,7 +115,7 @@
 			vertical-align: middle;
 			margin-right: 0; /* Adjusts for spacing */
 		}
-		
+
 		> .inner {
 			 padding:4px 0;
 			 margin:0;
@@ -128,7 +128,7 @@
 	&:hover > :first-child  > .text{
 		.opacity(1);
 	}
-	
+
   }//li
 }
 
@@ -137,10 +137,10 @@
 
 /* gallery */
 @media only screen and (max-width: @screen-xs) {
-.ace-thumbnails { 
+.ace-thumbnails {
  text-align:center;
  }
- 
+
  .ace-thumbnails > li {
 	float:none;
 	display:inline-block;

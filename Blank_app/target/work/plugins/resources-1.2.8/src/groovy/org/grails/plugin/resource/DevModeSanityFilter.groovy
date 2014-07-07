@@ -7,7 +7,7 @@ import javax.servlet.*
 
 /**
  * This just traps any obvious mistakes the user has made and warns them in dev mode
- * 
+ *
  * @author Marc Palmer (marc@grailsrocks.com)
  */
 class DevModeSanityFilter implements Filter {
@@ -24,9 +24,9 @@ class DevModeSanityFilter implements Filter {
 <h1>Resources are being processed, please wait...</h1>
 </body>
 </html>"""
-    
+
     def grailsResourceProcessor
-    
+
     void init(FilterConfig config) throws ServletException {
         def applicationContext = WebApplicationContextUtils.getWebApplicationContext(config.servletContext)
         grailsResourceProcessor = applicationContext.grailsResourceProcessor

@@ -18,7 +18,7 @@ package org.grails.plugin.resource;
 
 
 /**
- * Copied from Tomcat 
+ * Copied from Tomcat
  * original source from https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/http/RequestUtil.java
  *
  */

@@ -2,7 +2,7 @@
 /**
  * jqGrid Japanese Translation
  * OKADA Yoshitada okada.dev@sth.jp
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -89,7 +89,7 @@ $.extend($.jgrid,{
 	col : {
 	    caption: "\u5217\u3092\u8868\u793a\uff0f\u96a0\u3059",
 	    bSubmit: "\u9001\u4fe1",
-	    bCancel: "\u30ad\u30e3\u30f3\u30bb\u30eb"	
+	    bCancel: "\u30ad\u30e3\u30f3\u30bb\u30eb"
 	},
 	errors : {
 		errcap : "\u30a8\u30e9\u30fc",

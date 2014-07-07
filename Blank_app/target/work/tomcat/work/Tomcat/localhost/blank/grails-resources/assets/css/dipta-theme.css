@@ -8,7 +8,7 @@
 }
 
 .navbar {
-	background: #0083A9; 
+	background: #0083A9;
 }
 
 .sidebar-app-title {
@@ -90,7 +90,7 @@
   color: #0083A9;
 }
 
-.dd-item > button:hover ~ .dd-handle, 
+.dd-item > button:hover ~ .dd-handle,
 .dd-item > button:hover ~ .dd2-content {
   color: #0083A9;
 }
@@ -241,7 +241,7 @@ input.ace.ace-switch.ace-switch-6[type="checkbox"]:checked + .lbl:before {
   color: #0083A9;
 }
 
-.dd-item > button:hover ~ .dd-handle, 
+.dd-item > button:hover ~ .dd-handle,
 .dd-item > button:hover ~ .dd2-content {
   color: #0083A9;
 }
@@ -396,12 +396,12 @@ select {
 
 h1{
   font-size: 22px;
-  border-bottom: 0px;	
-} 
+  border-bottom: 0px;
+}
 
 .tab-content{
-	border:none; 
-} 
+	border:none;
+}
 
 .span6{width:460px}
 
@@ -415,15 +415,15 @@ h1{
 	margin-top: 0;
 	font-size: 20px;
 }
-	
-.row, .mrow, .control-group{ 
-	margin-bottom: 1em; 
-} 
 
-.hrow{  
+.row, .mrow, .control-group{
+	margin-bottom: 1em;
+}
+
+.hrow{
 	overflow:hidden;
-	margin-bottom: 1em; 
-} 
+	margin-bottom: 1em;
+}
 
 .mbtn{
 	margin-top: 1.6em;
@@ -443,7 +443,7 @@ label.control-label{
 
 .nav-pills li a{
 	padding-top: 0.2em;
-	padding-bottom: 0.2em;  
+	padding-bottom: 0.2em;
 }
 
 label.property-key {
@@ -456,7 +456,7 @@ label.property-key {
   	font-weight: normal;
 }
 
-span.property-value {	
+span.property-value {
 	float: left;
 	padding-left: 1em;
 }

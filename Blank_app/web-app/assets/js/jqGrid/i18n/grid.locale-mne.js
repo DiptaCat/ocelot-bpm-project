@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : " zahtjevana je povratna vrijednost!",
 			customarray : "Prilagođena funkcija treba da vrati niz!",
 			customfcheck : "Prilagođena funkcija treba da bude prisutana u slučaju prilagođene provjere!"
-			
+
 		}
 	},
 	view : {

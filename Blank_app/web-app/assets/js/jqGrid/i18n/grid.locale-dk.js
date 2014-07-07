@@ -2,7 +2,7 @@
 /**
  * jqGrid Danish Translation
  * Kaare Rasmussen kjs@jasonic.dk
- * http://jasonic.dk/blog 
+ * http://jasonic.dk/blog
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html

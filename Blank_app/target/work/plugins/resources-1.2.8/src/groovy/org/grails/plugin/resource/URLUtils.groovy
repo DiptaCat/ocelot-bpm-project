@@ -4,7 +4,7 @@ package org.grails.plugin.resource
  * @author Marc Palmer (marc@grailsrocks.com)
  */
 class URLUtils {
-    
+
     def static externalURLPattern = /^((https?:?)?\/\/).*/
     private static final int MAX_NORMALIZE_ITERATIONS = 3
 
@@ -22,41 +22,41 @@ class URLUtils {
     static String relativeURI(base, target) {
          new URI(base).resolve(new URI(target)).normalize().toString()
     }
-    
+
     /**
      * Works out if url is relative, such that it would need to be corrected if
      * the file containing the url is moved
      */
     static Boolean isRelativeURL(url) {
         !url.startsWith('data:') &&
-        !url.startsWith('#') && 
+        !url.startsWith('#') &&
         !(url.indexOf('//') >= 0)
     }
 
     static Boolean isExternalURL(url){
         return url ==~ externalURLPattern
     }
-    
+
     /**
      * Normalizes and decodes uri once.
      * Check if result contains \ , /../ , /./ or // after decoding and throws IllegalArgumentException in that case
-     * 
+     *
      * @param uri
      * @return
      */
     static String normalizeUri(String uri) {
         if (uri == null) return null
-        
+
         String normalized = RequestUtil.normalize(uri)
         if (normalized == null) {
             throw new IllegalArgumentException("illegal uri ${uri}")
         }
-        
+
         String decoded = URLDecoder.decode(normalized, "UTF-8")
         if(decoded.contains('\\') || decoded.contains('/./') || decoded.contains('/../') || decoded.contains('//')) {
             throw new IllegalArgumentException("illegal uri ${uri}")
         }
-        
+
         decoded
     }
 }

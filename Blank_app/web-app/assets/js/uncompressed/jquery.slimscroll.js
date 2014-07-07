@@ -71,10 +71,10 @@
 
         // scroll amount applied when user is using gestures
         touchScrollStep : 200,
-        
+
         // sets border radius
         borderRadius: '7px',
-        
+
         // sets border radius of the rail
         railBorderRadius: '7px'
       };

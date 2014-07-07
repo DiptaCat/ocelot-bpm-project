@@ -6,14 +6,14 @@ modules = {
 		dependsOn: 'jquery'
 	   resource url: 'assets/css/bootstrap.min.css' //
 	   resource url: 'assets/css/font-awesome.min.css' //
-	  
+
 	   resource url: 'assets/css/bootstrap-editable.css' //
 	   resource url: 'assets/css/ace-fonts.css' //
 	   resource url: 'assets/css/ace.min.css' //
 	   resource url: 'assets/css/ace-rtl.min.css' //
 	   resource url: 'assets/css/ace-skins.min.css' //
 	   resource url: 'assets/css/dipta-theme.css' //
-	   
+
 	   resource url: 'assets/js/ace-extra.min.js' //
 	   resource url: 'assets/js/bootstrap.min.js' //
 	   resource url: 'assets/js/typeahead-bs2.min.js' //
@@ -35,6 +35,6 @@ modules = {
 	   resource url: 'assets/js/ace-elements.min.js' //
 	   resource url: 'assets/js/ace.min.js' //
 	   resource url: 'assets/js/jquery.autosize.min.js' //
-	   
+
    }
 }

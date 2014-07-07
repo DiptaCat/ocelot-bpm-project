@@ -91,11 +91,11 @@ abstract class TomcatServer implements EmbeddableServer {
             shouldScan = (Boolean) (scanConfig.enabled instanceof Boolean ? scanConfig.enabled : false)
             extraJarsToSkip = (scanConfig.excludes instanceof Collection) ? scanConfig.excludes.collect { it.toString() } : []
         }
-        
+
         tomcatDir.deleteDir()
         new File(tomcatDir, 'webapps').mkdirs()
     }
-    
+
     protected void configureJarScanner(Context context) {
         if (extraJarsToSkip && shouldScan) {
             try {

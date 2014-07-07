@@ -75,7 +75,7 @@ $.extend($.jgrid,{
 	col : {
 	    caption: "Mostrar/ocultar columnas",
 	    bSubmit: "Enviar",
-	    bCancel: "Cancelar"	
+	    bCancel: "Cancelar"
 	},
 	errors : {
 		errcap : "Erro",

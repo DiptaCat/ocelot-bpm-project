@@ -2,7 +2,7 @@
 /**
  * jqGrid Thai Translation
  * Kittituch Manakul m.kittituch@Gmail.com
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : "ต้องการการคืนค่า!",
 			customarray : "ฟังก์ชันที่สร้างขึ้นต้องส่งค่ากลับเป็นแบบแอเรย์",
 			customfcheck : "ระบบต้องการฟังก์ชันที่สร้างขึ้นสำหรับการตรวจสอบ!"
-			
+
 		}
 	},
 	view : {

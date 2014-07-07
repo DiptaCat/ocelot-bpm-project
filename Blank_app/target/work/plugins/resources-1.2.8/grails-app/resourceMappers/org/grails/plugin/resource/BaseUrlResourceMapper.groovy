@@ -29,8 +29,8 @@ class BaseUrlResourceMapper {
 
 			if (!url) {
 				url = getUrl(config.default, resource.linkUrl)
-			}		
-			
+			}
+
             if (url) {
                 if (url.endsWith('/')) {
                     url = url[0..-2]
@@ -39,7 +39,7 @@ class BaseUrlResourceMapper {
             }
         }
     }
-	
+
 	private String getUrl(configItem, linkUrl){
 		def url;
 		if(configItem){
@@ -53,7 +53,7 @@ class BaseUrlResourceMapper {
 		}
 		return url;
 	}
-	
+
 	private int getHashedResourceNum(String toHash, int maxNum){
 		if(toHash.contains('/')){
 			toHash = toHash.substring(toHash.lastIndexOf('/'));

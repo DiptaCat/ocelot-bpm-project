@@ -12,15 +12,15 @@ import java.util.concurrent.CopyOnWriteArrayList
 class ResourceModule {
     String name
     String cachedMarkup // Saves calling the tags every time
-    
+
     List<ResourceMeta> resources = new CopyOnWriteArrayList<ResourceMeta>()
 
     List<String> dependsOn = []
     def defaultBundle
-    
-    
+
+
     def pluginManager
-    
+
     private HashSet<String> dispositions
 
     /**
@@ -34,7 +34,7 @@ class ResourceModule {
         this.pluginManager = svc.pluginManager
         this.defaultBundle = false
     }
-    
+
     ResourceModule(name, Map resourceInfo, defBundle, svc) {
         this(name, svc)
         this.defaultBundle = defBundle
@@ -71,26 +71,26 @@ class ResourceModule {
         }
         lockDown()
     }
-    
+
     void addModuleDependency(String name) {
         dependsOn << name
     }
-    
+
     def getBundleTypes() {
         ['css', 'js']
     }
-    
+
     ResourceMeta addNewSyntheticResource(Class<ResourceMeta> type, String uri, resSvc) {
         def agg = type.newInstance(module:this)
         agg.sourceUrl = uri // Hack
         agg.actualUrl = uri
         agg.workDir = resSvc.workDir
-        
+
         resources << agg
-        
+
         agg
     }
-    
+
     ResourceMeta newResourceFromArgs(Map args, svc, boolean singleResourceModule) {
         def url = args.remove('url')
         if (url) {
@@ -120,32 +120,32 @@ class ResourceModule {
             } else if (!(excludedMappers instanceof Set)) {
                 r.excludedMappers = excludedMappers.toString().split(',')*.trim() as Set
             }
-        } 
-        
+        }
+
         // We cannot auto bundle this if attrs, wrapper are set, or its a single resource module, or its not
         // a bundle-able type
-        def canAutoBundle = 
+        def canAutoBundle =
             (!singleResourceModule || (singleResourceModule && defaultBundle)) && // single resource with defaultbundle specified is OK
-            !r.bundle && 
-            !args.wrapper && 
-            !args.attrs && 
+            !r.bundle &&
+            !args.wrapper &&
+            !args.attrs &&
             (r.sourceUrlExtension in bundleTypes)
-            
+
         if (canAutoBundle) {
             if (defaultBundle == null) {
                 // use module name by default
                 r.bundle = "bundle_$name"
-            } else if (defaultBundle) { 
+            } else if (defaultBundle) {
                 // use supplied value as a default
                 r.bundle = defaultBundle.toString()
             }
         }
-        
+
         // Namespace bundle by disposition
-        if (r.bundle) { 
+        if (r.bundle) {
             r.bundle += '_'+r.disposition
         }
-        
+
         r.prePostWrapper = args.remove('wrapper')
         def resattrs = ti.attrs?.clone() ?: [:]
         def attrs = args.remove('attrs')
@@ -156,16 +156,16 @@ class ResourceModule {
         }
         r.tagAttributes = resattrs
         r.attributes.putAll(args)
-        return r        
+        return r
     }
-    
+
     void lockDown() {
         this.resources = this.resources.asImmutable()
     }
-    
+
     Set<String> getRequiredDispositions() {
         if (!dispositions) {
-            dispositions = (resources.findAll { r -> 
+            dispositions = (resources.findAll { r ->
                 r.disposition
             }).disposition as Set
         }

@@ -31,7 +31,7 @@
 		this.$prevBtn.on('click', $.proxy(this.previous, this));
 		this.$nextBtn.on('click', $.proxy(this.next, this));
 		this.$element.on('click', 'li.complete', $.proxy(this.stepclicked, this));
-		
+
 		this.$stepContainer = this.$element.data('target') || 'body';
 		this.$stepContainer = $(this.$stepContainer);
 	};

@@ -1,12 +1,12 @@
 a {
-	color: #0083A9;	
+	color: #0083A9;
 	background-color: inherit;
 }
 
 h1 {
 	font-size: 1.6em;
 	margin-bottom: 0.5em;
-	color: #666;		
+	color: #666;
 }
 
 h2 {
@@ -39,13 +39,13 @@ label.property-key {
 	width: 200px;
 }
 
-span.property-value {	
+span.property-value {
 	float: left;
 	padding-left: 1em;
 }
 
 #header {
-	background-color: #0083A9;	
+	background-color: #0083A9;
 	height: 66px;
 	font-size: 0.9em;
 }
@@ -58,7 +58,7 @@ span.property-value {
 	color: #fff;
 	font-weight: bolder;
 	font-size: 1.4em;
-	float: right;	
+	float: right;
 	margin: 16px 15.5px 0 0;
 }
 
@@ -70,9 +70,9 @@ span.property-value {
 
 #area-cont {
 	background-color: #707173;
-	height: 22px;	
-	padding: 0 41.5px;	
-	line-height: 22px;	
+	height: 22px;
+	padding: 0 41.5px;
+	line-height: 22px;
 }
 
 #area span {
@@ -84,7 +84,7 @@ span.property-value {
     color: #fff;
     float: right;
     font-weight: bold;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 .form-search {
@@ -97,7 +97,7 @@ span.property-value {
 	vertical-align: top;
 }
 
-.nav-pills li a:hover {	
+.nav-pills li a:hover {
 	background-color: #0083A9;
 	color: #FFFFFF;
 }
@@ -109,7 +109,7 @@ span.property-value {
  }
 
 ul.errors {
-	list-style-type: none;	
+	list-style-type: none;
 	background-color: #F2DEDE;
     border-color: #EED3D7;
     color: #B94A48;
@@ -132,7 +132,7 @@ ul.errors {
 }
 
  .pagination .gap {
-    color: #999999;    
+    color: #999999;
     float: left;
 	padding: 0 14px;
 	line-height: 34px;
@@ -158,8 +158,8 @@ ul.errors {
 	background: #0083A9;
 	color: #fff;
 	clear: both;
-	font-size: 0.8em;	
-	padding: 0.4em;	
+	font-size: 0.8em;
+	padding: 0.4em;
 }
 
 .footer a {
@@ -168,7 +168,7 @@ ul.errors {
 
 .footer p {
 	text-align: center;
-	color: #fff;	
+	color: #fff;
 	margin: 0;
 }
 
@@ -199,7 +199,7 @@ th.desc a {
 
 ul.association {
 	margin-left: 16.5em;
-	list-style: none;	
+	list-style: none;
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {

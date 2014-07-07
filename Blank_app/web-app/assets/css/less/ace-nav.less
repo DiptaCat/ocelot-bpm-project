@@ -13,7 +13,7 @@
 
 	  margin:0;
 	  padding-left:0; padding-right:0;
-	  
+
 	  min-height:@navbar-mh;
 	  position:relative;
 
@@ -38,7 +38,7 @@
 		color: @navbar-text-color;
 	 }
   }
-  
+
   .navbar-header {
 	margin:0 !important;
   }
@@ -76,7 +76,7 @@
 .ace-nav {
  height:100%;
  margin:0 !important;
- 
+
  > li {
 	line-height:@navbar-mh;
 	height:@navbar-mh;
@@ -86,11 +86,11 @@
 
 	position:relative;
 	float:left !important;
-	
+
 	&:first-child {
 	  border-left:none;
 	}
-	
+
 	> a {
 		background-color: @ace-nav-default;
 		color: #FFF;
@@ -167,25 +167,25 @@
 
 
 
-	
+
 	//margins
 	.marginX (@index) when (@index > 0) {
 		&.margin-@{index} { margin-left: unit(@index,px); }
 		.marginX(@index - 1);
 	}
 	.marginX(4);
-	
+
 	&.no-border {
 		border: none !important;
 	}
 
-	
+
 	///
 	.dropdown-menu {
 		z-index: @zindex-navbar-fixed + 1;
 	}
  }
- 
+
  .nav-user-photo {
 	 margin: -4px 8px 0 0;
 
@@ -194,8 +194,8 @@
 
 	 max-width: 40px;
  }
- 
- 
+
+
   li:last-child  a [class^="icon-"] {/* the arrow indicating "See more" on each dropdown , and the icons of user menu */
 	display: inline-block;
 	width: 1.25em;
@@ -222,7 +222,7 @@
  .ace-nav > li:nth-last-child(4) > .dropdown-menu.pull-right:after {
   right:100px;
  }
- 
+
  .ace-nav > li:nth-last-child(3) > .dropdown-menu.pull-right {
 	right:-40px;
  }
@@ -244,7 +244,7 @@
  .ace-nav > li:nth-last-child(4) > .dropdown-menu.pull-right:after {
 	right:140px;
  }
- 
+
  .ace-nav > li:nth-last-child(3) > .dropdown-menu.pull-right {
 	right:-80px;
  }
@@ -252,7 +252,7 @@
  .ace-nav > li:nth-last-child(3) > .dropdown-menu.pull-right:after {
 	right:100px;
  }
- 
+
  .ace-nav > li:nth-last-child(2) > .dropdown-menu.pull-right {
 	right:-50px;
  }
@@ -273,7 +273,7 @@
 	right:auto;
 	left:25px;
  }
- 
+
  .ace-nav > li:nth-last-child(3) > .dropdown-menu.pull-right {
 	left:-60px;
 	right:auto;
@@ -283,7 +283,7 @@
 	left:80px;
 	right:auto;
  }
- 
+
  .ace-nav > li:nth-last-child(2) > .dropdown-menu.pull-right {
 	left:-110px;
 	right:auto;
@@ -314,9 +314,9 @@
 	display:block;
 	float:none !important;
 	text-align:center;
-	
+
 	background-color:#404040;
-	
+
 	border:1px solid #DDD;
 	border-width:1px 0;
 
@@ -366,14 +366,14 @@
 	text-align:left;
 
 	vertical-align:top;
-	line-height:15px; 
+	line-height:15px;
 	position:relative; top:6px;
 
 	 small {
 		display:block;
 	 }
  }
- 
+
  @media (min-width: @screen-topbar-down-min) and (max-width: @screen-xs) , (max-width: 360px) {
 	.user-menu {
 		padding-top:42px !important;
@@ -389,7 +389,7 @@
 		color:#777; font-size:14px;
 		width:156px;
 		max-width:156px;
-		
+
 		padding-left:8px;
 		padding-right:8px;
 		height:32px;
@@ -403,7 +403,7 @@
 		text-align:center;
 
 		vertical-align:none;
-		line-height:normal; 
+		line-height:normal;
 	}
 
 	.user-info > small {

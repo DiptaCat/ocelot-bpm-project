@@ -11,14 +11,14 @@ import grails.util.Environment
  * NOTE this is a lame implementation that NEVER adds servletContextPath!
  */
 class HalfBakedLegacyLinkGenerator implements GrailsApplicationAware {
-    
+
     def pluginManager
     GrailsApplication grailsApplication
-    
+
     String resource(Map args) {
         getResourceUrl(args)
     }
-    
+
 
     // ********************* EVIL - I HATE INABILITY TO REUSE! ***********************
     /**
@@ -67,7 +67,7 @@ class HalfBakedLegacyLinkGenerator implements GrailsApplicationAware {
         if (args.contextPath) {
             s << args.contextPath
         }
-        
+
         def dir = args['dir']
         if (args.plugin) {
             s << pluginManager.getPluginPath(args.plugin) ?: ''
@@ -78,8 +78,8 @@ class HalfBakedLegacyLinkGenerator implements GrailsApplicationAware {
         def file = args['file']
         if (file) {
             s << (file.startsWith("/") || dir?.endsWith('/') ?  file : "/${file}")
-        }    
+        }
         return s.toString()
     }
-    
+
 }

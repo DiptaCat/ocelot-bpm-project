@@ -6,7 +6,7 @@
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
- * 
+ *
  * update 2011.11.30
  *		add double u3000 SPACE for search:odata to fix SEARCH box display err when narrow width from only use of eq/ne/cn/in/lt/gt operator under IE6/7
 **/
@@ -49,7 +49,7 @@ $.extend($.jgrid,{
 			novalue : " 需要返回值！",
 			customarray : "自定义函数需要返回数组！",
 			customfcheck : "Custom function should be present in case of custom checking!"
-			
+
 		}
 	},
 	view : {

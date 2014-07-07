@@ -26,13 +26,13 @@ import java.lang.reflect.Method;
  * Includes the hashcode, method signature, and class name of the target (caller) in the cache key
  */
 public class CustomCacheKeyGenerator implements KeyGenerator {
-	
+
 	private final KeyGenerator innerKeyGenerator;
-	
+
 	public CustomCacheKeyGenerator(KeyGenerator innerKeyGenerator){
 		this.innerKeyGenerator = innerKeyGenerator;
 	}
-	
+
 	public CustomCacheKeyGenerator(){
 		// Use the Spring key generator if the Spring version is 4.0.3 or later
 		// Can't use the Spring key generator if < 4.0.3 because of https://jira.spring.io/browse/SPR-11505
@@ -47,7 +47,7 @@ public class CustomCacheKeyGenerator implements KeyGenerator {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("serial")
 	private static final class CacheKey implements Serializable {
 		final String targetClassName;
@@ -110,7 +110,7 @@ public class CustomCacheKeyGenerator implements KeyGenerator {
 
 	public Object generate(Object target, Method method, Object... params) {
 		Class<?> objClass = AopProxyUtils.ultimateTargetClass(target);
-		
+
 		return new CacheKey(
 				objClass.getName().intern(),
 				method.toString().intern(),

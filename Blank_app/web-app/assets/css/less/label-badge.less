@@ -14,7 +14,7 @@
 }
 
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
 	//default display:none causes problems with Android Webview
 	::safari-only,.label:empty {
 		display: inline-block;
@@ -35,7 +35,7 @@
  font-weight:normal;
  line-height:15px;
  background-color:@label-default !important;
- 
+
  &.no-radius { border-radius:0; }
  &.radius-1 { border-radius:1px; }
  &.radius-2 { border-radius:2px; }
@@ -58,7 +58,7 @@
 
  .@{label-class}, .@{badge-class} {
 	background-color:@label-color !important;
- }  
+ }
 }
 
 .label-arrow(@color) {
@@ -114,7 +114,7 @@
 	position:absolute;
 	top:0;
 	z-index: -1;
-	
+
 	border:1px solid transparent;
 
 	border-right-color:@label-default;
@@ -135,7 +135,7 @@
 	position:absolute;
 	top:0;
 	z-index: -1;
-	
+
 	border:1px solid transparent;
 
 	border-left-color:@label-default;
@@ -187,7 +187,7 @@
   font-size: @font-size;
   line-height: @line-height;
   height: @height;
-  
+
   &.arrowed {
 	margin-left: @border-width;
 	&:before {

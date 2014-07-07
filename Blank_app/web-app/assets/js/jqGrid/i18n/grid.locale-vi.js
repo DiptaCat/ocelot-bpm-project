@@ -2,7 +2,7 @@
 /**
  * jqGrid Vietnamese Translation
  * Lê Đình Dũng dungtdc@gmail.com
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : " giá trị trả về bắt buộc phải có!",
 			customarray : "Hàm nên trả về một mảng!",
 			customfcheck : "Custom function should be present in case of custom checking!"
-			
+
 		}
 	},
 	view : {

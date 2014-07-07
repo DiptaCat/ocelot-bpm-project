@@ -22,7 +22,7 @@ class CSSPreprocessorResourceMapper {
     static defaultIncludes = ['**/*.css']
 
     def grailsResourceProcessor
-    
+
     /**
      * Find all url() and fix up the url if it is not absolute
      * NOTE: This needs to run after any plugins that move resources around, but before any that obliterate
@@ -35,19 +35,19 @@ class CSSPreprocessorResourceMapper {
             }
             return null
         }
-        
+
         def processor = new CSSLinkProcessor()
-        
+
         if (log.debugEnabled) {
             log.debug "CSS Preprocessor munging ${resource}"
         }
 
         processor.process(resource, grailsResourceProcessor) { prefix, originalUrl, suffix ->
-            
+
             if (log.debugEnabled) {
                 log.debug "CSS Preprocessor munging url $originalUrl"
             }
-            
+
             // We don't do absolutes or full URLs - perhaps we should do "/" at some point? If app 
             // is mapped to root context then some people might do this but its lame
             // Also skip already-processed resources (i.e. bundled CSS)

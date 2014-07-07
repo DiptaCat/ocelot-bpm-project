@@ -9,17 +9,17 @@ import org.grails.plugin.resource.*
  * @author Luke Daley (ld@ldaley.com)
  */
 class ResourcesBootStrap {
- 
+
     def grailsResourceProcessor
-    
+
     def init = { servletContext ->
         /*grailsResourceProcessor.reload()*/
         if (Environment.current == Environment.DEVELOPMENT) {
             grailsResourceProcessor.dumpResources()
         }
     }
-    
+
     def destroy = {
-        
+
     }
 }

@@ -14,12 +14,12 @@ import org.grails.plugin.resource.util.DispositionsUtils
  * @author Luke Daley (ld@ldaley.com)
  */
 class ResourceTagLib {
-	
+
     static namespace = "r"
-    
+
     static REQ_ATTR_PREFIX_PAGE_FRAGMENTS = 'resources.plugin.page.fragments'
     static REQ_ATTR_PREFIX_AUTO_DISPOSITION = 'resources.plugin.auto.disposition'
-    
+
     static STASH_WRITERS = [
         'script': { out, stash ->
             out << "<script type=\"text/javascript\">"
@@ -38,7 +38,7 @@ class ResourceTagLib {
 
         }
     ]
-    
+
     static writeAttrs( attrs, output) {
         // Output any remaining user-specified attributes
         attrs.each { k, v ->
@@ -46,7 +46,7 @@ class ResourceTagLib {
                output << k
                output << '="'
                output << v.encodeAsHTML()
-               output << '" '    
+               output << '" '
            }
         }
     }
@@ -62,9 +62,9 @@ class ResourceTagLib {
             writeAttrs(attrs, o)
 
             o << '></script>'
-            return o    
+            return o
         },
-        
+
         link: { url, constants, attrs ->
             def o = new StringBuilder()
             o << "<link href=\"${url}\" "
@@ -88,14 +88,14 @@ class ResourceTagLib {
         ico:[rel:'shortcut icon'],
         appleicon:[rel:'apple-touch-icon']
     ]
-    
+
     def grailsResourceProcessor
-    
+
     def grailsLinkGenerator
-    
+
 	/**
 	 * Check if a url has already been rendered.
-	 * 
+	 *
 	 * @param url
 	 * @return true if not already rendered
 	 */
@@ -109,7 +109,7 @@ class ResourceTagLib {
             trk = new HashSet()
             request.resourceTracker = trk
         }
-        
+
         if (!trk.contains(url)) {
             trk.add(url)
             if (log.debugEnabled) {
@@ -123,7 +123,7 @@ class ResourceTagLib {
             return false
         }
     }
-    
+
     boolean declareModuleRequiredByPage(name, boolean mandatory = true) {
         def trk = request.resourceModuleTracker
         if (trk == null) {
@@ -133,14 +133,14 @@ class ResourceTagLib {
             trk = new HashMap()
             request.resourceModuleTracker = trk
         }
-        
+
         // If not already added, or is there but not mandatory and setting mandatory...
         if (!trk.containsKey(name) || (!trk[name] && mandatory)) {
             if (log.debugEnabled) {
                 log.debug "adding module [$name] (mandatory:${mandatory}) to resource module tracker for request ${request}"
             }
             trk[name] = mandatory
-            
+
             grailsResourceProcessor.addModuleDispositionsToRequest(request, name)
             return true
         } else {
@@ -150,10 +150,10 @@ class ResourceTagLib {
             return false
         }
     }
-    
+
     /**
      * Render a link for a resource.
-     * 
+     *
      * @attr uri to be written as the actual reference
      * @attr type of link to produce, must be one of SUPPORTED_TYPES
      * @attr ... other attributes which will override constant attributes for the link type
@@ -165,12 +165,12 @@ class ResourceTagLib {
         if (!type) {
             type = FilenameUtils.getExtension(urlForExtension)
         }
-        
+
         def typeInfo = SUPPORTED_TYPES[type]?.clone()
         if (!typeInfo) {
             throwTagError "I can't work out the type of ${uri} with type [${type}]. Please check the URL, resource definition or specify [type] attribute"
         }
-        
+
         def writerName = typeInfo.remove('writer')
         def writer = LINK_WRITERS[writerName ?: 'link']
 
@@ -179,7 +179,7 @@ class ResourceTagLib {
 
         out << writer(uri, typeInfo, attrs)
     }
-    
+
     /**
      * Render an appropriate resource link for a resource - WHETHER IT IS PROCESSED BY THIS PLUGIN OR NOT.
      *
@@ -213,11 +213,11 @@ class ResourceTagLib {
         if (!attrs.url && !attrs.uri && !attrs.file) {
             throw new GrailsTagException('For the &lt;r:external /&gt; tag, one of the attributes [uri, url, file] must be present')
         }
-        
+
         def url = attrs.remove('url')
         def disposition = attrs.remove('disposition')
 
-        def info 
+        def info
 
         def type = attrs.remove('type')
         def resolveArgs = determineResourceResolutionArguments(url, attrs)
@@ -242,7 +242,7 @@ class ResourceTagLib {
             // and layoutResources will render the implicit module
             return
         }
-        
+
         // Output link if image disposition, or if not already included
         if (disposition == 'image' || notAlreadyIncludedResource(info.resource?.linkUrl ?: info.uri)) {
             attrs.type = type
@@ -267,10 +267,10 @@ class ResourceTagLib {
 
 	/**
 	 * Produce standard map of arguments to use in resolving resource.
-	 * 
+	 *
 	 * @param url
 	 * @param attrs
-	 * @return 
+	 * @return
 	 */
     private determineResourceResolutionArguments(url, Map attrs) {
 
@@ -294,7 +294,7 @@ class ResourceTagLib {
         GrailsUtil.deprecated "Tag [r:use] is deprecated please use [r:require] instead"
         out << r.require(attrs)
     }
-    
+
     /**
      * Indicate that a page requires a named resource module
      * This is stored in the request until layoutResources is called, we then sort out what needs rendering or not later
@@ -303,9 +303,9 @@ class ResourceTagLib {
         if (log.debugEnabled) {
             log.debug "require (request ${request}): ${attrs}"
         }
-        
+
         needsResourceLayout()
-        
+
         def trk = request.resourceModuleTracker
         def mandatory = attrs.strict == null ? true : attrs.strict.toString() != 'false'
         def moduleNames
@@ -330,14 +330,14 @@ class ResourceTagLib {
             declareModuleRequiredByPage(name, mandatory)
         }
     }
-    
+
     private stashPageFragment(String type, String disposition, def fragment) {
         if (log.debugEnabled) {
             log.debug "stashing request script for disposition [${disposition}]: ${ fragment}"
         }
 
         needsResourceLayout()
-        
+
         def trkName = ResourceTagLib.makePageFragmentKey(type, disposition)
         DispositionsUtils.addDispositionToRequest(request, disposition, '-page-fragments-')
 
@@ -348,15 +348,15 @@ class ResourceTagLib {
         }
         trk << fragment
     }
-    
+
     private static String makePageFragmentKey(String type, String disposition) {
         "${REQ_ATTR_PREFIX_PAGE_FRAGMENTS}:${type}:${disposition}"
     }
-    
+
     private List consumePageFragments(String type, String disposition) {
         return (List) request[ResourceTagLib.makePageFragmentKey(type, disposition)] ?: Collections.EMPTY_LIST
     }
-    
+
     private static String makeAutoDispositionKey( String disposition) {
         "${REQ_ATTR_PREFIX_AUTO_DISPOSITION}:${disposition}"
     }
@@ -364,11 +364,11 @@ class ResourceTagLib {
     private isAutoLayoutDone(disposition) {
         request[ResourceTagLib.makeAutoDispositionKey(disposition)]
     }
-    
+
     private autoLayoutDone(disposition) {
         request[ResourceTagLib.makeAutoDispositionKey(disposition)] = true
     }
-    
+
     /**
      * Render the resources. First invocation renders head JS and CSS, second renders deferred JS only, and any more spews.
      */
@@ -399,11 +399,11 @@ class ResourceTagLib {
             }
             return
         }
-        
+
         if (log.debugEnabled) {
             log.debug "Rendering resources for disposition [${dispositionToRender}]"
         }
-        
+
         def trk = request.resourceModuleTracker
         if (log.debugEnabled) {
             log.debug "Rendering resources, modules in tracker: ${trk}"
@@ -422,7 +422,7 @@ class ResourceTagLib {
             // @todo where a module resource is bundled, need to satisfy deps of all resources in the bundle first!
             out << r.renderModule(name:module, disposition:dispositionToRender)
         }
-        
+
         if (log.debugEnabled) {
             log.debug "Rendering page fragments for disposition: ${dispositionToRender}"
         }
@@ -432,7 +432,7 @@ class ResourceTagLib {
         if (log.debugEnabled) {
             log.debug "Removing outstanding request disposition: ${dispositionToRender}"
         }
-        
+
         DispositionsUtils.doneDispositionResources(request, dispositionToRender)
     }
 
@@ -463,7 +463,7 @@ class ResourceTagLib {
     def stash = { attrs, body ->
         stashPageFragment(attrs.type, attrs.disposition, body())
     }
-    
+
     protected getModuleByName(name) {
         def module = grailsResourceProcessor.getModule(name)
         if (!module) {
@@ -491,18 +491,18 @@ class ResourceTagLib {
         if (!module) {
             return
         }
-        
+
         def s = new StringBuilder()
-        
+
         def renderingDisposition = attrs.remove('disposition')
 
         if (log.debugEnabled) {
             log.debug "Rendering the resources of module [${name}]: ${module.dump()}"
         }
-        
+
         def debugMode = grailsResourceProcessor.isDebugMode(request)
-        
-        for (r in module.resources) { 
+
+        for (r in module.resources) {
             if (!r.exists() && !URLUtils.isExternalURL(r.actualUrl)) {
                 throw new IllegalArgumentException("Module [$name] depends on resource [${r.sourceUrl}] but the file cannot be found")
             }
@@ -515,11 +515,11 @@ class ResourceTagLib {
                 args.uri = debugMode ? r.originalUrl : "${r.actualUrl}"
                 args.wrapper = r.prePostWrapper
                 args.disposition = r.disposition
-                
+
                 if (r.tagAttributes) {
                     args.putAll(r.tagAttributes) // Copy the attrs originally provided e.g. type override
                 }
-                
+
                 if (log.debugEnabled) {
                     log.debug "Rendering one of the module's resource links: ${args}"
                 }
@@ -532,14 +532,14 @@ class ResourceTagLib {
 
     /**
      * Get the uri to use for linking, and - if relevant - the resource instance.
-     * 
+     *
      * NOTE: The URI handling mechanics in here are pretty evil and nuanced (i.e. 
      * ad-hoc vs declared, ad-hoc and not found, ad-hoc and excluded etc).
      * There is reasonable test coverage, but only fools rush in.
-     * 
+     *
      * @attr uri - to be resolved, i.e. id of the ResourceMeta
      * @attr disposition - of the resource
-     * 
+     *
      * @return Map with uri/url property and *maybe* a resource property
      */
     def resolveLinkUriToUriAndResource(attrs) {
@@ -562,15 +562,15 @@ class ResourceTagLib {
                 uri = ctxPath + uri
             }
         }
-        
+
         def debugMode = grailsResourceProcessor.isDebugMode(request)
 
         // Get out quick and add param to tell filter we don't want any fancy stuff
         if (debugMode) {
-            
+
             // Some JS libraries can't handle different query params being sent to other dependencies
             // so we reuse the same timestamp for the lifecycle of the request
-    
+
             // Here we allow a refresh arg that will generate a new timestamp, normally we used the last we 
             // generated. Otherwise, you can't debug anything in a JS debugger as the URI of the JS 
             // is different every time.
@@ -579,7 +579,7 @@ class ResourceTagLib {
                 session.removeAttribute('grails-resources.debug-timestamp')
                 request.'grails-resources.debug-timestamp-refreshed' = true
             }
-            
+
             def timestamp = session['grails-resources.debug-timestamp']
             if (!timestamp) {
                 timestamp = System.currentTimeMillis()
@@ -588,14 +588,14 @@ class ResourceTagLib {
 
             uri += (uri.indexOf('?') >= 0) ? "&_debugResources=y&n=$timestamp" : "?_debugResources=y&n=$timestamp"
             return [uri:uri, debug:true]
-        } 
-        
+        }
+
         def disposition = attrs.remove('disposition')
 
         if (!abs) {
             uri = forcePrefixedWithSlash(uri)
         }
-        
+
         // If its a bad or empty URI, get out of here. It must at least contain the context path if it is relative
         if (!abs && (uri.size() <= ctxPath.size())) {
             return [uri:uri]
@@ -603,7 +603,7 @@ class ResourceTagLib {
 
         def contextRelUri = abs ? uri : uri[ctxPath.size()..-1]
         def reluri = ResourceProcessor.removeQueryParams(contextRelUri)
-        
+
         // Get ResourceMeta or create one if uri is not absolute
         def res = grailsResourceProcessor.getExistingResourceMeta(reluri)
         if (!res && !abs) {
@@ -628,7 +628,7 @@ class ResourceTagLib {
             return [uri:uri, resource:res]
         }
     }
-     
+
     /**
      * Get the URL for a resource
      * @todo this currently won't work for absolute="true" invocations, it should just passthrough these
@@ -646,7 +646,7 @@ class ResourceTagLib {
             out << info.uri
         }
     }
-    
+
     /**
      * Write out an HTML <img> tag using resource processing for the image
      */
@@ -656,7 +656,7 @@ class ResourceTagLib {
         }
         def args = attrs.clone()
         args.disposition = "image"
-        
+
         def info = resolveLinkUriToUriAndResource(args)
         def res = info.resource
 
@@ -672,7 +672,7 @@ class ResourceTagLib {
         o << "/>"
         out << o
     }
-    
+
     protected forcePrefixedWithSlash(uri) {
         if (uri) {
             if (uri[0] != '/') {

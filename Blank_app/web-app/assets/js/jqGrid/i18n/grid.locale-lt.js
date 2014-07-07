@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : " turi būti gražinama kokia nors reikšmė!",
 			customarray : "Custom f-ja turi grąžinti masyvą!",
 			customfcheck : "Custom f-ja tūrėtų būti sukurta, prieš bandant ją naudoti!"
-			
+
 		}
 	},
 	view : {

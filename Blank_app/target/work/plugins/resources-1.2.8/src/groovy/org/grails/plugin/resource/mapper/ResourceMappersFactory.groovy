@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory
 class ResourceMappersFactory {
 
     static List<ResourceMapper> createResourceMappers(grailsApplication, mappersConfig) {
-        
+
         def log = LoggerFactory.getLogger('org.grails.plugin.resource.mapper.ResourceMappersFactory')
-        
+
         // filter out abstracts
         def resourceMapperClasses = grailsApplication.resourceMapperClasses.findAll {
             !Modifier.isAbstract(it.clazz.modifiers)
         }
-        
+
         // Create an application context to allow the mapper instances to be autowired
         def beanNames = []
         def bb = new BeanBuilder(grailsApplication.mainContext, grailsApplication.classLoader)
@@ -29,23 +29,23 @@ class ResourceMappersFactory {
             for (resourceMapperClass in resourceMapperClasses) {
                 def name = resourceMapperClass.fullName
                 def instanceName = "${name}Instance"
-                
-                "$instanceName"(resourceMapperClass.clazz) { 
-                    it.autowire = true 
+
+                "$instanceName"(resourceMapperClass.clazz) {
+                    it.autowire = true
                 }
-                
-                "$name"(ResourceMapper, ref(instanceName), mappersConfig) 
-                
+
+                "$name"(ResourceMapper, ref(instanceName), mappersConfig)
+
                 beanNames << name
             }
         }
-        
+
         def ctx = bb.createApplicationContext()
-        def mapperOrdering = beanNames.collect { ctx.getBean(it) }.sort { ResourceMapper lhs, ResourceMapper rhs -> 
+        def mapperOrdering = beanNames.collect { ctx.getBean(it) }.sort { ResourceMapper lhs, ResourceMapper rhs ->
             if (lhs == null || rhs == null) {
                 throw new NullPointerException("compareTo() called with a null parameter")
             }
-            
+
             def phaseComp = lhs.phase <=> rhs.phase
             if (phaseComp != 0) {
                 return phaseComp
@@ -54,7 +54,7 @@ class ResourceMappersFactory {
                 return lhs.priority <=> rhs.priority ?: lhs.name <=> rhs.name
             }
         }
-        
+
         def operations = mapperOrdering.operation
         mapperOrdering.each { m ->
             if (m.name in operations) {
@@ -62,7 +62,7 @@ class ResourceMappersFactory {
                     "The mapper ${m.name} is not valid because there is an operation with the same name. Please change the name of the mapper.")
             }
         }
-        
+
         // Let's throw people a bone with some nice debug
         if (log.debugEnabled) {
             def s = new StringBuilder()

@@ -3,18 +3,18 @@
 	   <div class="navbar-header pull-left">
 	      <div style="display:inline;">
 	        <a href="#" class="navbar-brand"><img src="${resource(dir: 'images', file: 'logodipu.gif')}" alt="Diputació de Tarragona" /></a>
-	      </div>	      
+	      </div>
 	   </div>
 	   <div class="navbar-header pull-right" role="navigation">
-	      <ul class="nav ace-nav">		         	
+	      <ul class="nav ace-nav">
 	         <li>
 	            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
 	             <g:if test="${session.profile?.foto}">
 	               <dt:imgFromData class="nav-user-photo" data="${session.profile.foto as byte[]}" mimetype="image/jpeg" />
 	             </g:if>
-	             <g:else> 
-	             	<r:img class="nav-user-photo" uri="/assets/images/useravatar.png" alt="Foto del usuari" />               
-	             </g:else>  
+	             <g:else>
+	             	<r:img class="nav-user-photo" uri="/assets/images/useravatar.png" alt="Foto del usuari" />
+	             </g:else>
 	             <span>${session.profile?.nomComplet?:request.user?:'[desconegut]'}</span> <i class="icon-caret-down"></i>
 	            </a>
 	           <ul class="pull-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close dropdown-profiles">

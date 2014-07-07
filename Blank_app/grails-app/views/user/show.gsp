@@ -1,48 +1,6 @@
 
 <%@ page import="blank.User" %>
 <!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.show.label" args="[entityName]" /> ${userInstance.toString()}</title>
-</head>
-<body>
-<div class="page-header">
-    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-</div>
-<div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label" args="[entityName]" /></g:link>
-</div>
-<div id="show-user" class="content scaffold-show" role="main">
-    <g:if test="${flash.message}">
-        <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
-    </g:if>
-    <div class="form-horizontal">
-        <fieldset>
-            <g:render template="data" model="${['userInstance': userInstance]}" />
-        </fieldset>
-    </div>
-    <g:form method="delete">
-        <div class="form-actions">
-            <g:hiddenField name="id" value="${userInstance?.id}" />
-            <g:link class="edit btn btn-sm btn-primary" action="edit" id="${userInstance?.id}">
-                <i class="icon-trash icon-pencil"></i>
-                <g:message code="default.button.edit.label" default="Edit" />
-            </g:link>
-            <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                <i class="icon-trash icon-white"></i>
-                ${message(code: 'default.button.delete.label', default: 'Delete')}
-            </button>
-        </div>
-    </g:form>
-</div>
-</body>
-</html>
-
-
 %{--<html>
 	<head>
 		<meta name="layout" content="main">
@@ -64,36 +22,45 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list user">
-
-				<g:if test="${userInstance?.bpms}">
-				<li class="fieldcontain">
-					<span id="bpms-label" class="property-label"><g:message code="user.bpms.label" default="Bpms" /></span>
-
-						<g:each in="${userInstance.bpms}" var="b">
-						<span class="property-value" aria-labelledby="bpms-label"><g:link controller="bpm" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
-						</g:each>
-
-				</li>
-				</g:if>
-
-				<g:if test="${userInstance?.login}">
-				<li class="fieldcontain">
-					<span id="login-label" class="property-label"><g:message code="user.login.label" default="Login" /></span>
-
-						<span class="property-value" aria-labelledby="login-label"><g:fieldValue bean="${userInstance}" field="login"/></span>
-
-				</li>
-				</g:if>
-
+			
 				<g:if test="${userInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="user.name.label" default="Name" /></span>
-
+					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userInstance}" field="name"/></span>
-
+					
 				</li>
 				</g:if>
-
+			
+				<g:if test="${userInstance?.login}">
+				<li class="fieldcontain">
+					<span id="login-label" class="property-label"><g:message code="user.login.label" default="Login" /></span>
+					
+						<span class="property-value" aria-labelledby="login-label"><g:fieldValue bean="${userInstance}" field="login"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.bpms}">
+				<li class="fieldcontain">
+					<span id="bpms-label" class="property-label"><g:message code="user.bpms.label" default="Bpms" /></span>
+					
+						<g:each in="${userInstance.bpms}" var="b">
+						<span class="property-value" aria-labelledby="bpms-label"><g:link controller="bpm" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.dateCreated}">
+				<li class="fieldcontain">
+					<span id="dateCreated-label" class="property-label"><g:message code="user.dateCreated.label" default="Date Created" /></span>
+					
+						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${userInstance?.dateCreated}" /></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
@@ -104,3 +71,42 @@
 		</div>
 	</body>
 </html>--}%
+<html>
+<head>
+    <meta name="layout" content="main">
+    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+    <title><g:message code="default.show.label" args="[entityName]" /> ${userInstance.toString()}</title>
+</head>
+<body>
+<div class="page-header">
+    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+</div>
+<div class="row-fluid wizard-actions">
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"/></i> <g:message code="default.new.label" args="[entityName]" /></g:link>
+</div>
+<div id="show-user" class="content scaffold-show" role="main">
+    <g:if test="${flash.message}">
+        <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
+    </g:if>
+    <div class="form-horizontal">
+        <fieldset>
+            <g:render template="data" model="${['userInstance': userInstance]}" />
+        </fieldset>
+    </div>
+    <g:form>
+        <div class="form-actions">
+            <g:hiddenField name="id" value="${userInstance?.id}" />
+            <g:link class="edit btn btn-sm btn-primary" action="edit" id="${userInstance?.id}">
+                <i class="icon-trash icon-pencil"></i>
+                <g:message code="default.button.edit.label" default="Edit" />
+            </g:link>
+            <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                <i class="icon-trash icon-white"></i>
+                ${message(code: 'default.button.delete.label', default: 'Delete')}
+            </button>
+        </div>
+    </g:form>
+</div>
+</body>
+</html>

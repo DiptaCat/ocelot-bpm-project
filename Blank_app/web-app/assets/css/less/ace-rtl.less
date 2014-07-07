@@ -1,6 +1,6 @@
  @import "bootstrap/variables.less";
  @import "bootstrap/mixins.less";
- 
+
  @import "variables.less";
  @import "mixins.less";
 
@@ -49,7 +49,7 @@
 		content: "\00A0 \2014";
 	}
  }
- blockquote.pull-right {	
+ blockquote.pull-right {
 	p , small {
 		text-align:right;
 	}
@@ -60,8 +60,8 @@
 		content: "\2014 \00A0";
 	}
  }
- 
- 
+
+
  //forms.less
  .radio,
  .checkbox {
@@ -123,7 +123,7 @@
     text-align: left;
   }
  }
- 
+
  //tables.less
 
 
@@ -135,9 +135,9 @@
  .btn-group > .btn, .btn-group-vertical > .btn {
 	float: right;
  }
- 
 
- 
+
+
  //dropdowns.less
  .dropdown-menu {
 	margin: 2px 0 0; // override default ul
@@ -146,8 +146,8 @@
 	margin-left:0;
 	margin-right:2px;
  }
- 
- 
+
+
  //close.less
  .close {
 	float: left;
@@ -162,7 +162,7 @@
 		float: left;
 	}
  }
- 
+
  //navs.less
  .nav {
 	margin-right:0;
@@ -275,14 +275,14 @@
 }
 
 
- 
+
  //ACE
  //general.less
  .main-container {
 	direction:rtl;
 	text-align:right;
  }
- 
+
  .main-content {
 	margin-right:@sidebar-width;
 	margin-left:0;
@@ -295,7 +295,7 @@
 	margin-left:0;
 	margin-right:18px;
  }
- 
+
  //ace-nav.less
  .ace-nav {
 	> li {
@@ -311,7 +311,7 @@
 				left:auto; right:2px;
 			}
 		}
-		
+
 		&.no-border { border:none;}
 		.marginX (@index) when (@index > 0) {
 			&.margin-@{index} { margin-left:0; margin-right:unit(@index,px); }
@@ -360,7 +360,7 @@
 		font-size:14px;
 		content:@breadcrumb-separator-rtl;
 		color: @breadcrumb-arrow-color;
-		
+
 		margin-left: 2px;
 		padding: 0 2px 0 5px;
 		position:relative;
@@ -411,16 +411,16 @@
 			}
 		}
 	}
-	
+
 	a > .arrow {
 		left:9px; right:auto;
 	}
-	
+
 	&.active {
 		&:after {// the border on left of active item
 			left:-2px;
 			right:auto;
-			
+
 			border-width: 0 0 0 2px;
 		}
 	}
@@ -430,11 +430,11 @@
 		> li {
 			margin-left:0;
 			margin-right:0;
-			
+
 			> a {
 				padding:7px 37px 8px 0;
 			}
-			
+
 			a > [class*="icon-"]:first-child {
 				left:auto; right:10px;
 			}
@@ -442,8 +442,8 @@
 	}
 	> .submenu {
 		> li {
-			//tree like menu 
-			&:before {			
+			//tree like menu
+			&:before {
 				left:auto; right:18px;
 			}
 		}
@@ -462,7 +462,7 @@
  .nav-list li {
 	&.active > a:after {
 		left:0; right:auto;
-		
+
 		border-left-color:@menu-active-color;
 		border-right-color:transparent;
 	}
@@ -497,7 +497,7 @@
 
  @menumin-shadow-rtl:~"-2px 1px 2px 0 rgba(0, 0, 0, 0.2)";
  .menu-min .nav-list > li {
-	
+
 	> a {
 		> .menu-text {
 			left:auto;
@@ -519,7 +519,7 @@
 
 	> .submenu {
 		.box-shadow(@menumin-shadow-rtl);
-		
+
 		left:auto; right:(@sidebar-min-width - 1);
 		li {
 		  > a {
@@ -527,7 +527,7 @@
 
 			margin-left:auto;
 			margin-right:0;
-			
+
 			padding-left:0;
 			padding-right:24px;
 			> [class*="icon-"]:first-child {
@@ -614,7 +614,7 @@
  .btn-lg > [class*="icon-"] {
 	margin-left:6px;
 	margin-right:0;
-	
+
 	&.icon-on-right {
 		margin-left:0;
 		margin-right:6px;
@@ -623,7 +623,7 @@
  .btn-sm > [class*="icon-"] {
 	margin-left:3px;
 	margin-right:0;
-	
+
 	&.icon-on-right {
 		margin-left:0;
 		margin-right:3px;
@@ -702,8 +702,8 @@
 	}
  }
 
- 
- 
+
+
  input[type=checkbox].ace , input[type=radio].ace {
 	+ .lbl {
 		&::before {
@@ -711,7 +711,7 @@
 			margin-left:1px;
 		}
 	}
-	
+
 	&.ace-switch + .lbl {
 		&::before {
 			direction:ltr;
@@ -766,7 +766,7 @@
 			}
 		}
 	}
-	
+
 	.remove {
 		left:-11px; right:auto;
 	}
@@ -777,7 +777,7 @@
 	}
  }
 
- 
+
  //tab-accordion.less
  .nav-tabs {
   .navtab-paddingX (@index) when (@index > 0) {
@@ -822,7 +822,7 @@
 	margin-right:auto;
 	margin-left:4px;
  }
- 
+
  .nav-tabs[class*="tab-color-"] > li > a {
 	& , &:focus, &:hover {
 		margin-right:auto;
@@ -863,13 +863,13 @@
 	 border-left-width:0;
   }
  }
- 
+
  //tables.less
  .table-header {
 	padding-left:0;
 	padding-right:12px;
  }
- 
+
  .dataTables_length {
 	margin-left:0;
 	margin-right:8px;
@@ -877,7 +877,7 @@
  .dataTables_filter {
 	margin-left:8px;
 	margin-right:0;
-	
+
 	text-align:left;
  }
  .dataTables_info {
@@ -891,15 +891,15 @@
 	margin-right:0;
 	margin-left:4px;
  }
- 
+
  .dataTables_wrapper > .row > [class*="col-"] {
 	float:right;
 	margin-left:0;
 	width:50%;
 	.box-sizing(border-box);
  }
- 
- 
+
+
  //widget.less
  .widget-box {
 	direction:rtl;
@@ -973,7 +973,7 @@
 		text-align:right;
 		padding-left:0;
 		padding-right:8px;
-		
+
 	}
  }
  .infobox {
@@ -1000,7 +1000,7 @@
 		right:auto;
 	}
  }
- 
+
  .infobox-small {
 	text-align:right;
 	> .infobox-data {
@@ -1015,22 +1015,22 @@
 	margin-left:auto;
 	margin-right:2px;
  }
- 
+
  //page.price
  .pricing-box {
 	.widget-header {
 		padding-right:0;
 	 }
  }
- 
+
  .pricing-table-header {
 	text-align:right;
 	> li {
 		padding:7px 11px 7px 0;
 	}
  }
- 
- 
+
+
  .pricing-box-small {
 	margin-left:0;
 	margin-right:-2px;
@@ -1068,7 +1068,7 @@
  }
 
 
- 
+
 
  //page.login.less
  &.login-layout {
@@ -1085,7 +1085,7 @@
 					margin-left:0;
 					margin-right:11px;
 				}
-				
+
 				+ div {//the next one
 					float:left;
 					text-align:left;
@@ -1099,7 +1099,7 @@
 	  }
 	}
  }
- 
+
  //gallery
  .ace-thumbnails {
 	margin-right:0;
@@ -1107,7 +1107,7 @@
 		float:right;
 		.tags {
 			direction:ltr;
-			
+
 			> .label-holder {
 				margin:1px 0 0 1px;
 
@@ -1117,7 +1117,7 @@
 		}
 	}
  }
- 
+
  //items.less
  .itemdiv {
 	padding-right:0;
@@ -1139,14 +1139,14 @@
 			&:after {
 				right:16px; left:-12px;
 			}
-			
+
 			> [class*="icon-quote-"]:first-child {
 				margin-left:4px;
 				margin-right:0;
 			}
 		}
 	}
-	
+
 	&.dialogdiv {
 		&:before {
 			left:auto;
@@ -1170,12 +1170,12 @@
 			}
 		}
 	}
-	
+
 	&.memberdiv {
 		float:right;
 	}
-	
-	
+
+
 	.tools {
 		right:auto;
 		left:4px;
@@ -1227,16 +1227,16 @@
  .profile-info-value {
 	padding-right:6px;
 	padding-left:4px;
-	
+
 	margin-left:auto;
 	margin-right:120px;
-	
+
 	> span  + span:before{
 		margin-left:3px;
 		margin-right:1px;
 	}
  }
- 
+
  .profile-user-info-striped {
 	.profile-info-value {
 		padding-left:0;
@@ -1261,14 +1261,14 @@
 	margin-right:auto;
 	margin-left:1px;
  }
- 
+
 
  .tab-content.profile-edit-tab-content {
 	.box-shadow(~"-1px 1px 0 0 rgba(0, 0, 0, 0.2)");
  }
- 
- 
- 
+
+
+
  //page.inbox.less
  .inbox-tabs.nav-tabs {
 	  > li {
@@ -1277,14 +1277,14 @@
 			right:35%; right:~"calc(50% - 6px)";
 		}
 	  }
-	  
+
 	  &.tab-size-bigger > li {
 		&.active > a.btn-new-mail > .btn:before {
 			left:auto;
 			right:35%; right:~"calc(50% - 8px)";
 		}
 	  }
-	  
+
 	  > li.pull-left {
 		float:left;
 	  }
@@ -1356,8 +1356,8 @@
  .message-form .controls {
 	margin-right:125px;
  }
- 
- 
+
+
  //page.timeline.less
  .timeline-container {
 	&:before {
@@ -1378,7 +1378,7 @@
 			}
 		}
 	}
-	
+
 	&:nth-child(even) .widget-box {
 		&.transparent {
 			border-right-color:#DBDBDB !important;
@@ -1444,14 +1444,14 @@
 	float:right;
  }
 
- 
- 
+
+
  .grid2, .grid3, .grid4 {
 	float:right;
 
 	border-left:none;
 	border-right:1px solid #E3E3E3;
-	
+
 	&:first-child {
 		border-right:none;
 	}
@@ -1460,9 +1460,9 @@
  	left: auto;
 	right: 0;
  }
- 
- 
- 
+
+
+
  //thirdparty-calendar.less
  .external-event {
 	> [class*="icon-"]:first-child {
@@ -1471,9 +1471,9 @@
 
 		border-right:none;
 		border-left:1px solid #FFF;
-	}  
+	}
  }
- 
+
  //thirdparty-colorbox.less
  #cboxCurrent {
 	left:auto;
@@ -1489,7 +1489,7 @@
  #cboxNext {
 	left:auto; right:0;
  }
- 
+
  //thirdparty-fuelux.less
  .ace-spinner .spinner-buttons > button.btn:active { left:auto; top:auto; }
 
@@ -1503,7 +1503,7 @@
 	right:50%;
 	left: auto;
  }
- 
+
  .tree {
 	padding-left:0;
 	padding-right:9px;
@@ -1512,7 +1512,7 @@
 		right:0;
 		border-width: 0 1px 0 0;
 	}
-	
+
 	.tree-folder {
 		.tree-folder-header {
 			.tree-folder-name  {
@@ -1539,7 +1539,7 @@
 			}
 		}
 	}
-	
+
 	.tree-item {
 		.tree-item-name {
 			margin-left:0;
@@ -1561,8 +1561,8 @@
 		margin-right:36px;
 	}
  }
- 
- 
+
+
  //thirdpart-gritter.less
  #gritter-notice-wrapper {
 	text-align:right;
@@ -1621,8 +1621,8 @@
 		padding-left:5px;
 	}
  }
- 
- 
+
+
  //thirdparty-select2.less
  .select2-container .select2-choice {
 	padding-left:0;
@@ -1649,7 +1649,7 @@
 	right:5px;
 	left:auto;
  }
- 
+
  .select2-container-multi .select2-choices li {
 	float:right;
  }
@@ -1657,11 +1657,11 @@
 	margin: 3px 5px 3px 0;
 	padding: 3px 18px 3px 5px;
  }
- 
+
  .select2-results {
 	margin-right:0;
  }
- 
+
  .select2-drop {
 	direction:rtl;
 	text-align:right;
@@ -1674,7 +1674,7 @@
 		padding-left:0;
 	}
  }
- 
+
  .select2-search:after {
 	right:-20px;
 	left:auto;
@@ -1699,7 +1699,7 @@
 	margin-right:auto;
 	margin-left:4px;
  }
- 
+
  //bootstrap-tag.less
  .tags .tag {
 	padding-left:22px;
@@ -1711,7 +1711,7 @@
 		right:auto;
 	}
  }
- 
+
  //thirdparty-jquery-ui.less
  .ui-datepicker .ui-datepicker-prev:before {
 	content:"\f061";
@@ -1749,7 +1749,7 @@
  .ui-accordion .ui-accordion-header {
 	padding-right:24px;
 	padding-left:8px;
-	
+
 	.ui-accordion-header-icon {
 		position:absolute;
 		left:auto;
@@ -1807,8 +1807,8 @@
 		float:right !important;
 	}
  }
- 
- 
+
+
  //thirdparty-nestable.less
  .dd {
 	text-align:right;
@@ -1822,7 +1822,7 @@
 	.dd-list {
 		padding-right: 30px;
 		padding-left:0;
-	}	
+	}
  }
  .dd2-handle  + .dd2-content,
  .dd2-handle  + .dd2-content[class*="btn-"]
@@ -1849,7 +1849,7 @@
 .dd-list > li[class*="item-"] {
   border-left-width:0;
   border-right-width:0;
-  
+
   > .dd-handle {
 	border-right:2px solid;
 	border-right-color:inherit;
@@ -1872,8 +1872,8 @@
 	direction:rtl;
 	text-align:right;
  }
- 
- 
+
+
  //pretty print
  ol.linenums {
 	margin-right:33px;
@@ -1917,7 +1917,7 @@
 	right:auto;
 	left:100px;
  }
- 
+
  .rtl .ace-nav > li:nth-last-child(3) > .dropdown-menu {
 	right:auto;
 	left:-40px;
@@ -1939,7 +1939,7 @@
 	right:auto;
 	left:140px;
  }
- 
+
  .rtl .ace-nav > li:nth-last-child(3) > .dropdown-menu {
 	right:auto;
 	left:-80px;
@@ -1949,7 +1949,7 @@
 	right:auto;
 	left:100px;
  }
- 
+
  .rtl .ace-nav > li:nth-last-child(2) > .dropdown-menu {
 	right:auto;
 	left:-50px;
@@ -1972,7 +1972,7 @@
 	left:auto;
 	right:25px;
  }
- 
+
  .rtl .ace-nav > li:nth-last-child(3) > .dropdown-menu {
 	left:auto;
 	right:-60px;
@@ -1982,7 +1982,7 @@
 	left:auto;
 	right:80px;
  }
- 
+
  .rtl .ace-nav > li:nth-last-child(2) > .dropdown-menu {
 	left:auto;
 	right:-110px;
@@ -2062,7 +2062,7 @@
 	margin-right:auto;
 	right:0;
 	margin-left:2px;
-	
+
 	padding-left:0;
 	padding-right:33px;
  }
@@ -2083,7 +2083,7 @@
 	left:auto;
 	right:-8px;
  }
- 
+
  .rtl .breadcrumb {
 	margin-left:auto;
 	margin-right:90px;

@@ -2,7 +2,7 @@
 /**
  * jqGrid English Translation
  * Tony Tomov tony@trirand.com
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : " 반환값이 필요합니다!",
 			customarray : "사용자정의 함수는 배열을 반환해야 합니다!",
 			customfcheck : "Custom function should be present in case of custom checking!"
-			
+
 		}
 	},
 	view : {

@@ -160,7 +160,7 @@
             if (typeof G_vmlCanvasManager !== 'undefined') {
                 G_vmlCanvasManager.initElement(this.$c[0]);
             }
-			
+
 			if (this.usesExcanvas) {
                 G_vmlCanvasManager.initElement(this.$c[0]);
             }

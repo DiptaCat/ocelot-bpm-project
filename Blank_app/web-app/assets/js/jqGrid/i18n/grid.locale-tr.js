@@ -18,7 +18,7 @@ $.extend($.jgrid,{
 	search : {
 	    caption: "Arama...",
 	    Find: "Bul",
-	    Reset: "Temizle",	    
+	    Reset: "Temizle",
 	    odata: [{ oper:'eq', text:"eşit"},{ oper:'ne', text:"eşit değil"},{ oper:'lt', text:"daha az"},{ oper:'le', text:"daha az veya eşit"},{ oper:'gt', text:"daha fazla"},{ oper:'ge', text:"daha fazla veya eşit"},{ oper:'bw', text:"ile başlayan"},{ oper:'bn', text:"ile başlamayan"},{ oper:'in', text:"içinde"},{ oper:'ni', text:"içinde değil"},{ oper:'ew', text:"ile biten"},{ oper:'en', text:"ile bitmeyen"},{ oper:'cn', text:"içeren"},{ oper:'nc', text:"içermeyen"}],
 	    groupOps: [	{ op: "VE", text: "tüm" },	{ op: "VEYA",  text: "herhangi" }	]
 	},
@@ -75,7 +75,7 @@ $.extend($.jgrid,{
 	col : {
 	    caption: "Sütunları göster/gizle",
 	    bSubmit: "Gönder",
-	    bCancel: "İptal"	
+	    bCancel: "İptal"
 	},
 	errors : {
 		errcap : "Hata",

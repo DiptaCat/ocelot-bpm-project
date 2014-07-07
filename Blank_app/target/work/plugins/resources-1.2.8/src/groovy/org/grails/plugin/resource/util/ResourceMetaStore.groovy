@@ -19,9 +19,9 @@ class ResourceMetaStore {
 
     Map latches = new ConcurrentHashMap()
     Map resourcesByURI = new ConcurrentHashMap()
-    
+
     static CLOSED_LATCH = new CountDownLatch(0)
-    
+
     /**
      * Note that this is not re-entrant safe, and is only to be called at app startup, before requests come in
      */
@@ -30,7 +30,7 @@ class ResourceMetaStore {
         if (log.debugEnabled) {
             log.debug "Adding declared resource ${resource}"
         }
-        
+
         // It may be null if it is not found / broken in some way
         if (resource) {
             addResource(resource, false)
@@ -45,7 +45,7 @@ class ResourceMetaStore {
         resourcesByURI.remove(uri)
         latches.remove(uri)
     }
-    
+
     private addResource(resource, boolean adHocResource = false) {
         def uris = new HashSet()
 
@@ -62,7 +62,7 @@ class ResourceMetaStore {
         // As the original URL is used, we need this to resolve to the actualUrl for redirect
         uris << resource.sourceUrl
         resource = resource.delegating ? resource.delegate : resource
-        
+
         uris.each { u ->
             if (log.debugEnabled) {
                 log.debug "Storing mapping for resource URI $u to ${resource}"
@@ -71,8 +71,8 @@ class ResourceMetaStore {
             latches[u] = CLOSED_LATCH // so that future calls for alternative URLs succeed
         }
     }
-    
-    /** 
+
+    /**
      * A threadsafe synchronous method to get an existing resource or create an ad-hoc resource
      */
     ResourceMeta getOrCreateAdHocResource(String uri, Closure resourceCreator) {
@@ -113,10 +113,10 @@ class ResourceMetaStore {
                 if (resource) {
                     addResource(resource, true)
                 }
-                
+
                 // indicate that we are done
                 thisLatch.countDown()
-                return resource                
+                return resource
             } else {
                 if (log.debugEnabled) {
                     log.debug "getOrCreateAdHocResource for ${uri}, waiting for latch, another thread has crept in and is creating resource"
@@ -135,11 +135,11 @@ class ResourceMetaStore {
             return resourcesByURI[uri]
         }
     }
-    
+
     def keySet() {
         resourcesByURI.keySet()
     }
-    
+
     def getAt(String key) {
         resourcesByURI[key]
     }

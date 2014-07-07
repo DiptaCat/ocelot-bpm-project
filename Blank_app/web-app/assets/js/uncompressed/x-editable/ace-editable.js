@@ -3,7 +3,7 @@ Image editable input.
 **/
 (function ($) {
     "use strict";
-    
+
     var Image = function (options) {
         this.init('image', options, Image.defaults);
 
@@ -35,8 +35,8 @@ Image editable input.
         /**
         Renders input from tpl
 
-        @method render() 
-        **/        
+        @method render()
+        **/
         render: function() {
 			var self = this;
 			this.$input = this.$tpl.find('input[type=hidden]:eq(0)');
@@ -45,7 +45,7 @@ Image editable input.
 			this.$file.attr({'name':this.name});
 			this.$input.attr({'name':this.name+'-hidden'});
 
-			
+
 			this.options.image.before_change = this.options.image.before_change || function(files, dropped) {
 				var file = files[0];
 				if(typeof file === "string") {
@@ -86,7 +86,7 @@ Image editable input.
 
     });
 
-	
+
     Image.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         tpl: '<span><input type="hidden" /></span><span><input type="file" /></span>',
         inputclass: '',
@@ -116,10 +116,10 @@ Image editable input.
 //Wysiwyg
 (function ($) {
     "use strict";
-    
+
     var Wysiwyg = function (options) {
         this.init('wysiwyg', options, Wysiwyg.defaults);
-        
+
         //extend wysiwyg manually as $.extend not recursive 
         this.options.wysiwyg = $.extend({}, Wysiwyg.defaults.wysiwyg, options.wysiwyg);
     };
@@ -129,7 +129,7 @@ Image editable input.
     $.extend(Wysiwyg.prototype, {
         render: function () {
 			this.$editor = this.$input.nextAll('.wysiwyg-editor:eq(0)');
-			
+
 			this.$tpl.parent().find('.wysiwyg-editor').show().ace_wysiwyg(
 			 {
 				toolbar:
@@ -149,7 +149,7 @@ Image editable input.
 			.closest('.editable-input').addClass('editable-wysiwyg')
 			.closest('.editable-container').css({'display':'block'});//if display is inline-block, putting large images inside the editor will expand it out of bounding box!
 
-			if(this.options.wysiwyg && this.options.wysiwyg.css) 
+			if(this.options.wysiwyg && this.options.wysiwyg.css)
 				this.$tpl.closest('.editable-wysiwyg').css(this.options.wysiwyg.css);
         },
 
@@ -166,7 +166,7 @@ Image editable input.
         value2input: function(value) {
 			this.$editor.html(value);
         },
-		input2value: function() { 
+		input2value: function() {
 			return this.$editor.html();
         },
 
@@ -174,14 +174,14 @@ Image editable input.
            //this.$editor.focus().get(0).setSelectionRange(200,200);
         }
     });
-	
+
 
 
     Wysiwyg.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
 		tpl: '<input type="hidden" /><div class="wysiwyg-editor"></div>',
         inputclass: 'editable-wysiwyg',
         wysiwyg: {
-            
+
         }
     });
 
@@ -201,7 +201,7 @@ Spinner editable input.
 **/
 (function ($) {
     "use strict";
-    
+
     var Spinner = function (options) {
         this.init('spinner', options, Spinner.defaults);
 		this.initSpinner(options, Spinner.defaults);
@@ -218,39 +218,39 @@ Spinner editable input.
         /**
         Renders input from tpl
 
-        @method render() 
-        **/        
+        @method render()
+        **/
         render: function() {
 		},
-       
+
         /**
         Activates input: sets focus on the first field.
-        
-        @method activate() 
-       **/        
+
+        @method activate()
+       **/
        activate: function() {
             if(this.$input.is(':visible')) {
 				this.$input.focus();
 				$.fn.editableutils.setCursorPosition(this.$input.get(0), this.$input.val().length);
-				
+
 				var val = parseInt(this.$input.val());
 				var options = $.extend({value:val}, this.options.spinner);
 				this.$input.ace_spinner(options);
             }
        },
-       
+
        /**
         Attaches handler to submit form in case of 'showbuttons=false' mode
-        
-        @method autosubmit() 
-       **/       
+
+        @method autosubmit()
+       **/
        autosubmit: function() {
            this.$input.keydown(function (e) {
                 if (e.which === 13) {
                     $(this).closest('form').submit();
                 }
            });
-       }       
+       }
     });
 
     Spinner.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
@@ -283,7 +283,7 @@ Slider editable input.
 **/
 (function ($) {
     "use strict";
-    
+
     var Slider = function (options) {
         this.init('slider', options, Slider.defaults);
 		this.initSlider(options, Slider.defaults);
@@ -300,14 +300,14 @@ Slider editable input.
         /**
         Renders input from tpl
 
-        @method render() 
-        **/        
+        @method render()
+        **/
         render: function() {
 		},
         /**
         Activates input: sets focus on the first field.
-        
-        @method activate() 
+
+        @method activate()
        **/
        activate: function() {
             if(this.$input.is(':visible')) {
@@ -322,7 +322,7 @@ Slider editable input.
 						slide: function( event, ui ) {
 							var val = parseInt(ui.value);
 							self.$input.val(val);
-							
+
 							if(ui.handle.firstChild == null) {/* no tooltips attached to it */
 								$(ui.handle).append("<div class='tooltip top in' style='display:none;top:-38px;left:-5px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>");
 							}
@@ -333,22 +333,22 @@ Slider editable input.
 					this.$input.parent().addClass('editable-slider').css('width', width+'px').slider(options);
             }
        },
-	   
+
 	   value2html: function(value, element) {
        },
 
        /**
         Attaches handler to submit form in case of 'showbuttons=false' mode
-        
-        @method autosubmit() 
-       **/       
+
+        @method autosubmit()
+       **/
        autosubmit: function() {
            this.$input.keydown(function (e) {
                 if (e.which === 13) {
                     $(this).closest('form').submit();
                 }
            });
-       }       
+       }
     });
 
     Slider.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {

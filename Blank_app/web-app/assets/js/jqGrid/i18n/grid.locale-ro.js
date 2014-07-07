@@ -2,7 +2,7 @@
 /**
  * jqGrid Romanian Translation
  * Alexandru Emil Lupu contact@alecslupu.ro
- * http://www.alecslupu.ro/ 
+ * http://www.alecslupu.ro/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -99,16 +99,16 @@ $.extend($.jgrid,{
 			],
 			AmPm : ["am","pm","AM","PM"],
 			/*
-			 Here is a problem in romanian: 
+			 Here is a problem in romanian:
 					M	/	F
 			 1st = primul / prima
 			 2nd = Al doilea / A doua
-			 3rd = Al treilea / A treia 
+			 3rd = Al treilea / A treia
 			 4th = Al patrulea/ A patra
-			 5th = Al cincilea / A cincea 
+			 5th = Al cincilea / A cincea
 			 6th = Al șaselea / A șasea
 			 7th = Al șaptelea / A șaptea
-			 .... 
+			 ....
 			 */
 			S: function (j) {return j < 11 || j > 13 ? ['st', 'nd', 'rd', 'th'][Math.min((j - 1) % 10, 3)] : 'th'},
 			srcformat: 'Y-m-d',

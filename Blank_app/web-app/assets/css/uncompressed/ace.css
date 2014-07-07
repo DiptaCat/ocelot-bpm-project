@@ -2571,7 +2571,7 @@ li [class*=" icon-"],
     bottom: auto;
     top: auto !important;
     /*so that it's applied even if it's .sidebar-fixed */
-  
+
     margin-top: 40px;
     border: 1px solid #CCC;
     border-left-width: 0;
@@ -2720,7 +2720,7 @@ li [class*=" icon-"],
    float:none;
    position:absolute;
    border-width:0 1px 1px 0;
-  
+
    border-left:none;
    box-shadow:none;
    margin-top:0;
@@ -11749,7 +11749,7 @@ ul.attachment-list > li {
     border: 1px dotted #D00;
     overflow: visible !important;
     /* because it's image only, so it's ok */
-  
+
     display: inline-block !important;
     vertical-align: middle;
   }

@@ -45,7 +45,7 @@ $.extend($.jgrid,{
 			novalue : " захтевана је повратна вредност!",
 			customarray : "Custom function should return array!",
 			customfcheck : "Custom function should be present in case of custom checking!"
-			
+
 		}
 	},
 	view : {

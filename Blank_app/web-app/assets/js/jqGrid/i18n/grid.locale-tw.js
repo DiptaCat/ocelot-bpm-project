@@ -6,7 +6,7 @@
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
- * 
+ *
 **/
 $.jgrid = $.jgrid || {};
 $.extend($.jgrid,{
@@ -46,7 +46,7 @@ $.extend($.jgrid,{
 			novalue : " 需要傳回值！",
 			customarray : "自訂函數應傳回陣列！",
 			customfcheck : "自訂檢查應有自訂函數！"
-			
+
 		}
 	},
 	view : {

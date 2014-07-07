@@ -1,8 +1,8 @@
 ;(function($){
 /**
- * jqGrid Bulgarian Translation 
+ * jqGrid Bulgarian Translation
  * Tony Tomov tony@trirand.com
- * http://trirand.com/blog/ 
+ * http://trirand.com/blog/
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -76,13 +76,13 @@ $.extend($.jgrid,{
 	col : {
 		caption: "Избери колони",
 		bSubmit: "Ок",
-		bCancel: "Изход"	
+		bCancel: "Изход"
 	},
 	errors : {
 		errcap : "Грешка",
 		nourl : "Няма посочен url адрес",
 		norecords: "Няма запис за обработка",
-		model : "Модела не съответства на имената!"	
+		model : "Модела не съответства на имената!"
 	},
 	formatter : {
 		integer : {thousandsSeparator: " ", defaultValue: '0'},

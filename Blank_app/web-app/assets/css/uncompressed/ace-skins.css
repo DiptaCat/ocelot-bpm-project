@@ -14,7 +14,7 @@
 
 
 .skin-1  .nav-list > li {
- border-color:#3F4E54; 
+ border-color:#3F4E54;
  border-top-width:0;
 }
 .skin-1 .nav-list > li > a  , .skin-1 .menu-min .nav-list > li.open > a{
@@ -145,7 +145,7 @@
 
 .skin-1 .sidebar-collapse {
  background-color:#141A1B;
- border-color:#3F4E54; 
+ border-color:#3F4E54;
  border-top-width:1px;
 }
 .skin-1 .sidebar-collapse:before {
@@ -280,7 +280,7 @@
 
 
 .skin-2  .nav-list > li {
- border-color:#444; 
+ border-color:#444;
  border-top-width:0;
 }
 .skin-2  .nav-list > li:last-child {
@@ -381,7 +381,7 @@
  border:none;
  box-shadow:none;
  text-shadow:1px 1px 0 rgba(0,0,0,0.5);
- 
+
  margin-top:2px;
 }
 .skin-2  .menu-min .nav-list > li > a.dropdown-toggle > .menu-text {
@@ -393,7 +393,7 @@
  box-shadow:none;
  border:none;
  background-color:#303030;
- 
+
  margin-left:1px;
  margin-top:1px;
  border-left:1px solid #FFF;
@@ -840,7 +840,7 @@ body.skin-2 .main-content{
 .skin-3 .main-container:after
 {
  background: #FFF;
- 
+
  background: -moz-linear-gradient(top, #EEF5FA 0%, #FFF 8%) 0 4px;
  background: -webkit-gradient(linear, 0 0, 0 100%, from(#EEF5FA), color-stop(4%, #FFF)) 0 4px;
  background: -webkit-linear-gradient(top, #EEF5FA 0%, #FFF 8%) 0 4px;
@@ -1054,7 +1054,7 @@ body.skin-2 .main-content{
 
 .skin-3 .sidebar-collapse {
  background-color:#D0D0D0;
- border-color:#FFF; 
+ border-color:#FFF;
 }
 .skin-3 .sidebar-collapse:before {
  border-color:#FFF;
@@ -1221,7 +1221,7 @@ body.skin-3 .main-content  {
 .rtl.skin-2  .menu-min .nav-list > li > ul.submenu {
  margin-left:auto;
  margin-right:1px;
- 
+
  border-left:none;
  border-right:1px solid #FFF;
 }

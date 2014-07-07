@@ -20,22 +20,22 @@ import org.grails.plugin.resource.mapper.ResourceMapper
 class ResourceMeta {
 
     static final PROCESSED_BY_PREFIX = 'processed.by.'
-    
+
     def log = LoggerFactory.getLogger(ResourceMeta)
 
     /**
      * The optional module-unique id
      */
     String id
-    
+
     /**
      * The owning module
      */
     ResourceModule module
-    
+
     /**
      * Set on instantiation to be the dir that content is served from
-     * 
+     *
      * @see ResourceProcessor#workDir
      */
     File workDir
@@ -59,103 +59,103 @@ class ResourceMeta {
      * The original sourceUrlParamsAndFragment of the resource, if any
      */
     String sourceUrlParamsAndFragment
-    
+
     /**
      * The url of the local resource, after processing. (no query params)
      */
     String actualUrl
-    
+
     /**
      * The url to use when rendering links - e.g. for absolute CDN overrides
      */
     String linkOverride
-    
+
     String bundle
-    
+
     /**
      * The original mime type
      */
     String contentType
-    
+
     /**
      * Where do you want this resource? "defer", "head" etc
      */
     String disposition
 
     Set excludedMappers
-    
+
     // For per-resource options like "nominify", 'nozip'
     Map attributes = [:]
-    
+
     // For per-resource tag resource attributes like "media", 'width', 'height' etc
     Map tagAttributes = [:]
 
     Closure prePostWrapper
 
     // ***** Below here is state we determine at runtime during processing *******
-    
+
     /**
      * The delegate to actually use when linking, if any. Think bundling.
      */
     private ResourceMeta delegate
-    
+
     Resource originalResource
-    
+
     Long originalSize
-    
+
     Long processedSize
 
     File processedFile
-    
+
     long originalLastMod
-    
+
     // A list of Closures taking request & response. Delegates to resourceMeta
     List requestProcessors = []
-    
+
     private String _linkUrl
-    
+
     private boolean processed
-    
+
     private Boolean _resourceExists
-    
+
     /**
      * The URI of the resource that resulted in the processing of this resource, or null
      * For resources ref'd in CSS or stuff loaded up by bundles for example
      */
     String declaringResource
-    
+
     Integer contentLength
-    
+
     Integer originalContentLength = 0
 
     void delegateTo(ResourceMeta target) {
         delegate = target
-        
+
         // No more processing to be done on us
         processed = true
     }
-    
+
     boolean isOriginalAbsolute() {
         sourceUrl.indexOf(':/') > 0
     }
-    
+
     boolean isActualAbsolute() {
         actualUrl.indexOf(':/') > 0
     }
-    
+
     boolean isDirty() {
-        !originalResource || 
+        !originalResource ||
         (originalResource.lastModified() != originalLastMod)
     }
-    
+
     boolean needsProcessing() {
         processed
     }
-    
+
     void updateContentLength() {
         if (processedFile) {
             this.@contentLength = processedFile.size().toInteger()
-        } else if (originalResource?.URL.protocol in ['jndi', 'file']) { 
+        } else if (originalResource?.URL.protocol in ['jndi', 'file']) {
             this.@contentLength = getOriginalResourceLength()
         } else {
             this.@contentLength = 0
@@ -167,7 +167,7 @@ class ResourceMeta {
             return originalResource.file.size()
         } else {
             // This may not close the connection in a timely manner if non-HTTP URL
-            return originalResource?.URL.openConnection().contentLength        
+            return originalResource?.URL.openConnection().contentLength
         }
     }
 
@@ -177,7 +177,7 @@ class ResourceMeta {
         this.originalContentLength = getOriginalResourceLength()
         updateContentLength()
     }
-    
+
     void setProcessedFile(File f) {
         this.processedFile = f
         updateExists()
@@ -194,7 +194,7 @@ class ResourceMeta {
                 this.originalSize = _resourceExists ? processedFile.length() : 0
             }
         } else if (originalResource) {
-            _resourceExists = originalResource.exists()            
+            _resourceExists = originalResource.exists()
             if (!this.originalLastMod && _resourceExists) {
                 this.originalLastMod = originalResource.lastModified()
             }
@@ -207,7 +207,7 @@ class ResourceMeta {
             this.processedFile << inputStream
             _resourceExists = this.processedFile.exists()
         } finally {
-            inputStream?.close()                    
+            inputStream?.close()
         }
     }
 
@@ -218,15 +218,15 @@ class ResourceMeta {
     InputStream newInputStream() {
         return processedFile ? processedFile.newInputStream() : originalResource.inputStream
     }
-    
+
     // Hook for when preparation is starting
     void beginPrepare(grailsResourceProcessor) {
         def uri = this.sourceUrl
         if (!URLUtils.isExternalURL(uri)) {
-            
+
             // Delete whatever file may already be there
             processedFile?.delete()
-            
+
     		def uriWithoutFragment = uri
     		if (uri.contains('#')) {
     			uriWithoutFragment = uri.substring(0, uri.indexOf('#'))
@@ -268,7 +268,7 @@ class ResourceMeta {
             log.warn "Skipping mappers for ${this.actualUrl} because its an absolute URL."
         }
     }
-    
+
     // Hook for when preparation is done
     void endPrepare(grailsResourceProcessor) {
         if (!delegating) {
@@ -280,26 +280,26 @@ class ResourceMeta {
         updateExists()
         processed = true
     }
-    
+
     boolean isDelegating() {
         delegate != null
     }
-    
+
     boolean exists() {
         _resourceExists
     }
-    
+
     String getLinkUrl() {
         if (!delegate) {
-            return linkOverride ?: _linkUrl 
+            return linkOverride ?: _linkUrl
         } else {
             return delegate.linkUrl
         }
     }
-    
+
     String getActualUrl() {
         if (!delegate) {
-            return this.@actualUrl 
+            return this.@actualUrl
         } else {
             return delegate.actualUrl
         }
@@ -309,13 +309,13 @@ class ResourceMeta {
         this.@actualUrl = url
         _linkUrl = sourceUrlParamsAndFragment ? actualUrl + sourceUrlParamsAndFragment : url
     }
-    
-    
+
+
     void setSourceUrl(String url) {
         if (this.@originalUrl == null) {
             this.@originalUrl = url // the full monty
         }
-        
+
         def qidx = url.indexOf('?')
         def hidx = url.indexOf('#')
 
@@ -333,7 +333,7 @@ class ResourceMeta {
 
         // Strictly speaking this is query params plus fragment ...
         sourceUrlParamsAndFragment = chopIdx >= 0 ? url[chopIdx..-1] : null
-        
+
         sourceUrlExtension = FilenameUtils.getExtension(sourceUrl) ?: null
     }
 
@@ -345,11 +345,11 @@ class ResourceMeta {
             FilenameUtils.getExtension(processedFile.name) ?: null
         }
     }
-    
+
     String getWorkDirRelativeParentPath() {
         workDirRelativePath - "$processedFile.name"
     }
-    
+
     String getWorkDirRelativePath() {
         if (processedFile) {
             return processedFile.path - workDir.path
@@ -357,7 +357,7 @@ class ResourceMeta {
             return null
         }
     }
-    
+
     String getActualUrlParent() {
         def lastSlash = actualUrl.lastIndexOf('/')
         if (lastSlash >= 0) {
@@ -366,16 +366,16 @@ class ResourceMeta {
             return ''
         }
     }
-    
+
     String relativeToWithQueryParams(ResourceMeta base) {
         def url = relativeTo(base)
         return sourceUrlParamsAndFragment ? url + sourceUrlParamsAndFragment : url
     }
-    
+
     ResourceMeta getDelegate() {
         delegate
     }
-    
+
     /**
      * Reset the resource state to how it was after loading from the module definition
      * i.e. keep only declared info, nothing generated later during processing
@@ -397,7 +397,7 @@ class ResourceMeta {
         this.@processed = false
         attributes.entrySet().removeAll { it.key.startsWith(PROCESSED_BY_PREFIX) }
     }
-    
+
     /**
      * Calculate the URI of this resource relative to the base resource.
      * All resource URLs must be app-relative with no ../ or ./
@@ -421,7 +421,7 @@ class ResourceMeta {
             def baseParts = baseUrl.tokenize('/')
             def thisParts = actualUrl.tokenize('/')
             int i = 0
-            for (; i < baseParts.size(); i++) { 
+            for (; i < baseParts.size(); i++) {
                 if (thisParts[i] == baseParts[i]) {
                     commonStem << baseParts[i]+'/'
                 } else {
@@ -435,7 +435,7 @@ class ResourceMeta {
             return result.toString()
         }
     }
-    
+
     void updateActualUrlFromProcessedFile() {
         def p = workDirRelativePath?.replace('\\', '/')
         if (p != null) {
@@ -445,12 +445,12 @@ class ResourceMeta {
             setActualUrl(sourceUrl)
         }
     }
-    
+
     boolean excludesMapperOrOperation(String mapperName, String operationName) {
         if (!excludedMappers) {
             return false
         }
-        
+
         def exclude = excludedMappers.contains("*")
         if (!exclude) {
             exclude = excludedMappers.contains(mapperName)
@@ -460,11 +460,11 @@ class ResourceMeta {
         }
         return exclude
     }
-    
+
     void wasProcessedByMapper(ResourceMapper mapper, boolean processed = true) {
         attributes[PROCESSED_BY_PREFIX+mapper.name] = processed
     }
-    
+
     String toString() {
         "ResourceMeta for URI ${sourceUrl} served by ${actualUrl} (delegate: ${delegating ? delegate : 'none'})"
     }

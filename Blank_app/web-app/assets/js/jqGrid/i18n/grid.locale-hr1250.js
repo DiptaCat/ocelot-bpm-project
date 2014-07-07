@@ -3,7 +3,7 @@
  * jqGrid Croatian Translation (charset windows-1250)
  * Version 1.0.1 (developed for jQuery Grid 4.4)
  * msajko@gmail.com
- * 
+ *
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -46,7 +46,7 @@ $.extend($.jgrid,{
 			novalue : " zahtjevan podatak je obavezan!",
 			customarray : "Opcionalna funkcija trebala bi bili polje (array)!",
 			customfcheck : "Custom function should be present in case of custom checking!"
-			
+
 		}
 	},
 	view : {

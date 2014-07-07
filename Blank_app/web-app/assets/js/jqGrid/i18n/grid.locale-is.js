@@ -75,7 +75,7 @@ $.extend($.jgrid,{
 	col : {
 	    caption: "Sýna / fela dálka",
 	    bSubmit: "Vista",
-	    bCancel: "Hætta við"	
+	    bCancel: "Hætta við"
 	},
 	errors : {
 		errcap : "Villa",

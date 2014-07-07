@@ -55,7 +55,7 @@
 						$entity.data(value);
 
 						if('additionalParameters' in value
-							&& 'item-selected' in value.additionalParameters 
+							&& 'item-selected' in value.additionalParameters
 								&& value.additionalParameters['item-selected'] == true) {
 								$entity.addClass ('tree-selected');
 								$entity.find('i').removeClass(self.options['unselected-icon']).addClass(self.options['selected-icon']);

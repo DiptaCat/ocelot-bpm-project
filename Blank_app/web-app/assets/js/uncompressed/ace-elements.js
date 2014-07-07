@@ -22,9 +22,9 @@ jQuery(function() {
 			if(ace_inner_call === true) return;//this change event is called from above drop event
 			return handle_on_change.call(self);
 		});
-		
+
 		this.$element.wrap('<div class="ace-file-input" />');
-		
+
 		this.apply_settings();
 	}
 	Ace_File_Input.error = {
@@ -49,13 +49,13 @@ jQuery(function() {
 		this.$label = this.$element.next();
 
 		this.$label.on('click', function(){//firefox mobile doesn't allow 'tap'!
-			if(!this.disabled && !self.element.disabled && !self.$element.attr('readonly')) 
+			if(!this.disabled && !self.element.disabled && !self.$element.attr('readonly'))
 				self.$element.click();
 		})
 
 		if(remove_btn) this.$label.next('a').on(ace.click_event, function(){
 			if(! self.can_reset ) return false;
-			
+
 			var ret = true;
 			if(self.settings.before_remove) ret = self.settings.before_remove.call(self.element);
 			if(!ret) return false;
@@ -79,13 +79,13 @@ jQuery(function() {
 			if(!this.settings.btn_change) this.$label.addClass('hide-placeholder');
 		}
 		this.$label.attr('data-title', this.settings.btn_change).addClass('selected');
-		
+
 		for (var i = 0; i < files.length; i++) {
 			var filename = typeof files[i] === "string" ? files[i] : $.trim( files[i].name );
 			var index = filename.lastIndexOf("\\") + 1;
 			if(index == 0)index = filename.lastIndexOf("/") + 1;
 			filename = filename.substr(index);
-			
+
 			var fileIcon = 'icon-file';
 			if((/\.(jpe?g|png|gif|svg|bmp|tiff?)$/i).test(filename)) {
 				fileIcon = 'icon-picture';
@@ -98,7 +98,7 @@ jQuery(function() {
 			else {
 				this.$label.append('<span class="file-name" data-title="'+filename+'"><i class="'+fileIcon+'"></i></span>');
 				var type = $.trim(files[i].type);
-				var can_preview = hasFileReader && this.settings.thumbnail 
+				var can_preview = hasFileReader && this.settings.thumbnail
 						&&
 						( (type.length > 0 && type.match('image')) || (type.length == 0 && fileIcon == 'icon-picture') )//the second one is for Android's default browser which gives an empty text for file.type
 				if(can_preview) {
@@ -121,16 +121,16 @@ jQuery(function() {
 			.find('[class*="icon-"]').attr('class', this.settings.no_icon)
 			.prev('img').remove();
 			if(!this.settings.no_icon) this.$label.find('[class*="icon-"]').remove();
-		
+
 		this.$label.find('.file-name').not(':first').remove();
-		
+
 		if(this.$element.data('ace_input_files')) {
 			this.$element.removeData('ace_input_files');
 			this.$element.removeData('ace_input_method');
 		}
 
 		this.reset_input_field();
-		
+
 		return false;
 	}
 
@@ -139,7 +139,7 @@ jQuery(function() {
 		this.$element.wrap('<form>').closest('form').get(0).reset();
 		this.$element.unwrap();
 	}
-	
+
 	Ace_File_Input.prototype.enable_reset = function(can_reset) {
 		this.can_reset = can_reset;
 	}
@@ -152,14 +152,14 @@ jQuery(function() {
 		this.disabled = false;
 		this.$element.removeAttr('disabled').removeClass('disabled');
 	}
-	
+
 	Ace_File_Input.prototype.files = function() {
 		return $(this).data('ace_input_files') || null;
 	}
 	Ace_File_Input.prototype.method = function() {
 		return $(this).data('ace_input_method') || '';
 	}
-	
+
 	Ace_File_Input.prototype.update_settings = function(new_settings) {
 		this.settings = $.extend({}, this.settings, new_settings);
 		this.apply_settings();
@@ -169,7 +169,7 @@ jQuery(function() {
 
 	var enable_drop_functionality = function() {
 		var self = this;
-		var dropbox = this.element.parentNode;		
+		var dropbox = this.element.parentNode;
 		$(dropbox).on('dragenter', function(e){
 			e.preventDefault();
 			e.stopPropagation();
@@ -187,30 +187,30 @@ jQuery(function() {
 				tmpfiles.push(files[0]);
 				files = tmpfiles;//keep only first file
 			}
-			
+
 			var ret = true;
 			if(self.settings.before_change) ret = self.settings.before_change.call(self.element, files, true);//true means files have been dropped
 			if(!ret || ret.length == 0) {
 				return false;
 			}
-			
+
 			//user can return a modified File Array as result
 			if(ret instanceof Array || (hasFileList && ret instanceof FileList)) files = ret;
-			
-			
+
+
 			self.$element.data('ace_input_files', files);//save files data to be used later by user
 			self.$element.data('ace_input_method', 'drop');
 
 
 			self.show_file_list(files);
-			
-			
+
+
 			self.$element.triggerHandler('change' , [true]);//true means inner_call
 			return true;
 		});
 	}
-	
-	
+
+
 	var handle_on_change = function() {
 		var ret = true;
 		if(this.settings.before_change) ret = this.settings.before_change.call(this.element, this.element.files || [this.element.value]/*make it an array*/, false);//false means files have been selected, not dropped
@@ -218,7 +218,7 @@ jQuery(function() {
 			if(!this.$element.data('ace_input_files')) this.reset_input_field();//if nothing selected before, reset because of the newly unacceptable (ret=false||length=0) selection
 			return false;
 		}
-		
+
 
 		//user can return a modified File Array as result
 		var files = !hasFileList ? null ://for old IE, etc
@@ -250,7 +250,7 @@ jQuery(function() {
 	var preview_image = function(file) {
 		var self = this;
 		var $span = self.$label.find('.file-name:last');//it should be out of onload, otherwise all onloads may target the same span because of delays
-		
+
 		var deferred = new $.Deferred
 		var reader = new FileReader();
 		reader.onload = function (e) {
@@ -274,7 +274,7 @@ jQuery(function() {
 
 				var w = thumb.w, h = thumb.h;
 				if(self.settings.thumbnail == 'small') {w=h=size;};
-				$(img).css({'background-image':'url('+thumb.src+')' , width:w, height:h})									
+				$(img).css({'background-image':'url('+thumb.src+')' , width:w, height:h})
 						.data('thumb', thumb.src)
 						.attr({src:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='})
 						.show()
@@ -298,7 +298,7 @@ jQuery(function() {
 	}
 
 	var get_thumbnail = function(img, size, type) {
-		
+
 		var w = img.width, h = img.height;
 		if(w > size || h > size) {
 		  if(w > h) {
@@ -356,7 +356,7 @@ jQuery(function() {
 		icon_remove:'icon-remove',
 		droppable:false,
 		thumbnail:false,//large, fit, small
-		
+
 		//callbacks
 		before_change:null,
 		before_remove:null,
@@ -375,19 +375,19 @@ jQuery(function() {
 
 (function($ , undefined) {
 	$.fn.ace_spinner = function(options) {
-		
+
 		//when min is negative, the input maxlength does not account for the extra minus sign
 		this.each(function() {
 			var icon_up = options.icon_up || 'icon-chevron-up'
 			var icon_down = options.icon_down || 'icon-chevron-down'
 			var on_sides = options.on_sides || false
-			
+
 			var btn_up_class = options.btn_up_class || ''
 			var btn_down_class = options.btn_down_class || ''
-		
+
 			var max = options.max || 999
 			max = (''+max).length
-			
+
 				$(this).addClass('spinner-input form-control').wrap('<div class="ace-spinner">')
 				var $parent_div = $(this).closest('.ace-spinner').spinner(options).wrapInner("<div class='input-group'></div>")
 
@@ -403,7 +403,7 @@ jQuery(function() {
 								<i class="'+icon_up+'"></i>\
 							</button>\
 						</div>')
-				
+
 					$parent_div.addClass('touch-spinner')
 					$parent_div.css('width' , (max * 20 + 40)+'px')
 				}
@@ -426,8 +426,8 @@ jQuery(function() {
 						$parent_div.css('width' , (max * 20 + 10)+'px')
 					}
 				}
-				
-				
+
+
 
 			$(this).on('mousewheel DOMMouseScroll', function(event){
 				var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1
@@ -439,9 +439,9 @@ jQuery(function() {
 			$parent_div.on('changed', function(){
 				that.trigger('change')//trigger the input's change event
 			});
-			
+
 		});
-		
+
 		return this;
 	}
 
@@ -455,7 +455,7 @@ jQuery(function() {
 
 (function($ , undefined) {
 	$.fn.ace_wizard = function(options) {
-		
+
 		this.each(function() {
 			var $this = $(this);
 			$this.wizard();
@@ -464,7 +464,7 @@ jQuery(function() {
 			var $wizard = $this.data('wizard');
 			$wizard.$prevBtn.remove();
 			$wizard.$nextBtn.remove();
-			
+
 			$wizard.$prevBtn = buttons.find('.btn-prev').eq(0).on(ace.click_event,  function(){
 				$this.wizard('previous');
 			}).attr('disabled', 'disabled');
@@ -473,7 +473,7 @@ jQuery(function() {
 			}).removeAttr('disabled');
 			$wizard.nextText = $wizard.$nextBtn.text();
 		});
-		
+
 		return this;
 	}
 
@@ -485,14 +485,14 @@ jQuery(function() {
 
 (function($ , undefined) {
 	$.fn.ace_colorpicker = function(options) {
-		
+
 		var settings = $.extend( {
 			pull_right:false,
 			caret:true
         }, options);
-		
+
 		this.each(function() {
-		
+
 			var $that = $(this);
 			var colors = '';
 			var color = '';
@@ -519,14 +519,14 @@ jQuery(function() {
 				e.preventDefault();
 				return true;//if false, dropdown won't hide!
 			});
-			
-			
+
+
 		});
 		return this;
-		
-	}	
-	
-	
+
+	}
+
+
 })(window.jQuery);
 
 
@@ -549,7 +549,7 @@ jQuery(function() {
 			'selected-icon' : 'icon-ok',
 			'unselected-icon' : 'tree-dot'
 		}
-		
+
 		$options = $.extend({}, $options, options)
 
 		this.each(function() {
@@ -567,7 +567,7 @@ jQuery(function() {
 				<div class="tree-item-name"></div>\
 			</div>');
 			$this.addClass($options['selectable'] == true ? 'tree-selectable' : 'tree-unselectable');
-			
+
 			$this.tree($options);
 		});
 
@@ -705,7 +705,7 @@ jQuery(function() {
 				title : 'View Source'
 			}
 		}
-		
+
 		var toolbar_buttons =
 		options.toolbar ||
 		[
@@ -751,7 +751,7 @@ jQuery(function() {
 					toolbar += ' </div> <div class="btn-group"> ';
 					continue;
 				}
-				
+
 				if(typeof button == "string" && button in button_defaults) {
 					button = button_defaults[button];
 					button.name = toolbar_buttons[tb];
@@ -759,7 +759,7 @@ jQuery(function() {
 					button = $.extend(button_defaults[button.name] , button);
 				}
 				else continue;
-				
+
 				var className = "className" in button ? button.className : '';
 				switch(button.name) {
 					case 'font':
@@ -840,7 +840,7 @@ jQuery(function() {
 			toolbar.find('.dropdown-menu input:not([type=file])').on(ace.click_event, function() {return false})
 		    .on('change', function() {$(this).closest('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle')})
 			.on('keydown', function (e) {if(e.which == 27) {this.value='';$(this).change()}});
-			toolbar.find('input[type=file]').prev().on(ace.click_event, function (e) { 
+			toolbar.find('input[type=file]').prev().on(ace.click_event, function (e) {
 				$(this).next().click();
 			});
 			toolbar.find('.wysiwyg_colorpicker').each(function() {
@@ -848,7 +848,7 @@ jQuery(function() {
 					$(this).nextAll('input').eq(0).val(this.value).change();
 				}).next().find('.btn-colorpicker').tooltip({title: this.title, animation:false, container:'body'})
 			});
-			
+
 			var speech_input;
 			if (options.speech_button && 'onwebkitspeechchange' in (speech_input = document.createElement('input'))) {
 				var editorOffset = $(this).offset();
@@ -856,31 +856,31 @@ jQuery(function() {
 				$(speech_input).attr({type:'text', 'data-edit':'inserttext','x-webkit-speech':''}).addClass('wysiwyg-speech-input')
 				.css({'position':'absolute'}).offset({top: editorOffset.top, left: editorOffset.left+$(this).innerWidth()-35});
 			} else speech_input = null
-			
-			
+
+
 			//view source
 			var self = $(this);
 			var view_source = false;
 			toolbar.find('a[data-view=source]').on('click', function(e){
 				e.preventDefault();
-				
+
 				if(!view_source) {
 					$('<textarea />')
 					.css({'width':self.outerWidth(), 'height':self.outerHeight()})
 					.val(self.html())
 					.insertAfter(self)
 					self.hide();
-					
+
 					$(this).addClass('active');
 				}
 				else {
 					var textarea = self.next();
 					self.html(textarea.val()).show();
 					textarea.remove();
-					
+
 					$(this).removeClass('active');
 				}
-				
+
 				view_source = !view_source;
 			});
 

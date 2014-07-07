@@ -95,11 +95,11 @@ class ResourceProcessor implements InitializingBean {
         adHocIncludes = adHocIncludes.collect { it.startsWith('/') ? it : '/' + it }
 
         adHocExcludesLowerCase = getConfigParamOrDefault('adhoc.excludes', DEFAULT_ADHOC_EXCLUDES)
-        adHocExcludesLowerCase = adHocExcludesLowerCase.collect { 
-            String result = it.toString() 
-            if(!result.startsWith('/')) 
+        adHocExcludesLowerCase = adHocExcludesLowerCase.collect {
+            String result = it.toString()
+            if(!result.startsWith('/'))
                 result = '/' + result
-            result.toLowerCase() 
+            result.toLowerCase()
         }
 
         optionalDispositions = getConfigParamOrDefault('optional.dispositions', ['inline', 'image'])
@@ -400,7 +400,7 @@ class ResourceProcessor implements InitializingBean {
     ResourceMeta getExistingResourceMeta(uri) {
         resourceInfo[uri]
     }
-    
+
     /**
      * Get the existing or create a new ad-hoc ResourceMeta for the URI.
      * @returns The resource instance - which may have a null processedFile if the resource cannot be found
@@ -810,11 +810,11 @@ class ResourceProcessor implements InitializingBean {
     /* @todo add this later when we understand what less-css-resources needs
         // Now do the derived synthetic resources as we know any changed components
         // have now been reset
-        
+
         // LESS mapper would make synthetic resources too, and these might also delegate
         // to a bundled resource, but all need processing in the correct order
         // and LESS would need to compile the stuff to a file in beginPrepare
-        // before the bundle aggregates the output. 
+        // before the bundle aggregates the output.
         // Question is, what is the correct ordering here?
         collectResourcesThatNeedProcessing(modulesByName[SYNTHETIC_MODULE], resBatch)
     */

@@ -17,11 +17,11 @@ $(document).ready(function() {
 
     // activació dels inputs datepicker
 	$('.datepicker').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language:'ca', autoclose:true});
-	
+
     $('*[title]:not([data-toggle])').addClass('tooltiped');
     $('*[data-toggle=popover]').popover();
     $('*[data-toggle=tooltip], .tooltiped').tooltip({container:'body'});
-	
+
 
 });	
 

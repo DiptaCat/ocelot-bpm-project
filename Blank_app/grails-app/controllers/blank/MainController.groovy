@@ -2,7 +2,7 @@ package blank
 
 class MainController {
 
-    def index() { 
-		
+    def index() {
+
 	}
 }

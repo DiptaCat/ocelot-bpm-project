@@ -77,7 +77,7 @@ $.extend($.jgrid,{
 	col: {
 	    caption: "Valitse sarakkeet",
 	    bSubmit: "OK",
-	    bCancel: "Peru"	
+	    bCancel: "Peru"
 	},
 	errors : {
 		errcap: "Virhe",

@@ -6,7 +6,13 @@ class User {
     String login
 
     static hasMany = [bpms: Bpm]
-    //static favs = [favs: Bpm]
+    def favouriteBPMs = []
+
+    Date dateCreated
+
+    static mapping = {
+        autoTimestamp true
+    }
 
     static constraints = {
         name blank: false

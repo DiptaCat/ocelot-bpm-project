@@ -4,7 +4,7 @@
  * Łukasz Schab lukasz@freetree.pl
  * http://FreeTree.pl
  *
- * Updated names, abbreviations, currency and date/time formats for Polish norms (also corresponding with CLDR v21.0.1 --> http://cldr.unicode.org/index) 
+ * Updated names, abbreviations, currency and date/time formats for Polish norms (also corresponding with CLDR v21.0.1 --> http://cldr.unicode.org/index)
  * Tomasz Pęczek tpeczek@gmail.com
  * http://tpeczek.blogspot.com; http://tpeczek.codeplex.com
  *

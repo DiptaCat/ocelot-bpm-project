@@ -3,7 +3,7 @@
  * jqGrid German Translation
  * Version 1.0.0 (developed for jQuery Grid 3.3.1)
  * Olaf Klöppel opensource@blue-hit.de
- * http://blue-hit.de/ 
+ * http://blue-hit.de/
  *
  * Updated for jqGrid 3.8
  * Andreas Flack
@@ -87,7 +87,7 @@ $.extend($.jgrid,{
 	col : {
 		caption: "Spalten auswählen",
 		bSubmit: "Speichern",
-		bCancel: "Abbrechen"	
+		bCancel: "Abbrechen"
 	},
 	errors : {
 		errcap : "Fehler",

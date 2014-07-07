@@ -28,20 +28,20 @@ ace.settings = {
 		if(!fix && ace.settings.is('sidebar', 'fixed')) {
 			ace.settings.sidebar_fixed(false);
 		}
-		
+
 		var navbar = document.getElementById('navbar');
 		if(fix) {
 			if(!ace.hasClass(navbar , 'navbar-fixed-top'))  ace.addClass(navbar , 'navbar-fixed-top');
 			if(!ace.hasClass(document.body , 'navbar-fixed'))  ace.addClass(document.body , 'navbar-fixed');
-			
+
 			ace.settings.set('navbar', 'fixed');
 		} else {
 			ace.removeClass(navbar , 'navbar-fixed-top');
 			ace.removeClass(document.body , 'navbar-fixed');
-			
+
 			ace.settings.unset('navbar', 'fixed');
 		}
-		
+
 		document.getElementById('ace-settings-navbar').checked = fix;
 	},
 
@@ -56,12 +56,12 @@ ace.settings = {
 		if(fix) {
 			if(!ace.hasClass(breadcrumbs , 'breadcrumbs-fixed'))  ace.addClass(breadcrumbs , 'breadcrumbs-fixed');
 			if(!ace.hasClass(document.body , 'breadcrumbs-fixed'))  ace.addClass(document.body , 'breadcrumbs-fixed');
-			
+
 			ace.settings.set('breadcrumbs', 'fixed');
 		} else {
 			ace.removeClass(breadcrumbs , 'breadcrumbs-fixed');
 			ace.removeClass(document.body , 'breadcrumbs-fixed');
-			
+
 			ace.settings.unset('breadcrumbs', 'fixed');
 		}
 		document.getElementById('ace-settings-breadcrumbs').checked = fix;
@@ -104,8 +104,8 @@ ace.settings = {
 			ace.settings.unset('main-container', 'fixed');
 		}
 		document.getElementById('ace-settings-add-container').checked = inside;
-		
-		
+
+
 		if(navigator.userAgent.match(/webkit/i)) {
 			//webkit has a problem redrawing and moving around the sidebar background in realtime
 			//so we do this, to force redraw
@@ -150,7 +150,7 @@ ace.settings = {
 ace.settings.check = function(item, val) {
 	if(! ace.settings.exists(item, val) ) return;//no such setting specified
 	var status = ace.settings.is(item, val);//is breadcrumbs-fixed? or is sidebar-collapsed? etc
-	
+
 	var mustHaveClass = {
 		'navbar-fixed' : 'navbar-fixed-top',
 		'sidebar-fixed' : 'sidebar-fixed',
@@ -164,7 +164,7 @@ ace.settings.check = function(item, val) {
 	//for example, sidebar isn't .fixed, but user fixed it on a previous page
 	//or if an element has a specified class, but saved settings say it shouldn't, then remove it
 	//for example, sidebar by default is minimized (.menu-min hard coded), but user expanded it and now shouldn't have 'menu-min' class
-	
+
 	var target = document.getElementById(item);//#navbar, #sidebar, #breadcrumbs
 	if(status != ace.hasClass(target , mustHaveClass[item+'-'+val])) {
 		ace.settings[item.replace('-','_')+'_'+val](status);//call the relevant function to mage the changes
@@ -185,7 +185,7 @@ ace.data_storage = function(method, undefined) {
 
 	var storage = null;
 	var type = 0;
-	
+
 	if((method == 1 || method === undefined) && 'localStorage' in window && window['localStorage'] !== null) {
 		storage = ace.storage;
 		type = 1;
@@ -198,7 +198,7 @@ ace.data_storage = function(method, undefined) {
 	//var data = {}
 	this.set = function(namespace, key, value, undefined) {
 		if(!storage) return;
-		
+
 		if(value === undefined) {//no namespace here?
 			value = key;
 			key = namespace;
@@ -227,7 +227,7 @@ ace.data_storage = function(method, undefined) {
 						return;
 					}
 				}
-				
+
 				else {
 					tmp[key] = value;
 				}
@@ -239,7 +239,7 @@ ace.data_storage = function(method, undefined) {
 
 	this.get = function(namespace, key, undefined) {
 		if(!storage) return null;
-		
+
 		if(key === undefined) {//no namespace here?
 			key = namespace;
 			return storage.get(prefix+key);
@@ -256,10 +256,10 @@ ace.data_storage = function(method, undefined) {
 		}
 	}
 
-	
+
 	this.remove = function(namespace, key, undefined) {
 		if(!storage) return;
-		
+
 		if(key === undefined) {
 			key = namespace
 			this.set(key, null);

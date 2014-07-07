@@ -3,7 +3,7 @@
  * jqGrid Brazilian-Portuguese Translation
  * Sergio Righi sergio.righi@gmail.com
  * http://curve.com.br
- * 
+ *
  * Updated by Jonnas Fonini
  * http://fonini.net
  * Dual licensed under the MIT and GPL licenses:

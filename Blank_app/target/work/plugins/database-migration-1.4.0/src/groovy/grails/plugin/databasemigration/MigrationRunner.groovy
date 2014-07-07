@@ -35,11 +35,11 @@ class MigrationRunner {
 	static void autoRun(migrationCallbacks = null) {
 		def dataSourceConfigs = grails.plugin.databasemigration.MigrationUtils.getDataSourceConfigs()
 		dataSourceConfigs.dataSource = MigrationUtils.application.config.dataSource
-		
+
 		for (configAndName in dataSourceConfigs) {
 			String dsConfigName = configAndName.key
 			ConfigObject configObject = configAndName.value
-			
+
 			if (!MigrationUtils.canAutoMigrate(dsConfigName)) {
 				LOG.warn "Not running auto migrate for DataSource '$dsConfigName'"
 				continue
@@ -61,11 +61,11 @@ class MigrationRunner {
 						List schemas = []
 						while (resultSet.next()) {
 							String schema = resultSet.getString(1)
-							if(schema ==~ config.multiSchemaPattern || schema in config.multiSchemaList){ schemas << schema } 
+							if(schema ==~ config.multiSchemaPattern || schema in config.multiSchemaList){ schemas << schema }
 						}
-						
+
 						LOG.info "Found ${schemas.size()} schemas to update"
-						
+
 						schemas.each{ schema ->
 							database = MigrationUtils.getDatabase(schema, dsConfigName)
 							runMigrations(dsConfigName, schema, config, database, migrationCallbacks)
@@ -83,7 +83,7 @@ class MigrationRunner {
 			}
 		}
 	}
-	
+
 	static void runMigrations(dsConfigName, schema, config, database, migrationCallbacks){
 		if (config.dropOnStart) {
 			LOG.warn "Dropping tables..."
@@ -126,5 +126,5 @@ class MigrationRunner {
 			LOG.info "No migrations to run for '$dsConfigName${schema ? '.'+schema : ''}'"
 		}
 	}
-	
+
 }

@@ -16,7 +16,7 @@ class AggregatedResourceMeta extends ResourceMeta {
 
     def resources = []
     def inheritedModuleDependencies = new HashSet()
-    
+
     void reset() {
         super.reset()
     }
@@ -24,7 +24,7 @@ class AggregatedResourceMeta extends ResourceMeta {
     boolean containsResource(ResourceMeta r) {
         resources.find { r.sourceUrl == it.sourceUrl }
     }
-    
+
     @Override
     boolean isDirty() {
         resources.any { it.dirty }
@@ -36,7 +36,7 @@ class AggregatedResourceMeta extends ResourceMeta {
         if (!containsResource(r)) {
             resources << r
             inheritedModuleDependencies << r.module
-        
+
             // Update our aggregated sourceUrl
             sourceUrl = "${sourceUrl}, ${r.sourceUrl}"
         }
@@ -51,7 +51,7 @@ class AggregatedResourceMeta extends ResourceMeta {
     }
 
     protected initFile(grailsResourceProcessor) {
-        def commaPos = sourceUrl.indexOf(',') 
+        def commaPos = sourceUrl.indexOf(',')
         if (commaPos == -1) {
             commaPos = sourceUrl.size()
         }
@@ -68,7 +68,7 @@ class AggregatedResourceMeta extends ResourceMeta {
         initFile(grailsResourceProcessor)
 
         this.originalSize = resources.originalSize.sum()
-        
+
         buildAggregateResource(grailsResourceProcessor)
     }
 
@@ -76,9 +76,9 @@ class AggregatedResourceMeta extends ResourceMeta {
         def moduleOrder = grailsResourceProcessor.modulesInDependencyOrder
 
         def newestLastMod = 0
-        
+
         def bundledContent = new StringBuilder()
-        
+
         // Add the resources to the file in the order determined by module dependencies!
         moduleOrder.each { m ->
             resources.each { r ->
@@ -89,19 +89,19 @@ class AggregatedResourceMeta extends ResourceMeta {
                     }
                     bundledContent << r.processedFile.getText("UTF-8")
                     bundledContent << "\r\n"
-                    
+
                     if (r.originalLastMod > newestLastMod) {
                         newestLastMod = r.originalLastMod
                     }
                 }
             }
         }
-        
+
         def out = getWriter()
         out << bundledContent
         out << "\r\n"
         out.close()
-        
+
         this.originalLastMod = newestLastMod
     }
 }
