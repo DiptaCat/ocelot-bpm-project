@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: userInstance, field: 'favouriteBpms', 'error')}  col-xs-12">
+<div class="control-group ${hasErrors(bean: userInstance, field: 'favouriteBPMs', 'error')}  col-xs-12">
     <label class="control-label" style="font-weight: bold">
         <g:message code="user.favouriteBpms.label" default="Favourite BPMs"/>
     </label>
@@ -61,6 +61,4 @@
         <g:message name="name" message="${userInstance?.dateCreated}"/>
     </div>
 </div>
-
-
 

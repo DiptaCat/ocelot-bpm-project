@@ -91,8 +91,21 @@ class UserController {
         }
     }
 
-    def addBPMToFavourites() {
+    @Transactional
+    def addBPMToFavourites(User userInstance, long id) {
 
+        def bpm = Bpm.get(id)
+
+        if(!userInstance.favouriteBPMs.contains(bpm)){
+            userInstance.favouriteBPMs.add(bpm)
+            redirect action: "index", method: "GET"
+        } else {
+            redirect action: "show", method: "GET"
+        }
+    }
+
+    def bpms (User userInstance) {
+        respond userInstance
     }
 
     protected void notFound() {

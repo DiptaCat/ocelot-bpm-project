@@ -32,14 +32,14 @@
     </label>
     <div class="controls">
 
-<ul class="one-to-many">
-<g:each in="${userInstance?.bpms?}" var="b">
-    <li><g:link controller="bpm" action="show" id="${b.id}">${b?.name}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="bpm" action="create" params="['user.id': userInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'bpm.label', default: 'Bpm')])}</g:link>
-</li>
-</ul>
+    <ul class="one-to-many">
+        <g:each in="${userInstance?.bpms?}" var="b">
+            <li><g:link controller="bpm" action="show" id="${b.id}">${b?.name}</g:link></li>
+        </g:each>
+        <li class="add">
+        <g:link controller="bpm" action="create" params="['user.id': userInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'bpm.label', default: 'Bpm')])}</g:link>
+        </li>
+    </ul>
 
 
     </div>
