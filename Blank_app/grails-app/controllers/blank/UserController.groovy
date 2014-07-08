@@ -91,6 +91,10 @@ class UserController {
         }
     }
 
+    def addBPMToFavourites() {
+
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

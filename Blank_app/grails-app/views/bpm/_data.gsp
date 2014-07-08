@@ -7,7 +7,7 @@
     </label>
 
     <div class="controls">
-        <g:textField name="name" required="" value="${bpmInstance?.name}"/>
+        <g:message name="name" value="${bpmInstance?.name}"/>
     </div>
 
 </div>
@@ -20,7 +20,7 @@
     </label>
 
     <div class="controls">
-        <g:textField name="user" required="" value="${bpmInstance?.user?.login}"/>
+        <g:message name="user" value="${bpmInstance?.user?.login}"/>
     </div>
 
 </div>

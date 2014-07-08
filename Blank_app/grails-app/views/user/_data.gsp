@@ -30,8 +30,22 @@
 
     <div class="controls" style="font-style: italic">
         <ul class="one-to-many">
-            <g:each in="${userInstance?.bpms ?}" var="b">
-                <li><g:link controller="bpm" action="show" id="${b.id}">${b?.name}</g:link></li>
+            <g:each in="${userInstance?.bpms ?}" var="bpm">
+                <li><g:link controller="bpm" action="show" id="${bpm.id}">${bpm?.name}</g:link></li>
+            </g:each>
+        </ul>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: userInstance, field: 'favouriteBpms', 'error')}  col-xs-12">
+    <label class="control-label" style="font-weight: bold">
+        <g:message code="user.favouriteBpms.label" default="Favourite BPMs"/>
+    </label>
+
+    <div class="controls" style="font-style: italic">
+        <ul class="one-to-many">
+            <g:each in="${userInstance?.favouriteBPMs ?}" var="bpm">
+                <li><g:link controller="bpm" action="show" id="${bpm.id}">${bpm?.name}</g:link></li>
             </g:each>
         </ul>
     </div>
