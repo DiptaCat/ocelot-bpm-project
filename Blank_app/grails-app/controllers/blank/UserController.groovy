@@ -91,7 +91,6 @@ class UserController {
         }
     }
 
-    @Transactional
     def addBPMToFavourites(User userInstance, long id) {
 
         def bpm = Bpm.get(id)
@@ -104,8 +103,9 @@ class UserController {
         }
     }
 
-    def bpms (User userInstance) {
-        respond userInstance
+    def bpms (long id) {
+        User userInstance = User.get(id)
+        respond userInstance, model: [bpmsList:Bpm.list()]
     }
 
     protected void notFound() {

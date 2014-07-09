@@ -8,6 +8,7 @@
 
     <div class="controls" style="font-style: italic">
         <g:message name="login" message="${userInstance?.login}"/>
+        <g:message name="" message="${userInstance?.favouriteBPMs?.size()}"/>
     </div>
 </div>
 

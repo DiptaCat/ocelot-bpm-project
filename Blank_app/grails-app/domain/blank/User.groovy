@@ -7,7 +7,7 @@ class User {
     Date dateCreated
 
     static hasMany = [bpms: Bpm]
-    def favouriteBPMs = []
+    ArrayList<Bpm> favouriteBPMs = new ArrayList<Bpm>()
 
 
     static mapping = {
@@ -25,5 +25,9 @@ class User {
 
     def existBpm(long id) {
         favouriteBPMs.contains(Bpm.findById(id))
+    }
+
+    String toString() {
+        "${login}"
     }
 }
