@@ -94,17 +94,12 @@ class UserController {
     def addBPMToFavourites(User userInstance, long id) {
 
         def bpm = Bpm.get(id)
-
-        if(!userInstance.favouriteBPMs.contains(bpm)){
-            userInstance.favouriteBPMs.add(bpm)
-            redirect action: "index", method: "GET"
-        } else {
-            return
-            //redirect action: "show", method: "GET"
-        }
+        userInstance.addToFavouriteBPMs(name: "${bpm.name}").save()
+        userInstance.save flush: true
+        redirect action: "index", method: "GET"
     }
 
-    def bpms (User userInstance, long id) {
+    def bpms (User userInstance) {
         if(userInstance != null)
             respond userInstance, model: [bpmsList:Bpm.list()]
         else

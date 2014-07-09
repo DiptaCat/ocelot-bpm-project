@@ -6,8 +6,8 @@ class User {
     String login
     Date dateCreated
 
-    static hasMany = [bpms: Bpm]
-    List<Bpm> favouriteBPMs = [].withLazyDefault { new Bpm() }
+    static hasMany = [bpms: Bpm, favouriteBPMs:FavBpm]
+
 
 
     static mapping = {
@@ -20,7 +20,7 @@ class User {
     }
 
     def getFavourites(){
-        return this.favouriteBPMs.sort{it.lastUpdated}
+        return this.favouriteBPMs//.sort{it.lastUpdated}
     }
 
     def existBpm(long id) {
