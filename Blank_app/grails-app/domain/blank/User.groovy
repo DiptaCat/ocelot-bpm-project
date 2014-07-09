@@ -7,7 +7,7 @@ class User {
     Date dateCreated
 
     static hasMany = [bpms: Bpm]
-    ArrayList<Bpm> favouriteBPMs = new ArrayList<Bpm>()
+    List<Bpm> favouriteBPMs = [].withLazyDefault { new Bpm() }
 
 
     static mapping = {

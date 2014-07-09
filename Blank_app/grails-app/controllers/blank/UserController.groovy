@@ -57,7 +57,7 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view: 'edit'
+            respond userInstance.errors, view: 'bpms'
             return
         }
 
@@ -87,7 +87,7 @@ class UserController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
                 redirect action: "index", method: "GET"
             }
-            '*' { render status: NO_CONTENT }
+            '*' { respond userInstance, [status: OK] }
         }
     }
 
@@ -99,13 +99,16 @@ class UserController {
             userInstance.favouriteBPMs.add(bpm)
             redirect action: "index", method: "GET"
         } else {
-            redirect action: "show", method: "GET"
+            return
+            //redirect action: "show", method: "GET"
         }
     }
 
-    def bpms (long id) {
-        User userInstance = User.get(id)
-        respond userInstance, model: [bpmsList:Bpm.list()]
+    def bpms (User userInstance, long id) {
+        if(userInstance != null)
+            respond userInstance, model: [bpmsList:Bpm.list()]
+        else
+            redirect action: "index", method: "GET"
     }
 
     protected void notFound() {

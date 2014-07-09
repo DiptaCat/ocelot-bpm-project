@@ -41,11 +41,12 @@
 <div class="control-group ${hasErrors(bean: userInstance, field: 'favouriteBPMs', 'error')}  col-xs-12">
     <label class="control-label" style="font-weight: bold">
         <g:message code="user.favouriteBpms.label" default="Favourite BPMs"/>
+        "${userInstance?.favouriteBPMs.size()}"
     </label>
 
     <div class="controls" style="font-style: italic">
         <ul class="one-to-many">
-            <g:each in="${userInstance?.favouriteBPMs ?}" var="bpm">
+            <g:each in="${userInstance?.getFavourites() ?}" var="bpm">
                 <li><g:link controller="bpm" action="show" id="${bpm.id}">${bpm?.name}</g:link></li>
             </g:each>
         </ul>
