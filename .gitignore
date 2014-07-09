@@ -29,5 +29,7 @@
 # "temporary" build files
 /target
 
-#Added by Julio: .idea files
-.idea/
+#Added by Julio
+./idea 	#Ignore IE files
+*.class #Ignore .class files
+*.log	#Ignore .log files
