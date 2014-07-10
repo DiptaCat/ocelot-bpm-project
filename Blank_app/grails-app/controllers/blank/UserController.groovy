@@ -97,7 +97,7 @@ class UserController {
         redirect action: "index", method: "GET"
     }
 
-    def bpms (User userInstance) {
+    def bpms(User userInstance) {
         if(userInstance != null)
             respond userInstance, model: [bpmsList:Bpm.list()]
         else
