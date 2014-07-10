@@ -1,6 +1,7 @@
 Blank_app/.idea/.name
 # nk_app/.idea/.name
 .gitignore for Grails 1.2 and 1.3
+/.idea/*
 
 # web application files
 /web-app/WEB-INF/classes
