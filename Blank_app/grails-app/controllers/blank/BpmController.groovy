@@ -9,6 +9,14 @@ class BpmController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def recents = {
+        respond Bpm.list(sort: "lastUpdated", order: "desc", max: 5)
+    }
+
+    def temporals = {
+        respond Bpm.list(sort: "temporal", order: "desc").takeWhile { it.temporal }
+    }
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Bpm.list(params), model: [bpmInstanceCount: Bpm.count()]

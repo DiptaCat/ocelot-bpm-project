@@ -6,6 +6,17 @@
         <element id="javaee-facet-resources" facet="blank/web/GrailsWeb" />
       </root>
     </artifact>
+    <artifact type="exploded-war" name="blank-grailsPlugins:GrailsWeb exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/blank_grailsPlugins_GrailsWeb_exploded</output-path>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="blank-grailsPlugins/web/GrailsWeb" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="javaee-facet-classes" facet="blank-grailsPlugins/web/GrailsWeb" />
+          </element>
+        </element>
+      </root>
+    </artifact>
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />

@@ -1,6 +1,5 @@
 package blank
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -8,7 +7,6 @@ import grails.transaction.Transactional
 class UserController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model: [userInstanceCount: User.count()]
@@ -89,6 +87,21 @@ class UserController {
             }
             '*' { render status: NO_CONTENT }
         }
+    }
+
+    def addBPMToFavourites(User userInstance, long id) {
+
+        def bpm = Bpm.get(id)
+        userInstance.addToFavouriteBPMs(bpm).save()
+        userInstance.save flush: true
+        redirect action: "index", method: "GET"
+    }
+
+    def bpms (User userInstance) {
+        if(userInstance != null)
+            respond userInstance, model: [bpmsList:Bpm.list()]
+        else
+            redirect action: "index", method: "GET"
     }
 
     protected void notFound() {
