@@ -36,5 +36,5 @@
 
 Blank_app/*.iml
 Blank_app/.idea/
-Blank_app/*/*.class
+Blank_app/target/
 Blank_app/*.log
