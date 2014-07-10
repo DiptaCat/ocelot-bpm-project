@@ -6,7 +6,7 @@
                                                       alt="Diputació de Tarragona"/></a>
             </div>
         </div>
-
+        %{----}%
         <div class="navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li>
