@@ -1,7 +1,4 @@
-Blank_app/.idea/.name
-# nk_app/.idea/.name
-.gitignore for Grails 1.2 and 1.3
-/.idea/*
+# .gitignore for Grails 1.2 and 1.3
 
 # web application files
 /web-app/WEB-INF/classes
@@ -20,7 +17,6 @@ Blank_app/.idea/.name
 
 # project release file
 /*.war
-/*.class
 
 # plugin release files
 /*.zip
@@ -33,5 +29,8 @@ Blank_app/.idea/.name
 # "temporary" build files
 /target
 
-#Added by Julio: .idea files
-.idea/
+#Added by Julio
+/.idea 	#Ignore IE files
+*.class #Ignore .class files
+*.log	#Ignore .log files
+/Blank_app/.idea
