@@ -1,0 +1,29 @@
+introduction: Introduction
+get-started: 
+    title: Get Started
+    install: Install the plugin
+    create-process: Create a process definition
+    execute-test: Execute the integration test
+conventions: A Word about Conventions
+usage:
+    title: User Guide
+    script-create-process: Create a process definition
+    services: Inject camunda API Services
+    configuration: 
+        title: Configure the camunda plugin
+        deployment-scenario: Set the deployment scenario
+        process-engine-configuration: Configure your process engine
+        jul-logging: Consider 'java.util.logging' settings
+        alternative-database: Use a different database 
+        alternative-engine-version: Use an alternative version of camunda 
+        bean-names: Provide alternative bean names
+        override-configuration: Override plugin configuration with custom beans
+testing: 
+    title: Testing Guide
+    drive-process: Drive the process instances
+    mock-services: Mock the service calls
+resources: 
+    title: Further Resources
+    plugin-resources: camunda Grails plugin
+    camunda-resources: camunda BPM
+    modeler-resources: camunda Modeler
