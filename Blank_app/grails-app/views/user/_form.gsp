@@ -28,9 +28,9 @@
 
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'bpms', 'error')}  col-xs-12">
-    <label class="control-label" for="bpms">
-        <g:message code="user.bpms.label" default="Bpms"/>
 
+    <label class="control-label">
+        <g:message code="user.bpms.label" default="Bpms"/>
     </label>
 
     <div class="controls">
@@ -42,6 +42,28 @@
             <li class="add">
                 <g:link controller="bpm" action="create"
                         params="['user.id': userInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'bpm.label', default: 'Bpm')])}</g:link>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: userInstance, field: 'favouriteBPMs', 'error')}  col-xs-12">
+
+    <label class="control-label">
+        <g:message code="user.add.label" default="Favourites"/>
+    </label>
+
+    <div class="controls">
+
+        <ul class="one-to-many">
+            <g:each in="${userInstance?.favouriteBPMs ?}" var="b">
+                <li><g:link controller="bpm" action="show" id="${b.id}">${b?.name}</g:link></li>
+            </g:each>
+
+            <li class="add">
+                <g:link controller="user" action="bpms"
+                        id="${userInstance.id}">${message(code: 'user.add.label', default: "Add Favourite")}</g:link>
             </li>
         </ul>
 

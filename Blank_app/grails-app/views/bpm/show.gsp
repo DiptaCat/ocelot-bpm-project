@@ -41,6 +41,7 @@
                 <i class="icon-trash icon-pencil"></i>
                 <g:message code="default.button.edit.label" default="Edit"/>
             </g:link>
+
             <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate=""
                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 
