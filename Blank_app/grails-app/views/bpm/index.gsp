@@ -13,53 +13,67 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"/></i> <g:message code="default.new.label"
-                                                                                              args="[entityName]"/></g:link>
-    <div class="hr dotted clearfix"></div>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+                                                                                             args="[entityName]"/></g:link>
+
+    <g:link class="btn btn-sm btn-grey btn-info" action="recents"><i class="icon-arrow-down"></i> <g:message
+            code="default.list.label"
+            args="[entityName]"/></g:link>
+
+    <g:link class="btn btn-sm btn-purple btn-info" action="temporals"><i class="icon-arrow-down"></i> <g:message
+            code="default.tmp.label"
+            default="Temporals"
+            args="[entityName]"/></g:link>
 </div>
 
-<div id="list-bpm" class="content scaffold-list" role="main">
-    <g:if test="${flash.message}">
-        <div class="alert alert-${flash.messagetype ?: 'info'} message" role="status"><button data-dismiss="alert"
-                                                                                              class="close"
-                                                                                              type="button">×</button>${flash.message}
-        </div>
-    </g:if>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
+<div class="hr dotted clearfix"></div>
 
-            <g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/>
+<div>
 
-            %{--<g:sortableColumn property="dateCreated" title="${message(code: 'bpm.dateCreated.label', default: 'Date Created')}" />
+    <div id="list-bpm" class="content scaffold-list" role="main">
+        <g:if test="${flash.message}">
+            <div class="alert alert-${flash.messagetype ?: 'info'} message" role="status"><button
+                    data-dismiss="alert"
+                    class="close"
+                    type="button">×</button>${flash.message}
+            </div>
+        </g:if>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
 
-            <g:sortableColumn property="lastUpdated" title="${message(code: 'bpm.lastUpdated.label', default: 'Last Updated')}" /> --}%
+                <g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/>
 
-            <th><g:message code="bpm.user.label" default="User"/></th>
+                %{--<g:sortableColumn property="dateCreated" title="${message(code: 'bpm.dateCreated.label', default: 'Date Created')}" />
 
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${bpmInstanceList}" status="i" var="bpmInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                <g:sortableColumn property="lastUpdated" title="${message(code: 'bpm.lastUpdated.label', default: 'Last Updated')}" /> --}%
 
-                <td><g:link action="show"
-                            id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
-
-                %{--<td><g:formatDate date="${bpmInstance.dateCreated}" /></td>
-
-                <td><g:formatDate date="${bpmInstance.lastUpdated}" /></td> --}%
-
-                <td>${fieldValue(bean: bpmInstance, field: "user.login")}</td>
+                <th><g:message code="bpm.user.label" default="User"/></th>
 
             </tr>
-        </g:each>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <g:each in="${bpmInstanceList}" status="i" var="bpmInstance">
+                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-    <div class="pagination pagination-right">
-        <div class="pagination-content">
-            <g:paginate total="${bpmInstanceCount ?: 0}"/>
+                    <td><g:link action="show"
+                                id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
+
+                    %{--<td><g:formatDate date="${bpmInstance.dateCreated}" /></td>
+
+                    <td><g:formatDate date="${bpmInstance.lastUpdated}" /></td> --}%
+
+                    <td>${fieldValue(bean: bpmInstance, field: "user.login")}</td>
+
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+
+        <div class="pagination pagination-right">
+            <div class="pagination-content">
+                <g:paginate total="${bpmInstanceCount ?: 0}"/>
+            </div>
         </div>
     </div>
 </div>

@@ -4,8 +4,13 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
+<<<<<<< HEAD
           <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.8/web-app" relative="/" />
+=======
+          <root url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.8/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
+>>>>>>> b7aedfba7581dd6b085b67d3acb823d624f1794d
           <root url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
@@ -65,6 +70,7 @@
     <orderEntry type="library" scope="PROVIDED" name="grails-2.4.2" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Blank_app-grailsPlugins)">
+<<<<<<< HEAD
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/liquibase/liquibase-core/2.0.5/liquibase-core-2.0.5.jar!/" />
@@ -103,6 +109,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/camunda/bpm/camunda-engine-spring/7.0.0-Final/camunda-engine-spring-7.0.0-Final.jar!/" />
         </CLASSES>
+=======
+        <CLASSES />
+>>>>>>> b7aedfba7581dd6b085b67d3acb823d624f1794d
         <JAVADOC />
         <SOURCES />
       </library>

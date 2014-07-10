@@ -11,8 +11,8 @@
     <h1><g:message code="default.show.label" args="[entityName]" /></h1>
 </div>
 
-<g:each in="${blank.Bpm.all}" var="bpm">
+<g:each in="${bpmsList}" var="bpm">
     <div id="show">
-        <span class="name">${bpm.name} ${bpm.id}</span> <g:link id="${bpm.id}" action="addBPMToFavourites" controller="User">Add to Favourites</g:link>
+        <span class="name">${bpm.name} ${bpm.id}</span> <g:link action="addBPMToFavourites" id="${bpm.id}" controller="User">Add to Favourites</g:link>
     </div>
 </g:each>

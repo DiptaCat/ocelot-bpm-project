@@ -13,8 +13,8 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"/></i> <g:message code="default.new.label"
-                                                                                              args="[entityName]"/></g:link>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+                                                                                             args="[entityName]"/></g:link>
     <div class="hr dotted clearfix"></div>
 </div>
 

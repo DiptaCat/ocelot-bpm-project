@@ -1,6 +1,5 @@
 package blank
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -8,7 +7,6 @@ import grails.transaction.Transactional
 class UserController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model: [userInstanceCount: User.count()]
@@ -57,7 +55,7 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view: 'edit'
+            respond userInstance.errors, view: 'bpms'
             return
         }
 
@@ -87,25 +85,23 @@ class UserController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
                 redirect action: "index", method: "GET"
             }
-            '*' { render status: NO_CONTENT }
+            '*' { respond userInstance, [status: OK] }
         }
     }
 
-    @Transactional
     def addBPMToFavourites(User userInstance, long id) {
 
         def bpm = Bpm.get(id)
-
-        if(!userInstance.favouriteBPMs.contains(bpm)){
-            userInstance.favouriteBPMs.add(bpm)
-            redirect action: "index", method: "GET"
-        } else {
-            redirect action: "show", method: "GET"
-        }
+        userInstance.addToFavouriteBPMs(bpm).save()
+        userInstance.save flush: true
+        redirect action: "index", method: "GET"
     }
 
-    def bpms (User userInstance) {
-        respond userInstance
+    def bpms(User userInstance) {
+        if(userInstance != null)
+            respond userInstance, model: [bpmsList:Bpm.list()]
+        else
+            redirect action: "index", method: "GET"
     }
 
     protected void notFound() {

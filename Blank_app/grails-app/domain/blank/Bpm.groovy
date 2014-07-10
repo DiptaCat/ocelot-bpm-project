@@ -6,6 +6,8 @@ class Bpm {
     Date dateCreated
     Date lastUpdated
 
+    boolean temporal
+
     def User user
     static belongsTo = [User]
 
@@ -14,6 +16,6 @@ class Bpm {
     }
 
     static constraints = {
-        name blank: false
+        name blank: false, unique: true
     }
 }
