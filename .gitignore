@@ -31,6 +31,5 @@
 
 #Added by Julio
 .idea/ 	#Ignore IE files
-Blank_app/.idea
 *.class #Ignore .class files
 *.log	#Ignore .log files
