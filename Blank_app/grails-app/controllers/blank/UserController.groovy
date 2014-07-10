@@ -55,7 +55,7 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view: 'edit'
+            respond userInstance.errors, view: 'bpms'
             return
         }
 
@@ -85,7 +85,7 @@ class UserController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
                 redirect action: "index", method: "GET"
             }
-            '*' { render status: NO_CONTENT }
+            '*' { respond userInstance, [status: OK] }
         }
     }
 

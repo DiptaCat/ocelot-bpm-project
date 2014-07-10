@@ -30,10 +30,12 @@
     <div class="form-horizontal">
         <fieldset>
             <g:render template="data" model="${['userInstance': userInstance]}"/>
+
         </fieldset>
     </div>
     <g:form>
         <div class="form-actions">
+
             <g:hiddenField name="id" value="${userInstance?.id}"/>
 
             <g:link class="edit btn btn-sm btn-primary" action="edit" id="${userInstance?.id}">
@@ -46,7 +48,7 @@
                 <i class="icon-trash icon-white"></i>
                 ${message(code: 'default.button.delete.label', default: 'Delete')}
             </button>
-            
+
             <g:hiddenField name="id"/>
             <g:link class="edit btn btn-sm btn-primary" action="bpms" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
@@ -58,7 +60,6 @@
 </div>
 </body>
 </html>
-
 
 %{--<html>
 	<head>

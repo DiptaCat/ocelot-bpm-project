@@ -3,6 +3,7 @@
 <div class="control-group ${hasErrors(bean: bpmInstance, field: 'name', 'error')}  col-xs-12">
 
     <label class="control-label" for="name" style="font-weight: bold">
+
         <g:message code="bpm.name.label" default="Name"/>
     </label>
 
@@ -15,13 +16,13 @@
 <div class="control-group ${hasErrors(bean: bpmInstance, field: 'user', 'error')} required col-xs-12">
 
     <label class="control-label" for="user" style="font-weight: bold">
-        <g:message code="bpm.user.label" default="User"/>
+        <g:message code="bpm.user.label" default="Owner"/>
     </label>
 
     <div class="controls" style="font-style: italic">
         <g:message name="user" message="${bpmInstance?.user?.login}"/>
-    </div>
 
+    </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: bpmInstance, field: 'dateCreated', 'error')}  col-xs-12">

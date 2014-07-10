@@ -20,6 +20,7 @@
     </label>
 
     <div class="controls">
+
         <g:select id="user" name="user.id" from="${User.list()}" optionKey="id" required=""
                   value="${bpmInstance?.user?.id}" class="many-to-one"/>
 
