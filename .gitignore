@@ -34,7 +34,7 @@
 *.class #Ignore .class files
 *.log	#Ignore .log files
 
-
+Blank_app/*.iml
 Blank_app/.idea/
 Blank_app/*/*.class
 Blank_app/*.log
