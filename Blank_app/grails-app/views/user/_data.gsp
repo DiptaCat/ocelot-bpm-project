@@ -63,4 +63,3 @@
         <g:message name="name" message="${userInstance?.dateCreated}"/>
     </div>
 </div>
-

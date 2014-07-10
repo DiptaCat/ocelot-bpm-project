@@ -33,3 +33,8 @@
 .idea/ 	#Ignore IE files
 *.class #Ignore .class files
 *.log	#Ignore .log files
+
+Blank_app/*.iml
+Blank_app/.idea/
+Blank_app/target/
+Blank_app/*.log
