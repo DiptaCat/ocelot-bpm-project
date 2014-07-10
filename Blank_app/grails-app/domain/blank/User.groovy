@@ -6,7 +6,8 @@ class User {
     String login
     Date dateCreated
 
-    static hasMany = [bpms: Bpm, favouriteBPMs:FavBpm]
+    static hasMany = [bpms: Bpm, favouriteBPMs:Bpm]
+    static mappedBy = [ favouriteBPMs: "none" ]
 
 
 
@@ -17,6 +18,7 @@ class User {
     static constraints = {
         name(blank:false, minSize:2)
         login(blank:false, unique:true, minSize:2)
+        favouriteBPMs nullable: true
     }
 
     def getFavourites(){
