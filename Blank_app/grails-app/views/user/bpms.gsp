@@ -46,9 +46,9 @@
         <thead>
         <tr>
 
-            <th><g:message code="bpm.name.label" default="Name"/></th>
+            <th><g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/></th>
 
-            <th><g:message code="bpm.user.label" default="User"/></th>
+            <th><g:sortableColumn property="user" title="${message(code: 'bpm.name.label', default: 'User')}"/></th>
 
             <th><g:message default="Add to Favourites"/></th>
 
@@ -58,11 +58,13 @@
         <g:each in="${bpmsList}" status="i" var="bpm">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link controller="User" action="addBPMToFavourites"
-                            params="${userInstance?.id}"
-                            id="${bpm.id}">${fieldValue(bean: bpm, field: "name")}</g:link></td>
+                <td>${fieldValue(bean: bpm, field: "name")}</td>
 
                 <td>${fieldValue(bean: bpm, field: "user.login")}</td>
+
+                <span class="name">Add</span><g:link action="addBPMToFavourites" id="${bpm.id}"
+                                                               params="${[userId: userInstance?.id, bpmId: bpm.id]}"
+                                                               controller="user">Add to Favourites</g:link>
 
             </tr>
         </g:each>
