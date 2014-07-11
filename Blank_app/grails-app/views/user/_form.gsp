@@ -63,7 +63,7 @@
 
             <li class="add">
                 <g:link controller="user" action="bpms"
-                        id="${userInstance.id}">${message(code: 'user.add.label', default: "Add Favourite")}</g:link>
+                        id="${userInstance?.id}">${message(code: 'user.add.label', default: "Add Favourite")}</g:link>
             </li>
         </ul>
 

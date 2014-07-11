@@ -163,6 +163,15 @@
           <root url="jar://$USER_HOME$/.gvm/grails/2.4.2/lib/org.apache.ant/ant-junit/jars/ant-junit-1.8.4.jar!/" />
           <root url="jar://$USER_HOME$/.gvm/grails/2.4.2/lib/net.java.dev.jna/jna/jars/jna-4.0.0.jar!/" />
           <root url="jar://$USER_HOME$/.gvm/grails/2.4.2/lib/org.apache.ant/ant-trax/jars/ant-trax-1.7.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.1/joda-time-2.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.1.1/mybatis-3.1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.1/mail-1.4.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-email/1.2/commons-email-1.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/camunda/bpm/camunda-engine/7.0.0-Final/camunda-engine-7.0.0-Final.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/camunda/bpm/camunda-engine-spring/7.0.0-Final/camunda-engine-spring-7.0.0-Final.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
