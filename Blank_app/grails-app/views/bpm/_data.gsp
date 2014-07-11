@@ -20,7 +20,8 @@
     </label>
 
     <div class="controls" style="font-style: italic">
-        <g:message name="user" message="${bpmInstance?.user?.login}"/>
+        <td><g:link action="show" controller="user"
+                    id="${bpmInstance.user?.id}">${fieldValue(bean: bpmInstance, field: "user.login")}</g:link></td>
 
     </div>
 </div>

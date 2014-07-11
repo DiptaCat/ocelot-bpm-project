@@ -31,10 +31,6 @@
 
             <g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/>
 
-            %{--<th><g:message code="bpm.lastUpdated.label" default="Last Updated"/></th>
-
-            <g:sortableColumn property="dateCreated" title="${message(code: 'bpm.dateCreated.label', default: 'Date Created')}" />--}%
-
             <g:sortableColumn property="user" title="${message(code: 'bpm.name.label', default: 'User')}"/>
 
         </tr>
@@ -43,12 +39,7 @@
         <g:each in="${bpmInstanceList}" status="i" var="bpmInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show"
-                            id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
-
-                %{--<td><g:formatDate date="${bpmInstance.lastUpdated}"/></td>
-
-                <td><g:formatDate date="${bpmInstance.dateCreated}" /></td>--}%
+                <td><g:link action="show" id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
 
                 <td>${fieldValue(bean: bpmInstance, field: "user.login")}</td>
 

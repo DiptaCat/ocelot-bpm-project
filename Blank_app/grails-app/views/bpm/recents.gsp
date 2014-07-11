@@ -33,8 +33,6 @@
 
             <th><g:message code="bpm.name.label" default="Name"/></th>
 
-            %{--<g:sortableColumn property="dateCreated" title="${message(code: 'bpm.dateCreated.label', default: 'Date Created')}" />--}%
-
             <th><g:message code="bpm.user.label" default="User"/></th>
 
         </tr>
@@ -47,8 +45,6 @@
 
                 <td><g:link action="show"
                             id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
-
-                %{--<td><g:formatDate date="${bpmInstance.dateCreated}" /></td>--}%
 
                 <td>${fieldValue(bean: bpmInstance, field: "user.login")}</td>
 

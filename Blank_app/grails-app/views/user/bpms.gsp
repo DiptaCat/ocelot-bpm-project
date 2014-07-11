@@ -1,27 +1,5 @@
 <%@ page import="blank.Bpm" %>
 
-%{--<!DOCTYPE html>
-<html>
-<head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'bpm.label', default: 'BPM')}"/>
-</head>
-
-<body>
-<div class="page-header">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
-</div>
-
-<g:each in="${bpmsList}" var="bpm">
-    <div id="show">
-        <span class="name">${bpm.name} ${bpm.id}</span><g:link action="addBPMToFavourites" id="${bpm.id}"
-                                                                params="${[userId: userInstance?.id, bpmId: bpm.id]}"
-                                                                controller="user">Add to Favourites</g:link>
-    </div>
-</g:each>
-</body>
-</html>--}%
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,11 +24,11 @@
         <thead>
         <tr>
 
-            <th><g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/></th>
+            <g:sortableColumn property="name" title="${message(code: 'bpm.name.label', default: 'Name')}"/>
 
-            <th><g:sortableColumn property="user" title="${message(code: 'bpm.name.label', default: 'User')}"/></th>
+            <g:sortableColumn property="user" title="${message(code: 'bpm.name.label', default: 'User')}"/>
 
-            <th><g:message default="Add to Favourites"/></th>
+            <th><g:message code="user.add.label" default="Add to Favourites"/></th>
 
         </tr>
         </thead>
@@ -62,9 +40,8 @@
 
                 <td>${fieldValue(bean: bpm, field: "user.login")}</td>
 
-                <span class="name">Add</span><g:link action="addBPMToFavourites" id="${bpm.id}"
-                                                               params="${[userId: userInstance?.id, bpmId: bpm.id]}"
-                                                               controller="user">Add to Favourites</g:link>
+                <td><g:link action="addBPMToFavourites" id="${bpm.id}" params="${[userId: userInstance?.id, bpmId: bpm.id]}"
+                                                               controller="user">Add</g:link></td>
 
             </tr>
         </g:each>
@@ -73,3 +50,25 @@
 </div>
 </body>
 </html>
+
+%{--<!DOCTYPE html>
+<html>
+<head>
+    <meta name="layout" content="main">
+    <g:set var="entityName" value="${message(code: 'bpm.label', default: 'BPM')}"/>
+</head>
+
+<body>
+<div class="page-header">
+    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+</div>
+
+<g:each in="${bpmsList}" var="bpm">
+    <div id="show">
+        <span class="name">${bpm.name} ${bpm.id}</span><g:link action="addBPMToFavourites" id="${bpm.id}"
+                                                                params="${[userId: userInstance?.id, bpmId: bpm.id]}"
+                                                                controller="user">Add to Favourites</g:link>
+    </div>
+</g:each>
+</body>
+</html>--}%
