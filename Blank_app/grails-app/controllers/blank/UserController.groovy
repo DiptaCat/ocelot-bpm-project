@@ -89,12 +89,12 @@ class UserController {
         }
     }
 
-    def addBPMToFavourites(User userInstance, long id) {
-
-        def bpm = Bpm.get(id)
+    def addBPMToFavourites() {
+        def userInstance = User.get(params.userId)
+        def bpm = Bpm.get(params.bpmId)
         userInstance.addToFavouriteBPMs(bpm).save()
         userInstance.save flush: true
-        redirect action: "index", method: "GET"
+        respond userInstance, view: 'edit'
     }
 
     def bpms(User userInstance) {

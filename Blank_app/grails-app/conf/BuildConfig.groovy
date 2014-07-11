@@ -42,6 +42,8 @@ grails.project.dependency.resolution = {
         mavenCentral()
         mavenRepo "https://app.camunda.com/nexus/content/groups/public"
 
+
+
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -62,7 +64,6 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.7'
-        compile ":camunda:0.1.1"
 
         //compile ":asset-pipeline:1.8.11"
         runtime ':resources:1.2.8'
