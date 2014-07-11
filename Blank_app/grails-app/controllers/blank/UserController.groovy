@@ -104,6 +104,10 @@ class UserController {
             redirect action: "index", method: "GET"
     }
 
+    def bpmTabs(User userInstance) {
+        respond userInstance
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

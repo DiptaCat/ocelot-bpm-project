@@ -30,7 +30,6 @@
     <div class="form-horizontal">
         <fieldset>
             <g:render template="data" model="${['userInstance': userInstance]}"/>
-
         </fieldset>
     </div>
     <g:form>
@@ -53,6 +52,12 @@
             <g:link class="edit btn btn-sm btn-primary" action="bpms" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
                 <g:message code="default.button.listBPM.label" default="List of BPMs" />
+            </g:link>
+
+            <g:hiddenField name="id"/>
+            <g:link class="edit btn btn-sm btn-primary" action="bpmTabs" id="${userInstance?.id}">
+                <i class="icon-trash icon-pencil"></i>
+                <g:message code="default.button.tabsBMP.label" default="BPMs Manager" />
             </g:link>
 
         </div>
