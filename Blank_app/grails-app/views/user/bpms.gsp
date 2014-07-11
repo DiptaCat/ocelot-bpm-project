@@ -1,6 +1,6 @@
 <%@ page import="blank.Bpm" %>
 
-<!DOCTYPE html>
+%{--<!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
@@ -20,9 +20,9 @@
     </div>
 </g:each>
 </body>
-</html>
+</html>--}%
 
-%{--<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
@@ -50,6 +50,8 @@
 
             <th><g:message code="bpm.user.label" default="User"/></th>
 
+            <th><g:message default="Add to Favourites"/></th>
+
         </tr>
         </thead>
         <tbody>
@@ -68,4 +70,4 @@
     </table>
 </div>
 </body>
-</html>--}%
+</html>
