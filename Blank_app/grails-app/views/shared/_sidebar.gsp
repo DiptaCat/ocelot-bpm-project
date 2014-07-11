@@ -4,7 +4,6 @@
 		<li><a href="${createLink(uri: '/')}"><i class="icon-home"></i> <span class="menu-text"><g:message code="default.home.label" /></span></a></li>
 		<li><g:link controller="user" action="index"><i class="icon-user"></i> <span class="menu-text">Users</span></g:link></li>
         <li><g:link controller="bpm" action="index"><i class="icon-user"></i> <span class="menu-text">Bpms</span></g:link></li>
-        <li><g:link controller="task" action="index"><i class="icon-user"></i> <span class="menu-text">Task</span></g:link></li>
 
         %{--<li><g:link controller="prova2" action="index"><i class="icon-plus-sign"></i> <span class="menu-text">Prova2</span></g:link></li>
         <li>

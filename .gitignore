@@ -33,3 +33,13 @@
 .idea/ 	#Ignore IE files
 *.class #Ignore .class files
 *.log	#Ignore .log files
+
+TaskList/*.iml
+TaskList/.idea/
+TaskList/target/
+TaskList/*.log
+
+Blank_app/*.iml
+Blank_app/.idea/
+Blank_app/target/
+Blank_app/*.log

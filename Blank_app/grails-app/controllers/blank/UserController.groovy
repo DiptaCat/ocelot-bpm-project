@@ -90,7 +90,6 @@ class UserController {
     }
 
     def addBPMToFavourites() {
-
         def userInstance = User.get(params.userId)
         def bpm = Bpm.get(params.bpmId)
         userInstance.addToFavouriteBPMs(bpm).save()
