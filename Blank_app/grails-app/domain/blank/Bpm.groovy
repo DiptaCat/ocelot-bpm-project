@@ -9,9 +9,10 @@ class Bpm {
     boolean temporal
 
     def User user
-    static belongsTo = [User]
+
 
     static mapping = {
+        batchSize 10
         autoTimestamp true
     }
 
