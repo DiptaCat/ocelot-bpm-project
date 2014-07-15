@@ -7,11 +7,14 @@ class User {
     Date dateCreated
 
     static hasMany = [bpms: Bpm, favouriteBPMs:Bpm]
-    static mappedBy = [ favouriteBPMs: "none" ]
+    static mappedBy = [favouriteBPMs: 'none']
 
 
     static mapping = {
         autoTimestamp true
+        favouriteBPMs joinTable: false
+        /*favouriteBPMs cascade: 'all-delete-orphan'
+        bpms cascade: 'all-delete-orphan'*/
     }
 
     static constraints = {
@@ -21,7 +24,7 @@ class User {
     }
 
     def getFavourites(){
-        return this.favouriteBPMs//.sort{it.lastUpdated}
+        return this.favouriteBPMs
     }
 
     String toString() {

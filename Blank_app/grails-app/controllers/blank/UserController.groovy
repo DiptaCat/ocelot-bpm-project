@@ -92,7 +92,7 @@ class UserController {
     def addBPMToFavourites() {
         def userInstance = User.get(params.userId)
         def bpm = Bpm.get(params.bpmId)
-        userInstance.addToFavouriteBPMs(bpm).save()
+        userInstance.addToFavouriteBPMs(bpm).save(flush: true)
         userInstance.save flush: true
         respond userInstance, view: 'edit'
     }

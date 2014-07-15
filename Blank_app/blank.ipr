@@ -186,10 +186,7 @@
     </group>
   </component>
   <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/blank.iml" filepath="$PROJECT_DIR$/blank.iml" />
-      <module fileurl="file://$PROJECT_DIR$/blank-grailsPlugins.iml" filepath="$PROJECT_DIR$/blank-grailsPlugins.iml" />
-    </modules>
+    <modules />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
