@@ -14,7 +14,7 @@
 
 <div class="row-fluid wizard-actions">
     <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
-                                                                                              args="[entityName]"/></g:link>
+                                                                                             args="[entityName]"/></g:link>
     <div class="hr dotted clearfix"></div>
 </div>
 
@@ -39,7 +39,8 @@
         <g:each in="${bpmInstanceList}" status="i" var="bpmInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show" id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
+                <td><g:link action="show"
+                            id="${bpmInstance.id}">${fieldValue(bean: bpmInstance, field: "name")}</g:link></td>
 
                 <td>${fieldValue(bean: bpmInstance, field: "user.login")}</td>
 

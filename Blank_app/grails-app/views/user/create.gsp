@@ -14,7 +14,7 @@
 
 <div class="row-fluid wizard-actions">
     <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
-                                                                                               args="[entityName]"/></g:link>
+                                                                                              args="[entityName]"/></g:link>
 </div>
 
 <div id="create-user" class="content scaffold-create" role="main">

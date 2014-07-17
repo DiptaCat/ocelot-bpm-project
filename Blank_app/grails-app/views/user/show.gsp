@@ -15,9 +15,9 @@
 
 <div class="row-fluid wizard-actions">
     <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
-                                                                                               args="[entityName]"/></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
                                                                                               args="[entityName]"/></g:link>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+                                                                                             args="[entityName]"/></g:link>
 </div>
 
 <div id="show-user" class="content scaffold-show" role="main">
@@ -51,7 +51,7 @@
             <g:hiddenField name="id"/>
             <g:link class="edit btn btn-sm btn-primary" action="bpmTabs" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
-                <g:message code="default.button.tabsBMP.label" default="BPMs Manager" />
+                <g:message code="default.button.tabsBMP.label" default="BPMs Manager"/>
             </g:link>
 
         </div>

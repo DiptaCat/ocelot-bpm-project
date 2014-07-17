@@ -40,8 +40,9 @@
 
                 <td>${fieldValue(bean: bpm, field: "user.login")}</td>
 
-                <td><g:link action="addBPMToFavourites" id="${bpm.id}" params="${[userId: userInstance?.id, bpmId: bpm.id]}"
-                                                               controller="user">Add</g:link></td>
+                <td><g:link action="addBPMToFavourites" id="${bpm.id}"
+                            params="${[userId: userInstance?.id, bpmId: bpm.id]}"
+                            controller="user">Add</g:link></td>
 
             </tr>
         </g:each>

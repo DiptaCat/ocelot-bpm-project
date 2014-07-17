@@ -6,11 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="${grailsApplication.config.appName}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
+
+    %{--<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
+    <r:layoutResources/>
+    <r:require modules="jquery, ace"/>--}%
+
+    <asset:javascript src="application.js"/>
+
+    <asset:stylesheet href="application.css"/>
+
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <g:layoutHead/>
-    <r:require modules="jquery, ace"/>
-    <r:layoutResources/>
+
+
 </head>
 
 <body class="navbar-fixed">
@@ -18,7 +27,7 @@
 
 <div class="main-container" id="main-container">
     <div class="main-container-inner">
-        <a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
+        <a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"/></a>
 
         <g:render template="/shared/sidebar"/>
 
@@ -42,6 +51,6 @@
         }
     });
 </g:javascript>
-<r:layoutResources/>
+%{--<r:layoutResources/>--}%
 </body>
 </html>

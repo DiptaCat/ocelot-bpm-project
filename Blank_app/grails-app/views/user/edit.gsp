@@ -14,9 +14,9 @@
 
 <div class="row-fluid wizard-actions">
     <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
-                                                                                               args="[entityName]"/></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
                                                                                               args="[entityName]"/></g:link>
+    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+                                                                                             args="[entityName]"/></g:link>
 </div>
 
 <div id="edit-user" class="content scaffold-edit" role="main">

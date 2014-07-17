@@ -62,7 +62,8 @@
                             <g:each in="${userInstance?.favouriteBPMs ?}" status="i" var="bpm">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                     <td><g:link controller="bpm" action="show" id="${bpm.id}">${bpm?.name}</g:link>
-                                    <td><g:link controller="user" action="show" id="${bpm?.user.id}">${bpm?.user.login}</g:link>
+                                    <td><g:link controller="user" action="show"
+                                                id="${bpm?.user.id}">${bpm?.user.login}</g:link>
                                 </tr>
                             </g:each>
                             </tbody>

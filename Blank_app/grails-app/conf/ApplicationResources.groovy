@@ -1,4 +1,4 @@
-modules = {
+/*modules = {
     application {
         resource url:'js/application.js'
     }
@@ -37,4 +37,4 @@ modules = {
 	   resource url: 'assets/js/jquery.autosize.min.js' //
 
    }
-}
+}*/
