@@ -1,5 +1,7 @@
 package blank
 
+import grails.converters.JSON
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -106,5 +108,31 @@ class BpmController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    def jsonToOject() {
+        def json = '''{
+                  "users": {
+                      "login": "dato_st",
+                      "name": "Sergi Toda",
+                      "dateCreated": "28/09/2010 16:02:43"
+                   }
+                   "bpms": {
+                      "name": "Ocelot"
+                      "dateCreated": "28/09/2010 16:05:43"
+                      "lastUpdated": "28/09/2010 16:02:43"
+                   }
+                }'''
+
+        def jsonObj = JSON.parse(json)
+        def jsonStr = jsonObj.toString()
+        def getBackJsonObj = JSON.parse(jsonStr)
+        User owner = new User(name: getBackJsonObj.users.name,
+                login: getBackJsonObj.users.name,
+                dateCreated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.dateCreated))
+        Bpm bpm = new Bpm(name: getBackJsonObj.bpms.name,
+                        dateCreated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.dateCreated),
+                        lastUpdated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.lastUpdated),
+                        user: owner)
     }
 }
