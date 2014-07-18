@@ -1,4 +1,5 @@
 package blank
+import grails.converters.*
 
 class Bpm {
 
@@ -18,5 +19,13 @@ class Bpm {
 
     static constraints = {
         name blank: false, unique: true
+    }
+
+    def userAsJSON = {
+        return this as JSON
+    }
+
+    def userAsXML = {
+        return this as XML
     }
 }

@@ -1,5 +1,6 @@
 package blank
 
+import grails.converters.JSON
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -106,6 +107,23 @@ class UserController {
 
     def bpmTabs(User userInstance) {
         respond userInstance
+    }
+
+    def jsonTobject () {
+        def json = '''{
+                  "users": {
+                      "login": "dato_st",
+                      "name": "Sergi Toda",
+                      "dateCreated": "28/09/2010 16:02:43" ""
+                   }
+                }'''
+
+        def jsonObj = JSON.parse(json)
+        def jsonStr = jsonObj.toString()
+        def getBackJsobObj = JSON.parse(jsonStr)
+        User user = new User(name: getBackJsobObj.users.name,
+                login: getBackJsobObj.users.name,
+                dateCreated: new Date().parse("d/M/yyyy H:m:s", getBackJsobObj.users.dateCreated))
     }
 
     protected void notFound() {

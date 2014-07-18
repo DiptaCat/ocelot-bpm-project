@@ -5,6 +5,11 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'bpm.label', default: 'Bpm')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
+    %{--<asset:javascript src="jquery-ui-1.10.3.custom.min.js"/>--}%
+    <asset:javascript src="jquery*.js"/>
+    <asset:stylesheet href="jquery-ui.css" />
+
 </head>
 
 <body>

@@ -1,4 +1,5 @@
 package blank
+import grails.converters.*
 
 class User {
 
@@ -29,5 +30,13 @@ class User {
 
     String toString() {
         "${login}"
+    }
+
+    def userAsJSON = {
+        return this as JSON
+    }
+
+    def userAsXML = {
+        return this as XML
     }
 }
