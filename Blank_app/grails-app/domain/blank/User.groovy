@@ -8,14 +8,12 @@ class User {
     Date dateCreated
 
     static hasMany = [bpms: Bpm, favouriteBPMs:Bpm]
-    static mappedBy = [favouriteBPMs: 'none']
+    static mappedBy = [favouriteBPMs: "none"]
 
 
     static mapping = {
         autoTimestamp true
-        favouriteBPMs joinTable: false
-        /*favouriteBPMs cascade: 'all-delete-orphan'
-        bpms cascade: 'all-delete-orphan'*/
+        favouriteBPMs joinTable: [name: 'FavBpm', column: 'BpmId', key: 'UserId']
     }
 
     static constraints = {

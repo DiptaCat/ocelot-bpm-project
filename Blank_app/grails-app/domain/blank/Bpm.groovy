@@ -1,5 +1,7 @@
 package blank
 import grails.converters.*
+import groovy.sql.Sql
+import org.springframework.jdbc.datasource.DataSourceUtils
 
 class Bpm {
 
@@ -11,6 +13,7 @@ class Bpm {
 
     def User user
 
+    def dataSource
 
     static mapping = {
         batchSize 10
@@ -19,6 +22,13 @@ class Bpm {
 
     static constraints = {
         name blank: false, unique: true
+    }
+
+    def beforeDelete = {
+        try {
+            Sql sql = Sql.newInstance(dataSource)
+            sql.executeUpdate('delete from FavBpm where BpmId is ?', [this.id])
+        } finally {}
     }
 
     def userAsJSON = {

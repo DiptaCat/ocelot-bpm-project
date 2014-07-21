@@ -19,7 +19,6 @@
 
     <g:layoutHead/>
 
-
 </head>
 
 <body class="navbar-fixed">

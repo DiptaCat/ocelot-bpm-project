@@ -1,5 +1,4 @@
-//= require jquery
-//= require_tree views
+//= require_tree .
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
