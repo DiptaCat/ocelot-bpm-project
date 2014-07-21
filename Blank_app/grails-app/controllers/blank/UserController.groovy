@@ -109,21 +109,21 @@ class UserController {
         respond userInstance
     }
 
-    def jsonTobject () {
+    def jsonTobject() {
         def json = '''{
                   "users": {
                       "login": "dato_st",
                       "name": "Sergi Toda",
-                      "dateCreated": "28/09/2010 16:02:43" ""
+                      "dateCreated": "28/09/2010 16:02:43"
                    }
                 }'''
 
         def jsonObj = JSON.parse(json)
         def jsonStr = jsonObj.toString()
-        def getBackJsobObj = JSON.parse(jsonStr)
-        User user = new User(name: getBackJsobObj.users.name,
-                login: getBackJsobObj.users.name,
-                dateCreated: new Date().parse("d/M/yyyy H:m:s", getBackJsobObj.users.dateCreated))
+        def getBackJsonObj = JSON.parse(jsonStr)
+        User user = new User(name: getBackJsonObj.users.name,
+                login: getBackJsonObj.users.name,
+                dateCreated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.dateCreated))
     }
 
     protected void notFound() {
