@@ -5,8 +5,8 @@
                 code="default.home.label"/></span></a></li>
         <li><g:link controller="user" action="index"><i class="icon-user"></i> <span
                 class="menu-text">Users</span></g:link></li>
-        <li><g:link controller="bpm" action="index"><i class="icon-user"></i> <span
-                class="menu-text">Bpms</span></g:link></li>
+        <li><g:link controller="model" action="index"><i class="icon-user"></i> <span
+                class="menu-text">Models</span></g:link></li>
 
         %{--<li><g:link controller="prova2" action="index"><i class="icon-plus-sign"></i> <span class="menu-text">Prova2</span></g:link></li>
         <li>
@@ -22,8 +22,8 @@
 
     </ul>
 
-    %{--<div class="sidebar-collapse" id="sidebar-collapse">
+    <div class="sidebar-collapse" id="sidebar-collapse">
         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-    </div>--}%
+    </div>
 </div>
 

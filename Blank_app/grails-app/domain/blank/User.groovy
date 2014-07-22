@@ -1,29 +1,24 @@
 package blank
-import grails.converters.*
 
+import grails.converters.*
+import grails.rest.*
+
+//@Resource(uri='/users')
 class User {
 
     String name
     String login
     Date dateCreated
 
-    static hasMany = [bpms: Bpm, favouriteBPMs:Bpm]
-    static mappedBy = [favouriteBPMs: "none"]
-
-
-    static mapping = {
-        autoTimestamp true
-        favouriteBPMs joinTable: [name: 'FavBpm', column: 'BpmId', key: 'UserId']
-    }
+    static hasMany = [models: Model, favourites: Model]
 
     static constraints = {
         name blank:false, minSize:2
         login blank:false, unique:true, minSize:2
-        favouriteBPMs nullable: true
     }
 
-    def getFavourites(){
-        return this.favouriteBPMs
+    static mapping = {
+        autoTimestamp true
     }
 
     String toString() {

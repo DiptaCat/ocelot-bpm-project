@@ -49,9 +49,9 @@
             </button>
 
             <g:hiddenField name="id"/>
-            <g:link class="edit btn btn-sm btn-primary" action="bpmTabs" id="${userInstance?.id}">
+            <g:link class="edit btn btn-sm btn-primary" action="getModelTabs" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
-                <g:message code="default.button.tabsBMP.label" default="BPMs Manager"/>
+                <g:message code="default.button.tabsBMP.label" default="Models Manager"/>
             </g:link>
 
         </div>
@@ -100,12 +100,12 @@
 				</li>
 				</g:if>
 
-				<g:if test="${userInstance?.bpms}">
+				<g:if test="${userInstance?.models}">
 				<li class="fieldcontain">
-					<span id="bpms-label" class="property-label"><g:message code="user.bpms.label" default="Bpms" /></span>
+					<span id="models-label" class="property-label"><g:message code="user.models.label" default="models" /></span>
 
-						<g:each in="${userInstance.bpms}" var="b">
-						<span class="property-value" aria-labelledby="bpms-label"><g:link controller="bpm" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
+						<g:each in="${userInstance.models}" var="b">
+						<span class="property-value" aria-labelledby="models-label"><g:link controller="model" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
 						</g:each>
 
 				</li>

@@ -1,6 +1,5 @@
 package blank
 
-import grails.converters.JSON
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -56,7 +55,7 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view: 'bpms'
+            respond userInstance.errors, view: 'getModels'
             return
         }
 
@@ -90,40 +89,35 @@ class UserController {
         }
     }
 
-    def addBPMToFavourites() {
-        def userInstance = User.get(params.userId)
-        def bpm = Bpm.get(params.bpmId)
-        userInstance.addToFavouriteBPMs(bpm).save(flush: true)
-        userInstance.save flush: true
+    def markFavourite() {
+
+        User userInstance = User.get(params.userId)
+        Model model = Model.get(params.bpmId)
+        userInstance.addToFavourites(model)
+        userInstance.save(flush: true)
+
         respond userInstance, view: 'edit'
     }
 
-    def bpms(User userInstance) {
-        if(userInstance != null)
-            respond userInstance, model: [bpmsList:Bpm.list()]
+    def unmarkFavourite() {
+
+        User userInstance = User.get(params.userId)
+        Model model = Model.get(params.modelId)
+        userInstance.removeFromFavourites(model)
+        userInstance.save(flush: true)
+
+        respond userInstance, view: 'edit'
+    }
+
+    def getModels(User userInstance) {
+        if(userInstance)
+            respond userInstance, model: [modelList:Model.list()]
         else
             redirect action: "index", method: "GET"
     }
 
-    def bpmTabs(User userInstance) {
+    def getModelTabs(User userInstance) {
         respond userInstance
-    }
-
-    def jsonTobject() {
-        def json = '''{
-                  "users": {
-                      "login": "dato_st",
-                      "name": "Sergi Toda",
-                      "dateCreated": "28/09/2010 16:02:43"
-                   }
-                }'''
-
-        def jsonObj = JSON.parse(json)
-        def jsonStr = jsonObj.toString()
-        def getBackJsonObj = JSON.parse(jsonStr)
-        User user = new User(name: getBackJsonObj.users.name,
-                login: getBackJsonObj.users.name,
-                dateCreated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.dateCreated))
     }
 
     protected void notFound() {

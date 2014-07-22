@@ -12,7 +12,7 @@
 
 <g:link controller="user" class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i>New User</g:link>
 
-<g:link controller="bpm" class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i>New Bpm</g:link>
+<g:link controller="model" class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i>New Model</g:link>
 
 </body>
 </html>
