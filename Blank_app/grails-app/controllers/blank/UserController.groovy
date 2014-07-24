@@ -1,6 +1,7 @@
 package blank
 
 import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpMethod.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -92,7 +93,8 @@ class UserController {
     def markFavourite() {
 
         User userInstance = User.get(params.userId)
-        Model model = Model.get(params.bpmId)
+        Model model = Model.get(params.modelId)
+
         userInstance.addToFavourites(model)
         userInstance.save(flush: true)
 
@@ -103,6 +105,7 @@ class UserController {
 
         User userInstance = User.get(params.userId)
         Model model = Model.get(params.modelId)
+
         userInstance.removeFromFavourites(model)
         userInstance.save(flush: true)
 
@@ -111,7 +114,7 @@ class UserController {
 
     def getModels(User userInstance) {
         if(userInstance)
-            respond userInstance, model: [modelList:Model.list()]
+            respond userInstance, model: [modelsList:Model.list()]
         else
             redirect action: "index", method: "GET"
     }

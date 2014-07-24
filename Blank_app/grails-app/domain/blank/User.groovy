@@ -1,7 +1,6 @@
 package blank
 
-import grails.converters.*
-import grails.rest.*
+//import grails.rest.*
 
 //@Resource(uri='/users')
 class User {
@@ -11,6 +10,7 @@ class User {
     Date dateCreated
 
     static hasMany = [models: Model, favourites: Model]
+    static mappedBy = [favourites: "none"]
 
     static constraints = {
         name blank:false, minSize:2
@@ -19,17 +19,11 @@ class User {
 
     static mapping = {
         autoTimestamp true
+        favourites joinTable: [name: 'FavModels', column: 'ModelId', key: 'UserId']
+        favourites cascade: 'save-update'
     }
 
     String toString() {
         "${login}"
-    }
-
-    def userAsJSON = {
-        return this as JSON
-    }
-
-    def userAsXML = {
-        return this as XML
     }
 }

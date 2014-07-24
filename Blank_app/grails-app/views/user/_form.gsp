@@ -58,7 +58,8 @@
 
         <ul class="one-to-many">
             <g:each in="${userInstance?.favourites ?}" var="b">
-                <li><g:link controller="model" action="show" id="${b.id}">${b?.name}</g:link></li>
+                <li><g:link controller="model" action="show" id="${b.id}">${b?.name}</g:link>
+                <g:link controller="user" action="unmarkFavourite" id="unmark" params="${[userId: userInstance?.id, modelId: b.id]}">Unmark</g:link></li>
             </g:each>
 
             <li class="add">

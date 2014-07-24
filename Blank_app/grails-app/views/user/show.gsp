@@ -42,16 +42,10 @@
                 <g:message code="default.button.edit.label" default="Edit"/>
             </g:link>
 
-            <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate=""
-                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                <i class="icon-trash icon-white"></i>
-                ${message(code: 'default.button.delete.label', default: 'Delete')}
-            </button>
-
             <g:hiddenField name="id"/>
-            <g:link class="edit btn btn-sm btn-primary" action="getModelTabs" id="${userInstance?.id}">
+            <g:link class="edit btn btn-sm btn-red" action="getModelTabs" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
-                <g:message code="default.button.tabsBMP.label" default="Models Manager"/>
+                <g:message code="default.button.tabsModels.label" default="Models Manager"/>
             </g:link>
 
         </div>
