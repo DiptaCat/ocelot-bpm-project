@@ -3,6 +3,7 @@ package blank
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.http.HttpMethod.*
 import grails.transaction.Transactional
+import grails.converters.*
 
 @Transactional(readOnly = true)
 class UserController {
@@ -15,6 +16,14 @@ class UserController {
 
     def show(User userInstance) {
         respond userInstance
+    }
+
+    def display(User userInstance) {
+        if(userInstance.id && User.exists(userInstance.id)){
+            render User.findById(userInstance.id) as XML
+        }else{
+            render User.list() as XML
+        }
     }
 
     def create() {

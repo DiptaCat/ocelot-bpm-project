@@ -1,6 +1,8 @@
 package blank
 
 import grails.converters.JSON
+import grails.converters.XML
+
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.http.HttpMethod.*
 import grails.transaction.Transactional
@@ -21,6 +23,14 @@ class ModelController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Model.list(params), model: [modelInstanceCount: Model.count()]
+    }
+
+    def display(Model modelInstance) {
+        if(modelInstance.id && User.exists(modelInstance.id)){
+            render User.findById(modelInstance.id) as XML
+        }else{
+            render User.list() as XML
+        }
     }
 
     def show(Model modelInstance) {
