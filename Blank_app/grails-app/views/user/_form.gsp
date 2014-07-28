@@ -1,7 +1,8 @@
 <%@ page import="blank.User" %>
 
 
-<div class="control-group ${hasErrors(bean: userInstance, field: 'name', 'error')} required col-xs-12">
+<div class="control-group ${hasErrors(bean: userInstance, field: 'name', 'error')} required col-xs-12"
+     xmlns="http://www.w3.org/1999/html">
     <label class="control-label" for="name">
         <g:message code="user.name.label" default="Name"/>
         <span class="required-indicator">*</span>
@@ -26,27 +27,54 @@
     </div>
 </div>
 
+<div>
+    </li><g:hiddenField name="id"/>
+    <g:link class="edit btn btn-sm btn-pink " action="getModelTabs" id="${userInstance?.id}">
+        <i class="icon-trash icon-pencil"></i>
+        <g:message code="default.button.tabsModels.label" default="Models Manager"/>
+    </g:link>
+</div>
 
+%{--
 <div class="control-group ${hasErrors(bean: userInstance, field: 'models', 'error')}  col-xs-12">
 
     <label class="control-label">
-        <g:message code="user.models.label" default="models"/>
+        <g:message code="user.models.label" default="Models"/>
     </label>
 
     <div class="controls">
 
-        <ul class="one-to-many">
-            <g:each in="${userInstance?.models ?}" var="b">
-                <li><g:link controller="model" action="show" id="${b.id}">${b?.name}</g:link></li>
-            </g:each>
-            <li class="add">
-                <g:link controller="model" action="create"
-                        params="['user.id': userInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'model.label', default: 'model')])}</g:link>
-            </li>
-        </ul>
+        <div class="controls" style="font-style: italic">
+            <ul class="one-to-many">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><g:message code="model.name.label" default="Name"/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <g:each in="${userInstance?.models?.sort { a, b -> a.name.compareTo(b.name) } ?}" status="i"
+                            var="model">
+                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
+                            <td><g:link controller="model" action="show"
+                                        id="${model.id}">${model?.name}</g:link></td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </ul>
+        </div>
     </div>
+
+    <g:link class="btn btn-sm btn-purple" controller="model" action="create" id="${userInstance?.id}">
+        <i class="icon-trash icon-pencil"></i>
+        <g:message code="default.button.tabsModels.label" default="New Model"/>
+    </g:link>
+
 </div>
+
+
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'favourites', 'error')}  col-xs-12">
 
@@ -55,18 +83,39 @@
     </label>
 
     <div class="controls">
+        <div class="controls" style="font-style: italic">
+            <ul class="one-to-many">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><g:message code="model.name.label" default="Name"/></th>
+                        <th><g:message code="model.user.label" default="User"/></th>
+                        <th><g:message code="user.remove.fav" default="Remove from favourites"/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <g:each in="${userInstance?.favourites ?}" status="i" var="model">
+                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-        <ul class="one-to-many">
-            <g:each in="${userInstance?.favourites ?}" var="b">
-                <li><g:link controller="model" action="show" id="${b.id}">${b?.name}</g:link>
-                <g:link controller="user" action="unmarkFavourite" id="unmark" params="${[userId: userInstance?.id, modelId: b.id]}">Unmark</g:link></li>
-            </g:each>
+                            <td><g:link controller="model" action="show"
+                                        id="${model.id}">${model?.name}</g:link></td>
 
-            <li class="add">
-                <g:link controller="user" action="getModels"
-                        id="${userInstance?.id}">${message(code: 'user.add.label', default: "Add Favourite")}</g:link>
-            </li>
-        </ul>
+                            <td><g:link controller="user" action="show"
+                                        id="${model?.user?.id}">${model?.user?.login}</g:link></td>
 
+                            <td><g:link controller="user" action="unmarkFavourite" id="unmark"
+                                        params="${[userId: userInstance?.id, modelId: model.id]}">Remove</g:link></li></td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+        <g:link class="btn btn-sm btn-purple" action="getModels" id="${userInstance?.id}">
+            <i class="icon-trash icon-pencil"></i>
+            <g:message code="default.button.tabsModels.label" default="Add Favourites"/>
+        </g:link>
+    </div>
     </div>
 </div>
+--}%

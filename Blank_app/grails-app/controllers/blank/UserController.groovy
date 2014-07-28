@@ -1,7 +1,6 @@
 package blank
 
 import static org.springframework.http.HttpStatus.*
-import static org.springframework.http.HttpMethod.*
 import grails.transaction.Transactional
 import grails.converters.*
 
@@ -19,11 +18,11 @@ class UserController {
     }
 
     def display(User userInstance) {
-        if(userInstance.id && User.exists(userInstance.id)){
-            render User.findById(userInstance.id) as XML
-        }else{
-            render User.list() as XML
+        if(params.id){
+            if (userInstance) render userInstance as XML
+            else render(status: 404, text: 'User not found')
         }
+        else render User.list() as XML
     }
 
     def create() {
@@ -107,7 +106,7 @@ class UserController {
         userInstance.addToFavourites(model)
         userInstance.save(flush: true)
 
-        respond userInstance, view: 'edit'
+        respond userInstance, view: 'getModelTabs'
     }
 
     def unmarkFavourite() {
@@ -118,7 +117,7 @@ class UserController {
         userInstance.removeFromFavourites(model)
         userInstance.save(flush: true)
 
-        respond userInstance, view: 'edit'
+        respond userInstance, view: 'getModelTabs'
     }
 
     def getModels(User userInstance) {
