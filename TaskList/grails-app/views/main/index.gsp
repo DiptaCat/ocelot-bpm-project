@@ -8,6 +8,7 @@
 <body>
 <div class="page-header">
     <h1>Home Page</h1>
+    <g:link action="deploy">Deploy</g:link>
 </div>
 
 </body>
