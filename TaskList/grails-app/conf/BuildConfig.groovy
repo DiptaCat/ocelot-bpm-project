@@ -6,7 +6,7 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-
+grails.server.port.http=9000
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -54,7 +54,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.29'
-        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
     }
 
@@ -68,7 +68,7 @@ grails.project.dependency.resolution = {
 
         //camunda plugin
         compile ":camunda:0.1.1"
-
+        compile ":rest-client-builder:2.0.3"
         //compile ":asset-pipeline:1.8.11"
         runtime ':resources:1.2.8'
 
