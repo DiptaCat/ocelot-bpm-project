@@ -15,10 +15,10 @@ class ModelController {
 
     def display(Model modelInstance) {
         if(params.id){
-            if (modelInstance) render modelInstance as XML
+            if (modelInstance) render modelInstance as JSON
             else render(status: 404, text: 'Model not found')
         }
-        else render User.list() as XML
+        else render Model.list() as JSON
     }
 
     def show(Model modelInstance) {

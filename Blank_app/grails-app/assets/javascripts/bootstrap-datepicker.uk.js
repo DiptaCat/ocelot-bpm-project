@@ -2,7 +2,8 @@
  * Ukrainian translation for bootstrap-datepicker
  * Andrey Vityuk <andrey [dot] vityuk [at] gmail.com>
  */
-;(function($){
+;
+(function ($) {
 	$.fn.datepicker.dates['uk'] = {
 		days: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота", "Неділя"],
 		daysShort: ["Нед", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб", "Нед"],

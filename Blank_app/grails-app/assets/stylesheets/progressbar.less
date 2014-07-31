@@ -2,104 +2,105 @@
 @progress-bg: #DADADA;
 
 .progress {
- .border-radius(0);
- .box-shadow(none);
+  .border-radius(0);
+  .box-shadow(none);
   background: @progress-bg;
 
- height: 18px;
+  height: 18px;
 
- .progress-bar {
+  .progress-bar {
 	.box-shadow(none);
-	line-height:18px;
- }
+	line-height: 18px;
+  }
 
- &[data-percent] {
+  &[data-percent] {
 	position: relative;
 	&:after {
-		 display: inline-block;
-		 content: attr(data-percent);
-		 color: #FFF;
-		 position: absolute;
-		 left: 0;
-		 right: 0;
-		 top: 0;
-		 bottom: 0;
+	  display: inline-block;
+	  content: attr(data-percent);
+	  color: #FFF;
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
 
-		 line-height: 16px;
+	  line-height: 16px;
 
-		 text-align: center;
-		 font-size: 12px;
-		 font-family: Verdana;
+	  text-align: center;
+	  font-size: 12px;
+	  font-family: Verdana;
 	}
- }
- &.progress-yellow[data-percent]:after {
+  }
+  &.progress-yellow[data-percent]:after {
 	color: #996633;
- }
+  }
 
-
- &.progress-small {
+  &.progress-small {
 	height: 12px;
 	.progress-bar {
-		line-height: 10px;
-		font-size: 11px;
+	  line-height: 10px;
+	  font-size: 11px;
 	}
 	&[data-percent]:after {
-		line-height: 10px;
-		font-size: 11px;
+	  line-height: 10px;
+	  font-size: 11px;
 	}
- }
+  }
 
-
- &.progress-mini {
+  &.progress-mini {
 	height: 9px;
 	.progress-bar {
-		line-height: 8px;
-		font-size: 11px;
+	  line-height: 8px;
+	  font-size: 11px;
 	}
 	&[data-percent]:after {
-		line-height: 8px;
-		font-size: 11px;
+	  line-height: 8px;
+	  font-size: 11px;
 	}
- }
+  }
 }
-
-
 
 .progress-bar {
- .progress-bar-variant(@progress-color);
+  .progress-bar-variant(@progress-color);
 }
+
 .progress-bar-danger {
- .progress-bar-variant(@progress-danger);
+  .progress-bar-variant(@progress-danger);
 }
+
 .progress-bar-success {
- .progress-bar-variant(@progress-success);
+  .progress-bar-variant(@progress-success);
 }
+
 .progress-bar-warning {
- .progress-bar-variant(@progress-warning);
+  .progress-bar-variant(@progress-warning);
 }
+
 .progress-bar-pink {
- .progress-bar-variant(@progress-pink);
+  .progress-bar-variant(@progress-pink);
 }
+
 .progress-bar-purple {
- .progress-bar-variant(@progress-purple);
+  .progress-bar-variant(@progress-purple);
 }
+
 .progress-bar-yellow {
- .progress-bar-variant(@progress-yellow);
+  .progress-bar-variant(@progress-yellow);
 }
+
 .progress-bar-inverse {
- .progress-bar-variant(@progress-inverse);
+  .progress-bar-variant(@progress-inverse);
 }
+
 .progress-bar-grey {
- .progress-bar-variant(@progress-grey);
+  .progress-bar-variant(@progress-grey);
 }
-
-
-
-
 
 .progress {
   position: relative;
 }
+
 .progress:before {
   display: inline-block;
   content: "";

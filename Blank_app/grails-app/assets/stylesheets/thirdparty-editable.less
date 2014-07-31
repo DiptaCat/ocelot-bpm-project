@@ -1,127 +1,131 @@
 .editable-container .popover-title {
-	color:#438EB9;
+  color: #438EB9;
 }
+
 .editable-click {
-	border-bottom:1px dashed #BBB;
-	cursor:pointer;
-	font-weight:normal;
+  border-bottom: 1px dashed #BBB;
+  cursor: pointer;
+  font-weight: normal;
 
+  img& {
+	border: 1px dotted #BBB;
+  }
+  &:hover {
+	border-color: #0088CC;
+	color: #0088CC;
 	img& {
-		border:1px dotted #BBB;
+	  .opacity(0.75);
 	}
-	&:hover {
-		border-color:#0088CC;
-		color:#0088CC;
-		img& {.opacity(0.75);}
-	}
+  }
 }
 
-
-.editable-buttons , .editable-input {
-	display:inline-block;
+.editable-buttons, .editable-input {
+  display: inline-block;
 }
+
 .editable-buttons {
-	margin-left:1px;
-	.btn {
-		padding:0;
-		width:28px;
-		line-height:24px;
-		border-width:3px;
-		font-size:12px;
-		margin:0 1px 0 0;
-		> [class*="icon-"] {
-			margin:0;
-		}
+  margin-left: 1px;
+  .btn {
+	padding: 0;
+	width: 28px;
+	line-height: 24px;
+	border-width: 3px;
+	font-size: 12px;
+	margin: 0 1px 0 0;
+	> [class*="icon-"] {
+	  margin: 0;
 	}
+  }
 }
+
 .editable-clear-x {
-	cursor:pointer;
-	color:#888;
-	background:none;
-	&:hover {
-		color:#D15B47;
-	}
+  cursor: pointer;
+  color: #888;
+  background: none;
+  &:hover {
+	color: #D15B47;
+  }
 
-	&:before {
-		display:inline-block;
-		content:"\f057";
+  &:before {
+	display: inline-block;
+	content: "\f057";
 
-		font-family:FontAwesome;font-size:15px;
+	font-family: FontAwesome;
+	font-size: 15px;
 
-		position:absolute;
-		margin-top:-9px;
-		width:16px; height:30px; line-height:30px;
-		text-align:center;
-	}
+	position: absolute;
+	margin-top: -9px;
+	width: 16px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+  }
 }
-
-
 
 .editable-input .ace-spinner {
- margin-right:8px;
+  margin-right: 8px;
 }
 
 .editable-inline .editable-slider {
-  margin-top:10px;
-  margin-right:4px;
+  margin-top: 10px;
+  margin-right: 4px;
 }
+
 .editable-popup .editable-slider {
-	display:block;
-	margin-bottom:16px;
-	margin-top:4px;
-}
-.editable-slider input{
-	display:none;
+  display: block;
+  margin-bottom: 16px;
+  margin-top: 4px;
 }
 
-
+.editable-slider input {
+  display: none;
+}
 
 .editable-input .ace-file-input {
-	display:block;
-}
-.editable-image .ace-file-multiple label.selected {
-	border-color:transparent;
+  display: block;
 }
 
-.editable-image + .editable-buttons  , .editable-wysiwyg + .editable-buttons {
-	display:block;
-	text-align:center;
-	margin-top:8px;
+.editable-image .ace-file-multiple label.selected {
+  border-color: transparent;
+}
+
+.editable-image + .editable-buttons, .editable-wysiwyg + .editable-buttons {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
 }
 
 .editable-wysiwyg {
-	width:95%;
-	.wysiwyg-editor  {
-		height:auto;
-		overflow-y:hidden;
-	}
+  width: 95%;
+  .wysiwyg-editor {
+	height: auto;
+	overflow-y: hidden;
+  }
 }
 
-
 .editableform {
-	.input-append.dropdown-menu {
-		display:none;
-	}
-	.open .input-append.dropdown-menu {
-		display:block;
-	}
+  .input-append.dropdown-menu {
+	display: none;
+  }
+  .open .input-append.dropdown-menu {
+	display: block;
+  }
 }
 
 .editable-container .editableform {
-	margin-bottom:10px;
+  margin-bottom: 10px;
 }
+
 .editable-inline .editableform {
-	margin-bottom:0;
+  margin-bottom: 0;
 }
-
-
 
 .editableform-loading {
-	background:none;
-	[class*="icon-"] , .progress{
-		position:relative;
-		top:35%;
-	}
+  background: none;
+  [class*="icon-"], .progress {
+	position: relative;
+	top: 35%;
+  }
 }
 
 
