@@ -41,8 +41,9 @@
                             <g:each in="${userInstance?.models?.sort { a, b -> a.name.compareTo(b.name) } ?}" status="i"
                                     var="model">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
                                     <td><g:link controller="model" action="show"
-                                                id="${model.id}">${model?.name}</g:link>
+                                                id="${model.id}">${model?.name}</g:link></td>
                                 </tr>
                             </g:each>
                             </tbody>
@@ -60,21 +61,31 @@
                             <tr>
                                 <th><g:message code="model.name.label" default="Name"/></th>
                                 <th><g:message code="model.user.label" default="User"/></th>
+                                <th><g:message code="user.remove.fav" default="Remove"/></th>
                             </tr>
                             </thead>
                             <tbody>
                             <g:each in="${userInstance?.favourites ?}" status="i" var="model">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
                                     <td><g:link controller="model" action="show"
-                                                id="${model.id}">${model?.name}</g:link>
+                                                id="${model.id}">${model?.name}</g:link></td>
+
                                     <td><g:link controller="user" action="show"
-                                                id="${model?.user?.id}">${model?.user?.login}</g:link>
+                                                id="${model?.user?.id}">${model?.user?.login}</g:link></td>
+
+                                    <td><g:link controller="user" action="unmarkFavourite" id="unmark"
+                                                params="${[userId: userInstance?.id, modelId: model.id]}">Unmark</g:link></li></td>
                                 </tr>
                             </g:each>
                             </tbody>
                         </table>
                     </ul>
                 </div>
+                <g:link class="btn btn-sm btn-purple" action="getModels" id="${userInstance?.id}">
+                    <i class="icon-trash icon-pencil"></i>
+                    <g:message code="default.button.tabsModels.label" default="Add Favourites"/>
+                </g:link>
             </div>
 
             <div class="tab-pane" id="recents">
@@ -91,8 +102,10 @@
                             <g:each in="${userInstance?.models?.sort { a, b -> a.lastUpdated.compareTo(b.lastUpdated) }?.reverse()}"
                                     status="i" var="model">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
                                     <td><g:link controller="model" action="show"
-                                                id="${model.id}">${model?.name}</g:link>
+                                                id="${model.id}">${model?.name}</g:link></td>
+
                                     <td><g:formatDate date="${model?.lastUpdated}"/></td>
                                 </tr>
                             </g:each>
@@ -115,6 +128,7 @@
                             <g:each in="${userInstance?.models}" status="i" var="model">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                     <g:if test="${model.temporal == true}">
+
                                         <td><g:link controller="model" action="show"
                                                     id="${model.id}">${model?.name}</g:link>
                                     </g:if>

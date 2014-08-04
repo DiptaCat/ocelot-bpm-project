@@ -1,36 +1,24 @@
 package blank
 
-import grails.converters.JSON
-import grails.converters.XML
-
 import static org.springframework.http.HttpStatus.*
-import static org.springframework.http.HttpMethod.*
 import grails.transaction.Transactional
+import grails.converters.*
 
 @Transactional(readOnly = true)
 class ModelController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-    def recents = {
-        respond Model.list(sort: "lastUpdated", order: "desc", max: 5)
-    }
-
-    def temporals = {
-        respond Model.list(sort: "temporal", order: "desc").takeWhile { it.temporal }
-    }
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Model.list(params), model: [modelInstanceCount: Model.count()]
     }
 
     def display(Model modelInstance) {
-        if(modelInstance.id && User.exists(modelInstance.id)){
-            render User.findById(modelInstance.id) as XML
-        }else{
-            render User.list() as XML
+        if(params.id){
+            if (modelInstance) render modelInstance as JSON
+            else render(status: 404, text: 'Model not found')
         }
+        else render Model.list() as JSON
     }
 
     def show(Model modelInstance) {

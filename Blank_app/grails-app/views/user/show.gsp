@@ -43,7 +43,7 @@
             </g:link>
 
             <g:hiddenField name="id"/>
-            <g:link class="edit btn btn-sm btn-red" action="getModelTabs" id="${userInstance?.id}">
+            <g:link class="edit btn btn-sm btn-pink" action="getModelTabs" id="${userInstance?.id}">
                 <i class="icon-trash icon-pencil"></i>
                 <g:message code="default.button.tabsModels.label" default="Models Manager"/>
             </g:link>

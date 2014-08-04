@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'model.label', default: 'model')}"/>
+    <g:set var="entityName" value="${message(code: 'model.label', default: 'Model')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/> ${modelInstance.toString()}</title>
 </head>
 
@@ -42,12 +42,6 @@
                 <g:message code="default.button.edit.label" default="Edit"/>
             </g:link>
 
-            <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate=""
-                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-
-                <i class="icon-trash icon-white"></i>
-                ${message(code: 'default.button.delete.label', default: 'Delete')}
-            </button>
         </div>
     </g:form>
 </div>

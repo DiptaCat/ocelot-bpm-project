@@ -1,8 +1,6 @@
 package blank
 
-//import grails.rest.*
 
-//@Resource(uri='/users')
 class User {
 
     String name

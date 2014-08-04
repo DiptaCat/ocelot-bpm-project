@@ -7,10 +7,6 @@
     <title><g:layoutTitle default="${grailsApplication.config.appName}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    %{--<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
-    <r:layoutResources/>
-    <r:require modules="jquery, ace"/>--}%
-
     <asset:javascript src="application.js"/>
 
     <asset:stylesheet href="application.css"/>
@@ -26,7 +22,7 @@
 
 <div class="main-container" id="main-container">
     <div class="main-container-inner">
-        <a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"/></a>
+        <a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
 
         <g:render template="/shared/sidebar"/>
 
@@ -38,6 +34,5 @@
     </div>
 </div>
 <asset:javascript src="sidebar.js"/>
-%{--<r:layoutResources/>--}%
 </body>
 </html>

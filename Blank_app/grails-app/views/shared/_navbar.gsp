@@ -2,7 +2,7 @@
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
             <div style="display:inline;">
-                <a href="#" class="navbar-brand"><asset:image src="logodipu.gif"/></a>
+                <g:link controller="main" action="index"><asset:image src="logodipu.gif"/></g:link>
             </div>
         </div>
 
@@ -12,12 +12,11 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <g:if test="${session.profile?.foto}">
                             <asset:image src="${session.profile?.foto}"/>
-                        %{--<dt:imgFromData class="nav-user-photo" data="${session.profile.foto as byte[]}"
-                                        mimetype="image/jpeg"/>--}%
+
                         </g:if>
                         <g:else>
                             <asset:image src="useravatar.png"/>
-                        %{--<r:img class="nav-user-photo" uri="/assets/images/useravatar.png" alt="Foto del usuari"/>--}%
+
                         </g:else>
                         <span>${session.profile?.nomComplet ?: request.user ?: '[desconegut]'}</span> <i
                             class="icon-caret-down"></i>

@@ -1,9 +1,6 @@
 package blank
 
-/*import grails.rest.*
-import groovy.sql.Sql*/
 
-//@Resource(uri='/models')
 class Model {
 
     String name
@@ -15,8 +12,6 @@ class Model {
     static hasMany = [usersFavs: User]
     static mappedBy = [usersFavs: "none"]
 
-    //def dataSource
-
     static constraints = {
         name blank: false, unique: 'user'
     }
@@ -27,9 +22,4 @@ class Model {
         usersFavs joinTable: [name: 'FavModels', column: 'UserId', key: 'ModelId']
         usersFavs cascade: 'save-update'
     }
-
-    /*def beforeDelete = {
-        Sql sql = Sql.newInstance(dataSource)
-        sql.executeUpdate('delete from FavModels where ModelId is ?', [this.id])
-    }*/
 }
