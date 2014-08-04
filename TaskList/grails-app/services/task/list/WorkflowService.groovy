@@ -6,6 +6,8 @@ import grails.util.GrailsNameUtils
 import org.camunda.bpm.engine.impl.bpmn.deployer.BpmnDeployer
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
+import org.camunda.bpm.engine.repository.Deployment;
+
 
 class WorkflowService {
 
@@ -27,22 +29,23 @@ class WorkflowService {
         ]
     }
 
-    def deployProcess(){
-        def r = new File("grails-app/processes/my/test/SimpleProcess2.xml")
+    def deployProcess(fileContent, fileName) {
+/*        def r = new File("grails-app/processes/my/test/SimpleProcess2.xml")
         String xml = "";
         r.eachLine {
             xml += it
-        }
+        }*/
 
         def d = repositoryService.createDeployment()
-                .name("SimpleProcess2".toString())
-                .addString("SimpleProcess2.bpmn20.xml", xml)
+                .name(fileName.toString())
+                .addString(fileName + ".bpmn20.xml", fileContent)
                 .deploy()
 
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("SimpleProcess2");
 
     }
+
     def startProcess(String taskId, String taskName, Map vars = [:]) {
         //log.info "STARTING PROCESS $p: ${vars.grep({it.key!='__files__'})}"
 
@@ -51,38 +54,54 @@ class WorkflowService {
         pi
     }
 
-    /**
-     * Every time you want to save variables should run this method, making maintenance to the variables so that everything is consistent
-     *
-     * @param taskid
-     * @param vars
-     * @return
-     */
-    */*
-    def saveTask(taskid, vars, complete = false) {
+    def deploymentList() {
+        def deployments = repositoryService.createDeploymentQuery().list()
 
-        def existingVars = taskService.getVariables(taskid)
+        def data = [:]
+        if (deployments.size() > 0) {
+            for (Deployment d : deployments) {
+                data[ d.getId()] = ['id': d.getId(), 'name':d.getName(), 'deployment time': d.getDeploymentTime().toString()]
 
-        println "SAVE TASK $taskid: complete=$complete: $vars"
-        println "SAVE TASK $taskid: complete=$complete: $vars"
+            }
+        }
+        data
 
-        removeFromArrays(taskid, existingVars, vars)
-        if (complete)
-            taskService.complete(taskid, vars)
-        else
-            taskService.setVariables(taskid, vars)
     }
 
-    *//**
-     * Multivalue variables are stored as single variables with names: varid, varid-1, varid-2, ..., varid-n
-     * When the newly assigned multivalue variable is assigned, some existing indices must be removed when the new size is smaller than the existing one.
-     * Every existing var has to be checked. If the var base name is being assigned but the existing index is not in the assigned one, must be removed.
-     *
-     * @param taskid ID of task
-     * @param existingVars Existing vars in process
-     * @params assignedVars    Vars that have recently been assigned
-     * @return Nothing
-     *//*
+}
+/**
+ * Every time you want to save variables should run this method, making maintenance to the variables so that everything is consistent
+ *
+ * @param taskid
+ * @param vars
+ * @return
+ * */
+
+/*
+def saveTask(taskid, vars, complete = false) {
+
+    def existingVars = taskService.getVariables(taskid)
+
+    println "SAVE TASK $taskid: complete=$complete: $vars"
+    println "SAVE TASK $taskid: complete=$complete: $vars"
+
+    removeFromArrays(taskid, existingVars, vars)
+    if (complete)
+        taskService.complete(taskid, vars)
+    else
+        taskService.setVariables(taskid, vars)
+}
+
+*//**
+ * Multivalue variables are stored as single variables with names: varid, varid-1, varid-2, ..., varid-n
+ * When the newly assigned multivalue variable is assigned, some existing indices must be removed when the new size is smaller than the existing one.
+ * Every existing var has to be checked. If the var base name is being assigned but the existing index is not in the assigned one, must be removed.
+ *
+ * @param taskid ID of task
+ * @param existingVars Existing vars in process
+ * @params assignedVars    Vars that have recently been assigned
+ * @return Nothing
+ *//*
     def removeFromArrays(taskid, Map existingVars = [:], Map assignedVars = [:]) {
         def toremove = []
         existingVars.each { k, v ->
@@ -154,12 +173,12 @@ class WorkflowService {
     }
 
     *//**
-     * Get data to show.
-     *
-     * @param processInstance The processInstance to get data from
-     * @param hist Historic info
-     * @return All values ​​of the variables in the different tasks
-     *//*
+ * Get data to show.
+ *
+ * @param processInstance The processInstance to get data from
+ * @param hist Historic info
+ * @return All values ​​of the variables in the different tasks
+ *//*
     def getData(processInstance, hist = [:]) {
 
         if (!hist)
@@ -196,12 +215,12 @@ class WorkflowService {
     }
 
     *//**
-     * Get data corresponding to a task
-     *
-     * @param values Raw values
-     * @param definition Values types and definitions
-     * @return Map with values and metadata
-     *//*
+ * Get data corresponding to a task
+ *
+ * @param values Raw values
+ * @param definition Values types and definitions
+ * @return Map with values and metadata
+ *//*
     def getTaskData(values, definition) {
         def data = [:]
         println "VALUES: $values"
