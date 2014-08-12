@@ -25,6 +25,9 @@ class UrlMappings {
             action = [DELETE:"remove"]
         }*/
 
+        //TODO: palette view should be changed
+        '/palette'(view: '/palette/index')
+
  		//"/"(view:"/index")
         //"/users"(resources:'user')
         "/"(controller: 'main')

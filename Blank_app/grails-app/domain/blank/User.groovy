@@ -7,6 +7,8 @@ class User {
     String login
     Date dateCreated
 
+//    Palette palette
+
     static hasMany = [models: Model, favourites: Model]
     static mappedBy = [favourites: "none"]
 
