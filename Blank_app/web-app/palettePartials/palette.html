@@ -1,0 +1,8 @@
+<accordion close-others="oneAtATime">
+    <accordion-group heading="{{key}}" ng-repeat="(key, value) in accordionDict">
+        <div ng-repeat="element in accordionDict[key]">
+            {{element.name}}:
+            {{element.icon}};
+        </div>
+    </accordion-group>
+</accordion>

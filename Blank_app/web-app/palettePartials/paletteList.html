@@ -1,3 +1,10 @@
+<div>
+    <div class="btn-group pull-right">
+        <button type="button" class="btn btn-primary" ng-click="createPaletteItem()" translate="">Create PaletteItem</button>
+    </div>
+    <h2>Palette List</h2>
+</div>
+
 <div class="row">
     <div class="col-md-2">
         Palette Preview:
@@ -10,24 +17,36 @@
             </accordion-group>
         </accordion>
     </div>
-    <div class="col-md-8">
-        Search: <input ng-model="query">
-        <table class="table table-striped">
-            <thead>
+    <div class="col-md-10">
+
+            <i class="glyphicon glyphicon-search"></i>
+            <input type="text" ng-model="query" placeholder="Search">
+
+            Sort by:
+            <select ng-model="orderProp">
+                <option value="name">Name</option>
+                <option value="category">Category</option>
+            </select>
+
+            <table class="table table-striped">
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>Icon</th>
+                    <th>Category</th>
                     <th>Activated</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="(key, value) in accordionDict | filter:query">
-                    
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
+                    <td><a href="#/palette/{{item.id}}">{{item.name}}</a></td>
+                    <td><a href="#/palette/{{item.id}}">{{item.icon}}</a></td>
+                    <td>{{item.category}}</td>
+                    <td ng-click="change(item)">{{item.activated | checkmark}}</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
-
-
-
-</div>

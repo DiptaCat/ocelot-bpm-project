@@ -9,13 +9,15 @@
 //= require services
 //= require controllers
 //= require directives
+//= require filters
 
 var ocelotApp = angular.module('ocelotApp', [
     'ui.bootstrap',
     'ngRoute',
     'ocelotControllers',
     'ocelotServices',
-    'ocelotDirectives'
+    'ocelotDirectives',
+    'ocelotFilters'
 ]);
 
 ocelotApp.config(function($routeProvider){
@@ -25,7 +27,7 @@ ocelotApp.config(function($routeProvider){
             controller: 'PaletteCtrl'
         }).
         when('/palette/:itemId', {
-            templateUrl: 'POSR TEMPLATE Aquí',
+            templateUrl: 'palettePartials/paletteDetail.html',
             controller: 'PaletteItemCtrl'
         }).
         otherwise({
