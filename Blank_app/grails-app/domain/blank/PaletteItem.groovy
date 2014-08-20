@@ -1,17 +1,13 @@
 package blank
 
-import grails.rest.Resource
-
-@Resource(uri='/paletteItems', formats=['json', 'xml'])
 class PaletteItem {
 
-    String name
-    String description
-    String category //TODO This should be an enum or whatever
-    String icon
+    String name, description,icon, properties
     boolean activated
 
+    static belongsTo = [category: CategoryItem]
 
     static constraints = {
+        properties column: "properties", sqlType: "varchar(5000)"
     }
 }

@@ -1,18 +1,18 @@
 class UrlMappings {
 
-	static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+    static mappings = {
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
         }
 
-        "/$controller/display/$id"{
-            action = [GET:"display"]
+        "/$controller/display/$id" {
+            action = [GET: "display"]
         }
 
-        "/$controller/modify/$id"{
-            action = [PUT:"modify"]
+        "/$controller/modify/$id" {
+            action = [PUT: "modify"]
         }
 
         //TODO: ask Ruben about 'create' action
@@ -25,12 +25,27 @@ class UrlMappings {
             action = [DELETE:"remove"]
         }*/
 
+        //"/"(view:"/index")
+        //"/users"(resources:'user')
+        "/"(controller: 'main')
+        "500"(view: '/error')
+
         //TODO: palette view should be changed
         '/palette'(view: '/palette/index')
 
- 		//"/"(view:"/index")
-        //"/users"(resources:'user')
-        "/"(controller: 'main')
-        "500"(view:'/error')
-	}
+        // RESTService api
+//        "/api/palette" (controller: 'palette', action: 'index', method: 'GET')
+//        "/api/palette/$id" (controller: 'palette', action: 'show', method: 'GET')
+
+
+        "/api/palette/$id"{
+            controller = 'palette'
+            action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
+        }
+
+        "/api/category" (controller: 'categoryItem', action: 'index', method: 'GET')
+
+
+
+    }
 }
