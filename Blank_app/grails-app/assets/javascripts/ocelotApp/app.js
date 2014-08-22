@@ -26,7 +26,11 @@ ocelotApp.config(function($routeProvider){
             templateUrl: 'palettePartials/paletteList.html',
             controller: 'PaletteCtrl'
         }).
-        when('/palette/:itemId', {
+        when('/paletteItem/create', {
+            templateUrl: 'palettePartials/paletteCreate.html',
+            controller: 'CreatePaletteItemCtrl'
+        }).
+        when('/paletteItem/:itemId', {
             templateUrl: 'palettePartials/paletteDetail.html',
             controller: 'PaletteItemCtrl'
         }).

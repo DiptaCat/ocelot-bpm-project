@@ -14,25 +14,12 @@ app.directive('showPalette', function(){
    return {
      restrict: 'E',
      templateUrl: 'palettePartials/palette.html',
-     controller: function($scope, Palette, PaletteItem){
-         $scope.accordionDict = {};
-         var query = Palette.query();
-         query.$promise.then(function (data) {
-             var palette = data[0];
-             palette.paletteItems.map(function (element) {
-                 PaletteItem.get({id: element.id}).$promise.then(function (item) {
-
-                     var category = item.category;
-
-                     $scope.accordionDict[category] = $scope.accordionDict[category] || [];
-
-                     if (item.activated) {
-                         $scope.accordionDict[category].push(item);
-                     }
-//                     console.log(item);
-                 });
-             })
-         });
+     link:  function (scope, element, attrs) {
+         scope.$watch('categoryGroup', function(newValue, oldValue) {
+             if (newValue !== oldValue) {
+                 console.log("Palette has changed", newValue);
+             }
+         }, true);
      }
    };
 });

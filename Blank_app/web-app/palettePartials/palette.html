@@ -1,8 +1,18 @@
 <accordion close-others="oneAtATime">
-    <accordion-group heading="{{key}}" ng-repeat="(key, value) in accordionDict">
-        <div ng-repeat="element in accordionDict[key]">
+    <accordion-group heading="{{category}}" ng-repeat="category in categories">
+        <div ng-repeat="element in categoryGroup[category]" ng-if="element.activated">
             {{element.name}}:
             {{element.icon}};
         </div>
     </accordion-group>
 </accordion>
+
+
+<!--<accordion close-others="oneAtATime">-->
+    <!--<accordion-group heading="{{key}}" ng-repeat="(key, value) in accordionDict">-->
+        <!--<div ng-repeat="element in accordionDict[key]">-->
+            <!--{{element.name}}:-->
+            <!--{{element.icon}};-->
+        <!--</div>-->
+    <!--</accordion-group>-->
+<!--</accordion>-->

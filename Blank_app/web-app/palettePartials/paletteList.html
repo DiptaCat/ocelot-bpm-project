@@ -1,22 +1,13 @@
 <div>
     <div class="btn-group pull-right">
-        <button type="button" class="btn btn-primary" ng-click="createPaletteItem()" translate="">Create PaletteItem</button>
+        <a href="#/paletteItem/create" class="btn btn-primary">Create PaletteItem<</a>
     </div>
     <h2>Palette List</h2>
 </div>
 
 <div class="row">
-    <div class="col-md-2">
-        Palette Preview:
-        <accordion close-others="oneAtATime">
-            <accordion-group heading="{{key}}" ng-repeat="(key, value) in accordionDict">
-                <div ng-repeat="element in accordionDict[key]">
-                    {{element.name}}:
-                    {{element.icon}};
-                </div>
-            </accordion-group>
-        </accordion>
-    </div>
+    <show-palette  class="col-md-2"></show-palette>
+
     <div class="col-md-10">
 
             <i class="glyphicon glyphicon-search"></i>
@@ -25,7 +16,7 @@
             Sort by:
             <select ng-model="orderProp">
                 <option value="name">Name</option>
-                <option value="category">Category</option>
+                <option value="category.id">Category</option>
             </select>
 
             <table class="table table-striped">
@@ -39,9 +30,9 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
-                    <td><a href="#/palette/{{item.id}}">{{item.name}}</a></td>
-                    <td><a href="#/palette/{{item.id}}">{{item.icon}}</a></td>
-                    <td>{{item.category}}</td>
+                    <td><a href="#/paletteItem/{{item.id}}">{{item.name}}</a></td>
+                    <td><a href="#/paletteItem/{{item.id}}">{{item.icon}}</a></td>
+                    <td>{{item.category.name}}</td>
                     <td ng-click="change(item)">{{item.activated | checkmark}}</td>
                 </tr>
                 </tbody>
