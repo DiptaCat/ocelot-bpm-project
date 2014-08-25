@@ -12,6 +12,11 @@ class BootStrap {
         def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
         springContext.getBean("customObjectMarshallers").register()
 
+
+        new User(name: "Luis", login: "luis").save()
+        new User(name: "Julio", login: "julio").save()
+
+
         // Category List
         def categories = ["Start Events", "Activities", "Structural", "Gateways", "Boundary Events", "Intermediate Events", "End Events"]
 
@@ -20,8 +25,7 @@ class BootStrap {
         }
 
 
-        new User(name: "Luis", login: "luis").save()
-        new User(name: "Julio", login: "julio").save()
+
 
 
         CategoryItem test = CategoryItem.get(1)

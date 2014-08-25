@@ -7,7 +7,7 @@ class User {
     String login
     Date dateCreated
 
-//    Palette palette
+//    Palette palette TODO què és un user una persona d'un model o un usuari que es pot loggejar....
 
     static hasMany = [models: Model, favourites: Model]
     static mappedBy = [favourites: "none"]
