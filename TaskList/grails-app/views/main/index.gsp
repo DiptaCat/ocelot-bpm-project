@@ -23,10 +23,24 @@
             <div class="controls" style="font-style: italic">
                 <ul class="one-to-many">
                     <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><g:message code="deployment.process.id" default="Id"/></th>
+                            <th><g:message  code="deployment.process.name" default="Name"/></th>
+                            <th><g:message  code="default.process.RunningInstances" default="Running Instances"/></th>
 
-                            <g:each in="${deployments}" var="d">
-                                    <li>${d}</li>
-                            </g:each>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <g:each in="${deployments}" status="i" var="d">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                <td><g:link action="show"
+                                            id="${d.getValue()['id']}" params="${[id:d.getValue()['id']]}">${d.getValue()['id']}</g:link></td>
+                                <td>${d.getValue()['name']}
+                                <td>${d.getValue()['time']}
+                            </tr>
+                        </g:each>
+                        </tbody>
                     </table>
                 </ul>
             </div>
