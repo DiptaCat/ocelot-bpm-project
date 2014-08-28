@@ -38,9 +38,6 @@ class UrlMappings {
 //        "/api/palette/$id" (controller: 'palette', action: 'show', method: 'GET')
 
 
-
-        "/api/palette/$idPalette/paletteItem/$idItem"
-
         "/api/palette/$id"{
             controller = 'palette'
             action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
