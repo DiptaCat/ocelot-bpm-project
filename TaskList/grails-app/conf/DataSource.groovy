@@ -19,7 +19,7 @@ environments {
         dataSource {
             dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
             //url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-            url = "jdbc:postgresql://localhost:5432/camundabpm"
+            url = "jdbc:postgresql://10.30.103.250:5432/camundabpm"
         }
     }
     test {

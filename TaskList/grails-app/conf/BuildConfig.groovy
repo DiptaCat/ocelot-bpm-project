@@ -70,7 +70,9 @@ grails.project.dependency.resolution = {
         compile ":camunda:0.1.1"
         compile ":rest-client-builder:2.0.3"
         //compile ":asset-pipeline:1.8.11"
-        runtime ':resources:1.2.8'
+        //runtime ':resources:1.2.8'
+
+	    compile ':asset-pipeline:1.9.4'
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"

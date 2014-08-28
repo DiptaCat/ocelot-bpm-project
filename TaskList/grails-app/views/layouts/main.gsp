@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="${grailsApplication.config.appName}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
+
+    <asset:javascript src="application.js"/>
+
+    <asset:stylesheet href="application.css"/>
+
+    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <g:layoutHead/>
-    <r:require modules="jquery, ace"/>
-    <r:layoutResources/>
 </head>
 
 <body class="navbar-fixed">
@@ -29,19 +32,6 @@
         </div>
     </div>
 </div>
-<g:javascript>
-    var APP_TITLE = "Blank App";
-
-    $('.sidebar-collapse').on('click', function () {
-        var title = $('#app-title').html();
-        if (title == APP_TITLE) {
-            $('#app-title').html('&nbsp;');
-        }
-        else {
-            $('#app-title').html(APP_TITLE);
-        }
-    });
-</g:javascript>
-<r:layoutResources/>
+<asset:javascript src="sidebar.js"/>
 </body>
 </html>
