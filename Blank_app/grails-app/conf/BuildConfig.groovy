@@ -55,14 +55,12 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
 
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+       	// test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 
-		//test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+		test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
-		test ":spock:0.7"
-
         // plugins for the build system only
         build ":tomcat:7.0.54"
 
@@ -78,6 +76,10 @@ grails.project.dependency.resolution = {
         runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
+
+		test(":spock:0.7") {
+			exclude "spock-grails-support"
+		}
 
         //compile ":rest-client-builder:2.0.3"
 

@@ -65,17 +65,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <g:each in="${userInstance?.favourites ?}" status="i" var="model">
+                            <g:each in="${userInstance?.models?}" status="i" var="model">
                                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                    <td><g:link controller="model" action="show"
-                                                id="${model.id}">${model?.name}</g:link></td>
+									<g:if test="${model.favourite == true}">
 
-                                    <td><g:link controller="user" action="show"
-                                                id="${model?.user?.id}">${model?.user?.login}</g:link></td>
+										<td><g:link controller="model" action="show"
+													id="${model.id}">${model?.name}</g:link></td>
 
-                                    <td><g:link controller="user" action="unmarkFavourite" id="unmark"
-                                                params="${[userId: userInstance?.id, modelId: model.id]}">Unmark</g:link></li></td>
+										<td><g:link controller="user" action="show"
+													id="${model?.user?.id}">${model?.user?.login}</g:link></td>
+
+										<td><g:link controller="user" action="unmarkFavourite" id="unmark"
+													params="${[userId: userInstance?.id, modelId: model.id]}">Unmark</g:link></li></td>
+									</g:if>
+
                                 </tr>
                             </g:each>
                             </tbody>

@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${modelsList}" status="i" var="model">
+        <g:each in="${userInstance?.models}" status="i" var="model">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
                 <td>${fieldValue(bean: model, field: "name")}</td>

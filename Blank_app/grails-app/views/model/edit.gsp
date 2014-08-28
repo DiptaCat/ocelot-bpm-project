@@ -41,18 +41,22 @@
             <g:render template="form"/>
         </fieldset>
         <fieldset class="form-actions">
+
             <button type="submit" name="_action_update" class="btn btn-sm btn-success save">
                 <i class="icon-refresh"></i>
                 ${message(code: 'default.button.update.label', default: 'Update')}
             </button>
+
             <button type="submit" name="_action_show" class="btn btn-sm">
                 ${message(code: 'default.button.cancel.label', default: 'Cancel')}
             </button>
+
             <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate=""
                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
                 <i class="icon-trash icon-white"></i>
                 ${message(code: 'default.button.delete.label', default: 'Delete')}
             </button>
+
         </fieldset>
     </g:form>
 </div>
