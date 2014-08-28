@@ -1,6 +1,35 @@
 //= require jquery
-//= require_tree .
+//= require bootstrap.min.js
+//= require bootstrap-editable.min.js
+//= require ace.min.js
+//= require ace-editable.min.js
 //= require_self
+
+/*
+	//= require jquery-ui-1.10.3.custom.min.js
+	//= require jquery.ui.touch-punch.min.js
+	//= require jquery.gritter.min.js
+	//= require jquery.slimscroll.min.js
+	//= require jquery.easy-pie-chart.min.js
+	//= require jquery.hotkeys.min.js
+	//= require jquery.maskedinput.min.js
+	//= require jquery.autosize.min.js
+	//= require jquery.datatables.bootstrap.js
+
+	//= require bootstrap-timepicker.min.js
+	//= require bootstrap-wysiwyg.min.js
+	//= require bootstrap-editable.min.js
+
+	//= require ace-extra.min.js
+	//= require ace-elements.min.js
+
+	//= require typeahead-bs2.min.js
+	//= require bootbox.min.js
+	//= require select2.min.js
+	//= require fuelux.spinner.min.js
+
+	//= require_tree .
+*/
 
 if (typeof jQuery !== 'undefined') {
 	(function ($) {

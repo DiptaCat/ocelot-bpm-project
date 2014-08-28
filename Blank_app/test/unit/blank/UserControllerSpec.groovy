@@ -1,37 +1,50 @@
 package blank
 
-
-
-import grails.test.mixin.*
-import spock.lang.*
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
+import spock.lang.Specification
 
 @TestFor(UserController)
 @Mock(User)
 class UserControllerSpec extends Specification {
 
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
+	/*def populateValidParams(params) {
+		assert params != null
+		params["name"] = 'Luis'
+		params["login"] = 'luis'
+	}
 
-    void "Test the index action returns the correct model"() {
+	void "Test the index action returns the correct model"() {
 
-        when:"The index action is executed"
-            controller.index()
+		when:"The index action is executed"
+		def x = controller.index()
 
-        then:"The model is correct"
-            !model.userInstanceList
-            model.userInstanceCount == 0
-    }
+		then:"The model is correct"
+		!x.userInstanceList
+		x.userInstanceCount == 0
+	}*/
 
-    void "Test the create action returns the correct model"() {
-        when:"The create action is executed"
-            controller.create()
+	void  "index action: 1 user"() {
+		when:
+		userInstance.save()
+		def x = controller.index()
 
-        then:"The model is correctly created"
-            model.userInstance!= null
-    }
+		then:
+		x.userInstanceList == [userInstance]
+		User.count() == 1
+		x.userInstanceCount == 1
+
+		where:
+		userInstance = new User(name: "Luis", login: "luis")
+	}
+
+	/*void "Test the create action returns the correct model"() {
+		when:"The create action is executed"
+		controller.create()
+
+		then:"The model is correctly created"
+		model.userInstance!= null
+	}
 
     void "Test the save action correctly persists an instance"() {
 
@@ -40,7 +53,7 @@ class UserControllerSpec extends Specification {
             request.method = 'POST'
             def user = new User()
             user.validate()
-            controller.save(user)
+            controller.save()
 
         then:"The create view is rendered again with the correct model"
             model.userInstance!= null
@@ -51,7 +64,7 @@ class UserControllerSpec extends Specification {
             populateValidParams(params)
             user = new User(params)
 
-            controller.save(user)
+            controller.save()
 
         then:"A redirect is issued to the show action"
             response.redirectedUrl == '/user/show/1'
@@ -148,5 +161,5 @@ class UserControllerSpec extends Specification {
             User.count() == 0
             response.redirectedUrl == '/user/index'
             flash.message != null
-    }
+    }*/
 }

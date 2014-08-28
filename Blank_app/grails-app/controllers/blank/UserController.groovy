@@ -8,10 +8,10 @@ import grails.converters.*
 class UserController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model: [userInstanceCount: User.count()]
-    }
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[userInstanceList: User.list(params), userInstanceCount: User.count ]
+	}
 
     def show(User userInstance) {
         respond userInstance
@@ -26,11 +26,12 @@ class UserController {
     }
 
     def create() {
-        respond new User(params)
+		respond new User(params)
     }
 
     @Transactional
     def save(User userInstance) {
+
         if (userInstance == null) {
             notFound()
             return
@@ -64,7 +65,7 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view: 'getModels'
+            respond userInstance.errors, view: 'edit'
             return
         }
 
@@ -102,27 +103,25 @@ class UserController {
 
         User userInstance = User.get(params.userId)
         Model model = Model.get(params.modelId)
-
-        userInstance.addToFavourites(model)
-        userInstance.save(flush: true)
+		model.favourite=true
+        model.save(flush: true)
 
         respond userInstance, view: 'getModelTabs'
     }
 
     def unmarkFavourite() {
 
-        User userInstance = User.get(params.userId)
-        Model model = Model.get(params.modelId)
-
-        userInstance.removeFromFavourites(model)
-        userInstance.save(flush: true)
+		User userInstance = User.get(params.userId)
+		Model model = Model.get(params.modelId)
+		model.favourite=false
+		model.save(flush: true)
 
         respond userInstance, view: 'getModelTabs'
     }
 
     def getModels(User userInstance) {
         if(userInstance)
-            respond userInstance, model: [modelsList:Model.list()]
+            respond userInstance
         else
             redirect action: "index", method: "GET"
     }

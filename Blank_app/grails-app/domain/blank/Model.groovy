@@ -9,8 +9,9 @@ class Model {
     boolean temporal
 
     static belongsTo = [user: User]
-    static hasMany = [usersFavs: User]
-    static mappedBy = [usersFavs: "none"]
+	boolean favourite = false
+    /*static hasMany = [usersFavs: User]
+    static mappedBy = [usersFavs: "none"]*/
 
     static constraints = {
         name blank: false, unique: 'user'
@@ -19,7 +20,7 @@ class Model {
     static mapping = {
         // batchSize 10
         autoTimestamp true
-        usersFavs joinTable: [name: 'FavModels', column: 'UserId', key: 'ModelId']
-        usersFavs cascade: 'save-update'
+        /*usersFavs joinTable: [name: 'FavModels', column: 'UserId', key: 'ModelId']
+        usersFavs cascade: 'save-update'*/
     }
 }
