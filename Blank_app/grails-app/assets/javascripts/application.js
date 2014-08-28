@@ -1,4 +1,8 @@
 //= require jquery
+//= require bootstrap.min.js
+//= require bootstrap-editable.min.js
+//= require ace.min.js
+//= require ace-editable.min.js
 //= require_tree .
 //= require_self
 

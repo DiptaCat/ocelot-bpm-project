@@ -45,9 +45,9 @@ class UrlMappings {
 
         "/api/category" (controller: 'categoryItem', action: 'index', method: 'GET')
 
-        "/api/paletteItem/" (controller: 'paletteItem', action: 'save', method: 'POST')
+        //"/api/paletteItem/" (controller: 'paletteItem', action: 'save', method: 'POST')
 
-        "/api/paletteItem/$id"{
+        "/api/palette/$id/paletteItem/$id"{
             controller = 'paletteItem'
             action = [GET: 'show', PUT: 'update', POST: 'update', POST: 'save', DELETE: 'delete']
         }
