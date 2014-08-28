@@ -39,8 +39,8 @@ class MainController {
     }
     def newInstanceView(String id){
         def processDefinition = workflowService.getProcessDefinition(id)
-        StartFormData startFormData = workflowService.getStartFormData(processDefinition.id)
-        println startFormData.formProperties().size()
+        def startFormData = workflowService.getStartFormData(processDefinition.id)
+        println startFormData
     }
 //    def newInstance(id, taskName=null, vars=[:]){
 //        workflowService.startProcess(id, taskName, vars)
