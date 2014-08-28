@@ -9,7 +9,7 @@ ocelotServices.factory("Palette", function($resource) {
 
 
 ocelotServices.factory("PaletteItem", function($resource) {
-    return $resource("/blank/api/paletteItem/:id", null, {'update' : {method: 'PUT'}, 'query' : {method:'GET', isArray:false}});
+    return $resource("/blank/api/palette/:id/paletteItem/:id", null, {'update' : {method: 'PUT'}, 'query' : {method:'GET', isArray:false}});
 });
 
 ocelotServices.factory("Category", function($resource) {
