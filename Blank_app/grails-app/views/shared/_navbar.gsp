@@ -19,16 +19,16 @@
 
                         </g:else>
                         <span>${session.profile?.nomComplet ?: request.user ?: '[desconegut]'}</span> <i
-                            class="icon-caret-down"></i>
+                            class="glyphicon glyphicon-caret-down"></i>
                     </a>
                     <ul class="pull-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close dropdown-profiles">
-                        <li class="dropdown-header"><i class="icon-user"></i> Perfil</li>
+                        <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> Perfil</li>
                         <g:each in="${request.units}">
                             <li>
                                 <g:link controller="main" action="setUnit" id="${it.id}">
                                     <div class="clearfix">
                                         <span class="pull-left"><i
-                                                class="btn btn-xs no-hover btn-${it.id == request.unit ? 'success' : 'info'} icon-briefcase"></i>${it.value}
+                                                class="btn btn-xs no-hover btn-${it.id == request.unit ? 'success' : 'info'} glyphicon glyphicon-briefcase"></i>${it.value}
                                         </span>
                                     </div>
                                 </g:link>

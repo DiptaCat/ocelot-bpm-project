@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'model.label', default: 'Bpm')}"/>
+    <g:set var="entityName" value="${message(code: 'Model.label', default: 'Model')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
 </head>
 
@@ -13,7 +13,7 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="glyphicon glyphicon-th-list"></i> <g:message code="default.list.label"
                                                                                               args="[entityName]"/></g:link>
 </div>
 
@@ -38,7 +38,7 @@
         </fieldset>
         <fieldset class="form-actions">
             <button type="submit" name="create" class="btn btn-sm btn-success save">
-                <i class="icon-ok"></i>
+                <i class="glyphicon glyphicon-ok"></i>
                 ${message(code: 'default.button.create.label', default: 'Create')}
             </button>
             <button type="submit" name="_action_list" class="btn btn-sm">

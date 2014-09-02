@@ -2,7 +2,6 @@ package blank
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-import grails.converters.*
 
 @Transactional(readOnly = true)
 class UserController {
@@ -17,17 +16,13 @@ class UserController {
         respond userInstance
     }
 
-    def display(User userInstance) {
-        if(params.id){
-            if (userInstance) render userInstance as XML
-            else render(status: 404, text: 'User not found')
-        }
-        else render User.list() as XML
-    }
-
     def create() {
 		respond new User(params)
     }
+
+	def edit(User userInstance) {
+		respond userInstance
+	}
 
     @Transactional
     def save(User userInstance) {
@@ -51,10 +46,6 @@ class UserController {
             }
             '*' { respond userInstance, [status: CREATED] }
         }
-    }
-
-    def edit(User userInstance) {
-        respond userInstance
     }
 
     @Transactional
@@ -99,6 +90,16 @@ class UserController {
         }
     }
 
+	protected void notFound() {
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
+				redirect action: "index", method: "GET"
+			}
+			'*' { render status: NOT_FOUND }
+		}
+	}
+
     def markFavourite() {
 
         User userInstance = User.get(params.userId)
@@ -128,15 +129,5 @@ class UserController {
 
     def getModelTabs(User userInstance) {
         respond userInstance
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*' { render status: NOT_FOUND }
-        }
     }
 }

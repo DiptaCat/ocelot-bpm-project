@@ -8,7 +8,7 @@ import spock.lang.Specification
 @Mock(User)
 class UserControllerSpec extends Specification {
 
-	/*def populateValidParams(params) {
+	def populateValidParams(params) {
 		assert params != null
 		params["name"] = 'Luis'
 		params["login"] = 'luis'
@@ -17,28 +17,14 @@ class UserControllerSpec extends Specification {
 	void "Test the index action returns the correct model"() {
 
 		when:"The index action is executed"
-		def x = controller.index()
+		def controller = controller.index()
 
 		then:"The model is correct"
-		!x.userInstanceList
-		x.userInstanceCount == 0
-	}*/
-
-	void  "index action: 1 user"() {
-		when:
-		userInstance.save()
-		def x = controller.index()
-
-		then:
-		x.userInstanceList == [userInstance]
-		User.count() == 1
-		x.userInstanceCount == 1
-
-		where:
-		userInstance = new User(name: "Luis", login: "luis")
+		!controller.userInstanceList
+		controller.userInstanceCount == 0
 	}
 
-	/*void "Test the create action returns the correct model"() {
+	void "Test the create action returns the correct model"() {
 		when:"The create action is executed"
 		controller.create()
 
@@ -161,5 +147,5 @@ class UserControllerSpec extends Specification {
             User.count() == 0
             response.redirectedUrl == '/user/index'
             flash.message != null
-    }*/
+    }
 }

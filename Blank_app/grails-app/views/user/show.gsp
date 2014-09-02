@@ -14,9 +14,9 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="glyphicon glyphicon-list"></i> <g:message code="default.list.label"
                                                                                               args="[entityName]"/></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+    <g:link class="btn btn-sm btn-info" action="create"><i class="glyphicon glyphicon-plus"></i> <g:message code="default.new.label"
                                                                                              args="[entityName]"/></g:link>
 </div>
 
@@ -36,16 +36,15 @@
         <div class="form-actions">
 
             <g:hiddenField name="id" value="${userInstance?.id}"/>
-
             <g:link class="edit btn btn-sm btn-primary" action="edit" id="${userInstance?.id}">
-                <i class="icon-trash icon-pencil"></i>
+                <i class="glyphicon  glyphicon-pencil"></i>
                 <g:message code="default.button.edit.label" default="Edit"/>
             </g:link>
 
             <g:hiddenField name="id"/>
             <g:link class="edit btn btn-sm btn-pink" action="getModelTabs" id="${userInstance?.id}">
-                <i class="icon-trash icon-pencil"></i>
-                <g:message code="default.button.tabsModels.label" default="Models Manager"/>
+                <i class="glyphicon glyphicon-th"></i>
+                <g:message code="default.button.tabsModel.label" default="Models Manager"/>
             </g:link>
 
         </div>

@@ -13,9 +13,9 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"></i> <g:message code="default.list.label"
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="glyphicon glyphicon-th-list"></i> <g:message code="default.list.label"
                                                                                               args="[entityName]"/></g:link>
-    <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"></i> <g:message code="default.new.label"
+    <g:link class="btn btn-sm btn-info" action="create"><i class="glyphicon glyphicon-plus"></i> <g:message code="default.new.label"
                                                                                              args="[entityName]"/></g:link>
 </div>
 
@@ -43,7 +43,7 @@
         <fieldset class="form-actions">
 
             <button type="submit" name="_action_update" class="btn btn-sm btn-success save">
-                <i class="icon-refresh"></i>
+                <i class="glyphicon glyphicon-refresh"></i>
                 ${message(code: 'default.button.update.label', default: 'Update')}
             </button>
 
@@ -53,7 +53,7 @@
 
             <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate=""
                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                <i class="icon-trash icon-white"></i>
+                <i class="glyphicon glyphicon-trash"></i>
                 ${message(code: 'default.button.delete.label', default: 'Delete')}
             </button>
 

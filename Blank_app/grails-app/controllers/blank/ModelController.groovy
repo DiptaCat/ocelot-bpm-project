@@ -10,15 +10,7 @@ class ModelController {
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Model.list(params), model: [modelInstanceCount: Model.count()]
-    }
-
-    def display(Model modelInstance) {
-        if(params.id){
-            if (modelInstance) render modelInstance as JSON
-            else render(status: 404, text: 'Model not found')
-        }
-        else render Model.list() as JSON
+        [modelInstanceList: Model.list(params), modelInstanceCount: Model.count()]
     }
 
     def show(Model modelInstance) {
@@ -28,6 +20,10 @@ class ModelController {
     def create() {
         respond new Model(params)
     }
+
+	def edit(Model modelInstance) {
+		respond modelInstance
+	}
 
     @Transactional
     def save(Model modelInstance) {
@@ -45,15 +41,11 @@ class ModelController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'model.label', default: 'Model'), modelInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'Model.label', default: 'Model'), modelInstance.id])
                 redirect modelInstance
             }
             '*' { respond modelInstance, [status: CREATED] }
         }
-    }
-
-    def edit(Model modelInstance) {
-        respond modelInstance
     }
 
     @Transactional
@@ -72,7 +64,7 @@ class ModelController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'model.label', default: 'Model'), modelInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Model.label', default: 'Model'), modelInstance.id])
                 redirect modelInstance
             }
             '*' { respond modelInstance, [status: OK] }
@@ -101,12 +93,20 @@ class ModelController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'model.label', default: 'Model'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'Model.label', default: 'Model'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
         }
     }
+
+	def display(Model modelInstance) {
+		if(params.id){
+			if (modelInstance) render modelInstance as JSON
+			else render(status: 404, text: 'Model not found')
+		}
+		else render Model.list() as JSON
+	}
 
     def jsonToOject() {
         def json = '''{

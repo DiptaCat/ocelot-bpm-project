@@ -87,7 +87,7 @@
                     </ul>
                 </div>
                 <g:link class="btn btn-sm btn-purple" action="getModels" id="${userInstance?.id}">
-                    <i class="icon-trash icon-pencil"></i>
+                    <i class="glyphicon glyphicon-star"></i>
                     <g:message code="default.button.tabsModels.label" default="Add Favourites"/>
                 </g:link>
             </div>
