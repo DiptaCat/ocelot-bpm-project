@@ -6,6 +6,8 @@ var ocelotControllers = angular.module('ocelotControllers', []);
 
 ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteItem, Category) {
     //Get all categories available
+    $scope.paletteId = 1;
+
     Category.query().$promise.then(function (data) {
         //Sort categories by its id
         data.sort(function (a, b) {
@@ -19,7 +21,7 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
     });
 
     $scope.categoryGroup = {};
-    Palette.get({id: 1}).$promise.then(function (palette) {
+    Palette.get({id: $scope.paletteId}).$promise.then(function (palette) {
 
         $scope.paletteItems = palette.paletteItems;
 
@@ -93,14 +95,17 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
     }
 });
 
-ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, Category, PaletteItem) {
+ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem) {
     //Get all categories available
     $scope.categories = Category.query();
 
     $scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false};
 
     $scope.save = function () {
-        PaletteItem.save($scope.item);
+
+        console.log("Route params = " + $routeParams.paletteId);
+
+        PaletteItem.save({id: $routeParams.paletteId}, $scope.item);
     };
 
 

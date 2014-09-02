@@ -20,8 +20,6 @@ class PaletteItemController extends RestfulController{
     @Override
     def save(){
 
-        println "Mètode save!!!!!!"
-
         def jsonReq = request.JSON
 
         def item = new PaletteItem()
@@ -29,7 +27,8 @@ class PaletteItemController extends RestfulController{
         item.name = jsonReq.name
         item.description = jsonReq.description
         item.activated = jsonReq.activated
-        item.icon = jsonReq.icon
+        item.icon = "hola"
+        item.svg = "hola"
 
 
 
@@ -37,6 +36,11 @@ class PaletteItemController extends RestfulController{
         category.addToPaletteItems(item)
 
         item.save( flush: true)
+
+        def palette = Palette.get(params.id)
+
+        palette.addToPaletteItems(item).save flush: true, failOnError: true
+
 
         render status: OK
     }

@@ -26,11 +26,11 @@ ocelotApp.config(function($routeProvider){
             templateUrl: 'palettePartials/paletteList.html',
             controller: 'PaletteCtrl'
         }).
-        when('/paletteItem/create', {
+        when('/palette/:paletteId/paletteItem/create', {
             templateUrl: 'palettePartials/paletteCreate.html',
             controller: 'CreatePaletteItemCtrl'
         }).
-        when('/paletteItem/:itemId', {
+        when('/palette/:paletteId/paletteItem/:itemId', {
             templateUrl: 'palettePartials/paletteDetail.html',
             controller: 'PaletteItemCtrl'
         }).
@@ -38,3 +38,22 @@ ocelotApp.config(function($routeProvider){
             redirectTo: '/palette'
         });
 });
+
+//ocelotApp.config(function($routeProvider){
+//    $routeProvider.
+//        when('/palette', {
+//            templateUrl: 'palettePartials/paletteList.html',
+//            controller: 'PaletteCtrl'
+//        }).
+//        when('/paletteItem/create', {
+//            templateUrl: 'palettePartials/paletteCreate.html',
+//            controller: 'CreatePaletteItemCtrl'
+//        }).
+//        when('/paletteItem/:itemId', {
+//            templateUrl: 'palettePartials/paletteDetail.html',
+//            controller: 'PaletteItemCtrl'
+//        }).
+//        otherwise({
+//            redirectTo: '/palette'
+//        });
+//});

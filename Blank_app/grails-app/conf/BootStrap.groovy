@@ -34,7 +34,8 @@ class BootStrap {
         def userTask = new PaletteItem(
                 name: "User Task",
                 description: "This is a User Task and I don't know why it's used for",
-                icon: "UT",
+                icon: "message.png",
+                svg: "images/svg/usertask.svg",
                 activated: true)
 
         userTask.save()
@@ -42,7 +43,8 @@ class BootStrap {
         def dataStore = new PaletteItem(
                 name: "Data Store",
                 description: "This is a Data Store",
-                icon: "DT",
+                icon: "delete.png",
+                svg: "images/svg/servicetask.svg",
                 activated: true)
 
         dataStore.save()

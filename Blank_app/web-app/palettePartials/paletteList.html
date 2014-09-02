@@ -1,6 +1,6 @@
 <div>
     <div class="btn-group pull-right">
-        <a href="#/paletteItem/create" class="btn btn-primary">Create PaletteItem<</a>
+        <a href="#/palette/{{paletteId}}/paletteItem/create" class="btn btn-primary">Create PaletteItem<</a>
     </div>
     <h2>Palette List</h2>
 </div>
@@ -31,8 +31,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
-                    <td><a href="#/paletteItem/{{item.id}}">{{item.name}}</a></td>
-                    <td><a href="#/paletteItem/{{item.id}}">{{item.icon}}</a></td>
+                    <td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
+                    <td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img ng-src="images/icons/{{item.icon}}"></a></td>
                     <td>{{item.category.name}}</td>
                     <td ng-click="change(item)">{{item.activated | checkmark}}</td>
                 </tr>

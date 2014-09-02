@@ -21,11 +21,11 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.2">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.2/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.2/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.2/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.2/grails-app/taglib" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.4">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.4/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.4/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.4/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/asset-pipeline-1.9.4/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/cache-1.1.7">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/cache-1.1.7/src/java" isTestSource="false" />

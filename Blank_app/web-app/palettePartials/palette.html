@@ -2,7 +2,10 @@
     <accordion-group heading="{{category}}" ng-repeat="category in categories">
         <div ng-repeat="element in categoryGroup[category]" ng-if="element.activated">
             {{element.name}}:
-            {{element.icon}};
+            <div ng-include="element.svg"></div>
+            <!--{{element.svg}}-->
+            <!--{{element.name}}:-->
+            <!--{{element.icon}};-->
         </div>
     </accordion-group>
 </accordion>

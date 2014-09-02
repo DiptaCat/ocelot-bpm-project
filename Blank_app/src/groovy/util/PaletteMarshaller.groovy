@@ -18,6 +18,7 @@ class PaletteMarshaller implements OcelotMarshaller{
                                 name: paletteItem.name,
                                 description: paletteItem.description,
                                 icon: paletteItem.icon,
+                                svg: paletteItem.svg,
                                 category: [id: paletteItem.category.id, name: paletteItem.category.name],
                                 activated: paletteItem.activated
                         ]
