@@ -34,6 +34,10 @@ ocelotApp.config(function($routeProvider){
             templateUrl: 'palettePartials/paletteDetail.html',
             controller: 'PaletteItemCtrl'
         }).
+        when('/proves', {
+            templateUrl: 'palettePartials/proves.html',
+            controller: 'ProvesCtrl'
+        }).
         otherwise({
             redirectTo: '/palette'
         });
