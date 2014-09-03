@@ -54,6 +54,17 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.29'
+
+        /**************************************************************************/
+        //Addded by us
+        compile ("org.camunda.bpm:camunda-engine:7.1.0-Final") {
+            excludes 'spring-beans'
+        }
+        runtime ("org.camunda.bpm:camunda-engine-spring:7.1.0-Final") {
+            excludes 'spring-context', 'spring-jdbc', 'spring-orm'
+        }
+        /**************************************************************************/
+
         runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
     }

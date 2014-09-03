@@ -3,12 +3,10 @@ package task.list
 import grails.transaction.Transactional
 
 import grails.util.GrailsNameUtils
-import org.camunda.bpm.engine.form.FormProperty
+import org.camunda.bpm.engine.form.FormField
 import org.camunda.bpm.engine.form.StartFormData
-import org.camunda.bpm.engine.impl.bpmn.deployer.BpmnDeployer
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
-import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition
 
 class WorkflowService {
@@ -282,7 +280,9 @@ class WorkflowService {
 
         def getStartFormData(String processDefinitionId) {
             StartFormData startFormData  = formService.getStartFormData(processDefinitionId)
-            List<FormProperty> formProperties = startFormData.getFormProperties()
+            /*  Updated with Camunda 7.1.0-Final
+                FormProperty deprecated -> Updated to Form Field */
+            List<FormField> formProperties = startFormData.formFields()
             formProperties
         }
 
