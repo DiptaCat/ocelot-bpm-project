@@ -1,5 +1,6 @@
 package taskList
 
+import org.camunda.bpm.engine.form.FormField
 import org.camunda.bpm.engine.form.FormProperty
 import org.camunda.bpm.engine.repository.ProcessDefinition
 import org.camunda.bpm.engine.form.StartFormData
@@ -40,7 +41,7 @@ class MainController {
     def newInstanceView(String id){
         def processDefinition = workflowService.getProcessDefinition(id)
         def startFormData = workflowService.getStartFormData(processDefinition.id)
-        println startFormData
+        render (view:'startProcess.gsp', model: [startFormData:startFormData])
     }
 //    def newInstance(id, taskName=null, vars=[:]){
 //        workflowService.startProcess(id, taskName, vars)

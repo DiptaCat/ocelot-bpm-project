@@ -279,11 +279,12 @@ class WorkflowService {
         }
 
         def getStartFormData(String processDefinitionId) {
-            StartFormData startFormData  = formService.getStartFormData(processDefinitionId)
+            def startFormData  = formService.getRenderedStartForm(processDefinitionId)
             /*  Updated with Camunda 7.1.0-Final
                 FormProperty class is deprecated -> Updated to Form Field */
-            List<FormField> formProperties = startFormData.formFields()
-            formProperties
+//            List<FormField> formFields = startFormData.getFormFields()
+            println startFormData
+            startFormData // codi HTML a sac (injectar-ho a una vista! )
         }
 
         def getFormData(Task task) {
