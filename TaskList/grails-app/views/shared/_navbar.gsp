@@ -12,11 +12,12 @@
                 <li>
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <g:if test="${session.profile?.foto}">
-                            <dt:imgFromData class="nav-user-photo" data="${session.profile.foto as byte[]}"
-                                            mimetype="image/jpeg"/>
+                            <asset:image src="${session.profile?.foto}"/>
+
                         </g:if>
                         <g:else>
-                            <r:img class="nav-user-photo" uri="/assets/images/useravatar.png" alt="Foto del usuari"/>
+                            <asset:image src="useravatar.png"/>
+
                         </g:else>
                         <span>${session.profile?.nomComplet ?: request.user ?: '[desconegut]'}</span> <i
                             class="icon-caret-down"></i>
