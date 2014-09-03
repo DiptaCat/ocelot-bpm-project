@@ -1,4 +1,4 @@
-import blank.User
+import ocelot.User
 
 class BootStrap {
 

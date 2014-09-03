@@ -41,8 +41,8 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 	protected static final Log log = LogFactory.getLog(ScaffoldedGroovyPageView.class);
 
 	public ScaffoldedGroovyPageView(String uri, String contents) {
-		Assert.hasLength(contents, "Argument [contents] cannot be blank or null");
-		Assert.hasLength(uri, "Argument [uri] cannot be blank or null");
+		Assert.hasLength(contents, "Argument [contents] cannot be ocelot or null");
+		Assert.hasLength(uri, "Argument [uri] cannot be ocelot or null");
 
 		this.contents = contents;
 		setUrl(uri);

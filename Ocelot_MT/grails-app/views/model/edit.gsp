@@ -1,4 +1,4 @@
-<%@ page import="org.springframework.validation.FieldError; blank.Model" %>
+<%@ page import="org.springframework.validation.FieldError; ocelot.Model" %>
 <!DOCTYPE html>
 <html>
 <head>

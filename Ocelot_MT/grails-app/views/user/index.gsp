@@ -1,4 +1,4 @@
-<%@ page import="blank.User" %>
+<%@ page import="ocelot.User" %>
 <!DOCTYPE html>
 <html>
 <head>

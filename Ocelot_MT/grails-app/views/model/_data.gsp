@@ -1,4 +1,4 @@
-<%@ page import="blank.Model" %>
+<%@ page import="ocelot.Model" %>
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'name', 'error')}  col-xs-12">
 
