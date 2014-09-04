@@ -84,5 +84,9 @@ class MainController {
          println "ContentType: ${uploadedFile.contentType}"*/
     }
 
+    def emptyView() {
+        render(view: 'emptyView')
+    }
+
     //
 }
