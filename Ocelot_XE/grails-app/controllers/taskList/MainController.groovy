@@ -39,9 +39,17 @@ class MainController {
 
     }
     def newInstanceView(String id){
-        def processDefinition = workflowService.getProcessDefinition(id)
+        ProcessDefinition processDefinition = workflowService.getProcessDefinition(id)
         def startFormData = workflowService.getStartFormData(processDefinition.id)
-        render (view:'startProcess.gsp', model: [startFormData:startFormData])
+        startFormData.each {FormField f ->
+            println f.id
+            println f.properties
+            println f.defaultValue
+            println f.label
+            println f.type
+        }
+        render (view:'startProcess.gsp', model: [startFormData:startFormData, processDefinition:processDefinition])
+
     }
 //    def newInstance(id, taskName=null, vars=[:]){
 //        workflowService.startProcess(id, taskName, vars)
