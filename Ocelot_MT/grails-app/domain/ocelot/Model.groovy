@@ -1,6 +1,5 @@
 package ocelot
 
-
 class Model {
 
     String name

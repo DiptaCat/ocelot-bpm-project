@@ -1,6 +1,5 @@
 package ocelot
 
-
 class User {
 
     String name
