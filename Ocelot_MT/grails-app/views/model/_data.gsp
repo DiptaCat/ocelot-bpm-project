@@ -28,7 +28,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'dateCreated', 'error')}  col-xs-12">
     <label class="control-label" for="name" style="font-weight: bold">
-        <g:message code="user.dateCreated.label" default="Date Created"/>
+        <g:message code="model.dateCreated.label" default="Date Created"/>
     </label>
 
     <div class="controls" style="font-style: italic">
@@ -39,7 +39,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'lastUpdated', 'error')}  col-xs-12">
     <label class="control-label" for="name" style="font-weight: bold">
-        <g:message code="user.lastUpdated.label" default="Date Updated"/>
+        <g:message code="model.lastUpdated.label" default="Date Updated"/>
     </label>
 
     <div class="controls" style="font-style: italic">
@@ -50,7 +50,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'temporal', 'error')} col-xs-12">
     <label class="control-label" for="temporal" style="font-weight: bold">
-        <g:message code="model.name.label" default="Temporal"/>
+        <g:message code="model.temporal.label" default="Temporal"/>
     </label>
 
     <div class="controls" style="font-style: italic">

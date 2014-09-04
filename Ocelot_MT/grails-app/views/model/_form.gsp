@@ -2,7 +2,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'name', 'error')} required col-xs-12">
     <label class="control-label" for="name">
-        <g:message code="" default="Name"/>
+        <g:message code="model.name.label" default="Name"/>
         <span class="required-indicator">*</span>
     </label>
 
@@ -15,7 +15,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'user', 'error')} required col-xs-12">
     <label class="control-label" for="user">
-        <g:message code="" default="User"/>
+        <g:message code="model.user.label" default="User"/>
         <span class="required-indicator">*</span>
     </label>
 
@@ -30,7 +30,7 @@
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'temporal', 'error')} col-xs-12">
     <label class="control-label" for="temporal">
-        <g:message code="" default="Temporal"/>
+        <g:message code="model.temporal.label" default="Temporal"/>
     </label>
 
     <div class="controls">
