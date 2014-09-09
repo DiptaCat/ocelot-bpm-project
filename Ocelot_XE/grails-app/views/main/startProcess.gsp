@@ -20,7 +20,12 @@
             <g:each in="${startFormData}" var="property">
                 <tr>
                     <td width="20%"><g:message code="${property.label}" default="${property.label}"/><span class="required-indicator">*</span></td>
-                    <td><g:textField name="field" value="${property.defaultValue}" datatype="property.type"/></td>
+                    <g:if test="${property.type.toString()=='org.camunda.bpm.engine.impl.form.type.StringFormType@21d0da67'}">
+                        <td><g:textField name="field" value="${property.defaultValue}" datatype="property.type"/></td>
+                    </g:if>
+                    <g:elseif test="${property.type.toString()=='org.camunda.bpm.engine.impl.form.type.LongFormType@11d605f3'}">
+                        <td><g:select from="${(16..67)}" name="field" value="${property.defaultValue}"/></td>
+                    </g:elseif>
                 </tr>
             </g:each>
         </table>
