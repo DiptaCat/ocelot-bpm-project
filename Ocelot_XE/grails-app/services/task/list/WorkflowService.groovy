@@ -218,7 +218,7 @@ class WorkflowService {
                 try {
                     def groupedhv = histvars[h.id]?.groupBy({ it.name }) ?: [:] // full hist
                     def hv = groupedhv?.collectEntries({ k, v -> [k, v[-1]] }) ?: [:]
-// only one value per variable and task
+                    // only one value per variable and task
                     //				println "HISTORICS (TOTS): $h.activityName --> " + hv?._tasks?.value
                     //				println "HISTORICS: $h.activityName --> " + hv?._tasks?.value?."$did"
                     data[did]['_values'] = getTaskData(hv, hv?._tasks?.value?."$did"?.'_formdata')
@@ -284,6 +284,9 @@ class WorkflowService {
                 FormProperty class is deprecated -> Updated to Form Field */
             List<FormField> formFields = startFormData.getFormFields()
             formFields // codi HTML a sac (injectar-ho a una vista! )
+        }
+        def submitStartForm(String processDefinitionId, Map<String, Object> properties){
+            formService.submitStartForm(processDefinitionId, properties)
         }
 
         def getFormData(Task task) {
@@ -366,8 +369,8 @@ class WorkflowService {
             }
             //println pi.processProperties
             pi
-
         }
+
         def getNumInstances(ProcessDefinition processDefinition) {
             historyService.createHistoricProcessInstanceQuery().processDefinitionId(processDefinition.getId()).count();
         }

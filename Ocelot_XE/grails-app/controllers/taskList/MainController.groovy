@@ -28,14 +28,16 @@ class MainController {
     def deploy(){
         workflowService.deployProcess()
     }
-    def newInstance(String id){
+    def newInstance(){
+        //vars and processDefinition
         workflowService.startProcess(id)
         def deployment = workflowService.getDeploymentById(id)
         def processDefinition = workflowService.getProcessDefinition(id)
         def numInstnaces = workflowService.getNumInstances(processDefinition)
 
+        workflowService.submitStartForm(processDefinitionId, properties)
         //
-        render (view:'show.gsp', model: [deployment:deployment, numInstnaces:numInstnaces])
+        render (view:'index.gsp')
 
     }
     def newInstanceView(String id){
