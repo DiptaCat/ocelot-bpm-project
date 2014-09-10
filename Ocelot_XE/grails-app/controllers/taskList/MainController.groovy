@@ -28,8 +28,13 @@ class MainController {
     def deploy(){
         workflowService.deployProcess()
     }
-    def newInstance(String processDefinitionId){
-        ProcessDefinition processDefinition = workflowService.getProcessDefinition(processDefinitionId)
+    def newInstance(){
+        println 'params' + params
+        ProcessDefinition processDefinition = workflowService.getProcessDefinition(params['id'])
+        def startFormData = workflowService.getStartFormData(processDefinition.id)
+//        params['field'].each{ list ->
+
+
         println "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         println processDefinition.properties
         //vars and processDefinition
@@ -46,14 +51,11 @@ class MainController {
     def newInstanceView(String id){
         ProcessDefinition processDefinition = workflowService.getProcessDefinition(id)
         def startFormData = workflowService.getStartFormData(processDefinition.id)
-        startFormData.each {FormField f ->
-            println f.id
-            println f.properties
-            println f.defaultValue
-            println f.label
-            println f.type
+        startFormData.each {FormField d ->
+            println d.id
+            println d.label
         }
-        render (view:'startProcess.gsp', model: [startFormData:startFormData, processDefinition:processDefinition])
+        render (view:'startProcess.gsp', model: [startFormData:startFormData, processDefinitionId:processDefinition.deploymentId])
 
     }
 //    def newInstance(id, taskName=null, vars=[:]){
