@@ -25,6 +25,56 @@
         Activated: <td ng-click="changeActivated()">{{item.activated | checkmark}}</td>
     </div>
 </div>
+<div>
+    <table class="table" style="max-width: 600px">
+        <thead class="table-header">
+            <tr>
+                <th>name</th>
+                <th>type</th>
+                <th>default value</th>
+                <th style="max-width: 50px; text-align: right">
+                    <a class="btn btn-mini" ng-click="addProperty()"><i class="icon-plus"></i></a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="item.properties.length <= 0">
+                <td>
+                    No items found
+                </td>
+            </tr>
+            <tr ng-show="item.properties.length > 0" ng-repeat="property in item.properties">
+                <td>
+                    <input ng-model="property.name" type="text" placeholder="name">
+                </td>
+                <td>
+                    <select ng-model="property.type" ng-click="resetValue(property)">
+                        <option value="string">string</option>
+                        <option value="boolean">boolean</option>
+                    </select>
+                </td>
+                <td>
+                    <div ng-switch on="property.type">
+                        <div ng-switch-when="boolean">
+                            <input ng-model="property.value" type="checkbox">
+                        </div>
+                        <div ng-switch-default>
+                            <input ng-model="property.value">
+                        </div>
+                    </div>
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                    <a class="btn btn-mini" ng-click="removeProperty($index)"><i class="icon-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-repeat="property in item.properties">
+    {{ property | json}}
+</div>
+
 <div class="row btn-group pull-right">
     <a href="#/palette" class="btn btn-primary">Cancel</a>
     <button type="button" class="btn btn-primary" ng-click="save()" translate="">Create New Item</button>

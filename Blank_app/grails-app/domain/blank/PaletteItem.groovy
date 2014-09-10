@@ -11,6 +11,7 @@ class PaletteItem {
     static constraints = {
 //        properties column: "properties", sqlType: "varchar(5000)"
 //        icon column: "icon", sqlType: "varchar(5000)"
+        properties nullable : true, maxSize: 5000
         svg maxSize: 5000
     }
 }
