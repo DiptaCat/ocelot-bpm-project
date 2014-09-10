@@ -33,5 +33,9 @@
             </g:each>
         </table>
     </g:form>
+    <g:link class="edit btn btn-sm btn-pink " action="newInstance" id="${processDefinition.id}">
+        <i class="glyphicon glyphicon-pencil"></i>
+        <g:message code="default.button.startProcess.label" default="Start process"/>
+    </g:link>
 
 </html>
