@@ -9,6 +9,9 @@ import grails.converters.JSON
 class PaletteItemMarshaller implements OcelotMarshaller{
     void register(){
         JSON.registerObjectMarshaller(PaletteItem){ PaletteItem paletteItem ->
+
+            def pProps = paletteItem.props == null ? [] : JSON.parse(paletteItem.props.toString())
+
             [
                     id: paletteItem.id,
                     name: paletteItem.name,
@@ -17,7 +20,7 @@ class PaletteItemMarshaller implements OcelotMarshaller{
                     svg: paletteItem.svg,
                     category: [id: paletteItem.category.id, name: paletteItem.category.name],
                     activated: paletteItem.activated,
-                    properties: paletteItem.properties
+                    props: pProps
             ]
         }
     }

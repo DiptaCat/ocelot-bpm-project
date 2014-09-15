@@ -4,7 +4,7 @@ class Palette {
 
     String name
 
-    static hasMany = [ paletteItems: PaletteItem]
+    static hasMany = [ paletteItems: PaletteItem, customPaletteItems: CustomPaletteItem]
 
     static constraints = {
     }

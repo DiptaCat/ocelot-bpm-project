@@ -38,12 +38,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-show="item.properties.length <= 0">
+            <tr ng-show="item.props.length <= 0">
                 <td>
                     No items found
                 </td>
             </tr>
-            <tr ng-show="item.properties.length > 0" ng-repeat="property in item.properties">
+            <tr ng-show="item.props.length > 0" ng-repeat="property in item.props">
                 <td>
                     <input ng-model="property.name" type="text" placeholder="name">
                 </td>
@@ -71,11 +71,11 @@
     </table>
 </div>
 
-<div ng-repeat="property in item.properties">
+<div ng-repeat="property in item.props">
     {{ property | json}}
 </div>
 
-<div class="row btn-group pull-right">
+<div class="row  bottom btn-group pull-right">
     <a href="#/palette" class="btn btn-primary">Cancel</a>
     <button type="button" class="btn btn-primary" ng-click="save()" translate="">Create New Item</button>
 </div>

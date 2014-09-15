@@ -11,6 +11,10 @@
         <li><g:link controller="model" action="index"><i class="icon-user"></i> <span
                 class="menu-text">Models</span></g:link></li>
 
+
+        <li><a href="palette"><i class="icon-list-alt"></i> <span
+                class="menu-text">Palette</span></a></li>
+
         %{--<li><g:link controller="prova2" action="index"><i class="icon-plus-sign"></i> <span class="menu-text">Prova2</span></g:link></li>
         <li>
             <a href="#" class="dropdown-toggle">

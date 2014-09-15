@@ -89,6 +89,32 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
         PaletteItem.update({id: $scope.item.id}, $scope.item);
     };
 
+    $scope.addProperty = function(){
+        var property = {name: "", value: "", type: "string"};
+
+        $scope.item.props = $scope.item.props || [];
+
+        $scope.item.props.push(property);
+    };
+
+
+    $scope.removeProperty = function (index){
+        var props = $scope.item.props;
+
+        if(props){
+            props.splice(index, 1);
+        }
+    };
+
+    $scope.resetValue= function(property){
+        switch (property.type){
+            case "boolean":
+                property.value = false;
+                break;
+            default :
+                property.value = "";
+        }
+    };
 
     $scope.changeActivated = function(){
         $scope.item.activated = !$scope.item.activated;
@@ -99,7 +125,7 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
     //Get all categories available
     $scope.categories = Category.query();
 
-    $scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, properties: []};
+    $scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, props: []};
 
     $scope.save = function () {
 
@@ -111,12 +137,12 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
 
     $scope.addProperty = function(){
         var property = {name: "", value: "", type: "string"};
-        $scope.item.properties.push(property);
+        $scope.item.props.push(property);
     };
 
 
     $scope.removeProperty = function (index){
-        var props = $scope.item.properties;
+        var props = $scope.item.props;
 
         if(props){
             props.splice(index, 1);

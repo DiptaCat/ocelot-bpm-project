@@ -1,17 +1,17 @@
 package blank
 
-class PaletteItem {
+import palette.APaletteItem
 
-    String name, description,icon, svg, properties
+class PaletteItem extends APaletteItem{
+
     boolean activated
 
-    static belongsTo = [palettes: Palette, category: CategoryItem]
-    static hasMany = [palettes: Palette]
+    static belongsTo = [category: CategoryItem]
 
     static constraints = {
 //        properties column: "properties", sqlType: "varchar(5000)"
 //        icon column: "icon", sqlType: "varchar(5000)"
-        properties nullable : true, maxSize: 5000
+        props nullable : true, maxSize: 5000
         svg maxSize: 5000
     }
 }
