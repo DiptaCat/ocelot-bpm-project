@@ -10,10 +10,6 @@
     <h1>Home Page</h1>
 </div>
 <div>
-    <g:link class="edit btn btn-sm btn-pink" action="newInstanceView" id="${deployment.getId()}">
-        <i class="icon-trash icon-pencil"></i>
-        <g:message code="instance.process.new" default="New Instance"/>
-    </g:link>
     <div class="tab-content">
         <div class="tab-pane active" id="deployments">
 
@@ -38,6 +34,10 @@
             </div>
         </div>
     </div>
+    <g:link class="edit btn btn-sm btn-pink" action="newInstanceView" id="${deployment.getId()}">
+        <i class="icon-trash icon-pencil"></i>
+        <g:message code="instance.process.new" default="New Instance"/>
+    </g:link>
 </div>
 
 </body>

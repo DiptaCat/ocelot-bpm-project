@@ -30,13 +30,19 @@ class MainController {
     }
     def newInstance(){
         println 'params' + params
+
         ProcessDefinition processDefinition = workflowService.getProcessDefinition(params['id'])
         def startFormData = workflowService.getStartFormData(processDefinition.id)
-//        params['field'].each{ list ->
 
+        startFormData.each {FormField d ->
+            d.defaultValue = params[d.id]
+        }
 
-        println "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        println processDefinition.properties
+        startFormData.each {FormField d ->
+            println d.id + "\t" +  d.defaultValue
+        }
+
+        //println processDefinition.properties
         //vars and processDefinition
         /*workflowService.startProcess(id)
         def deployment = workflowService.getDeploymentById(id)
@@ -54,6 +60,7 @@ class MainController {
         startFormData.each {FormField d ->
             println d.id
             println d.label
+            println d
         }
         render (view:'startProcess.gsp', model: [startFormData:startFormData, processDefinitionId:processDefinition.deploymentId])
 

@@ -32,11 +32,12 @@
                 </tr>
             </g:each>
         </table>
+        <g:submitButton name="update" value="Start process" />
     </g:form>
 
-    <g:link class="edit btn btn-sm btn-pink " action="newInstance" id="${processDefinitionId}" params="[pepito: 'hola']">
+    %{--<g:link class="edit btn btn-sm btn-pink " action="newInstance" id="${processDefinitionId}" params="${['startFormData':startFormData]}">
         <i class="glyphicon glyphicon-pencil"></i>
         <g:message code="default.button.startProcess.label" default="Start process"/>
-    </g:link>
+    </g:link>--}%
 
 </html>
