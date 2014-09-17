@@ -49,10 +49,10 @@ class WorkflowService {
 
     }
 
-    def startProcess(String taskId, String taskName, Map vars = [:]) {
+    def startProcess(String taskId, Map vars) {
         //log.info "STARTING PROCESS $p: ${vars.grep({it.key!='__files__'})}"
-
-        ProcessInstance pi = runtimeService.startProcessInstanceById(taskId, taskName, vars)
+        println vars
+        ProcessInstance pi = runtimeService.startProcessInstanceById(taskId, vars)
         //println "STARTED PROCESS $p: ${vars.grep({it.key!='__files__'})}: $pi"
         pi
     }
