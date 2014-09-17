@@ -38,7 +38,7 @@ class MainController {
             d.defaultValue = params[d.id]
         }
 
-        startFormData.each {FormField d ->
+            startFormData.each {FormField d ->
             println d.id + "\t" +  d.defaultValue
         }
 

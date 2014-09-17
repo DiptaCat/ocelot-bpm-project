@@ -34,7 +34,7 @@
                         <tbody>
                         <g:each in="${deployments}" status="i" var="d">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><g:link action="show"
+                                <td><g:link action="show" controller="process"
                                             id="${d.getValue()['id']}" params="${[id:d.getValue()['id']]}">${d.getValue()['id']}</g:link></td>
                                 <td>${d.getValue()['name']}
                                 <td>${d.getValue()['time']}
