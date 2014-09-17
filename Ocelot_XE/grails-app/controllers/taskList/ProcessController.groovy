@@ -28,35 +28,32 @@ class ProcessController {
     }
 
     def newInstance(){
-        println 'params' + params
+            println 'params' + params
 
-        ProcessDefinition processDefinition = workflowService.getProcessDefinition(params['id'])
-        def startFormData = workflowService.getStartFormData(processDefinition.id)
+            ProcessDefinition processDefinition = workflowService.getProcessDefinition(params['id'])
+            def startFormData = workflowService.getStartFormData(processDefinition.id)
+            HashMap<String, Object> vars = new HashMap<String, Object>()
+            startFormData.each {FormField d ->
+                d.defaultValue = params[d.id]
+                vars.put(d.id, d.defaultValue)
+            }
 
-        startFormData.each {FormField d ->
-            d.defaultValue = params[d.id]
+            def response = workflowService.startProcess(processDefinition.id, vars)
+
+            println response
+
+            //println processDefinition.properties
+            //vars and processDefinition
+            /*workflowService.startProcess(id)
+            def deployment = workflowService.getDeploymentById(id)
+            def processDefinition = workflowService.getProcessDefinition(id)
+            def numInstnaces = workflowService.getNumInstances(processDefinition)
+
+            workflowService.submitStartForm(processDefinitionId, properties)*/
+            //
+            redirect(controller:'Main',action:'index')
+
         }
 
-        startFormData.each {FormField d ->
-            println d.id + "\t" +  d.defaultValue
-        }
 
-        //println processDefinition.properties
-        //vars and processDefinition
-        /*workflowService.startProcess(id)
-        def deployment = workflowService.getDeploymentById(id)
-        def processDefinition = workflowService.getProcessDefinition(id)
-        def numInstnaces = workflowService.getNumInstances(processDefinition)
-
-        workflowService.submitStartForm(processDefinitionId, properties)*/
-        //
-        def processDefinitions = workflowService.deploymentList()
-        def data = [:]
-        processDefinitions.each { ProcessDefinition p ->
-            def numInstance = workflowService.getNumInstances(p)
-            data."$p.id" = [id: p.deploymentId, name: p.name, time: numInstance]}
-
-        render (view:'index.gsp', [deployments: data])
-
-    }
 }

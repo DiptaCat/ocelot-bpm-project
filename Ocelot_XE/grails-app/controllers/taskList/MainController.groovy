@@ -18,57 +18,11 @@ class MainController {
             data."$p.id" = [id: p.deploymentId, name: p.name, time: numInstance]}
         [deployments: data]
     }
-    def show(){
-        def deployment = workflowService.getDeploymentById(params["id"])
-        ProcessDefinition processDefinition = workflowService.getProcessDefinition(params["id"])
 
-        def numInstnaces = workflowService.getNumInstances(processDefinition)
-        [deployment: deployment, numInstnaces: numInstnaces]
-    }
     def deploy(){
         workflowService.deployProcess()
     }
-    def newInstance(){
-        println 'params' + params
 
-        ProcessDefinition processDefinition = workflowService.getProcessDefinition(params['id'])
-        def startFormData = workflowService.getStartFormData(processDefinition.id)
-
-        startFormData.each {FormField d ->
-            d.defaultValue = params[d.id]
-        }
-
-            startFormData.each {FormField d ->
-            println d.id + "\t" +  d.defaultValue
-        }
-
-        //println processDefinition.properties
-        //vars and processDefinition
-        /*workflowService.startProcess(id)
-        def deployment = workflowService.getDeploymentById(id)
-        def processDefinition = workflowService.getProcessDefinition(id)
-        def numInstnaces = workflowService.getNumInstances(processDefinition)
-
-        workflowService.submitStartForm(processDefinitionId, properties)*/
-        //
-        render (view:'index.gsp')
-
-    }
-    def newInstanceView(String id){
-        ProcessDefinition processDefinition = workflowService.getProcessDefinition(id)
-        def startFormData = workflowService.getStartFormData(processDefinition.id)
-        startFormData.each {FormField d ->
-            println d.id
-            println d.label
-            println d
-        }
-        render (view:'startProcess.gsp', model: [startFormData:startFormData, processDefinitionId:processDefinition.deploymentId])
-
-    }
-//    def newInstance(id, taskName=null, vars=[:]){
-//        workflowService.startProcess(id, taskName, vars)
-//        render (view:'index.gsp')
-//    } //ask to ruben
 
     def upload() {
         def f = request.getFile('myFile')
