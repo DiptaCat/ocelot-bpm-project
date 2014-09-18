@@ -10,6 +10,8 @@ import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
 import org.camunda.bpm.engine.repository.ProcessDefinition
+import org.camunda.bpm.model.bpmn.Bpmn
+import org.camunda.bpm.model.bpmn.instance.UserTask
 
 class WorkflowService {
 

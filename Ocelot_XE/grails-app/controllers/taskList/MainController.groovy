@@ -37,7 +37,7 @@ class MainController {
         print f.size
         print f.contentType
         print f.getClass()
-        String fileContent = f.getInputStream().getText()
+        def fileContent = f.getInputStream()
         workflowService.deployProcess(fileContent, f.originalFilename)
         response.sendError(200, 'Done')
     }
