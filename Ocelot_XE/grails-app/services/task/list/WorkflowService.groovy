@@ -38,6 +38,13 @@ class WorkflowService {
                 .deploymentId(deploymentId)
                 .singleResult();
     }
+
+    def getProcessDefinitionByProcessId(String processDefinitionId) {
+        repositoryService.createProcessDefinitionQuery()
+                .processDefinitionId(processDefinitionId)
+                .singleResult();
+    }
+
     def deployProcess(fileStream, fileName) {
 
         String processName = fileName
