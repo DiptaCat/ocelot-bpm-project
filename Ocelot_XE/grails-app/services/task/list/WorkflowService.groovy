@@ -110,6 +110,16 @@ class WorkflowService {
         pi
     }
 
+    def getUnassignedTasks() {
+        def unassignedTasks = taskService.createTaskQuery().taskUnassigned().list()
+        unassignedTasks
+    }
+
+    def getAllUserTasks(String user) {
+        def userTasks = taskService.createTaskQuery().taskAssignee(user).list()
+        userTasks
+    }
+
     def deploymentList() {
         def processDefinitions = repositoryService.createProcessDefinitionQuery().active().list()
         processDefinitions
