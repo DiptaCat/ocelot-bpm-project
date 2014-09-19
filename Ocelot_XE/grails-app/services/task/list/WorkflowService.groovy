@@ -127,6 +127,11 @@ class WorkflowService {
         userTasks
     }
 
+    def getUserTaskById(String id) {
+        def task = taskService.createTaskQuery().taskId(id)
+        task
+    }
+
     def deploymentList() {
         def processDefinitions = repositoryService.createProcessDefinitionQuery().active().list()
         processDefinitions

@@ -7,7 +7,7 @@
 
 <body>
 <div class="page-header">
-    <h1>Home Page</h1>
+    <h1>Process</h1>
 </div>
 <div>
     <div class="tab-content">

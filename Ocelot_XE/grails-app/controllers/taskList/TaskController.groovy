@@ -7,16 +7,26 @@ class TaskController {
 
     def workflowService
 
-    def emptyView() {
+    def index() {
         def tasks = workflowService.getUnassignedTasks()
+        def processNames = []
+
 
         tasks.each {Task t ->
             println t.getName()
-            ProcessDefinition processDefinition = workflowService.getProcessInstance(t.getProcessInstanceId())
+            ProcessDefinition processDefinition = workflowService.getProcessDefinitionByProcessDefinitionId(t.getProcessDefinitionId())
             println processDefinition.getName()
+            processNames.add(processDefinition.getName())
             println t.getOwner()
         }
 
-        render(view: 'emptyView')
+        [tasks: tasks, processNames: processNames]
     }
+
+    def show() {
+        def task = workflowService.getUserTaskById(params['id'])
+        [task: task, procName: params['procName']]
+    }
+
+    def action() {}
 }
