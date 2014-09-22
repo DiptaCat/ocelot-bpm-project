@@ -35,12 +35,11 @@
                         <tbody>
                         <g:each in="${tasks}" status="i" var="d">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td><g:link action="show" controller="task"
-                                            id="${d.getId()}" params="${[id:d.getId(), procName:processNames[i]]}">${d.getName()}</g:link></td>
-                                <td>${processNames[i]}</td>
+                                <td>${d.getName()}</td>
+                                <td>${processDefinitions[i].getName()}</td>
                                 <td>${d.getCreateTime()}</td>
                                 <td>${d.getDueDate()}</td>
-                                <td><g:link class="edit btn btn-sm btn-grey" controller="task" action="action" id="${d.getId()}">Task</g:link></td>
+                                <td><g:link class="edit btn btn-sm btn-grey" controller="task" action="show" params="${[id:d.getId(), processDefinitionId:processDefinitions[i].getDeploymentId()]}" id="${d.getId()}">Task</g:link></td>
                             </tr>
                         </g:each>
                         </tbody>

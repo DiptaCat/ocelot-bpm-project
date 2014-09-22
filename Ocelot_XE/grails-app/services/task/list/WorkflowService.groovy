@@ -3,6 +3,7 @@ package task.list
 import grails.transaction.Transactional
 
 import grails.util.GrailsNameUtils
+import org.apache.commons.validator.Form
 import org.camunda.bpm.engine.form.FormField
 import org.camunda.bpm.engine.form.StartFormData
 import org.camunda.bpm.engine.impl.persistence.entity.DeploymentEntity
@@ -362,8 +363,11 @@ class WorkflowService {
         }
 
         def getFormData(String taskId) {
-            formService.getTaskFormData(taskId)
+            List<FormField>  formFields = formService.getTaskFormData(taskId).getFormFields()
+            println formFields
+            formFields
         }
+
 
         // Values from the process variables
         def getTaskLocalValues(taskId, values) {
