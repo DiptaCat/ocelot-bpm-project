@@ -15,18 +15,6 @@
         <li><a href="palette"><i class="icon-list-alt"></i> <span
                 class="menu-text">Palette</span></a></li>
 
-        %{--<li><g:link controller="prova2" action="index"><i class="icon-plus-sign"></i> <span class="menu-text">Prova2</span></g:link></li>
-        <li>
-            <a href="#" class="dropdown-toggle">
-                <i class="icon-th-list"></i> <span class="menu-text">Tipologia</span> <b class="arrow icon-angle-down"></b>
-             </a>
-            <ul class="submenu">
-                   <li><g:link controller="tipusFamilia" class="index" action="index"><i class="icon-double-angle-right"></i> Família</g:link></li>
-                 <li><g:link controller="tipusDestinatari" class="index" action="index"><i class="icon-double-angle-right"></i> Destinatari</g:link></li>
-                  <li><g:link controller="tipusCanal" class="index" action="index"><i class="icon-double-angle-right"></i> Canal</g:link></li>
-            </ul>
-        </li>			--}%
-
     </ul>
 
     <div class="sidebar-collapse" id="sidebar-collapse">

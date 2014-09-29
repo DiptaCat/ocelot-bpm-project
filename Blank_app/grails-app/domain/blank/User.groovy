@@ -7,12 +7,13 @@ class User {
     String login
     Date dateCreated
 
-//    Palette palette TODO què és un user una persona d'un model o un usuari que es pot loggejar....
+	//static hasOne = [palette: Palette] //TODO què és un user una persona d'un model o un usuari que es pot loggejar....
 
     static hasMany = [models: Model, favourites: Model]
     static mappedBy = [favourites: "none"]
 
     static constraints = {
+//	    palette nullable: true
         name blank:false, minSize:2
         login blank:false, unique:true, minSize:2
     }

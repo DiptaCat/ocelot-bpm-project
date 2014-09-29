@@ -8,7 +8,7 @@ import static org.springframework.http.HttpStatus.CONFLICT
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 class PaletteItemController extends RestfulController{
 
     static responseFormats = ['json']
@@ -68,7 +68,7 @@ class PaletteItemController extends RestfulController{
         instance.icon = jsonReq.icon
 
         //COSA MEVA
-        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))
+//        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))
 
         if(instance.category.id != jsonReq.category.id){
             def category = CategoryItem.get(instance.category.id)
@@ -82,7 +82,7 @@ class PaletteItemController extends RestfulController{
 
         //TODO preguntar a Ruben què fer en cas d'error
 
-        println instance.dump()
+//        println instance.dump()
 
         render status: OK
 
