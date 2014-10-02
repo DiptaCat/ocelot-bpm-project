@@ -1,6 +1,4 @@
-
-
-eventCreateWarStart = {warName, stagingDir ->
+eventCreateWarStart = { warName, stagingDir ->
 	includeTargets << new File(assetPipelinePluginDir, "scripts/_AssetCompile.groovy")
 	assetCompile()
 
@@ -8,11 +6,11 @@ eventCreateWarStart = {warName, stagingDir ->
 	def assetPathDir = new File(stagingDir, 'assets')
 	assetPathDir.mkdirs()
 
-	ant.copy(todir:assetPathDir.path, verbose:true) {
-		fileset dir:assetCompileDir
+	ant.copy(todir: assetPathDir.path, verbose: true) {
+		fileset dir: assetCompileDir
 	}
 }
 
 eventCleanStart = {
-    Ant.delete('dir':'target/assets')
+	Ant.delete('dir': 'target/assets')
 }

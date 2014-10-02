@@ -6,8 +6,8 @@ target(createWebXmlConfig: 'Creates WebXmlConfig.groovy') {
 		return
 	}
 
-	ant.copy file:   "$webxmlPluginDir/src/samples/_WebXmlConfig.groovy",
-				tofile: destination
+	ant.copy file: "$webxmlPluginDir/src/samples/_WebXmlConfig.groovy",
+			tofile: destination
 	println '\nCreated grails-app/conf/WebXmlConfig.groovy\n'
 }
 

@@ -15,12 +15,6 @@
  */
 package org.codehaus.groovy.grails.scaffolding.view;
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.groovy.grails.web.pages.GroovyPageTemplate;
@@ -28,6 +22,11 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest;
 import org.codehaus.groovy.grails.web.servlet.view.GroovyPageView;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.util.Assert;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * A special Spring View for scaffolding that renders an in-memory scaffolded view to the response.
@@ -37,8 +36,8 @@ import org.springframework.util.Assert;
  */
 public class ScaffoldedGroovyPageView extends GroovyPageView {
 
-	private String contents;
 	protected static final Log log = LogFactory.getLog(ScaffoldedGroovyPageView.class);
+	private String contents;
 
 	public ScaffoldedGroovyPageView(String uri, String contents) {
 		Assert.hasLength(contents, "Argument [contents] cannot be blank or null");
@@ -62,12 +61,12 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 	 * Overrides the default implementation to render a GSP view using an in-memory representation
 	 * held in the #contents property.
 	 *
-	 * @param model The model
+	 * @param model    The model
 	 * @param response The HttpServletResponse instance
 	 */
-    @Override
-    protected void renderTemplate(Map<String, Object> model, GrailsWebRequest webRequest, HttpServletRequest request,
-            HttpServletResponse response) {
+	@Override
+	protected void renderTemplate(Map<String, Object> model, GrailsWebRequest webRequest, HttpServletRequest request,
+								  HttpServletResponse response) {
 		if (log.isDebugEnabled()) {
 			log.debug("Rendering scaffolded view [" + getUrl() + "] with model [" + model + "]");
 		}
@@ -79,7 +78,7 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 		String pageName = getUrl();
 		template = templateEngine.createTemplate(new ByteArrayResource(contents.getBytes("UTF-8"), pageName), false);
 		if (template instanceof GroovyPageTemplate) {
-			((GroovyPageTemplate)template).setAllowSettingContentType(true);
+			((GroovyPageTemplate) template).setAllowSettingContentType(true);
 		}
 	}
 }

@@ -40,7 +40,7 @@ target(dbmPreviousChangesetSql: 'Generates the SQL to apply the previous <value>
 
 	doAndClose {
 		ScriptUtils.generatePreviousChangesetSql(
-			database, liquibase, ScriptUtils.newPrintWriter(argsList, 1), count.toInteger(), skip.toInteger(), contexts)
+				database, liquibase, ScriptUtils.newPrintWriter(argsList, 1), count.toInteger(), skip.toInteger(), contexts)
 	}
 }
 

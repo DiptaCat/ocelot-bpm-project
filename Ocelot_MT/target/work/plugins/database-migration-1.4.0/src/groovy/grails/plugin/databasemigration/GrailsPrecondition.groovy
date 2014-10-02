@@ -15,26 +15,20 @@
 package grails.plugin.databasemigration
 
 import groovy.sql.Sql
-
-import java.sql.Connection
-
 import liquibase.changelog.ChangeSet
 import liquibase.changelog.DatabaseChangeLog
 import liquibase.database.Database
 import liquibase.database.DatabaseConnection
-import liquibase.exception.DatabaseException
-import liquibase.exception.PreconditionErrorException
-import liquibase.exception.PreconditionFailedException
-import liquibase.exception.ValidationErrors
-import liquibase.exception.Warnings
+import liquibase.exception.*
 import liquibase.precondition.Precondition
 import liquibase.resource.ResourceAccessor
 import liquibase.snapshot.DatabaseSnapshot
 import liquibase.snapshot.DatabaseSnapshotGenerator
 import liquibase.snapshot.DatabaseSnapshotGeneratorFactory
-
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.context.ApplicationContext
+
+import java.sql.Connection
 
 /**
  * Custom Groovy-based precondition.
@@ -55,7 +49,7 @@ class GrailsPrecondition implements Precondition {
 	/**
 	 * {@inheritDoc}
 	 * @see liquibase.precondition.Precondition#check(liquibase.database.Database,
-	 * 	liquibase.changelog.DatabaseChangeLog, liquibase.changelog.ChangeSet)
+	 * liquibase.changelog.DatabaseChangeLog , liquibase.changelog.ChangeSet )
 	 */
 	void check(Database database, DatabaseChangeLog changeLog, ChangeSet changeSet) {
 		this.database = database

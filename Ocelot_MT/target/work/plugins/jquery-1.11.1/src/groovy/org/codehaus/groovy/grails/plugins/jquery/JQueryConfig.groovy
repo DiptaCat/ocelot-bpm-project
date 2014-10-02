@@ -23,21 +23,21 @@ import org.codehaus.groovy.grails.plugins.support.aware.GrailsApplicationAware
  * @author Sergey Nebolsin (nebolsin@prophotos.ru)
  */
 class JQueryConfig implements GrailsApplicationAware {
-    def defaultPlugins
-    def plugins = [:]
+	def defaultPlugins
+	def plugins = [:]
 
-    static SHIPPED_VERSION = '1.11.1'
-    GrailsApplication grailsApplication
+	static SHIPPED_VERSION = '1.11.1'
+	GrailsApplication grailsApplication
 
-    def init() {
-        grailsApplication.metadata.findAll { key, value ->
-            key.startsWith('jquery.plugins')
-        }.each {key, value ->
-            // wtf?
-            def pluginName = (key.length() >= 16)? key[15..-1] : "(ungrouped)"
-            plugins."$pluginName" = value.split(",") as List
-        }
+	def init() {
+		grailsApplication.metadata.findAll { key, value ->
+			key.startsWith('jquery.plugins')
+		}.each { key, value ->
+			// wtf?
+			def pluginName = (key.length() >= 16) ? key[15..-1] : "(ungrouped)"
+			plugins."$pluginName" = value.split(",") as List
+		}
 
-        defaultPlugins = grailsApplication.config.jquery?.defaultPlugins
-    }
+		defaultPlugins = grailsApplication.config.jquery?.defaultPlugins
+	}
 }

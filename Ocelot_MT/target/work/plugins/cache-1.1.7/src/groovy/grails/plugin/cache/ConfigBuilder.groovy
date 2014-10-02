@@ -15,7 +15,6 @@
 package grails.plugin.cache
 
 import grails.util.Environment
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -95,7 +94,7 @@ class ConfigBuilder extends BuilderSupport {
 					value = value.name
 				}
 
-				if ('name' == name || 'cache' == name  || 'domain' == name || name in CACHE_PARAM_NAMES) {
+				if ('name' == name || 'cache' == name || 'domain' == name || name in CACHE_PARAM_NAMES) {
 					_current[name] = value
 					return name
 				}
@@ -141,8 +140,7 @@ class ConfigBuilder extends BuilderSupport {
 
 		if (_unrecognizedElementDepth) {
 			_unrecognizedElementDepth--
-		}
-		else {
+		} else {
 			_stack.pop()
 		}
 	}

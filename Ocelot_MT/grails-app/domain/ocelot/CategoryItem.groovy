@@ -1,10 +1,10 @@
 package ocelot
 
 class CategoryItem {
-    String name
+	String name
 
-    static hasMany = [paletteItems: PaletteItem]
+	static hasMany = [paletteItems: PaletteItem]
 
-    static constraints = {
-    }
+	static constraints = {
+	}
 }

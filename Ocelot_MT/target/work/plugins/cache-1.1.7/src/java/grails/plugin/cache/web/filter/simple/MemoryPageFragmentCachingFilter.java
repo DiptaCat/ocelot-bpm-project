@@ -16,7 +16,6 @@ package grails.plugin.cache.web.filter.simple;
 
 import grails.plugin.cache.web.PageInfo;
 import grails.plugin.cache.web.filter.PageFragmentCachingFilter;
-
 import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -51,7 +50,7 @@ public class MemoryPageFragmentCachingFilter extends PageFragmentCachingFilter {
 
 	@Override
 	protected ConcurrentMapCacheManager getNativeCacheManager() {
-		return (ConcurrentMapCacheManager)super.getNativeCacheManager();
+		return (ConcurrentMapCacheManager) super.getNativeCacheManager();
 	}
 
 	@Override

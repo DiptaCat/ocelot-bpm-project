@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import grails.plugin.hibernate4.HibernatePluginSupport
 
+import grails.plugin.hibernate4.HibernatePluginSupport
 import org.codehaus.groovy.grails.commons.AnnotationDomainClassArtefactHandler
 
 /**

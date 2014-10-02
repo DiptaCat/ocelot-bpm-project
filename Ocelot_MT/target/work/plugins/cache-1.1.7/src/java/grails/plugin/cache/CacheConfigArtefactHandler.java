@@ -16,7 +16,6 @@ package grails.plugin.cache;
 
 import groovy.lang.GroovySystem;
 import groovy.lang.MetaClass;
-
 import org.codehaus.groovy.grails.commons.AbstractInjectableGrailsClass;
 import org.codehaus.groovy.grails.commons.ArtefactHandlerAdapter;
 import org.codehaus.groovy.grails.commons.InjectableGrailsClass;
@@ -30,7 +29,9 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 
-	/** The artefact type. */
+	/**
+	 * The artefact type.
+	 */
 	public static final String TYPE = "CacheConfig";
 
 	/**
@@ -51,10 +52,11 @@ public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 	 * Default implementation of <code>CacheConfigGrailsClass</code>.
 	 */
 	public static class DefaultCacheConfigGrailsClass extends AbstractInjectableGrailsClass
-	       implements CacheConfigGrailsClass {
+			implements CacheConfigGrailsClass {
 
 		/**
 		 * Default constructor.
+		 *
 		 * @param wrappedClass
 		 */
 		public DefaultCacheConfigGrailsClass(Class<?> wrappedClass) {
@@ -75,7 +77,7 @@ public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 		}
 
 		protected void autowireBeanProperties(Object instance) {
-			ConfigurableApplicationContext ctx = (ConfigurableApplicationContext)grailsApplication.getMainContext();
+			ConfigurableApplicationContext ctx = (ConfigurableApplicationContext) grailsApplication.getMainContext();
 			ctx.getBeanFactory().autowireBeanProperties(instance,
 					AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);
 		}

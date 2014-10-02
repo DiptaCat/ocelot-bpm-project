@@ -14,18 +14,6 @@
  */
 package grails.plugin.cache;
 
-import java.io.Serializable;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.codehaus.groovy.grails.commons.ControllerArtefactHandler;
 import org.codehaus.groovy.grails.commons.GrailsApplication;
 import org.slf4j.Logger;
@@ -38,12 +26,19 @@ import org.springframework.core.BridgeMethodResolver;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.io.Serializable;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * getCacheOperations is called when beans are initialized and also from
  * PageFragmentCachingFilter during requests; the filter needs annotations on
  * controllers but if the standard lookup includes controllers, the return
  * values from the controller method calls are cached unnecessarily.
- *
+ * <p/>
  * Based on org.springframework.cache.annotation.AnnotationCacheOperationSource.
  *
  * @author Costin Leau
@@ -51,28 +46,23 @@ import org.springframework.util.ObjectUtils;
  */
 public class GrailsAnnotationCacheOperationSource implements CacheOperationSource, Serializable {
 
-	private static final long serialVersionUID = 1;
-
 	public static final String BEAN_NAME = "org.springframework.cache.annotation.AnnotationCacheOperationSource#0";
-
 	/**
 	 * Canonical value held in cache to indicate no caching attribute was
 	 * found for this method and we don't need to look again.
 	 */
 	protected static final Collection<CacheOperation> NULL_CACHING_ATTRIBUTE = Collections.emptyList();
-
-	protected GrailsApplication application;
-	protected boolean publicMethodsOnly = true;
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-
+	private static final long serialVersionUID = 1;
 	protected final Set<CacheAnnotationParser> annotationParsers =
 			new LinkedHashSet<CacheAnnotationParser>(1);
-
 	/**
 	 * Cache of CacheOperations, keyed by DefaultCacheKey (Method + target Class).
 	 */
 	protected final Map<Object, Collection<CacheOperation>> attributeCache =
 			new ConcurrentHashMap<Object, Collection<CacheOperation>>();
+	protected GrailsApplication application;
+	protected boolean publicMethodsOnly = true;
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Constructor.
@@ -82,7 +72,7 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 	}
 
 	public Collection<CacheOperation> getCacheOperations(Method method, Class<?> targetClass,
-			boolean includeControllers) {
+														 boolean includeControllers) {
 
 		if (!includeControllers && isControllerClass(targetClass)) {
 			return null;
@@ -107,7 +97,8 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 	/**
 	 * Determine the caching attribute for this method invocation.
 	 * <p>Defaults to the class's caching attribute if no method attribute is found.
-	 * @param method the method for the current invocation (never {@code null})
+	 *
+	 * @param method      the method for the current invocation (never {@code null})
 	 * @param targetClass the target class for this invocation (may be {@code null})
 	 * @return {@link CacheOperation} for this method, or {@code null} if the method
 	 * is not cacheable
@@ -122,8 +113,7 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 			// Put it in the cache.
 			if (cacheOps == null) {
 				attributeCache.put(cacheKey, NULL_CACHING_ATTRIBUTE);
-			}
-			else {
+			} else {
 				logger.debug("Adding cacheable method '{}' with attribute: {}", method.getName(), cacheOps);
 				attributeCache.put(cacheKey, cacheOps);
 			}
@@ -150,7 +140,8 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 	 * Determine a cache key for the given method and target class.
 	 * <p>Must not produce same key for overloaded methods.
 	 * Must produce same key for different instances of the same method.
-	 * @param method the method (never {@code null})
+	 *
+	 * @param method      the method (never {@code null})
 	 * @param targetClass the target class (may be {@code null})
 	 * @return the cache key (never {@code null})
 	 */
@@ -210,6 +201,7 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 	 * Spring's metadata attribute class.
 	 * <p>Can be overridden to support custom annotations that carry
 	 * caching metadata.
+	 *
 	 * @param ae the annotated method or class
 	 * @return the configured caching operations, or {@code null} if none found
 	 */
@@ -235,6 +227,7 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 
 	/**
 	 * Dependency injection for the grails application.
+	 *
 	 * @param grailsApplication the app
 	 */
 	public void setGrailsApplication(GrailsApplication grailsApplication) {
@@ -243,6 +236,7 @@ public class GrailsAnnotationCacheOperationSource implements CacheOperationSourc
 
 	/**
 	 * Dependency injection for whether to only consider public methods
+	 *
 	 * @param allow
 	 */
 	public void setAllowPublicMethodsOnly(boolean allow) {

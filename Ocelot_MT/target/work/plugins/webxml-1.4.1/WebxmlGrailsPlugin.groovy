@@ -1,7 +1,5 @@
 import grails.util.Environment
 import groovy.xml.StreamingMarkupBuilder
-import groovy.xml.XmlUtil
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -30,7 +28,7 @@ import org.slf4j.LoggerFactory
 class WebxmlGrailsPlugin {
 
 	private static final String DEFAULT_CONFIG_FILE = "DefaultWebXmlConfig"
-	private static final String APP_CONFIG_FILE     = "WebXmlConfig"
+	private static final String APP_CONFIG_FILE = "WebXmlConfig"
 
 	private Logger log = LoggerFactory.getLogger('grails.plugin.webxml.WebxmlGrailsPlugin')
 
@@ -46,10 +44,10 @@ class WebxmlGrailsPlugin {
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPWEBXML']
 	def scm = [url: 'http://plugins.grails.org/grails-webxml/']
 	def developers = [
-		[name: "Eric Pederson",  email: "ericacm@gmail.com"],
-		[name: "Bob Schulze",    email: "al.lias@gmx.de"],
-		[name: "Burt Beckwith",  email: "beckwithb@vmware.com"],
-		[name: "Stefano Gualdi", email: "stefano.gualdi@gmail.com"]
+			[name: "Eric Pederson", email: "ericacm@gmail.com"],
+			[name: "Bob Schulze", email: "al.lias@gmx.de"],
+			[name: "Burt Beckwith", email: "beckwithb@vmware.com"],
+			[name: "Stefano Gualdi", email: "stefano.gualdi@gmail.com"]
 	]
 
 	def doWithWebDescriptor = { xml ->
@@ -111,7 +109,7 @@ class WebxmlGrailsPlugin {
 		if (config.sessionConfig.sessionTimeout instanceof Integer) {
 			def contextParam = xml."context-param"
 			contextParam[contextParam.size() - 1] + {
-				'session-config'{
+				'session-config' {
 					'session-timeout'(config.sessionConfig.sessionTimeout)
 				}
 			}

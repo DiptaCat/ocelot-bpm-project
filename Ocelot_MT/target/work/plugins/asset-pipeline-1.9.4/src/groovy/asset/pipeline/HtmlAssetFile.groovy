@@ -16,13 +16,13 @@
 
 package asset.pipeline
 
-class HtmlAssetFile extends  AbstractAssetFile {
-    static final String contentType = 'text/html'
-    static extensions = ['html']
-    static compiledExtension = 'html'
-    static processors = []
+class HtmlAssetFile extends AbstractAssetFile {
+	static final String contentType = 'text/html'
+	static extensions = ['html']
+	static compiledExtension = 'html'
+	static processors = []
 
-    String directiveForLine(String line) {
-        return null
-    }
+	String directiveForLine(String line) {
+		return null
+	}
 }

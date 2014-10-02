@@ -1,32 +1,49 @@
-<div ng-controller = "PaleteCtrl">
-    <h1>Products</h1>
-    <div id="catalog">
-        <h2><a href="#">Activities</a></h2>
-        <div>
-            <ul>
-                <li ng-repeat='item in activities' ng-show="item.name" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="activities" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}</li>
-            </ul>
-        </div>
-        <h2><a href="#">Artifacts</a></h2>
-        <div>
-            <ul>
-                <li ng-repeat='item in artifacts' ng-show="item.name" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="artifacts" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}</li>
-            </ul>
-        </div>
-        <h2><a href="#">Data</a></h2>
-        <div>
-            <ul>
-                <li ng-repeat='item in data' ng-show="item.name" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="data" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}</li>
-            </ul>
-        </div>
-    </div>
+<div ng-controller="PaleteCtrl">
+	<h1>Products</h1>
+
+	<div id="catalog">
+		<h2><a href="#">Activities</a></h2>
+
+		<div>
+			<ul>
+				<li ng-repeat='item in activities' ng-show="item.name" data-drag="true"
+					data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="activities"
+					jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}
+				</li>
+			</ul>
+		</div>
+		<h2><a href="#">Artifacts</a></h2>
+
+		<div>
+			<ul>
+				<li ng-repeat='item in artifacts' ng-show="item.name" data-drag="true"
+					data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="artifacts"
+					jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}
+				</li>
+			</ul>
+		</div>
+		<h2><a href="#">Data</a></h2>
+
+		<div>
+			<ul>
+				<li ng-repeat='item in data' ng-show="item.name" data-drag="true"
+					data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="data"
+					jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.name}}
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 <div id="cart">
-    <h1>DropZone</h1>
-    <div>
-        <ol data-drop="true" ng-model='dropbox' jqyoui-droppable="{multiple:true}">
-            <li ng-repeat="item in dropbox track by $index" ng-show="item.name" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="dropbox" jqyoui-draggable="{index: {{$index}},animate:true}">{{item.name}}</li>
-            <li class="placeholder" ng-hide="hideMe()">Add your items here</li>
-        </ol>
-    </div>
+	<h1>DropZone</h1>
+
+	<div>
+		<ol data-drop="true" ng-model='dropbox' jqyoui-droppable="{multiple:true}">
+			<li ng-repeat="item in dropbox track by $index" ng-show="item.name" data-drag="true"
+				data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="dropbox"
+				jqyoui-draggable="{index: {{$index}},animate:true}">{{item.name}}
+			</li>
+			<li class="placeholder" ng-hide="hideMe()">Add your items here</li>
+		</ol>
+	</div>
 </div>

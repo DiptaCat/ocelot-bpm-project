@@ -15,12 +15,12 @@
 package grails.plugin.databasemigration
 
 import grails.util.GrailsUtil
-import java.sql.ResultSet
 import liquibase.Liquibase
 import liquibase.database.Database
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
+import java.sql.ResultSet
 
 /**
  * Based on the class of the same name from Mike Hugo's liquibase-runner plugin.
@@ -35,11 +35,11 @@ class MigrationRunner {
 	static void autoRun(migrationCallbacks = null) {
 		def dataSourceConfigs = grails.plugin.databasemigration.MigrationUtils.getDataSourceConfigs()
 		dataSourceConfigs.dataSource = MigrationUtils.application.config.dataSource
-		
+
 		for (configAndName in dataSourceConfigs) {
 			String dsConfigName = configAndName.key
 			ConfigObject configObject = configAndName.value
-			
+
 			if (!MigrationUtils.canAutoMigrate(dsConfigName)) {
 				LOG.warn "Not running auto migrate for DataSource '$dsConfigName'"
 				continue
@@ -55,23 +55,24 @@ class MigrationRunner {
 			try {
 				MigrationUtils.executeInSession(dsConfigName) {
 					Database database
-					if(config.multiSchema){
+					if (config.multiSchema) {
 						database = MigrationUtils.getDatabase(null, dsConfigName)
 						ResultSet resultSet = database.connection.metaData.schemas
 						List schemas = []
 						while (resultSet.next()) {
 							String schema = resultSet.getString(1)
-							if(schema ==~ config.multiSchemaPattern || schema in config.multiSchemaList){ schemas << schema } 
+							if (schema ==~ config.multiSchemaPattern || schema in config.multiSchemaList) {
+								schemas << schema
+							}
 						}
-						
+
 						LOG.info "Found ${schemas.size()} schemas to update"
-						
-						schemas.each{ schema ->
+
+						schemas.each { schema ->
 							database = MigrationUtils.getDatabase(schema, dsConfigName)
 							runMigrations(dsConfigName, schema, config, database, migrationCallbacks)
 						}
-					}
-					else{
+					} else {
 						database = MigrationUtils.getDatabase(config.updateOnStartDefaultSchema ?: null, dsConfigName)
 						runMigrations(dsConfigName, config.updateOnStartDefaultSchema ?: null, config, database, migrationCallbacks)
 					}
@@ -83,8 +84,8 @@ class MigrationRunner {
 			}
 		}
 	}
-	
-	static void runMigrations(dsConfigName, schema, config, database, migrationCallbacks){
+
+	static void runMigrations(dsConfigName, schema, config, database, migrationCallbacks) {
 		if (config.dropOnStart) {
 			LOG.warn "Dropping tables..."
 			MigrationUtils.getLiquibase(database).dropAll()
@@ -99,12 +100,13 @@ class MigrationRunner {
 		}
 
 		if (liquibases) {
-			LOG.info "Migrations detected for '$dsConfigName${schema ? '.'+schema : ''}': ${liquibases.keySet()}"
+			LOG.info "Migrations detected for '$dsConfigName${schema ? '.' + schema : ''}': ${liquibases.keySet()}"
 
 			try {
 				migrationCallbacks?.beforeStartMigration database
 			}
-			catch (MissingMethodException ignored) {}
+			catch (MissingMethodException ignored) {
+			}
 
 			liquibases.each { String changelogName, Liquibase liquibase ->
 				LOG.info "Running script '$changelogName'"
@@ -112,7 +114,8 @@ class MigrationRunner {
 				try {
 					migrationCallbacks?.onStartMigration database, liquibase, changelogName
 				}
-				catch (MissingMethodException ignored) {}
+				catch (MissingMethodException ignored) {
+				}
 
 				liquibase.update config.updateOnStartContexts ?: config.contexts ?: null
 			}
@@ -120,11 +123,11 @@ class MigrationRunner {
 			try {
 				migrationCallbacks?.afterMigrations database
 			}
-			catch (MissingMethodException ignored) {}
-		}
-		else {
-			LOG.info "No migrations to run for '$dsConfigName${schema ? '.'+schema : ''}'"
+			catch (MissingMethodException ignored) {
+			}
+		} else {
+			LOG.info "No migrations to run for '$dsConfigName${schema ? '.' + schema : ''}'"
 		}
 	}
-	
+
 }

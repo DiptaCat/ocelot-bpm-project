@@ -2,6 +2,6 @@ package ocelot
 
 class MainController {
 
-    def index() {
-    }
+	def index() {
+	}
 }

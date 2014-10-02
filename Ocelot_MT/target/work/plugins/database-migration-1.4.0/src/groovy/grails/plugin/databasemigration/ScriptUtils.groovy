@@ -15,10 +15,6 @@
 package grails.plugin.databasemigration
 
 import grails.util.GrailsUtil
-import liquibase.exception.ValidationFailedException
-
-import java.text.SimpleDateFormat
-
 import liquibase.Liquibase
 import liquibase.changelog.ChangeLogIterator
 import liquibase.changelog.DatabaseChangeLog
@@ -29,16 +25,18 @@ import liquibase.database.Database
 import liquibase.database.typeconversion.TypeConverter
 import liquibase.database.typeconversion.TypeConverterFactory
 import liquibase.diff.Diff
+import liquibase.exception.ValidationFailedException
 import liquibase.executor.Executor
 import liquibase.executor.ExecutorService
 import liquibase.executor.LoggingExecutor
 import liquibase.lockservice.LockService
 import liquibase.parser.ChangeLogParserFactory
 import liquibase.util.StringUtils
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationContext
+
+import java.text.SimpleDateFormat
 
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
@@ -92,12 +90,10 @@ class ScriptUtils {
 			if (filename.toLowerCase().endsWith('groovy')) {
 				baos = new ByteArrayOutputStream()
 				out = new PrintStream(baos)
-			}
-			else {
+			} else {
 				out = new PrintStream(filename)
 			}
-		}
-		else {
+		} else {
 			out = System.out
 		}
 
@@ -156,7 +152,12 @@ class ScriptUtils {
 		}
 	}
 
-	static void closeConnection(it) { try { it?.close() } catch (ignored) {} }
+	static void closeConnection(it) {
+		try {
+			it?.close()
+		} catch (ignored) {
+		}
+	}
 
 	// returns a Map; the rendered date String is under the 'date' key,
 	// calculateDateFileNameIndex is under 'calculateDateFileNameIndex',
@@ -203,7 +204,7 @@ class ScriptUtils {
 		}
 
 		results.error = 'Date must be specified as two strings with the format "yyyy-MM-dd HH:mm:ss"' +
-		                'or as one strings with the format "yyyy-MM-dd"'
+				'or as one strings with the format "yyyy-MM-dd"'
 
 		results
 	}
@@ -221,28 +222,28 @@ class ScriptUtils {
 	}
 
 	static Diff createDiff(Database referenceDatabase, Database targetDatabase,
-	                       ApplicationContext appCtx, String diffTypes) {
+						   ApplicationContext appCtx, String diffTypes) {
 
 		Diff diff = (referenceDatabase instanceof GormDatabase) ?
-			new GormDiff(referenceDatabase, targetDatabase) :
-			new Diff(referenceDatabase, targetDatabase)
+				new GormDiff(referenceDatabase, targetDatabase) :
+				new Diff(referenceDatabase, targetDatabase)
 		diff.diffTypes = diffTypes
 		diff.addStatusListener appCtx.diffStatusListener
 		diff
 	}
 
 	static void createAndPrintDiff(Database referenceDatabase, Database targetDatabase, Database printDatabase,
-			ApplicationContext appCtx, String diffTypes, PrintStream out) {
+								   ApplicationContext appCtx, String diffTypes, PrintStream out) {
 
 		createDiff(referenceDatabase, targetDatabase, appCtx, diffTypes).compare().printChangeLog(
-			out, printDatabase, new MySQLCompatibleChangeLogSerializer())
+				out, printDatabase, new MySQLCompatibleChangeLogSerializer())
 	}
 
 	static void createAndPrintFixedDiff(Database referenceDatabase, Database targetDatabase, Database printDatabase,
-			ApplicationContext appCtx, String diffTypes, PrintStream out) {
+										ApplicationContext appCtx, String diffTypes, PrintStream out) {
 
 		MigrationUtils.fixDiffResult(createDiff(referenceDatabase, targetDatabase, appCtx, diffTypes).compare()).printChangeLog(
-			out, printDatabase, new MySQLCompatibleChangeLogSerializer())
+				out, printDatabase, new MySQLCompatibleChangeLogSerializer())
 	}
 
 	static void generatePreviousChangesetSql(Database database, Liquibase liquibase, Writer output, int changesetCount, int skip, String contexts) {
@@ -259,7 +260,7 @@ class ScriptUtils {
 
 		try {
 			DatabaseChangeLog changeLog = ChangeLogParserFactory.instance.getParser(changeLogFile, liquibase.resourceAccessor).parse(
-				changeLogFile, liquibase.changeLogParameters, liquibase.resourceAccessor)
+					changeLogFile, liquibase.changeLogParameters, liquibase.resourceAccessor)
 			changeLog.changeSets.reverse true
 			skip.times { changeLog.changeSets.remove(0) }
 
@@ -267,9 +268,9 @@ class ScriptUtils {
 			changeLog.validate liquibase.database, contexts
 
 			ChangeLogIterator logIterator = new ChangeLogIterator(changeLog,
-				new ContextChangeSetFilter(contexts),
-				new DbmsChangeSetFilter(database),
-				new CountChangeSetFilter(changesetCount))
+					new ContextChangeSetFilter(contexts),
+					new DbmsChangeSetFilter(database),
+					new CountChangeSetFilter(changesetCount))
 
 			logIterator.run new NoopVisitor(database), database
 

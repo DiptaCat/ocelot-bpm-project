@@ -87,19 +87,17 @@ void generateForDomainClass(domainClass) {
 		event("GenerateViewsEnd", [domainClass.fullName])
 	}
 
-	if (generateAsyncController ) {
+	if (generateAsyncController) {
 		event("StatusUpdate", ["Generating controller for domain class ${domainClass.fullName}"])
 		templateGenerator.generateAsyncController(domainClass, basedir)
 		templateGenerator.generateAsyncTest(domainClass, "${basedir}/test/unit")
 		event("GenerateControllerEnd", [domainClass.fullName])
-	}
-	else if (generateRestfulController) {
+	} else if (generateRestfulController) {
 		event("StatusUpdate", ["Generating controller for domain class ${domainClass.fullName}"])
 		templateGenerator.generateRestfulController(domainClass, basedir)
 		templateGenerator.generateRestfulTest(domainClass, "${basedir}/test/unit")
 		event("GenerateControllerEnd", [domainClass.fullName])
-	}
-	else if (generateController) {
+	} else if (generateController) {
 		event("StatusUpdate", ["Generating controller for domain class ${domainClass.fullName}"])
 		templateGenerator.generateController(domainClass, basedir)
 		templateGenerator.generateTest(domainClass, "${basedir}/test/unit")

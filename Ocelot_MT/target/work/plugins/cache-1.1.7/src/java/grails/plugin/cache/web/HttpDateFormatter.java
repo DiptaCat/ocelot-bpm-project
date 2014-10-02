@@ -14,6 +14,8 @@
  */
 package grails.plugin.cache.web;
 
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,13 +23,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.slf4j.LoggerFactory;
-
 /**
  * RFC 2616 - HTTP/1.1 Protocol
  * <p/>
  * Section 3.3.1 defines the preferred full date and time as:
- *
+ * <p/>
  * <pre>
  * HTTP-date    = rfc1123-date
  * rfc1123-date = wkday "," SP date1 SP time SP "GMT"
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * <p/>
  * These are used in request and response headers.
  * <p/>
- *
+ * <p/>
  * Based on net.sf.ehcache.constructs.web.HttpDateFormatter.
  *
  * @author Greg Luck
@@ -81,17 +81,15 @@ public class HttpDateFormatter implements Serializable {
 	/**
 	 * Parses dates supplied in accordance with Section 3.3.1 of RFC 2616
 	 *
-	 * @param date
-	 *           a date formatted in accordance with Section 3.3.1 of RFC 2616
+	 * @param date a date formatted in accordance with Section 3.3.1 of RFC 2616
 	 * @return the parsed Date. If the date cannot be parsed, the start of POSIX
-	 *         time, 1/1/1970 is returned, which will have the effect of expiring
-	 *         the content.
+	 * time, 1/1/1970 is returned, which will have the effect of expiring
+	 * the content.
 	 */
 	public synchronized Date parseDateFromHttpDate(String date) {
 		try {
 			return httpDateFormat.parse(date);
-		}
-		catch (ParseException e) {
+		} catch (ParseException e) {
 			LoggerFactory.getLogger(getClass()).debug(
 					"ParseException on date {}. 1/1/1970 will be returned", date);
 			return new Date(0);

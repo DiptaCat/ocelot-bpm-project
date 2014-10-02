@@ -15,7 +15,6 @@
 package grails.plugin.databasemigration
 
 import liquibase.resource.ResourceAccessor
-
 import org.springframework.util.ClassUtils
 
 /**

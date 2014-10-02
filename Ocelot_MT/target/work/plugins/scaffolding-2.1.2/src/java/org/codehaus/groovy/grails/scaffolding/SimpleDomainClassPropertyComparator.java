@@ -15,10 +15,10 @@
  */
 package org.codehaus.groovy.grails.scaffolding;
 
-import java.util.Comparator;
-
 import org.codehaus.groovy.grails.commons.GrailsDomainClass;
 import org.springframework.util.Assert;
+
+import java.util.Comparator;
 
 /**
  * Comparator used when Hibernate isn't installed.

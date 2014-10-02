@@ -27,7 +27,7 @@ includeTargets << new File(scaffoldingPluginDir, 'scripts/_GrailsGenerate.groovy
 generateViews = true
 generateController = true
 
-target (generateAll: "Generates a CRUD interface (controller + views) for a domain class") {
+target(generateAll: "Generates a CRUD interface (controller + views) for a domain class") {
 	depends(checkVersion, parseArguments, packageApp)
 
 	promptForName(type: "Domain Class")
@@ -36,8 +36,7 @@ target (generateAll: "Generates a CRUD interface (controller + views) for a doma
 		String name = argsMap["params"][0]
 		if (!name || name == "*") {
 			uberGenerate()
-		}
-		else {
+		} else {
 			generateForName = name
 			generateForOne()
 		}

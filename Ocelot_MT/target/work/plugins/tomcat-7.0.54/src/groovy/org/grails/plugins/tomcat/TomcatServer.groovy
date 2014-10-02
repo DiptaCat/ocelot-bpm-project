@@ -15,17 +15,17 @@
  */
 package org.grails.plugins.tomcat
 
-import static grails.build.logging.GrailsConsole.instance as CONSOLE
 import grails.util.BuildSettings
 import grails.util.BuildSettingsHolder
 import grails.util.PluginBuildSettings
 import grails.web.container.EmbeddableServer
-
 import org.apache.catalina.Context
 import org.apache.tomcat.util.scan.StandardJarScanner
 import org.codehaus.groovy.grails.cli.support.GrailsBuildEventListener
 import org.codehaus.groovy.grails.plugins.GrailsPluginUtils
 import org.springframework.util.ReflectionUtils
+
+import static grails.build.logging.GrailsConsole.instance as CONSOLE
 
 /**
  * Provides common functionality for the inline and isolated variants of tomcat server.
@@ -36,171 +36,173 @@ import org.springframework.util.ReflectionUtils
  */
 abstract class TomcatServer implements EmbeddableServer {
 
-    protected final BuildSettings buildSettings
-    protected final PluginBuildSettings pluginSettings
+	protected final BuildSettings buildSettings
+	protected final PluginBuildSettings pluginSettings
 
-    protected final File workDir
-    protected final File tomcatDir
+	protected final File workDir
+	protected final File tomcatDir
 
-    protected final boolean usingUserKeystore
-    protected final File keystoreFile
-    protected final String keyPassword
-    protected String truststore
-    protected File truststoreFile
-    protected String trustPassword
-    protected Boolean shouldScan = false
-    protected Set<String> extraJarsToSkip
+	protected final boolean usingUserKeystore
+	protected final File keystoreFile
+	protected final String keyPassword
+	protected String truststore
+	protected File truststoreFile
+	protected String trustPassword
+	protected Boolean shouldScan = false
+	protected Set<String> extraJarsToSkip
 
-    // These are set from the outside in _GrailsRun
-    def grailsConfig
-    GrailsBuildEventListener eventListener
+	// These are set from the outside in _GrailsRun
+	def grailsConfig
+	GrailsBuildEventListener eventListener
 
-    TomcatServer() {
-        buildSettings = BuildSettingsHolder.getSettings()
-        pluginSettings = GrailsPluginUtils.getPluginBuildSettings()
+	TomcatServer() {
+		buildSettings = BuildSettingsHolder.getSettings()
+		pluginSettings = GrailsPluginUtils.getPluginBuildSettings()
 
-        workDir = buildSettings.projectWorkDir
-        tomcatDir = getWorkDirFile("tomcat")
+		workDir = buildSettings.projectWorkDir
+		tomcatDir = getWorkDirFile("tomcat")
 
-        def userKeystore = getConfigParam("keystorePath")
-        if (userKeystore) {
-            usingUserKeystore = true
-            keystoreFile = new File(userKeystore)
-            keyPassword = getConfigParam("keystorePassword") ?: "changeit" // changeit is the keystore default
-        } else {
-            usingUserKeystore = false
-            keystoreFile = getWorkDirFile("ssl/keystore")
-            keyPassword = "123456"
-        }
+		def userKeystore = getConfigParam("keystorePath")
+		if (userKeystore) {
+			usingUserKeystore = true
+			keystoreFile = new File(userKeystore)
+			keyPassword = getConfigParam("keystorePassword") ?: "changeit" // changeit is the keystore default
+		} else {
+			usingUserKeystore = false
+			keystoreFile = getWorkDirFile("ssl/keystore")
+			keyPassword = "123456"
+		}
 
-        def userTruststore = getConfigParam("truststorePath")
-        if (userKeystore) {
-            truststore = userTruststore
-            trustPassword = getConfigParam("truststorePassword") ?: "changeit"
-        } else {
-            truststore = "${buildSettings.grailsWorkDir}/ssl/truststore"
-            trustPassword = "123456"
-        }
+		def userTruststore = getConfigParam("truststorePath")
+		if (userKeystore) {
+			truststore = userTruststore
+			trustPassword = getConfigParam("truststorePassword") ?: "changeit"
+		} else {
+			truststore = "${buildSettings.grailsWorkDir}/ssl/truststore"
+			trustPassword = "123456"
+		}
 
-        truststoreFile = new File(truststore)
+		truststoreFile = new File(truststore)
 
-        System.setProperty('org.mortbay.xml.XmlParser.NotValidating', 'true')
+		System.setProperty('org.mortbay.xml.XmlParser.NotValidating', 'true')
 
-        def scanConfig = getConfigParam("scan")
-        if(scanConfig) {
-            shouldScan = (Boolean) (scanConfig.enabled instanceof Boolean ? scanConfig.enabled : false)
-            extraJarsToSkip = (scanConfig.excludes instanceof Collection) ? scanConfig.excludes.collect { it.toString() } : []
-        }
-        
-        tomcatDir.deleteDir()
-        new File(tomcatDir, 'webapps').mkdirs()
-    }
-    
-    protected void configureJarScanner(Context context) {
-        if (extraJarsToSkip && shouldScan) {
-            try {
-                def jarsToSkipField = ReflectionUtils.findField(StandardJarScanner, "defaultJarsToSkip", Set)
-                ReflectionUtils.makeAccessible(jarsToSkipField)
-                Set jarsToSkip = jarsToSkipField.get(StandardJarScanner)
-                jarsToSkip.addAll(extraJarsToSkip)
-            } catch (e) {
-                // ignore
-            }
-        }
-        def jarScanner = new StandardJarScanner()
-        jarScanner.setScanClassPath(shouldScan)
-        context.setJarScanner(jarScanner)
-    }
+		def scanConfig = getConfigParam("scan")
+		if (scanConfig) {
+			shouldScan = (Boolean) (scanConfig.enabled instanceof Boolean ? scanConfig.enabled : false)
+			extraJarsToSkip = (scanConfig.excludes instanceof Collection) ? scanConfig.excludes.collect {
+				it.toString()
+			} : []
+		}
 
-    /**
-     * The host and port params will never be null, defaults will be passed if necessary.
-     *
-     * If httpsPort is > 0, the server should listen for https requests on that port.
-     */
-    protected abstract void doStart(String host, int httpPort, int httpsPort)
+		tomcatDir.deleteDir()
+		new File(tomcatDir, 'webapps').mkdirs()
+	}
 
-    /**
-     * Shutdown the server.
-     */
-    abstract void stop()
+	protected void configureJarScanner(Context context) {
+		if (extraJarsToSkip && shouldScan) {
+			try {
+				def jarsToSkipField = ReflectionUtils.findField(StandardJarScanner, "defaultJarsToSkip", Set)
+				ReflectionUtils.makeAccessible(jarsToSkipField)
+				Set jarsToSkip = jarsToSkipField.get(StandardJarScanner)
+				jarsToSkip.addAll(extraJarsToSkip)
+			} catch (e) {
+				// ignore
+			}
+		}
+		def jarScanner = new StandardJarScanner()
+		jarScanner.setScanClassPath(shouldScan)
+		context.setJarScanner(jarScanner)
+	}
 
-    void restart() {
-        stop()
-        start()
-    }
+	/**
+	 * The host and port params will never be null, defaults will be passed if necessary.
+	 *
+	 * If httpsPort is > 0, the server should listen for https requests on that port.
+	 */
+	protected abstract void doStart(String host, int httpPort, int httpsPort)
 
-    void start() {
-        start(null, null)
-    }
+	/**
+	 * Shutdown the server.
+	 */
+	abstract void stop()
 
-    void start(int port) {
-        start(null, port)
-    }
+	void restart() {
+		stop()
+		start()
+	}
 
-    void start(String host, int port) {
-        doStart(host ?: DEFAULT_HOST, port ?: DEFAULT_PORT, 0)
-    }
+	void start() {
+		start(null, null)
+	}
 
-    void startSecure() {
-        startSecure(null)
-    }
+	void start(int port) {
+		start(null, port)
+	}
 
-    void startSecure(int port) {
-        startSecure(null, null, port)
-    }
+	void start(String host, int port) {
+		doStart(host ?: DEFAULT_HOST, port ?: DEFAULT_PORT, 0)
+	}
 
-    void startSecure(String host, int httpPort, int httpsPort) {
-        if (!keystoreFile.exists()) {
-            if (usingUserKeystore) {
-                throw new IllegalStateException("cannot start tomcat in https because use keystore does not exist (value: $keystoreFile)")
-            } else {
-                createSSLCertificate()
-            }
-        }
+	void startSecure() {
+		startSecure(null)
+	}
 
-        doStart(host ?: DEFAULT_HOST, httpPort ?: DEFAULT_PORT, httpsPort ?: DEFAULT_SECURE_PORT)
-    }
+	void startSecure(int port) {
+		startSecure(null, null, port)
+	}
 
-    protected File getWorkDirFile(String path) {
-        new File(workDir, path)
-    }
+	void startSecure(String host, int httpPort, int httpsPort) {
+		if (!keystoreFile.exists()) {
+			if (usingUserKeystore) {
+				throw new IllegalStateException("cannot start tomcat in https because use keystore does not exist (value: $keystoreFile)")
+			} else {
+				createSSLCertificate()
+			}
+		}
 
-    protected getConfigParam(String name) {
-        buildSettings.config.grails.tomcat[name]
-    }
+		doStart(host ?: DEFAULT_HOST, httpPort ?: DEFAULT_PORT, httpsPort ?: DEFAULT_SECURE_PORT)
+	}
 
-    protected Map getConfigParams() {
-        buildSettings.config.grails.tomcat
-    }
+	protected File getWorkDirFile(String path) {
+		new File(workDir, path)
+	}
 
-    protected createSSLCertificate() {
-        CONSOLE.updateStatus 'Creating SSL Certificate...'
+	protected getConfigParam(String name) {
+		buildSettings.config.grails.tomcat[name]
+	}
 
-        def keystoreDir = keystoreFile.parentFile
-        if (!keystoreDir.exists() && !keystoreDir.mkdir()) {
-            throw new RuntimeException("Unable to create keystore folder: " + keystoreDir.canonicalPath)
-        }
+	protected Map getConfigParams() {
+		buildSettings.config.grails.tomcat
+	}
 
-        getKeyToolClass().main(
-                "-genkey",
-                "-alias", "localhost",
-                "-dname", "CN=localhost,OU=Test,O=Test,C=US",
-                "-keyalg", "RSA",
-                "-validity", "365",
-                "-storepass", "key",
-                "-keystore", keystoreFile.absolutePath,
-                "-storepass", keyPassword,
-                "-keypass", keyPassword)
+	protected createSSLCertificate() {
+		CONSOLE.updateStatus 'Creating SSL Certificate...'
 
-        println 'Created SSL Certificate.'
-    }
+		def keystoreDir = keystoreFile.parentFile
+		if (!keystoreDir.exists() && !keystoreDir.mkdir()) {
+			throw new RuntimeException("Unable to create keystore folder: " + keystoreDir.canonicalPath)
+		}
 
-    private getKeyToolClass() {
-        try {
-            Class.forName('sun.security.tools.KeyTool')
-        } catch (ClassNotFoundException e) {
-            // no try/catch for this one, if neither is found let it fail
-            Class.forName('com.ibm.crypto.tools.KeyTool')
-        }
-    }
+		getKeyToolClass().main(
+				"-genkey",
+				"-alias", "localhost",
+				"-dname", "CN=localhost,OU=Test,O=Test,C=US",
+				"-keyalg", "RSA",
+				"-validity", "365",
+				"-storepass", "key",
+				"-keystore", keystoreFile.absolutePath,
+				"-storepass", keyPassword,
+				"-keypass", keyPassword)
+
+		println 'Created SSL Certificate.'
+	}
+
+	private getKeyToolClass() {
+		try {
+			Class.forName('sun.security.tools.KeyTool')
+		} catch (ClassNotFoundException e) {
+			// no try/catch for this one, if neither is found let it fail
+			Class.forName('com.ibm.crypto.tools.KeyTool')
+		}
+	}
 }

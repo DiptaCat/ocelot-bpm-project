@@ -44,7 +44,7 @@ public class Timer {
 		if (log.isInfoEnabled()) {
 			stopWatch.stop();
 			log.info("{} request for {} took {}",
-					new Object[] { cached ? "Cached" : "Uncached", uri, stopWatch });
+					new Object[]{cached ? "Cached" : "Uncached", uri, stopWatch});
 		}
 	}
 }

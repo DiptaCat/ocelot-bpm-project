@@ -14,25 +14,8 @@
  */
 package grails.plugin.databasemigration
 
-import java.lang.reflect.Method
-import java.util.jar.JarFile
-
-import liquibase.change.Change
-import liquibase.change.ChangeFactory
-import liquibase.change.ChangeWithColumns
-import liquibase.change.ColumnConfig
-import liquibase.change.ConstraintsConfig
-import liquibase.change.core.CreateProcedureChange
-import liquibase.change.core.CreateViewChange
-import liquibase.change.core.DeleteDataChange
-import liquibase.change.core.ExecuteShellCommandChange
-import liquibase.change.core.InsertDataChange
-import liquibase.change.core.LoadDataChange
-import liquibase.change.core.LoadDataColumnConfig
-import liquibase.change.core.RawSQLChange
-import liquibase.change.core.SQLFileChange
-import liquibase.change.core.StopChange
-import liquibase.change.core.UpdateDataChange
+import liquibase.change.*
+import liquibase.change.core.*
 import liquibase.change.custom.CustomChangeWrapper
 import liquibase.changelog.ChangeLogParameters
 import liquibase.changelog.ChangeSet
@@ -53,11 +36,13 @@ import liquibase.sql.visitor.SqlVisitorFactory
 import liquibase.util.ObjectUtil
 import liquibase.util.StringUtils
 import liquibase.util.file.FilenameUtils
-
 import org.codehaus.groovy.runtime.InvokerHelper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationContext
+
+import java.lang.reflect.Method
+import java.util.jar.JarFile
 
 /**
  * Based on <code>liquibase.parser.core.xml.XMLChangeLogSAXHandler</code>.
@@ -90,7 +75,7 @@ class DslBuilder extends BuilderSupport {
 	DatabaseChangeLog databaseChangeLog
 
 	DslBuilder(ChangeLogParameters changeLogParameters, ResourceAccessor resourceAccessor,
-	           String changeLogLocation, ApplicationContext ctx) {
+			   String changeLogLocation, ApplicationContext ctx) {
 
 		this.changeLogParameters = changeLogParameters
 		this.resourceAccessor = resourceAccessor
@@ -124,38 +109,28 @@ class DslBuilder extends BuilderSupport {
 
 		if ('comment' == name) {
 			setText value
-		}
-		else if ('validCheckSum' == name) {
+		} else if ('validCheckSum' == name) {
 			setText value
-		}
-		else if ('logicalFilePath' == name) {
+		} else if ('logicalFilePath' == name) {
 			databaseChangeLog.logicalFilePath = value
-		}
-		else if ('databaseChangeLog' == name) {
+		} else if ('databaseChangeLog' == name) {
 			databaseChangeLog.setLogicalFilePath attributes.logicalFilePath
-		}
-		else if ('include' == name) {
+		} else if ('include' == name) {
 			handleIncludedChangeLog attributes.file.replace('\\', '/'),
-				Boolean.parseBoolean(attributes.relativeToChangelogFile),
-				databaseChangeLog.physicalFilePath
-		}
-		else if ('includeAll' == name) {
+					Boolean.parseBoolean(attributes.relativeToChangelogFile),
+					databaseChangeLog.physicalFilePath
+		} else if ('includeAll' == name) {
 			processIncludeAll attributes
-		}
-		else if (!currentChangeSet && 'changeSet' == name) {
+		} else if (!currentChangeSet && 'changeSet' == name) {
 			processChangeSet attributes
-		}
-		else if (currentChangeSet && 'rollback' == name) {
+		} else if (currentChangeSet && 'rollback' == name) {
 			setText value
 			processRollback attributes
-		}
-		else if ('preConditions' == name) {
+		} else if ('preConditions' == name) {
 			processPreConditions attributes
-		}
-		else if (currentPrecondition instanceof CustomPreconditionWrapper && 'param' == name) {
+		} else if (currentPrecondition instanceof CustomPreconditionWrapper && 'param' == name) {
 			currentPrecondition.setParam attributes.name, attributes.value
-		}
-		else if (rootPrecondition) {
+		} else if (rootPrecondition) {
 			currentPrecondition = PreconditionFactory.instance.create(name)
 
 			setPropertiesFromAttributes currentPrecondition, attributes
@@ -163,8 +138,7 @@ class DslBuilder extends BuilderSupport {
 
 			if (currentPrecondition instanceof PreconditionLogic) {
 				preconditionLogicStack << currentPrecondition
-			}
-			else if (currentPrecondition instanceof GrailsPrecondition) {
+			} else if (currentPrecondition instanceof GrailsPrecondition) {
 				currentPrecondition.ctx = ctx
 				currentPrecondition.resourceAccessor = resourceAccessor
 			}
@@ -172,40 +146,30 @@ class DslBuilder extends BuilderSupport {
 			if ('sqlCheck' == name) {
 				setText value
 			}
-		}
-		else if ('modifySql' == name) {
+		} else if ('modifySql' == name) {
 			processModifySql attributes
-		}
-		else if (inModifySql) {
+		} else if (inModifySql) {
 			SqlVisitor sqlVisitor = SqlVisitorFactory.instance.create(name)
 			setPropertiesFromAttributes sqlVisitor, attributes
 			sqlVisitor.setApplicableDbms modifySqlDbmsList
 			sqlVisitor.setApplyToRollback modifySqlAppliedOnRollback
 			sqlVisitor.setContexts modifySqlContexts
 			currentChangeSet.addSqlVisitor sqlVisitor
-		}
-		else if (currentChangeSet && !currentChange) {
+		} else if (currentChangeSet && !currentChange) {
 			processChange name, attributes, value
-		}
-		else if (currentChange && 'column' == name) {
+		} else if (currentChange && 'column' == name) {
 			processColumn attributes
-		}
-		else if (currentChange && 'constraints' == name) {
+		} else if (currentChange && 'constraints' == name) {
 			processConstraints attributes
-		}
-		else if ('param' == name) {
+		} else if ('param' == name) {
 			processParam attributes
-		}
-		else if ('where' == name || 'whereLazy' == name) {
+		} else if ('where' == name || 'whereLazy' == name) {
 			setText value
-		}
-		else if ('property' == name) {
+		} else if ('property' == name) {
 			processProperty attributes
-		}
-		else if (currentChange instanceof ExecuteShellCommandChange && 'arg' == name) {
+		} else if (currentChange instanceof ExecuteShellCommandChange && 'arg' == name) {
 			currentChange.addArg attributes.value
-		}
-		else if (currentChange) {
+		} else if (currentChange) {
 			String creatorMethod = 'create' + name[0].toUpperCase() + name[1..-1]
 			def objectToCreateFrom = changeSubObjects ? changeSubObjects[-1] : currentChange
 			Method method
@@ -214,13 +178,12 @@ class DslBuilder extends BuilderSupport {
 			}
 			catch (NoSuchMethodException e) {
 				throw new MigrationFailedException(currentChangeSet,
-					"Could not find creator method $creatorMethod for tag: $name")
+						"Could not find creator method $creatorMethod for tag: $name")
 			}
 			def subObject = method.invoke(objectToCreateFrom)
 			setPropertiesFromAttributes subObject, attributes
 			changeSubObjects << subObject
-		}
-		else {
+		} else {
 			throw new MigrationFailedException(currentChangeSet, "Unexpected tag: $name")
 		}
 
@@ -322,7 +285,7 @@ class DslBuilder extends BuilderSupport {
 			File resourceBase = new File(changeLogFile.parent, pathName)
 			if (!resourceBase.exists()) {
 				throw new ChangeLogParseException(
-					"Resource directory for includeAll does not exist [$resourceBase.path]")
+						"Resource directory for includeAll does not exist [$resourceBase.path]")
 			}
 			pathName = resourceBase.path.replace('\\', '/') + '/'
 		}
@@ -337,11 +300,10 @@ class DslBuilder extends BuilderSupport {
 		for (URL fileUrl : resources) {
 			if (!fileUrl.toExternalForm().startsWith('file:')) {
 				if (fileUrl.toExternalForm().startsWith('jar:file:') ||
-				    fileUrl.toExternalForm().startsWith('wsjar:file:') ||
-				    fileUrl.toExternalForm().startsWith('zip:')) {
+						fileUrl.toExternalForm().startsWith('wsjar:file:') ||
+						fileUrl.toExternalForm().startsWith('zip:')) {
 					fileUrl = new File(extractZipFile(fileUrl), pathName).toURI().toURL()
-				}
-				else {
+				} else {
 					log.debug "${fileUrl.toExternalForm()} is not a file path"
 					continue
 				}
@@ -364,8 +326,7 @@ class DslBuilder extends BuilderSupport {
 						foundResource = true
 					}
 				}
-			}
-			else {
+			} else {
 				String path = pathName + file.name
 				if (!seenPaths.add(path)) {
 					log.debug "already included $path"
@@ -386,8 +347,7 @@ class DslBuilder extends BuilderSupport {
 		String path = resource.file.split('!')[0]
 		if (path.matches('file:\\/[A-Za-z]:\\/.*')) {
 			path = path.replaceFirst('file:\\/', '')
-		}
-		else {
+		} else {
 			path = path.replaceFirst('file:', '')
 		}
 
@@ -411,7 +371,7 @@ class DslBuilder extends BuilderSupport {
 		}
 
 		currentChangeSet = new ChangeSet(attributes.id, attributes.author, alwaysRun, runOnChange,
-			filePath, attributes.context, attributes.dbms,Boolean.valueOf(attributes.runInTransaction))
+				filePath, attributes.context, attributes.dbms, Boolean.valueOf(attributes.runInTransaction))
 
 		if (StringUtils.trimToNull(attributes.failOnError)) {
 			currentChangeSet.setFailOnError Boolean.parseBoolean(attributes.failOnError)
@@ -419,7 +379,7 @@ class DslBuilder extends BuilderSupport {
 
 		if (StringUtils.trimToNull(attributes.onValidationFail)) {
 			currentChangeSet.setOnValidationFail(
-				ChangeSet.ValidationFailOption.valueOf(attributes.onValidationFail))
+					ChangeSet.ValidationFailOption.valueOf(attributes.onValidationFail))
 		}
 	}
 
@@ -481,22 +441,17 @@ class DslBuilder extends BuilderSupport {
 
 		if (currentChange instanceof RawSQLChange) {
 			currentChange.setSql currentText
-		}
-		else if (currentChange instanceof CreateProcedureChange) {
+		} else if (currentChange instanceof CreateProcedureChange) {
 			currentChange.setProcedureBody currentText
-		}
-		else if (currentChange instanceof CreateViewChange) {
+		} else if (currentChange instanceof CreateViewChange) {
 			currentChange.setSelectQuery currentText
-		}
-		else if (currentChange instanceof StopChange) {
+		} else if (currentChange instanceof StopChange) {
 			currentChange.setMessage currentText
-		}
-		else if (currentChange instanceof LoadDataChange || currentChange instanceof SQLFileChange) {
+		} else if (currentChange instanceof LoadDataChange || currentChange instanceof SQLFileChange) {
 			if (attributes.encoding == null) {
 				attributes.encoding = 'UTF-8' // default from XSD
 			}
-		}
-		else if (currentChange instanceof GrailsChange) {
+		} else if (currentChange instanceof GrailsChange) {
 			currentChange.ctx = ctx
 		}
 
@@ -512,14 +467,13 @@ class DslBuilder extends BuilderSupport {
 
 	protected void processColumn(Map attributes) {
 		def column = currentChange instanceof LoadDataChange ?
-			new LoadDataColumnConfig() : new ColumnConfig()
+				new LoadDataColumnConfig() : new ColumnConfig()
 
 		setPropertiesFromAttributes column, attributes
 
 		if (currentChange instanceof ChangeWithColumns) {
 			currentChange.addColumn column
-		}
-		else {
+		} else {
 			throw new ChangeLogParseException("Unexpected column tag for ${currentChange.getClass().name}")
 		}
 	}
@@ -533,8 +487,7 @@ class DslBuilder extends BuilderSupport {
 			if (currentChange.columns) {
 				lastColumn = currentChange.columns[-1]
 			}
-		}
-		else {
+		} else {
 			throw new ChangeLogParseException("Unexpected change: ${currentChange.getClass().name}")
 		}
 
@@ -549,12 +502,10 @@ class DslBuilder extends BuilderSupport {
 		if (currentChange instanceof CustomChangeWrapper) {
 			if (attributes.value == null) {
 				currentParamName = attributes.name
-			}
-			else {
+			} else {
 				currentChange.setParam attributes.name, attributes.value
 			}
-		}
-		else {
+		} else {
 			throw new MigrationFailedException(currentChangeSet, "'param' unexpected in $name")
 		}
 	}
@@ -564,14 +515,12 @@ class DslBuilder extends BuilderSupport {
 		String dbms = StringUtils.trimToNull(attributes.dbms)
 		if (!StringUtils.trimToNull(attributes.file)) {
 			changeLogParameters.set attributes.name, attributes.value, context, dbms
-		}
-		else {
+		} else {
 			def props = new Properties()
 			def propertiesStream = resourceAccessor.getResourceAsStream(attributes.file)
 			if (!propertiesStream) {
 				log.info "Could not open properties file $attributes.file"
-			}
-			else {
+			} else {
 				props.load propertiesStream
 				props.each { propName, propValue ->
 					changeLogParameters.set propName.toString(), propValue.toString(), context, dbms
@@ -596,101 +545,78 @@ class DslBuilder extends BuilderSupport {
 	protected void nodeCompleted(parent, name) {
 		if (changeSubObjects) {
 			changeSubObjects.pop()
-		}
-		else if (rootPrecondition) {
+		} else if (rootPrecondition) {
 			if ('preConditions' == name) {
 				if (!currentChangeSet) {
 					databaseChangeLog.setPreconditions rootPrecondition
-				}
-				else {
+				} else {
 					currentChangeSet.setPreconditions rootPrecondition
 				}
 				rootPrecondition = null
-			}
-			else if ('and' == name) {
+			} else if ('and' == name) {
 				preconditionLogicStack.pop()
 				currentPrecondition = null
-			}
-			else if ('or' == name) {
+			} else if ('or' == name) {
 				preconditionLogicStack.pop()
 				currentPrecondition = null
-			}
-			else if ('not' == name) {
+			} else if ('not' == name) {
 				preconditionLogicStack.pop()
 				currentPrecondition = null
-			}
-			else if ('sqlCheck' == name) {
+			} else if ('sqlCheck' == name) {
 				currentPrecondition.setSql currentText
 				currentPrecondition = null
-			}
-			else if ('customPrecondition' == name) {
+			} else if ('customPrecondition' == name) {
 				currentPrecondition.setClassLoader resourceAccessor.toClassLoader()
 				currentPrecondition = null
-			}
-			else if ('grailsPrecondition' == name) {
+			} else if ('grailsPrecondition' == name) {
 				currentPrecondition = null
 			}
-		}
-		else if (currentChangeSet && 'rollback' == name) {
+		} else if (currentChangeSet && 'rollback' == name) {
 			currentChangeSet.addRollBackSQL currentText
 			inRollback = false
-		}
-		else if (currentChange instanceof RawSQLChange && 'comment' == name) {
+		} else if (currentChange instanceof RawSQLChange && 'comment' == name) {
 			currentChange.setComments currentText
 			currentText = null
-		}
-		else if (currentChange && ('where' == name || 'whereLazy' == name)) {
+		} else if (currentChange && ('where' == name || 'whereLazy' == name)) {
 			if (currentChange instanceof UpdateDataChange) {
 				currentChange.setWhereClause currentText
-			}
-			else if (currentChange instanceof DeleteDataChange) {
+			} else if (currentChange instanceof DeleteDataChange) {
 				currentChange.setWhereClause currentText
-			}
-			else {
+			} else {
 				throw new ChangeLogParseException("Unexpected change type: ${currentChange.getClass().name}")
 			}
 			currentText = null
-		}
-		else if (currentChange instanceof CreateProcedureChange && 'comment' == name) {
+		} else if (currentChange instanceof CreateProcedureChange && 'comment' == name) {
 			currentChange.setComments currentText
 			currentText = null
-		}
-		else if (currentChange instanceof CustomChangeWrapper && currentParamName != null && 'param' == name) {
+		} else if (currentChange instanceof CustomChangeWrapper && currentParamName != null && 'param' == name) {
 			currentChange.setParam currentParamName, currentText
 			currentText = null
 			currentParamName = null
-		}
-		else if (currentChangeSet && 'comment' == name) {
+		} else if (currentChangeSet && 'comment' == name) {
 			currentChangeSet.setComments currentText
 			currentText = null
-		}
-		else if (currentChangeSet && 'changeSet' == name) {
+		} else if (currentChangeSet && 'changeSet' == name) {
 			databaseChangeLog.addChangeSet currentChangeSet
 			currentChangeSet = null
-		}
-		else if (currentChange && 'column' == name && currentText != null) {
+		} else if (currentChange && 'column' == name && currentText != null) {
 			if (currentChange instanceof InsertDataChange || currentChange instanceof UpdateDataChange) {
 				currentChange.columns[-1].setValue currentText
-			}
-			else {
+			} else {
 				throw new ChangeLogParseException("Unexpected column with text: $currentText")
 			}
 			currentText = null
-		}
-		else if (currentChange && name == currentChange.changeMetaData.name) {
+		} else if (currentChange && name == currentChange.changeMetaData.name) {
 			if (inRollback) {
 				currentChangeSet.addRollbackChange currentChange
-			}
-			else {
+			} else {
 				currentChangeSet.addChange currentChange
 			}
 			currentChange = null
-		}
-		else if (currentChangeSet && 'validCheckSum' == name) {
+		} else if (currentChangeSet && 'validCheckSum' == name) {
 			currentChangeSet.addValidCheckSum currentText
 			currentText = null
-		}
-		else if ('modifySql' == name) {
+		} else if ('modifySql' == name) {
 			inModifySql = false
 			modifySqlDbmsList = null
 			modifySqlContexts = null
@@ -707,12 +633,10 @@ class DslBuilder extends BuilderSupport {
 		if (object instanceof CustomChangeWrapper) {
 			if ('class' == name) {
 				object.setClass value
-			}
-			else {
+			} else {
 				object.setParam name, value
 			}
-		}
-		else {
+		} else {
 			ObjectUtil.setProperty object, name, value
 		}
 	}
@@ -729,8 +653,7 @@ class DslBuilder extends BuilderSupport {
 			String tempFile = FilenameUtils.concat(FilenameUtils.getFullPath(relativeBaseFileName), fileName)
 			if (tempFile && new File(tempFile).exists()) {
 				fileName = tempFile
-			}
-			else {
+			} else {
 				fileName = FilenameUtils.getFullPath(relativeBaseFileName) + fileName
 			}
 		}

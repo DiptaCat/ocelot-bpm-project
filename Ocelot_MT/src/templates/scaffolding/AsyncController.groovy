@@ -1,112 +1,129 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%>
+< %= packageName ? "package ${packageName}\n\n" : '' % >
 
-import static org.springframework.http.HttpStatus.*
+
 import grails.transaction.Transactional
 
+import static org.springframework.http.HttpStatus.*
+
 @Transactional(readOnly = true)
-class ${className}Controller {
+class $ {
+	className
+}
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+Controller {
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        ${className}.async.task {
-            [${propertyName}List: list(params), count: count() ]
-        }.then { result ->
-            respond result.${propertyName}List, model:[${propertyName}Count: result.count]
-        }
-    }
+	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def show(String id) {
-        ${className}.async.get(id).then { ${propertyName} ->
-            respond ${propertyName}
-        }
-    }
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		$ { className }.async.task {
+			[$ { propertyName } List: list(params), count: count()]
+		}.then { result ->
+			respond result.$ { propertyName } List, model:
+			[$ { propertyName } Count: result.count]
+		}
+	}
 
-    def create() {
-        respond new ${className}(params)
-    }
+	def show(String id) {
+		$ { className }.async.get(id).then {
+			$ { propertyName } ->
+			respond $ { propertyName }
+		}
+	}
 
-    def save(${className} ${propertyName}) {
-        ${className}.async.withTransaction {
-            if (${propertyName} == null) {
-                notFound()
-                return
-            }
+	def create() {
+		respond new $ { className }(params)
+	}
 
-            if(${propertyName}.hasErrors()) {
-                respond ${propertyName}.errors, view:'create' // STATUS CODE 422
-                return
-            }
+	def save($ { className } $ { propertyName } ) {
+		$ { className }.async.withTransaction {
+			if ($ { propertyName } == null) {
+				notFound()
+				return
+			}
 
-            ${propertyName}.save flush:true
-            request.withFormat {
-                form multipartForm {
-                    flash.message = message(code: 'default.created.message', args: [message(code: '${propertyName}.label', default: '${className}'), ${propertyName}.id])
-                    redirect ${propertyName}
-                }
-                '*' { respond ${propertyName}, [status: CREATED] }
-            }
-        }
-    }
+			if ($ { propertyName }.hasErrors()) {
+				respond $ { propertyName }.errors, view: 'create' // STATUS CODE 422
+				return
+			}
 
-    def edit(String id) {
-        ${className}.async.get(id).then { ${propertyName} ->
-            respond ${propertyName}
-        }
-    }
+			$ { propertyName }.save flush: true
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.created.message', args: [message(code: '${propertyName}.label', default: '${className}'), $ {
+						propertyName
+					}.id])
+					redirect $ { propertyName }
+				}
+				'*' { respond $ { propertyName }, [status: CREATED] }
+			}
+		}
+	}
 
-    def update(String id) {
-        ${className}.async.withTransaction {
-            def ${propertyName} = ${className}.get(id)
-            if (${propertyName} == null) {
-                notFound()
-                return
-            }
+	def edit(String id) {
+		$ { className }.async.get(id).then {
+			$ { propertyName } ->
+			respond $ { propertyName }
+		}
+	}
 
-            ${propertyName}.properties = params
-            if( !${propertyName}.save(flush:true) ) {
-                respond ${propertyName}.errors, view:'edit' // STATUS CODE 422
-                return
-            }
+	def update(String id) {
+		$ { className }.async.withTransaction {
+			def $
+			{ propertyName } = $ { className }.get(id)
+			if ($ { propertyName } == null) {
+				notFound()
+				return
+			}
 
-            request.withFormat {
-                form multipartForm {
-                    flash.message = message(code: 'default.updated.message', args: [message(code: '${className}.label', default: '${className}'), ${propertyName}.id])
-                    redirect ${propertyName}
-                }
-                '*'{ respond ${propertyName}, [status: OK] }
-            }
-        }
-    }
+			$ { propertyName }.properties = params
+			if (!$ { propertyName }.save(flush: true)) {
+				respond $ { propertyName }.errors, view: 'edit' // STATUS CODE 422
+				return
+			}
 
-    def delete(String id) {
-        ${className}.async.withTransaction {
-            def ${propertyName} = ${className}.get(id)
-            if (${propertyName} == null) {
-                notFound()
-                return
-            }
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.updated.message', args: [message(code: '${className}.label', default: '${className}'), $ {
+						propertyName
+					}.id])
+					redirect $ { propertyName }
+				}
+				'*' { respond $ { propertyName }, [status: OK] }
+			}
+		}
+	}
 
-            ${propertyName}.delete flush:true
+	def delete(String id) {
+		$ { className }.async.withTransaction {
+			def $
+			{ propertyName } = $ { className }.get(id)
+			if ($ { propertyName } == null) {
+				notFound()
+				return
+			}
 
-            request.withFormat {
-                form multipartForm {
-                    flash.message = message(code: 'default.deleted.message', args: [message(code: '${className}.label', default: '${className}'), ${propertyName}.id])
-                    redirect action:"index", method:"GET"
-                }
-                '*'{ render status: NO_CONTENT }
-            }
-        }
-    }
+			$ { propertyName }.delete flush: true
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: '${propertyName}.label', default: '${className}'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+			request.withFormat {
+				form multipartForm {
+					flash.message = message(code: 'default.deleted.message', args: [message(code: '${className}.label', default: '${className}'), $ {
+						propertyName
+					}.id])
+					redirect action: "index", method: "GET"
+				}
+				'*' { render status: NO_CONTENT }
+			}
+		}
+	}
+
+	protected void notFound() {
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.not.found.message', args: [message(code: '${propertyName}.label', default: '${className}'), params.id])
+				redirect action: "index", method: "GET"
+			}
+			'*' { render status: NOT_FOUND }
+		}
+	}
 }

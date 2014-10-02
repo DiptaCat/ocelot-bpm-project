@@ -14,8 +14,6 @@
  */
 package grails.plugin.databasemigration.dbdoc
 
-import java.lang.reflect.Field
-
 import liquibase.change.Change
 import liquibase.changelog.ChangeSet
 import liquibase.changelog.DatabaseChangeLog
@@ -27,8 +25,9 @@ import liquibase.database.structure.Table
 import liquibase.resource.ResourceAccessor
 import liquibase.snapshot.DatabaseSnapshot
 import liquibase.snapshot.DatabaseSnapshotGeneratorFactory
-
 import org.springframework.util.ReflectionUtils
+
+import java.lang.reflect.Field
 
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
@@ -77,7 +76,7 @@ class MemoryDocVisitor extends DBDocVisitor {
 	Map generateHTML(ResourceAccessor resourceAccessor) {
 
 		DatabaseSnapshot snapshot = DatabaseSnapshotGeneratorFactory.instance.createSnapshot(
-			database, null, null)
+				database, null, null)
 		Map files = [:]
 
 		new ChangeLogListWriter(files).writeHTML(changeLogs)

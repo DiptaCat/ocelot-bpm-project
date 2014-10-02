@@ -16,11 +16,10 @@ package grails.plugin.cache.web.filter.simple;
 
 import grails.plugin.cache.BlockingCache;
 import grails.plugin.cache.CacheConfiguration;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 import java.util.Collection;
 import java.util.concurrent.ConcurrentMap;
-
-import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 /**
  * In-memory-based implementation of BlockingCache.

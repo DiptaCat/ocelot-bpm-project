@@ -1,1 +1,4 @@
-function test(){debugger;return}
+function test() {
+	debugger;
+	return
+}

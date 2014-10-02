@@ -14,8 +14,6 @@
  */
 package grails.plugin.databasemigration
 
-import java.lang.reflect.Field
-
 import liquibase.change.Change
 import liquibase.change.ChangeProperty
 import liquibase.change.ColumnConfig
@@ -25,6 +23,8 @@ import liquibase.exception.UnexpectedLiquibaseException
 import liquibase.serializer.core.string.StringChangeLogSerializer
 import liquibase.sql.visitor.SqlVisitor
 import liquibase.util.StringUtils
+
+import java.lang.reflect.Field
 
 /**
  * Custom Groovy-based change.
@@ -66,22 +66,18 @@ class GroovyAwareStringChangeLogSerializer extends StringChangeLogSerializer {
 					def value = field.get(objectToSerialize)
 					if (value instanceof ColumnConfig) {
 						values.add(indentTimes(indent) +
-							serializeColumnConfig(field.get(objectToSerialize), indent + 1))
-					}
-					else if (value instanceof ConstraintsConfig) {
+								serializeColumnConfig(field.get(objectToSerialize), indent + 1))
+					} else if (value instanceof ConstraintsConfig) {
 						values.add(indentTimes(indent) +
-							serializeConstraintsConfig(field.get(objectToSerialize), indent + 1))
-					}
-					else if (value instanceof CustomChange) {
+								serializeConstraintsConfig(field.get(objectToSerialize), indent + 1))
+					} else if (value instanceof CustomChange) {
 						values.add(indentTimes(indent) +
-							serializeCustomChange(field.get(objectToSerialize), indent + 1))
-					}
-					else {
+								serializeCustomChange(field.get(objectToSerialize), indent + 1))
+					} else {
 						if (value != null) {
 							if (value instanceof Map || value instanceof Collection) {
 								values.add(indentTimes(indent) + propertyName + '=' + serializeObject(value, indent + 1))
-							}
-							else {
+							} else {
 								values.add(indentTimes(indent) + propertyName + '=\'' + value + '\'')
 							}
 						}
@@ -116,8 +112,7 @@ class GroovyAwareStringChangeLogSerializer extends StringChangeLogSerializer {
 		for (object in collection) {
 			if (object instanceof ColumnConfig) {
 				returnString += indentTimes(indent) + serializeColumnConfig(object, indent + 1) + ',\n'
-			}
-			else {
+			} else {
 				returnString += indentTimes(indent) + object + ',\n'
 			}
 		}

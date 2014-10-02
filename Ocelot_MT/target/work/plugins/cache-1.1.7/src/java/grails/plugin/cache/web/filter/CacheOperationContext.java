@@ -14,15 +14,14 @@
  */
 package grails.plugin.cache.web.filter;
 
-import java.lang.reflect.Method;
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.cache.Cache;
 import org.springframework.cache.interceptor.CacheOperation;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 /**
  * Based on org.springframework.cache.interceptor.CacheAspectSupport.CacheOperationContext
@@ -45,8 +44,8 @@ public class CacheOperationContext {
 	protected final HttpServletRequest request;
 
 	public CacheOperationContext(CacheOperation operation, Method method, Object[] args,
-			Class<?> targetClass, Collection<Cache> caches, ExpressionEvaluator evaluator,
-			WebKeyGenerator keyGenerator, HttpServletRequest request) {
+								 Class<?> targetClass, Collection<Cache> caches, ExpressionEvaluator evaluator,
+								 WebKeyGenerator keyGenerator, HttpServletRequest request) {
 		this.operation = operation;
 		this.caches = caches;
 		this.method = method;

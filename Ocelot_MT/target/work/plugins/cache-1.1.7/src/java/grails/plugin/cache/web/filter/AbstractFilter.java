@@ -14,18 +14,6 @@
  */
 package grails.plugin.cache.web.filter;
 
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -33,6 +21,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.GenericFilterBean;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Based on net.sf.ehcache.constructs.web.filter.Filter.
@@ -55,24 +54,22 @@ public abstract class AbstractFilter extends GenericFilterBean {
 
 	public final void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
 			throws ServletException, IOException {
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
 		try {
 			// NO_FILTER set for RequestDispatcher forwards to avoid double gzipping
 			if (filterNotDisabled(request)) {
 				doFilter(request, response, chain);
-			}
-			else {
+			} else {
 				chain.doFilter(req, res);
 			}
-		}
-		catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			logThrowable(throwable, request);
 		}
 	}
 
 	protected abstract void doFilter(final HttpServletRequest httpRequest, final HttpServletResponse httpResponse,
-			final FilterChain chain) throws Throwable;
+									 final FilterChain chain) throws Throwable;
 
 	/**
 	 * Filters can be disabled programmatically by adding a {@link #NO_FILTER}
@@ -104,13 +101,12 @@ public abstract class AbstractFilter extends GenericFilterBean {
 			log.warn(messageBuffer
 					.append("\nTop StackTraceElement: ")
 					.append(throwable.getStackTrace()[0]).toString());
-		}
-		else {
+		} else {
 			log.warn(messageBuffer.toString(), throwable);
 		}
 
 		if (throwable instanceof IOException) {
-			throw (IOException)throwable;
+			throw (IOException) throwable;
 		}
 
 		throw new ServletException(throwable);
@@ -120,8 +116,26 @@ public abstract class AbstractFilter extends GenericFilterBean {
 		return cacheManager;
 	}
 
+	/**
+	 * Dependency injection for the cache manager.
+	 *
+	 * @param cacheManager the manager
+	 */
+	public void setCacheManager(CacheManager manager) {
+		cacheManager = manager;
+	}
+
 	protected Object getNativeCacheManager() {
 		return nativeCacheManager;
+	}
+
+	/**
+	 * Dependency injection for the native cache manager.
+	 *
+	 * @param nativeCacheManager the manager
+	 */
+	public void setNativeCacheManager(Object manager) {
+		nativeCacheManager = manager;
 	}
 
 	protected boolean acceptsEncoding(final HttpServletRequest request, final String name) {
@@ -193,27 +207,12 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	protected <T> T getBean(String name) {
 		ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
 				getServletContext());
-		return (T)ctx.getBean(name);
-	}
-
-	/**
-	 * Dependency injection for the cache manager.
-	 * @param cacheManager the manager
-	 */
-	public void setCacheManager(CacheManager manager) {
-		cacheManager = manager;
-	}
-
-	/**
-	 * Dependency injection for the native cache manager.
-	 * @param nativeCacheManager the manager
-	 */
-	public void setNativeCacheManager(Object manager) {
-		nativeCacheManager = manager;
+		return (T) ctx.getBean(name);
 	}
 
 	/**
 	 * Dependency injection for whether to suppress stacktraces.
+	 *
 	 * @param suppress if true only log the message
 	 */
 	public void setSuppressStackTraces(boolean suppress) {

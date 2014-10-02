@@ -1,92 +1,89 @@
 package ocelot
 
-import grails.converters.JSON
 import grails.rest.RestfulController
 import grails.transaction.Transactional
 
-import static org.springframework.http.HttpStatus.CONFLICT
-import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = false)
-class PaletteItemController extends RestfulController{
+class PaletteItemController extends RestfulController {
 
-    static responseFormats = ['json']
+	static responseFormats = ['json']
 
-    PaletteItemController(){
-        super(PaletteItem)
-    }
+	PaletteItemController() {
+		super(PaletteItem)
+	}
 
-    @Override
-    def save(){
+	@Override
+	def save() {
 
-        def jsonReq = request.JSON
+		def jsonReq = request.JSON
 
-        def item = new PaletteItem()
+		def item = new PaletteItem()
 
-        item.name = jsonReq.name
-        item.description = jsonReq.description
-        item.activated = jsonReq.activated
-        item.props = jsonReq.props
-        item.icon = "hola"
-        item.svg = "hola"
-
-
-
-        def category = CategoryItem.get(jsonReq.category.id)
-        category.addToPaletteItems(item)
-
-        item.save( flush: true)
-
-        def palette = Palette.get(params.id)
-
-        palette.addToPaletteItems(item).save flush: true, failOnError: true
+		item.name = jsonReq.name
+		item.description = jsonReq.description
+		item.activated = jsonReq.activated
+		item.props = jsonReq.props
+		item.icon = "hola"
+		item.svg = "hola"
 
 
-        render status: OK
-    }
+
+		def category = CategoryItem.get(jsonReq.category.id)
+		category.addToPaletteItems(item)
+
+		item.save(flush: true)
+
+		def palette = Palette.get(params.id)
+
+		palette.addToPaletteItems(item).save flush: true, failOnError: true
 
 
-    @Override
-    def update(){
-        def jsonReq = request.JSON
+		render status: OK
+	}
 
-        if(params.id != jsonReq.id){
-            render status: CONFLICT
-        }
 
-        def instance = PaletteItem.get(params.id)
+	@Override
+	def update() {
+		def jsonReq = request.JSON
 
-        if(instance == null){
-            render status: NOT_FOUND
-        }
+		if (params.id != jsonReq.id) {
+			render status: CONFLICT
+		}
 
-        instance.name = jsonReq.name
-        instance.description = jsonReq.description
-        instance.props = jsonReq.props.toString()
-        instance.activated = jsonReq.activated
-        instance.icon = jsonReq.icon
+		def instance = PaletteItem.get(params.id)
 
-        //COSA MEVA
+		if (instance == null) {
+			render status: NOT_FOUND
+		}
+
+		instance.name = jsonReq.name
+		instance.description = jsonReq.description
+		instance.props = jsonReq.props.toString()
+		instance.activated = jsonReq.activated
+		instance.icon = jsonReq.icon
+
+		//COSA MEVA
 //        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))
 
-        if(instance.category.id != jsonReq.category.id){
-            def category = CategoryItem.get(instance.category.id)
-            category.removeFromPaletteItems(instance)
+		if (instance.category.id != jsonReq.category.id) {
+			def category = CategoryItem.get(instance.category.id)
+			category.removeFromPaletteItems(instance)
 
-            category = CategoryItem.get(jsonReq.category.id)
-            category.addToPaletteItems(instance)
-        }
+			category = CategoryItem.get(jsonReq.category.id)
+			category.addToPaletteItems(instance)
+		}
 
-        instance.save flush : true
+		instance.save flush: true
 
-        //TODO preguntar a Ruben què fer en cas d'error
+		//TODO preguntar a Ruben què fer en cas d'error
 
 //        println instance.dump()
 
-        render status: OK
+		render status: OK
 
-    }
+	}
 //    @Override
 //    def update(){
 //        def jsonReq = request.JSON

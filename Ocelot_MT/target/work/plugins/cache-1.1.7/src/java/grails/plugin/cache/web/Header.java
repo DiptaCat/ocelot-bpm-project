@@ -14,15 +14,15 @@
  */
 package grails.plugin.cache.web;
 
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.util.Assert;
-
 /**
  * Generic implementation of a HTTP header. Handles String, Int and Date typed headers.
- *
+ * <p/>
  * Based on net.sf.ehcache.constructs.web.Header.
  *
  * @author Eric Dalquist
@@ -37,72 +37,9 @@ public class Header<T extends Serializable> implements Serializable {
 	protected final Type type;
 
 	/**
-	 * Used to help differentiate the different header types
-	 */
-	public enum Type {
-		/**
-		 * A String Header.
-		 * {@link javax.servlet.http.HttpServletResponse#setHeader(String, String)}
-		 */
-		STRING(String.class),
-
-		/**
-		 * A date Header.
-		 * {@link javax.servlet.http.HttpServletResponse#setDateHeader(String, long)}
-		 */
-		DATE(Long.class),
-
-		/**
-		 * A int Header.
-		 * {@link javax.servlet.http.HttpServletResponse#setIntHeader(String, int)}
-		 */
-		INT(Integer.class);
-
-		private static final Map<Class<? extends Serializable>, Type> TYPE_LOOKUP = new ConcurrentHashMap<Class<? extends Serializable>, Type>();
-		private final Class<? extends Serializable> type;
-
-		private Type(Class<? extends Serializable> type) {
-			this.type = type;
-		}
-
-		/**
-		 * @return The header type class this Type represents
-		 */
-		public Class<? extends Serializable> getTypeClass() {
-			return type;
-		}
-
-		/**
-		 * Determines the {@link Type} of the Header. Throws
-		 * IllegalArgumentException if the specified class does not match any of
-		 * the Types
-		 */
-		public static Type determineType(Class<? extends Serializable> typeClass) {
-			Type lookupType = TYPE_LOOKUP.get(typeClass);
-			if (lookupType != null) {
-				return lookupType;
-			}
-
-			for (Type t : Type.values()) {
-				if (typeClass == t.getTypeClass()) {
-					// If the class explicitly matches add to the lookup cache
-					TYPE_LOOKUP.put(typeClass, t);
-					return t;
-				}
-
-				if (typeClass.isAssignableFrom(t.getTypeClass())) {
-					return t;
-				}
-			}
-
-			throw new IllegalArgumentException("No Type for class " + typeClass);
-		}
-	}
-
-	/**
 	 * Create a new Header
 	 *
-	 * @param name Name of the header, may not be null
+	 * @param name  Name of the header, may not be null
 	 * @param value Value of the header, may not be null
 	 */
 	public Header(String name, T value) {
@@ -161,29 +98,26 @@ public class Header<T extends Serializable> implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Header<?> other = (Header<?>)obj;
+		Header<?> other = (Header<?>) obj;
 		if (name == null) {
 			if (other.name != null) {
 				return false;
 			}
-		}
-		else if (!name.equals(other.name)) {
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
 		if (type == null) {
 			if (other.type != null) {
 				return false;
 			}
-		}
-		else if (!type.equals(other.type)) {
+		} else if (!type.equals(other.type)) {
 			return false;
 		}
 		if (value == null) {
 			if (other.value != null) {
 				return false;
 			}
-		}
-		else if (!value.equals(other.value)) {
+		} else if (!value.equals(other.value)) {
 			return false;
 		}
 		return true;
@@ -192,5 +126,68 @@ public class Header<T extends Serializable> implements Serializable {
 	@Override
 	public String toString() {
 		return "Header<" + type.getTypeClass().getSimpleName() + "> [name=" + name + ", value=" + value + "]";
+	}
+
+	/**
+	 * Used to help differentiate the different header types
+	 */
+	public enum Type {
+		/**
+		 * A String Header.
+		 * {@link javax.servlet.http.HttpServletResponse#setHeader(String, String)}
+		 */
+		STRING(String.class),
+
+		/**
+		 * A date Header.
+		 * {@link javax.servlet.http.HttpServletResponse#setDateHeader(String, long)}
+		 */
+		DATE(Long.class),
+
+		/**
+		 * A int Header.
+		 * {@link javax.servlet.http.HttpServletResponse#setIntHeader(String, int)}
+		 */
+		INT(Integer.class);
+
+		private static final Map<Class<? extends Serializable>, Type> TYPE_LOOKUP = new ConcurrentHashMap<Class<? extends Serializable>, Type>();
+		private final Class<? extends Serializable> type;
+
+		private Type(Class<? extends Serializable> type) {
+			this.type = type;
+		}
+
+		/**
+		 * Determines the {@link Type} of the Header. Throws
+		 * IllegalArgumentException if the specified class does not match any of
+		 * the Types
+		 */
+		public static Type determineType(Class<? extends Serializable> typeClass) {
+			Type lookupType = TYPE_LOOKUP.get(typeClass);
+			if (lookupType != null) {
+				return lookupType;
+			}
+
+			for (Type t : Type.values()) {
+				if (typeClass == t.getTypeClass()) {
+					// If the class explicitly matches add to the lookup cache
+					TYPE_LOOKUP.put(typeClass, t);
+					return t;
+				}
+
+				if (typeClass.isAssignableFrom(t.getTypeClass())) {
+					return t;
+				}
+			}
+
+			throw new IllegalArgumentException("No Type for class " + typeClass);
+		}
+
+		/**
+		 * @return The header type class this Type represents
+		 */
+		public Class<? extends Serializable> getTypeClass() {
+			return type;
+		}
 	}
 }

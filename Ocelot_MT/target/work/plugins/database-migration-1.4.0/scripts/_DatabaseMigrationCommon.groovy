@@ -86,8 +86,7 @@ okToWrite = { destinationOrIndex = 0, boolean relativeToMigrationDir = false ->
 		if (!destination) {
 			return true // stdout
 		}
-	}
-	else {
+	} else {
 		destination = destinationOrIndex
 	}
 
@@ -102,7 +101,7 @@ okToWrite = { destinationOrIndex = 0, boolean relativeToMigrationDir = false ->
 
 	String propertyName = "file.overwrite.$file.name"
 	ant.input(addProperty: propertyName, message: "$destination exists, ok to overwrite?",
-	          validargs: 'y,n', defaultvalue: 'y')
+			validargs: 'y,n', defaultvalue: 'y')
 
 	if (ant.antProject.properties."$propertyName" == 'n') {
 		return false

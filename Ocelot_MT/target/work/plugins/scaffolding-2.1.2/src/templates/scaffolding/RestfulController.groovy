@@ -1,62 +1,68 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%>
+< %= packageName ? "package ${packageName}\n\n" : '' % >
 
-import static org.springframework.http.HttpStatus.*
+
 import grails.transaction.Transactional
 
+import static org.springframework.http.HttpStatus.*
+
 @Transactional(readOnly = true)
-class ${className}Controller {
+class $ {
+	className
+}
 
-    static responseFormats = ['json', 'xml']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+Controller {
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond ${className}.list(params), [status: OK]
-    }
+	static responseFormats = ['json', 'xml']
+	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Transactional
-    def save(${className} ${propertyName}) {
-        if (${propertyName} == null) {
-            render status: NOT_FOUND
-            return
-        }
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		respond $ { className }.list(params), [status: OK]
+	}
 
-        ${propertyName}.validate()
-        if (${propertyName}.hasErrors()) {
-            render status: NOT_ACCEPTABLE
-            return
-        }
+	@Transactional
+	def save($ { className } $ { propertyName } ) {
+		if ($ { propertyName } == null) {
+			render status: NOT_FOUND
+			return
+		}
 
-        ${propertyName}.save flush:true
-        respond ${propertyName}, [status: CREATED]
-    }
+		$ { propertyName }.validate()
+		if ($ { propertyName }.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
 
-    @Transactional
-    def update(${className} ${propertyName}) {
-        if (${propertyName} == null) {
-            render status: NOT_FOUND
-            return
-        }
+		$ { propertyName }.save flush: true
+		respond $ { propertyName }, [status: CREATED]
+	}
 
-        ${propertyName}.validate()
-        if (${propertyName}.hasErrors()) {
-            render status: NOT_ACCEPTABLE
-            return
-        }
+	@Transactional
+	def update($ { className } $ { propertyName } ) {
+		if ($ { propertyName } == null) {
+			render status: NOT_FOUND
+			return
+		}
 
-        ${propertyName}.save flush:true
-        respond ${propertyName}, [status: OK]
-    }
+		$ { propertyName }.validate()
+		if ($ { propertyName }.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
 
-    @Transactional
-    def delete(${className} ${propertyName}) {
+		$ { propertyName }.save flush: true
+		respond $ { propertyName }, [status: OK]
+	}
 
-        if (${propertyName} == null) {
-            render status: NOT_FOUND
-            return
-        }
+	@Transactional
+	def delete($ { className } $ { propertyName } ) {
 
-        ${propertyName}.delete flush:true
-        render status: NO_CONTENT
-    }
+		if ($ { propertyName } == null) {
+			render status: NOT_FOUND
+			return
+		}
+
+		$ { propertyName }.delete flush: true
+		render status: NO_CONTENT
+	}
 }

@@ -1,15 +1,19 @@
-@artifact.package@import grails.test.*
+@ artifact.package
+@ import grails.test.*
 
-class @artifact.name@ extends @artifact.superclass@ {
-    protected void setUp() {
-        super.setUp()
-    }
+@
+import java.lang.Object
 
-    protected void tearDown() {
-        super.tearDown()
-    }
+class @artifact.name @ extends @artifact.superclass @ {
+	protected void setUp() {
+		super.setUp()
+	}
 
-    void testSomething() {
+	protected void tearDown() {
+		super.tearDown()
+	}
 
-    }
+	void testSomething() {
+
+	}
 }

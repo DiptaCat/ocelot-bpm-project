@@ -19,58 +19,57 @@ import grails.util.BuildSettings
 import grails.web.container.EmbeddableServer
 import grails.web.container.EmbeddableServerFactory
 import groovy.transform.CompileStatic
-
 import org.codehaus.groovy.grails.cli.support.BuildSettingsAware
 import org.grails.plugins.tomcat.fork.ForkedTomcatServer
 import org.grails.plugins.tomcat.fork.TomcatExecutionContext
 
 class TomcatServerFactory implements EmbeddableServerFactory, BuildSettingsAware {
 
-    BuildSettings buildSettings
+	BuildSettings buildSettings
 
-    @CompileStatic
-    EmbeddableServer createInline(String basedir, String webXml, String contextPath, ClassLoader classLoader) {
-        final obj = buildSettings?.forkSettings?.get("run")
-        if (obj) {
-            return createForked(contextPath, obj)
-        }
+	@CompileStatic
+	EmbeddableServer createInline(String basedir, String webXml, String contextPath, ClassLoader classLoader) {
+		final obj = buildSettings?.forkSettings?.get("run")
+		if (obj) {
+			return createForked(contextPath, obj)
+		}
 
-        return new InlineExplodedTomcatServer(basedir, webXml, contextPath, classLoader)
-    }
+		return new InlineExplodedTomcatServer(basedir, webXml, contextPath, classLoader)
+	}
 
-    @CompileStatic
-    private ForkedTomcatServer createForked(String contextPath, forkConfig, boolean warMode = false) {
-        final settings = buildSettings
-        TomcatExecutionContext ec = new TomcatExecutionContext()
-        final forkedTomcat = new ForkedTomcatServer(ec)
-        ec.process = forkedTomcat
+	@CompileStatic
+	private ForkedTomcatServer createForked(String contextPath, forkConfig, boolean warMode = false) {
+		final settings = buildSettings
+		TomcatExecutionContext ec = new TomcatExecutionContext()
+		final forkedTomcat = new ForkedTomcatServer(ec)
+		ec.process = forkedTomcat
 
-        ec.initialize(settings)
-        ec.contextPath = contextPath
-        ec.resourcesDir = settings.resourcesDir
-        if (warMode) {
-            ec.warPath = settings.projectWarFile.canonicalPath
-        }
+		ec.initialize(settings)
+		ec.contextPath = contextPath
+		ec.resourcesDir = settings.resourcesDir
+		if (warMode) {
+			ec.warPath = settings.projectWarFile.canonicalPath
+		}
 
-        if (forkConfig instanceof Map) {
-            forkedTomcat.configure((Map)forkConfig)
-        }
+		if (forkConfig instanceof Map) {
+			forkedTomcat.configure((Map) forkConfig)
+		}
 
-        def tomcatJvmArgs = getTomcatJvmArgs()
-        if (tomcatJvmArgs instanceof List) {
-            forkedTomcat.jvmArgs = (List<String>)tomcatJvmArgs
-        }
+		def tomcatJvmArgs = getTomcatJvmArgs()
+		if (tomcatJvmArgs instanceof List) {
+			forkedTomcat.jvmArgs = (List<String>) tomcatJvmArgs
+		}
 
-        return forkedTomcat
-    }
+		return forkedTomcat
+	}
 
-    private getTomcatJvmArgs() {
-        buildSettings.config?.grails?.tomcat?.jvmArgs
-    }
+	private getTomcatJvmArgs() {
+		buildSettings.config?.grails?.tomcat?.jvmArgs
+	}
 
-    EmbeddableServer createForWAR(String warPath, String contextPath) {
-        buildSettings.projectWarFile = new File(warPath)
-        final forkConfig = buildSettings?.forkSettings?.get("war") ?: buildSettings?.forkSettings?.get("run") ?: [:]
-        return createForked(contextPath, forkConfig, true)
-    }
+	EmbeddableServer createForWAR(String warPath, String contextPath) {
+		buildSettings.projectWarFile = new File(warPath)
+		final forkConfig = buildSettings?.forkSettings?.get("war") ?: buildSettings?.forkSettings?.get("run") ?: [:]
+		return createForked(contextPath, forkConfig, true)
+	}
 }

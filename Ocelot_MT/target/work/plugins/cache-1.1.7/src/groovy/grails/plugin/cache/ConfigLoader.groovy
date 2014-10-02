@@ -14,13 +14,12 @@
  */
 package grails.plugin.cache
 
+import grails.plugin.cache.CacheConfigArtefactHandler.CacheConfigGrailsClass
+import grails.util.Environment
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationContext
-
-import grails.plugin.cache.CacheConfigArtefactHandler.CacheConfigGrailsClass
-import grails.util.Environment
 
 /**
  * @author Burt Beckwith
@@ -89,8 +88,7 @@ class ConfigLoader {
 			if ((cacheConfig instanceof Closure) && processConfig(config, configClass)) {
 				configs << config
 				log.debug "Including configs from $configClass.name with order $cacheConfig.order"
-			}
-			else {
+			} else {
 				log.debug "Not including configs from $configClass.name"
 			}
 		}
@@ -100,8 +98,7 @@ class ConfigLoader {
 		if ((cacheConfig.config instanceof Closure) && processConfig(cacheConfig, null)) {
 			configs << cacheConfig
 			log.debug "Including configs from Config.groovy with order $cacheConfig.order"
-		}
-		else {
+		} else {
 			log.debug "Not including configs from Config.groovy"
 		}
 

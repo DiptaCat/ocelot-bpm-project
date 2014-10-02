@@ -14,18 +14,17 @@
  */
 package grails.plugin.databasemigration
 
-import java.lang.reflect.Field
-
 import liquibase.database.Database
 import liquibase.database.structure.Column
 import liquibase.diff.Diff
 import liquibase.diff.DiffResult
 import liquibase.exception.DatabaseException
 import liquibase.snapshot.DatabaseSnapshot
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.util.ReflectionUtils
+
+import java.lang.reflect.Field
 
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
@@ -62,8 +61,7 @@ class GormDiff extends Diff {
 					(targetColumn.getTable() == null || !diffResult.getUnexpectedTables().contains(targetColumn.getTable())) &&
 					(targetColumn.getView() == null || !diffResult.getUnexpectedViews().contains(targetColumn.getView()))) {
 				diffResult.addUnexpectedColumn targetColumn
-			}
-			else if (targetColumn.getTable() != null && !diffResult.getUnexpectedTables().contains(targetColumn.getTable())) {
+			} else if (targetColumn.getTable() != null && !diffResult.getUnexpectedTables().contains(targetColumn.getTable())) {
 				Column baseColumn = referenceSnapshot.getColumn(targetColumn.getTable().getName(), targetColumn.getName())
 				if (baseColumn == null || isDifferent(targetColumn, baseColumn)) {
 					diffResult.addChangedColumn targetColumn

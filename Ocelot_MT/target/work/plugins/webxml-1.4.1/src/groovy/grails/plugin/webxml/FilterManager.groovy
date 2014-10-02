@@ -11,11 +11,11 @@ class FilterManager {
 	static final int URL_MAPPING_POSITION = 4000
 
 	Map<String, Integer> filterOrder = [
-		charEncodingFilter: CHAR_ENCODING_POSITION,
-		grailsWebRequest:   GRAILS_WEB_REQUEST_POSITION,
-		reloadFilter:       RELOAD_POSITION,
-		sitemesh:           SITEMESH_POSITION,
-		urlMapping:         URL_MAPPING_POSITION]
+			charEncodingFilter: CHAR_ENCODING_POSITION,
+			grailsWebRequest  : GRAILS_WEB_REQUEST_POSITION,
+			reloadFilter      : RELOAD_POSITION,
+			sitemesh          : SITEMESH_POSITION,
+			urlMapping        : URL_MAPPING_POSITION]
 
 	void registerWebXmlFilterPosition(String name, int position) {
 		filterOrder[name] = position

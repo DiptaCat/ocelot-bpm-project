@@ -1,102 +1,114 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%>
+< %= packageName ? "package ${packageName}\n\n" : '' % >
 
-import static org.springframework.http.HttpStatus.*
+
 import grails.transaction.Transactional
 
+import static org.springframework.http.HttpStatus.*
+
 @Transactional(readOnly = true)
-class ${className}Controller {
+class $ {
+	className
+}
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+Controller {
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond ${className}.list(params), model:[${propertyName}Count: ${className}.count()]
-    }
+	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def show(${className} ${propertyName}) {
-        respond ${propertyName}
-    }
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		respond $ { className }.list(params), model: [$ { propertyName } Count: $ { className }.count()]
+	}
 
-    def create() {
-        respond new ${className}(params)
-    }
+	def show($ { className } $ { propertyName } ) {
+		respond $ { propertyName }
+	}
 
-    @Transactional
-    def save(${className} ${propertyName}) {
-        if (${propertyName} == null) {
-            notFound()
-            return
-        }
+	def create() {
+		respond new $ { className }(params)
+	}
 
-        if (${propertyName}.hasErrors()) {
-            respond ${propertyName}.errors, view:'create'
-            return
-        }
+	@Transactional
+	def save($ { className } $ { propertyName } ) {
+		if ($ { propertyName } == null) {
+			notFound()
+			return
+		}
 
-        ${propertyName}.save flush:true
+		if ($ { propertyName }.hasErrors()) {
+			respond $ { propertyName }.errors, view: 'create'
+			return
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
-                redirect ${propertyName}
-            }
-            '*' { respond ${propertyName}, [status: CREATED] }
-        }
-    }
+		$ { propertyName }.save flush: true
 
-    def edit(${className} ${propertyName}) {
-        respond ${propertyName}
-    }
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), $ {
+					propertyName
+				}.id])
+				redirect $ { propertyName }
+			}
+			'*' { respond $ { propertyName }, [status: CREATED] }
+		}
+	}
 
-    @Transactional
-    def update(${className} ${propertyName}) {
-        if (${propertyName} == null) {
-            notFound()
-            return
-        }
+	def edit($ { className } $ { propertyName } ) {
+		respond $ { propertyName }
+	}
 
-        if (${propertyName}.hasErrors()) {
-            respond ${propertyName}.errors, view:'edit'
-            return
-        }
+	@Transactional
+	def update($ { className } $ { propertyName } ) {
+		if ($ { propertyName } == null) {
+			notFound()
+			return
+		}
 
-        ${propertyName}.save flush:true
+		if ($ { propertyName }.hasErrors()) {
+			respond $ { propertyName }.errors, view: 'edit'
+			return
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: '${className}.label', default: '${className}'), ${propertyName}.id])
-                redirect ${propertyName}
-            }
-            '*'{ respond ${propertyName}, [status: OK] }
-        }
-    }
+		$ { propertyName }.save flush: true
 
-    @Transactional
-    def delete(${className} ${propertyName}) {
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.updated.message', args: [message(code: '${className}.label', default: '${className}'), $ {
+					propertyName
+				}.id])
+				redirect $ { propertyName }
+			}
+			'*' { respond $ { propertyName }, [status: OK] }
+		}
+	}
 
-        if (${propertyName} == null) {
-            notFound()
-            return
-        }
+	@Transactional
+	def delete($ { className } $ { propertyName } ) {
 
-        ${propertyName}.delete flush:true
+		if ($ { propertyName } == null) {
+			notFound()
+			return
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: '${className}.label', default: '${className}'), ${propertyName}.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+		$ { propertyName }.delete flush: true
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.deleted.message', args: [message(code: '${className}.label', default: '${className}'), $ {
+					propertyName
+				}.id])
+				redirect action: "index", method: "GET"
+			}
+			'*' { render status: NO_CONTENT }
+		}
+	}
+
+	protected void notFound() {
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.not.found.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), params.id])
+				redirect action: "index", method: "GET"
+			}
+			'*' { render status: NOT_FOUND }
+		}
+	}
 }

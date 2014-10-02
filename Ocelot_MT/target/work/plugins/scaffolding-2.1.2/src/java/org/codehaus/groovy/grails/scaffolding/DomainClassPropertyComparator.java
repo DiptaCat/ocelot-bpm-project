@@ -15,13 +15,13 @@
  */
 package org.codehaus.groovy.grails.scaffolding;
 
-import java.util.Comparator;
-import java.util.Map;
-
 import org.codehaus.groovy.grails.commons.GrailsDomainClass;
 import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty;
 import org.codehaus.groovy.grails.validation.ConstrainedProperty;
 import org.springframework.util.Assert;
+
+import java.util.Comparator;
+import java.util.Map;
 
 /**
  * Comparator that uses the domain class property constraints to establish order in sort methods and always
@@ -52,11 +52,11 @@ public class DomainClassPropertyComparator implements Comparator {
 			return 1;
 		}
 
-		GrailsDomainClassProperty prop1 = (GrailsDomainClassProperty)o1;
-		GrailsDomainClassProperty prop2 = (GrailsDomainClassProperty)o2;
+		GrailsDomainClassProperty prop1 = (GrailsDomainClassProperty) o1;
+		GrailsDomainClassProperty prop2 = (GrailsDomainClassProperty) o2;
 
-		ConstrainedProperty cp1 = (ConstrainedProperty)constrainedProperties.get(prop1.getName());
-		ConstrainedProperty cp2 = (ConstrainedProperty)constrainedProperties.get(prop2.getName());
+		ConstrainedProperty cp1 = (ConstrainedProperty) constrainedProperties.get(prop1.getName());
+		ConstrainedProperty cp2 = (ConstrainedProperty) constrainedProperties.get(prop2.getName());
 
 		if (cp1 == null & cp2 == null) {
 			return prop1.getName().compareTo(prop2.getName());

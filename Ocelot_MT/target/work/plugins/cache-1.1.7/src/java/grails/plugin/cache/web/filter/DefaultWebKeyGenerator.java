@@ -14,10 +14,10 @@
  */
 package grails.plugin.cache.web.filter;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.codehaus.groovy.grails.web.util.WebUtils;
 import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Default implementation.
@@ -26,9 +26,8 @@ import org.springframework.util.StringUtils;
  */
 public class DefaultWebKeyGenerator implements WebKeyGenerator {
 
-	protected boolean supportAjax = false;
-
 	public static final String X_REQUESTED_WITH = "X-Requested-With";
+	protected boolean supportAjax = false;
 
 	public String generate(HttpServletRequest request) {
 

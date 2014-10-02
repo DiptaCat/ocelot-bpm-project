@@ -12,30 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import grails.plugin.cache.CacheBeanPostProcessor
-import grails.plugin.cache.CacheConfigArtefactHandler
-import grails.plugin.cache.ConfigLoader
-import grails.plugin.cache.CustomCacheKeyGenerator
-import grails.plugin.cache.GrailsConcurrentMapCacheManager
+
+import grails.plugin.cache.*
 import grails.plugin.cache.web.filter.DefaultWebKeyGenerator
 import grails.plugin.cache.web.filter.ExpressionEvaluator
 import grails.plugin.cache.web.filter.NoOpFilter
 import grails.plugin.cache.web.filter.simple.MemoryPageFragmentCachingFilter
-
+import javassist.util.proxy.ProxyFactory
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.cache.Cache
 import org.springframework.core.Ordered
 import org.springframework.web.filter.DelegatingFilterProxy
-import javassist.util.proxy.*;
 
 class CacheGrailsPlugin {
 
 	static {
 		ProxyFactory.classLoaderProvider = new ProxyFactory.ClassLoaderProvider() {
 			public ClassLoader get(ProxyFactory pf) {
-					return Thread.currentThread().getContextClassLoader();
+				return Thread.currentThread().getContextClassLoader();
 			}
 		};
 	}
@@ -48,8 +44,8 @@ class CacheGrailsPlugin {
 	def loadAfter = ['controllers', 'services']
 	def artefacts = [CacheConfigArtefactHandler]
 	def watchedResources = [
-		'file:./grails-app/conf/**/*CacheConfig.groovy',
-		'file:./plugins/*/grails-app/conf/**/*CacheConfig.groovy'
+			'file:./grails-app/conf/**/*CacheConfig.groovy',
+			'file:./plugins/*/grails-app/conf/**/*CacheConfig.groovy'
 	]
 
 	def title = 'Cache Plugin'
@@ -65,13 +61,13 @@ class CacheGrailsPlugin {
 	def scm = [url: 'https://github.com/grails-plugins/grails-cache']
 
 	def pluginExcludes = [
-		'**/com/demo/**',
-		'grails-app/conf/TestCacheConfig.groovy',
-		'grails-app/views/**',
-		'grails-app/i18n/**',
-		'web-app/**',
-		'docs/**',
-		'src/docs/**'
+			'**/com/demo/**',
+			'grails-app/conf/TestCacheConfig.groovy',
+			'grails-app/views/**',
+			'grails-app/i18n/**',
+			'web-app/**',
+			'docs/**',
+			'src/docs/**'
 	]
 
 	def getWebXmlFilterOrder() {
@@ -79,7 +75,7 @@ class CacheGrailsPlugin {
 		[grailsCacheFilter: FilterManager.URL_MAPPING_POSITION + 1000]
 	}
 
-	def doWithWebDescriptor = {xml ->
+	def doWithWebDescriptor = { xml ->
 		if (!isEnabled(application)) {
 			return
 		}
@@ -131,8 +127,8 @@ class CacheGrailsPlugin {
 		//                  org.springframework.cache.annotation.AnnotationCacheOperationSource#0 (org.springframework.cache.annotation.AnnotationCacheOperationSource),
 		//                  org.springframework.cache.interceptor.CacheInterceptor#0 (org.springframework.cache.interceptor.CacheInterceptor)
 
-		cache.'annotation-driven'('cache-manager': 'grailsCacheManager' ,'key-generator': cacheKeyGen,
-		                          mode: 'proxy', order: order, 'proxy-target-class': proxyTargetClass)
+		cache.'annotation-driven'('cache-manager': 'grailsCacheManager', 'key-generator': cacheKeyGen,
+				mode: 'proxy', order: order, 'proxy-target-class': proxyTargetClass)
 
 		// updates the AnnotationCacheOperationSource with a custom subclass
 		// and adds the 'cacheOperationSource' alias
@@ -147,10 +143,10 @@ class CacheGrailsPlugin {
 		webExpressionEvaluator(ExpressionEvaluator)
 
 		grailsCacheFilter(MemoryPageFragmentCachingFilter) {
-			cacheManager =         ref('grailsCacheManager')
+			cacheManager = ref('grailsCacheManager')
 			cacheOperationSource = ref('cacheOperationSource')
-			keyGenerator =         ref('webCacheKeyGenerator')
-			expressionEvaluator =  ref('webExpressionEvaluator')
+			keyGenerator = ref('webCacheKeyGenerator')
+			expressionEvaluator = ref('webExpressionEvaluator')
 		}
 	}
 
@@ -183,8 +179,7 @@ class CacheGrailsPlugin {
 		if (application.isControllerClass(source) || application.isServiceClass(source)) {
 			event.ctx.cacheOperationSource.reset()
 			log.debug 'Reset GrailsAnnotationCacheOperationSource cache'
-		}
-		else if (application.isCacheConfigClass(source)) {
+		} else if (application.isCacheConfigClass(source)) {
 			reloadCaches event.ctx
 		}
 	}

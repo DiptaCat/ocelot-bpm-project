@@ -1,44 +1,45 @@
 <div>
-    <div class="btn-group pull-right">
-        <a href="#/palette/{{paletteId}}/paletteItem/create" class="btn btn-primary">Create PaletteItem</a>
-    </div>
-    <h2>Palette List</h2>
+	<div class="btn-group pull-right">
+		<a href="#/palette/{{paletteId}}/paletteItem/create" class="btn btn-primary">Create PaletteItem</a>
+	</div>
+	<h2>Palette List</h2>
 </div>
 
 <div class="row">
-    <show-palette  class="col-md-2"></show-palette>
+	<show-palette class="col-md-2"></show-palette>
 
-    <div class="col-md-10">
+	<div class="col-md-10">
 
-            <!--<i class="glyphicon glyphicon-search"></i>-->
-            <i class="icon-search"></i>
-            <input type="text" ng-model="query" placeholder="Search">
+		<!--<i class="glyphicon glyphicon-search"></i>-->
+		<i class="icon-search"></i>
+		<input type="text" ng-model="query" placeholder="Search">
 
-            Sort by:
-            <select ng-model="orderProp">
-                <option value="name">Name</option>
-                <option value="category.id">Category</option>
-            </select>
+		Sort by:
+		<select ng-model="orderProp">
+			<option value="name">Name</option>
+			<option value="category.id">Category</option>
+		</select>
 
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Icon</th>
-                    <th>Category</th>
-                    <th>Activated</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
-                    <td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
-                    <td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img ng-src="images/icons/{{item.icon}}"></a></td>
-                    <td>{{item.category.name}}</td>
-                    <td ng-click="change(item)">{{item.activated | checkmark}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Icon</th>
+				<th>Category</th>
+				<th>Activated</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
+				<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
+				<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img ng-src="images/icons/{{item.icon}}"></a>
+				</td>
+				<td>{{item.category.name}}</td>
+				<td ng-click="change(item)">{{item.activated | checkmark}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 
 
-    </div>
+</div>

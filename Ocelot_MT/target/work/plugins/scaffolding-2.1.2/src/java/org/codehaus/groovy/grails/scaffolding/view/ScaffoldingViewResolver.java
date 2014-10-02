@@ -15,13 +15,6 @@
  */
 package org.codehaus.groovy.grails.scaffolding.view;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.groovy.grails.commons.GrailsDomainClass;
@@ -33,6 +26,13 @@ import org.codehaus.groovy.grails.web.util.WebUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.View;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Overrides the default Grails view resolver and resolves scaffolded views at runtime.
  *
@@ -41,12 +41,11 @@ import org.springframework.web.servlet.View;
  */
 public class ScaffoldingViewResolver extends GroovyPageViewResolver {
 
+	protected static final Log log = LogFactory.getLog(ScaffoldingViewResolver.class);
+	static final Map<String, View> scaffoldedViews = new ConcurrentHashMap<String, View>();
 	GrailsTemplateGenerator templateGenerator;
 	Map<String, List<String>> scaffoldedActionMap = Collections.emptyMap();
 	Map<String, GrailsDomainClass> scaffoldedDomains = Collections.emptyMap();
-
-	static final Map<String, View> scaffoldedViews = new ConcurrentHashMap<String, View>();
-	protected static final Log log = LogFactory.getLog(ScaffoldingViewResolver.class);
 
 	/**
 	 * Clears any cached scaffolded views.
@@ -60,37 +59,36 @@ public class ScaffoldingViewResolver extends GroovyPageViewResolver {
 		GrailsWebRequest webRequest = GrailsWebRequest.lookup();
 
 		String[] viewNameParts = splitViewName(viewName);
-		if(viewNameParts.length == 1) {
-		    viewName = WebUtils.addViewPrefix(viewName, webRequest.getControllerName());
-		    viewNameParts = splitViewName(viewName);
+		if (viewNameParts.length == 1) {
+			viewName = WebUtils.addViewPrefix(viewName, webRequest.getControllerName());
+			viewNameParts = splitViewName(viewName);
 		}
 
 		View v = scaffoldedViews.get(viewName);
-        if (v == null) {
+		if (v == null) {
 			GrailsDomainClass domainClass = scaffoldedDomains.get(viewNameParts[0]);
 			if (domainClass != null) {
 				String viewCode = null;
 				try {
 					viewCode = generateViewSource(viewNameParts[1], domainClass);
-				}
-				catch (Exception e) {
-					log.error("Error generating scaffolded view [" + viewName + "]: " + e.getMessage(),e);
+				} catch (Exception e) {
+					log.error("Error generating scaffolded view [" + viewName + "]: " + e.getMessage(), e);
 				}
 				if (StringUtils.hasLength(viewCode)) {
 					v = createScaffoldedView(viewName, viewCode);
 					scaffoldedViews.put(viewName, v);
 				}
 			}
-        }
-        if (v != null) {
-            return v;
-        }
+		}
+		if (v != null) {
+			return v;
+		}
 		return super.createFallbackView(viewName);
 	}
 
-    protected String[] splitViewName(String viewName) {
-        return org.apache.commons.lang.StringUtils.split(viewName, '/');
-    }
+	protected String[] splitViewName(String viewName) {
+		return org.apache.commons.lang.StringUtils.split(viewName, '/');
+	}
 
 	protected View createScaffoldedView(String viewName, String viewCode) throws Exception {
 		final ScaffoldedGroovyPageView view = new ScaffoldedGroovyPageView(viewName, viewCode);
@@ -103,7 +101,7 @@ public class ScaffoldingViewResolver extends GroovyPageViewResolver {
 
 	protected String generateViewSource(String viewName, GrailsDomainClass domainClass) throws IOException {
 		Writer sw = new FastStringWriter();
-		templateGenerator.generateView(domainClass, viewName,sw);
+		templateGenerator.generateView(domainClass, viewName, sw);
 		return sw.toString();
 	}
 
@@ -111,12 +109,12 @@ public class ScaffoldingViewResolver extends GroovyPageViewResolver {
 		this.templateGenerator = templateGenerator;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void setScaffoldedActionMap(Map scaffoldedActionMap) {
 		this.scaffoldedActionMap = scaffoldedActionMap;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void setScaffoldedDomains(Map scaffoldedDomains) {
 		this.scaffoldedDomains = scaffoldedDomains;
 	}

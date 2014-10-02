@@ -2,11 +2,11 @@ package ocelot
 
 class Palette {
 
-    String name
+	String name
 
-    static hasMany = [ paletteItems: PaletteItem, customPaletteItems: CustomPaletteItem]
+	static hasMany = [paletteItems: PaletteItem, customPaletteItems: CustomPaletteItem]
 //	static belongsTo = [user: User]
 
-    static constraints = {
-    }
+	static constraints = {
+	}
 }

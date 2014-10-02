@@ -14,28 +14,26 @@
  */
 package grails.plugin.cache
 
-import grails.plugin.cache.CacheEvict
-
 class GrailsCacheAdminService {
 
-    static transactional = false
+	static transactional = false
 
-    def grailsCacheManager
+	def grailsCacheManager
 
-    @CacheEvict(value="grailsBlocksCache", allEntries=true)
-    def clearBlocksCache() {}
+	@CacheEvict(value = "grailsBlocksCache", allEntries = true)
+	def clearBlocksCache() {}
 
-    @CacheEvict(value="grailsTemplatesCache", allEntries=true)
-    def clearTemplatesCache() {}
+	@CacheEvict(value = "grailsTemplatesCache", allEntries = true)
+	def clearTemplatesCache() {}
 
-    def clearCache(cacheName) {
-        grailsCacheManager.getCache(cacheName)?.clear()
-    }
+	def clearCache(cacheName) {
+		grailsCacheManager.getCache(cacheName)?.clear()
+	}
 
-    def clearAllCaches() {
-        grailsCacheManager.cacheNames.each { cacheName ->
-            clearCache(cacheName)
-        }
-    }
+	def clearAllCaches() {
+		grailsCacheManager.cacheNames.each { cacheName ->
+			clearCache(cacheName)
+		}
+	}
 
 }

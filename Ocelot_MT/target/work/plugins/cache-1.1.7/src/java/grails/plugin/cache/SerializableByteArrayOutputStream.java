@@ -47,7 +47,7 @@ public class SerializableByteArrayOutputStream extends SerializableOutputStream 
 		if (newcount > buf.length) {
 			buf = copyOf(Math.max(buf.length << 1, newcount));
 		}
-		buf[count] = (byte)b;
+		buf[count] = (byte) b;
 		count = newcount;
 	}
 
@@ -84,9 +84,9 @@ public class SerializableByteArrayOutputStream extends SerializableOutputStream 
 
 	// ByteArrayOutputStream uses Arrays.copyOf which is only in Java 6, that's inlined here.
 	protected byte[] copyOf(int newLength) {
-      byte[] copy = new byte[newLength];
-      System.arraycopy(buf, 0, copy, 0, Math.min(buf.length, newLength));
-      return copy;
+		byte[] copy = new byte[newLength];
+		System.arraycopy(buf, 0, copy, 0, Math.min(buf.length, newLength));
+		return copy;
 	}
 
 	public synchronized int size() {

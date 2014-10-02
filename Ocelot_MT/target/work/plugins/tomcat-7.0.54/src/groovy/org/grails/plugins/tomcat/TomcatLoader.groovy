@@ -15,8 +15,6 @@
  */
 package org.grails.plugins.tomcat
 
-import java.beans.PropertyChangeListener
-
 import org.apache.catalina.Container
 import org.apache.catalina.Lifecycle
 import org.apache.catalina.LifecycleState
@@ -27,6 +25,8 @@ import org.apache.commons.logging.LogFactory
 import org.apache.naming.resources.DirContextURLStreamHandler
 import org.apache.naming.resources.DirContextURLStreamHandlerFactory
 
+import java.beans.PropertyChangeListener
+
 /**
  * A loader instance used for the embedded version of Tomcat 7.
  *
@@ -35,68 +35,72 @@ import org.apache.naming.resources.DirContextURLStreamHandlerFactory
  */
 class TomcatLoader extends LifecycleBase implements Loader {
 
-    private static Log log = LogFactory.getLog(TomcatLoader.name)
+	private static Log log = LogFactory.getLog(TomcatLoader.name)
 
-    private static boolean first = true
+	private static boolean first = true
 
-    ClassLoader classLoader
-    Container container
-    boolean delegate
-    boolean reloadable
+	ClassLoader classLoader
+	Container container
+	boolean delegate
+	boolean reloadable
 
-    TomcatLoader(ClassLoader classLoader) {
-        // Class loader that only searches the parent
-        this.classLoader = new ParentDelegatingClassLoader(classLoader)
-    }
+	TomcatLoader(ClassLoader classLoader) {
+		// Class loader that only searches the parent
+		this.classLoader = new ParentDelegatingClassLoader(classLoader)
+	}
 
-    void addPropertyChangeListener(PropertyChangeListener listener) {}
+	void addPropertyChangeListener(PropertyChangeListener listener) {}
 
-    void addRepository(String repository) {
-        log.warn "Call to addRepository($repository) was ignored."
-    }
+	void addRepository(String repository) {
+		log.warn "Call to addRepository($repository) was ignored."
+	}
 
-    void backgroundProcess() {}
+	void backgroundProcess() {}
 
-    String[] findRepositories() {
-        log.warn "Call to findRepositories() returned null."
-    }
+	String[] findRepositories() {
+		log.warn "Call to findRepositories() returned null."
+	}
 
-    String getInfo() { "MyLoader/1.0" }
+	String getInfo() { "MyLoader/1.0" }
 
-    boolean modified() { false }
+	boolean modified() { false }
 
-    void removePropertyChangeListener(PropertyChangeListener listener) {}
+	void removePropertyChangeListener(PropertyChangeListener listener) {}
 
-    @Override protected void initInternal() {
-        URLStreamHandlerFactory streamHandlerFactory = new DirContextURLStreamHandlerFactory()
+	@Override
+	protected void initInternal() {
+		URLStreamHandlerFactory streamHandlerFactory = new DirContextURLStreamHandlerFactory()
 
-        if (first) {
-            first = false
-            try {
-                URL.setURLStreamHandlerFactory(streamHandlerFactory)
-            } catch (Exception e) {
-                // Log and continue anyway, this is not critical
-                log.error("Error registering jndi stream handler", e)
-            } catch (Throwable t) {
-                // This is likely a dual registration
-                log.info("Dual registration of jndi stream handler: " + t.getMessage())
-            }
-        }
+		if (first) {
+			first = false
+			try {
+				URL.setURLStreamHandlerFactory(streamHandlerFactory)
+			} catch (Exception e) {
+				// Log and continue anyway, this is not critical
+				log.error("Error registering jndi stream handler", e)
+			} catch (Throwable t) {
+				// This is likely a dual registration
+				log.info("Dual registration of jndi stream handler: " + t.getMessage())
+			}
+		}
 
-        DirContextURLStreamHandler.bind(classLoader, container.getResources())
-    }
+		DirContextURLStreamHandler.bind(classLoader, container.getResources())
+	}
 
-    @Override protected void destroyInternal() {
-        classLoader = null
-    }
+	@Override
+	protected void destroyInternal() {
+		classLoader = null
+	}
 
-    @Override protected void startInternal() {
-        fireLifecycleEvent(Lifecycle.START_EVENT, this)
-        setState(LifecycleState.STARTING)
-    }
+	@Override
+	protected void startInternal() {
+		fireLifecycleEvent(Lifecycle.START_EVENT, this)
+		setState(LifecycleState.STARTING)
+	}
 
-    @Override protected void stopInternal() {
-        fireLifecycleEvent(Lifecycle.STOP_EVENT, this)
-        setState(LifecycleState.STOPPING)
-    }
+	@Override
+	protected void stopInternal() {
+		fireLifecycleEvent(Lifecycle.STOP_EVENT, this)
+		setState(LifecycleState.STOPPING)
+	}
 }

@@ -14,17 +14,16 @@
  */
 package grails.plugin.cache.web;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.codehaus.groovy.grails.commons.ControllerArtefactHandler;
 import org.codehaus.groovy.grails.commons.GrailsControllerClass;
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest;
 import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Based on grails.plugin.springcache.web.ContentCacheParameters.
@@ -101,12 +100,10 @@ public class ContentCacheParameters {
 		// args if it exists
 		if (matches.size() == 1) {
 			method = matches.get(0);
-		}
-		else if (matches.size() > 1) {
+		} else if (matches.size() > 1) {
 			if (matches.get(0).getParameterTypes().length > 0) {
 				method = matches.get(0);
-			}
-			else {
+			} else {
 				method = matches.get(1);
 			}
 		}

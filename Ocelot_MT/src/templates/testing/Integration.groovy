@@ -1,18 +1,17 @@
-@artifact.package@
-
-import spock.lang.*
+@ artifact.package @
+import spock.lang.Specification
 
 /**
  *
  */
-class @artifact.name@ extends Specification {
+class @artifact.name @ extends Specification {
 
-    def setup() {
-    }
+	def setup() {
+	}
 
-    def cleanup() {
-    }
+	def cleanup() {
+	}
 
-    void "test something"() {
-    }
+	void "test something"() {
+	}
 }

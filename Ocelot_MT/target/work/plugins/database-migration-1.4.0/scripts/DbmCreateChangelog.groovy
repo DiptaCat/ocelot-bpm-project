@@ -37,7 +37,7 @@ target(dbmCreateChangelog: 'Creates an empty changelog file') {
 		String author = user ? "$user (generated)" : 'diff-generated'
 
 		ant.copy(file: "$databaseMigrationPluginDir/src/resources/changelog.template",
-		         tofile: file.path, verbose: true, overwrite: true) {
+				tofile: file.path, verbose: true, overwrite: true) {
 			filterset {
 				filter token: 'author', value: author
 				filter token: 'id', value: file.name - '.groovy'

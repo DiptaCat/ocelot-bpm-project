@@ -14,74 +14,74 @@
  * limitations under the License.
  */
 
-loadSpecTestTypeClass = {->
-  def doLoad = {-> classLoader.loadClass('grails.plugin.spock.test.GrailsSpecTestType') }
-  try {
-    doLoad()
-  } catch (ClassNotFoundException e) {
-    includeTargets << grailsScript("_GrailsCompile")
-    compile()
-    doLoad()
-  }
+loadSpecTestTypeClass = { ->
+	def doLoad = { -> classLoader.loadClass('grails.plugin.spock.test.GrailsSpecTestType') }
+	try {
+		doLoad()
+	} catch (ClassNotFoundException e) {
+		includeTargets << grailsScript("_GrailsCompile")
+		compile()
+		doLoad()
+	}
 }
 
 loadSpockTestTypes = {
-  if (!binding.variables.containsKey("unitTests")) return
-  def specTestTypeClass = loadSpecTestTypeClass()
-  [unit: unitTests, integration: integrationTests].each { name, types ->
-    if (!types.any { it.class == specTestTypeClass }) {
-      types << specTestTypeClass.newInstance('spock', name)
-    }
-  }
+	if (!binding.variables.containsKey("unitTests")) return
+	def specTestTypeClass = loadSpecTestTypeClass()
+	[unit: unitTests, integration: integrationTests].each { name, types ->
+		if (!types.any { it.class == specTestTypeClass }) {
+			types << specTestTypeClass.newInstance('spock', name)
+		}
+	}
 }
 
 eventAllTestsStart = {
-  loadSpockTestTypes()
+	loadSpockTestTypes()
 }
 
 eventPackagePluginsEnd = {
-  loadSpockTestTypes()
+	loadSpockTestTypes()
 }
 
 eventDefaultStart = {
-  int majorVersion = grailsSettings.grailsVersion.substring(0, 1).toInteger()
-  if (majorVersion > 1) {
-    createUnitTest = { Map args = [:] ->
-      createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: (args.testType ?: args['suffix']), path: "test/unit",
-          superClass: "Specification", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
-    }
-    createIntegrationTest = { Map args = [:] ->
-      createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "IntegrationSpec", path: "test/integration",
-          superClass: "IntegrationSpec", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
-    }
-  } else {
-    createUnitTest = { Map args = [:] ->
-      def superClass
-      // map unit test superclass to Spock equivalent
-      switch (args["superClass"]) {
-        case "ControllerUnitTestCase":
-          superClass = "ControllerSpec"
-          break
-        case "TagLibUnitTestCase":
-          superClass = "TagLibSpec"
-          break
-        default:
-          superClass = "UnitSpec"
-      }
+	int majorVersion = grailsSettings.grailsVersion.substring(0, 1).toInteger()
+	if (majorVersion > 1) {
+		createUnitTest = { Map args = [:] ->
+			createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: (args.testType ?: args['suffix']), path: "test/unit",
+					superClass: "Specification", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
+		}
+		createIntegrationTest = { Map args = [:] ->
+			createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "IntegrationSpec", path: "test/integration",
+					superClass: "IntegrationSpec", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
+		}
+	} else {
+		createUnitTest = { Map args = [:] ->
+			def superClass
+			// map unit test superclass to Spock equivalent
+			switch (args["superClass"]) {
+				case "ControllerUnitTestCase":
+					superClass = "ControllerSpec"
+					break
+				case "TagLibUnitTestCase":
+					superClass = "TagLibSpec"
+					break
+				default:
+					superClass = "UnitSpec"
+			}
 
-      createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "Spec", path: "test/unit",
-          superClass: superClass, templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
-    }
+			createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "Spec", path: "test/unit",
+					superClass: superClass, templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
+		}
 
-    createIntegrationTest = { Map args = [:] ->
-      createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "Spec", path: "test/integration",
-          superClass: "IntegrationSpec", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
-    }
-  }
+		createIntegrationTest = { Map args = [:] ->
+			createArtifact name: args["name"], suffix: "${args['suffix']}Spec", type: "Spec", path: "test/integration",
+					superClass: "IntegrationSpec", templatePath: "templates/testing", skipPackagePrompt: args['skipPackagePrompt']
+		}
+	}
 }
 
 // Just upgrade plugins without user input when building this plugin
 // Has no effect for clients of this plugin
 if (grailsAppName == 'spock-grails') {
-  isInteractive = false
+	isInteractive = false
 }

@@ -15,11 +15,11 @@
  */
 package org.codehaus.groovy.grails.scaffolding;
 
-import java.io.IOException;
-import java.io.Writer;
-
 import org.codehaus.groovy.grails.commons.GrailsDomainClass;
 import org.springframework.core.io.ResourceLoader;
+
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * Defines methods for generating Grails artifacts from a domain class.
@@ -38,29 +38,33 @@ public interface GrailsTemplateGenerator {
 
 	/**
 	 * Generates the necessary views for the supplied domain class.
+	 *
 	 * @param domainClass The DomainClass to generate views for
-	 * @param destDir The destination directory to generate views to
+	 * @param destDir     The destination directory to generate views to
 	 */
 	void generateViews(GrailsDomainClass domainClass, String destDir) throws IOException;
 
 	/**
 	 * Generates a controller for the supplied domain class.
+	 *
 	 * @param domainClass The DomainClass to generate views for
-	 * @param destDir The destination directory to generate views to
+	 * @param destDir     The destination directory to generate views to
 	 */
 	void generateController(GrailsDomainClass domainClass, String destDir) throws IOException;
 
 	/**
 	 * Generates a Restful controller for the supplied domain class.
+	 *
 	 * @param domainClass The DomainClass to generate views for
-	 * @param destDir The destination directory to generate views to
+	 * @param destDir     The destination directory to generate views to
 	 */
 	void generateRestfulController(GrailsDomainClass domainClass, String destDir) throws IOException;
 
 	/**
 	 * Generates a controller for the supplied domain class.
+	 *
 	 * @param domainClass The DomainClass to generate views for
-	 * @param destDir The destination directory to generate views to
+	 * @param destDir     The destination directory to generate views to
 	 */
 	void generateAsyncController(GrailsDomainClass domainClass, String destDir) throws IOException;
 
@@ -75,17 +79,18 @@ public interface GrailsTemplateGenerator {
 	 * Generates a view for the specified domain class and view name writing the result to the specified
 	 * java.io.Writer instance.
 	 *
-	 * @param viewName The name of the view
-	 * @param out The writer to write to
+	 * @param viewName    The name of the view
+	 * @param out         The writer to write to
 	 * @param domainClass The domain class to generate views for
 	 */
 	void generateView(GrailsDomainClass domainClass, String viewName, Writer out) throws IOException;
 
 	/**
 	 * Generates a view for the specified domain class and view name to the target directory.
+	 *
 	 * @param domainClass The domain class
-	 * @param viewName The view name
-	 * @param destDir The destination
+	 * @param viewName    The view name
+	 * @param destDir     The destination
 	 */
 	void generateView(GrailsDomainClass domainClass, String viewName, String destDir) throws IOException;
 
@@ -94,7 +99,7 @@ public interface GrailsTemplateGenerator {
 	 * java.io.Writer instance.
 	 *
 	 * @param domainClass The domain class to generate a controller for
-	 * @param out The Writer to write to
+	 * @param out         The Writer to write to
 	 */
 	void generateController(GrailsDomainClass domainClass, Writer out) throws IOException;
 
@@ -102,7 +107,7 @@ public interface GrailsTemplateGenerator {
 	 * Generates a controller unit test for the specified domain class.
 	 *
 	 * @param domainClass The domain class
-	 * @param destDir The destination
+	 * @param destDir     The destination
 	 */
 	void generateTest(GrailsDomainClass domainClass, String destDir) throws IOException;
 
@@ -110,7 +115,7 @@ public interface GrailsTemplateGenerator {
 	 * Generates a controller unit test for the specified domain class.
 	 *
 	 * @param domainClass The domain class
-	 * @param destDir The destination
+	 * @param destDir     The destination
 	 */
 	void generateRestfulTest(GrailsDomainClass domainClass, String destDir) throws IOException;
 
@@ -118,7 +123,7 @@ public interface GrailsTemplateGenerator {
 	 * Generates a controller unit test for the specified domain class.
 	 *
 	 * @param domainClass The domain class
-	 * @param destDir The destination
+	 * @param destDir     The destination
 	 */
 	void generateAsyncTest(GrailsDomainClass domainClass, String destDir) throws IOException;
 }

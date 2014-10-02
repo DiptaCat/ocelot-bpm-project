@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import grails.util.Environment
 
+import grails.util.Environment
 import org.codehaus.groovy.grails.plugins.jquery.JQueryConfig
 import org.codehaus.groovy.grails.plugins.jquery.JQueryProvider
 import org.codehaus.groovy.grails.plugins.web.taglib.JavascriptTagLib
@@ -30,22 +30,22 @@ class JqueryGrailsPlugin {
 	def grailsVersion = "1.3 > *"
 
 	def pluginExcludes = [
-		'docs/**',
-		'src/docs/**'
+			'docs/**',
+			'src/docs/**'
 	]
 
 	def title = "jQuery for Grails"
 	def description = "Provides integration for the jQuery library with Grails JavascriptProvider"
 	def documentation = "http://grails.org/plugin/jquery"
 	def license = "APACHE"
-	def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPJQUERY" ]
-	def scm = [ url: "https://github.com/gpc/grails-jquery" ]
-	def organization = [ name: "Grails Plugin Collective", url: "http://github.com/gpc" ]
+	def issueManagement = [system: "JIRA", url: "http://jira.grails.org/browse/GPJQUERY"]
+	def scm = [url: "https://github.com/gpc/grails-jquery"]
+	def organization = [name: "Grails Plugin Collective", url: "http://github.com/gpc"]
 	def developers = [
-		[name: "Sergey Nebolsin", email: "nebolsin@gmail.com"],
-		[name: "Craig Jones", email: "craigjones@maximsc.com"],
-		[name: "Marc Palmer", email: "marc@grailsrocks.com"],
-		[name: "Finn Herpich", email: "finn.herpich@marfinn-software.de"]
+			[name: "Sergey Nebolsin", email: "nebolsin@gmail.com"],
+			[name: "Craig Jones", email: "craigjones@maximsc.com"],
+			[name: "Marc Palmer", email: "marc@grailsrocks.com"],
+			[name: "Finn Herpich", email: "finn.herpich@marfinn-software.de"]
 	]
 
 	static jQueryVersion
@@ -84,7 +84,7 @@ class JqueryGrailsPlugin {
 
 		if (jQueryConfig.defaultPlugins) {
 			jQueryConfig.defaultPlugins.each { pluginName ->
-				jQueryConfig.plugins."$pluginName".each {fileName ->
+				jQueryConfig.plugins."$pluginName".each { fileName ->
 					JavascriptTagLib.LIBRARY_MAPPINGS.jquery += ["${JqueryGrailsPlugin.jQuerySources}/${fileName}"[0..-4]]
 				}
 			}

@@ -22,10 +22,10 @@ class AssetsTagLib {
 
 		def conf = grailsApplication.config.grails.assets
 		def debugParameter = params."_debugResources" == 'y' || params."_debugAssets" == "y"
-		def debugMode = (conf.allowDebugParam && debugParameter) ||  (Environment.current == Environment.DEVELOPMENT && !grailsApplication.warDeployed && conf.bundle != true)
+		def debugMode = (conf.allowDebugParam && debugParameter) || (Environment.current == Environment.DEVELOPMENT && !grailsApplication.warDeployed && conf.bundle != true)
 
-		if(!debugMode) {
-			out << "<script src=\"${assetPath(src:src)}\" type=\"text/javascript\" ${paramsToHtmlAttr(attrs)}></script>"
+		if (!debugMode) {
+			out << "<script src=\"${assetPath(src: src)}\" type=\"text/javascript\" ${paramsToHtmlAttr(attrs)}></script>"
 		} else {
 			if (src.lastIndexOf(".") >= 0) {
 				uri = src.substring(0, src.lastIndexOf("."))
@@ -37,11 +37,11 @@ class AssetsTagLib {
 			// def startTime = new Date().time
 			def list = assetProcessorService.getDependencyList(uri, 'application/javascript', extension)
 			def modifierParams = ["compile=false"]
-			if(attrs.charset) {
+			if (attrs.charset) {
 				modifierParams << "encoding=${attrs.charset}"
 			}
 			list.each { dep ->
-				def depAssetPath = assetPath([src: "${dep.path}", ignorePrefix:true])
+				def depAssetPath = assetPath([src: "${dep.path}", ignorePrefix: true])
 				out << "<script src=\"${depAssetPath}?${modifierParams.join("&")}\" type=\"text/javascript\" ${paramsToHtmlAttr(attrs)}></script>\n"
 			}
 			// println "Fetching Dev Mode Dependency List Time ${new Date().time - startTime}"
@@ -53,9 +53,9 @@ class AssetsTagLib {
 	 * @attr src OPTIONAL alternative to href
 	 */
 	def stylesheet = { attrs ->
-		def src  = attrs.remove('src')
+		def src = attrs.remove('src')
 		def href = attrs.remove('href')
-		if(href) {
+		if (href) {
 			src = href
 		}
 		src = "${AssetHelper.nameWithoutExtension(src)}.css"
@@ -63,10 +63,10 @@ class AssetsTagLib {
 		def uri
 		def extension
 		def debugParameter = params."_debugResources" == 'y' || params."_debugAssets" == "y"
-	    def debugMode = (conf.allowDebugParam && debugParameter) ||  (Environment.current == Environment.DEVELOPMENT && !grailsApplication.warDeployed && conf.bundle != true)
+		def debugMode = (conf.allowDebugParam && debugParameter) || (Environment.current == Environment.DEVELOPMENT && !grailsApplication.warDeployed && conf.bundle != true)
 
-		if(!debugMode) {
-			out << link([rel: 'stylesheet', href:src] + attrs)
+		if (!debugMode) {
+			out << link([rel: 'stylesheet', href: src] + attrs)
 		} else {
 			if (src.lastIndexOf(".") >= 0) {
 				uri = src.substring(0, src.lastIndexOf("."))
@@ -77,11 +77,11 @@ class AssetsTagLib {
 			}
 			def list = assetProcessorService.getDependencyList(uri, 'text/css', extension)
 			def modifierParams = ["compile=false"]
-			if(attrs.charset) {
+			if (attrs.charset) {
 				modifierParams << "encoding=${attrs.charset}"
 			}
 			list.each { dep ->
-				def depAssetPath = assetPath([src: "${dep.path}", ignorePrefix:true])
+				def depAssetPath = assetPath([src: "${dep.path}", ignorePrefix: true])
 				out << "<link rel=\"stylesheet\" href=\"${depAssetPath}?${modifierParams.join("&")}\" ${paramsToHtmlAttr(attrs)} />"
 			}
 		}
@@ -89,10 +89,9 @@ class AssetsTagLib {
 
 	def image = { attrs ->
 		def src = attrs.remove('src')
-        def absolute = attrs.remove('absolute')
-		out << "<img src=\"${assetPath(src:src, absolute: absolute)}\" ${paramsToHtmlAttr(attrs)}/>"
+		def absolute = attrs.remove('absolute')
+		out << "<img src=\"${assetPath(src: src, absolute: absolute)}\" ${paramsToHtmlAttr(attrs)}/>"
 	}
-
 
 	/**
 	 * @attr href REQUIRED
@@ -101,13 +100,13 @@ class AssetsTagLib {
 	 */
 	def link = { attrs ->
 		def href = attrs.remove('href')
-		out << "<link ${paramsToHtmlAttr(attrs)} href=\"${assetPath(src:href)}\"/>"
+		out << "<link ${paramsToHtmlAttr(attrs)} href=\"${assetPath(src: href)}\"/>"
 	}
 
 
 	def script = { attrs, body ->
 		def assetBlocks = request.getAttribute('assetScriptBlocks')
-		if(!assetBlocks) {
+		if (!assetBlocks) {
 			assetBlocks = []
 		}
 		assetBlocks << [attrs: attrs, body: body()]
@@ -116,7 +115,7 @@ class AssetsTagLib {
 
 	def deferredScripts = { attrs ->
 		def assetBlocks = request.getAttribute('assetScriptBlocks')
-		if(!assetBlocks) {
+		if (!assetBlocks) {
 			return
 		}
 		assetBlocks.each { assetBlock ->
@@ -132,29 +131,29 @@ class AssetsTagLib {
 	def assetPathExists = { attrs, body ->
 		def src = attrs.remove('src')
 		def exists = isAssetPath(src)
-            if (exists){
-                out << (body() ?: true)
-            } else {
-                out << ''
-            } 
-    }
+		if (exists) {
+			out << (body() ?: true)
+		} else {
+			out << ''
+		}
+	}
 
 	def isAssetPath(src) {
 		def conf = grailsApplication.config.grails.assets
-		if(conf.precompiled) {
+		if (conf.precompiled) {
 			def realPath = conf.manifest.getProperty(src)
-			if(realPath) {
+			if (realPath) {
 				return true
 			}
 		} else {
 			def assetFile = AssetHelper.fileForFullName(src)
-			if(assetFile != null) {
+			if (assetFile != null) {
 				return true
 			}
 		}
 		return false
 	}
-	
+
 	private paramsToHtmlAttr(attrs) {
 		attrs.collect { key, value -> "${key}=\"${value.toString().replace('\'', '\\\'')}\"" }?.join(" ")
 	}

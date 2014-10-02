@@ -14,12 +14,12 @@
  */
 package grails.plugin.cache;
 
+import org.springframework.cache.Cache;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import org.springframework.cache.Cache;
 
 /**
  * Based on org.springframework.cache.concurrent.ConcurrentMapCacheManager.

@@ -16,13 +16,13 @@
 
 package asset.pipeline
 
-class ManifestAssetFile extends AbstractAssetFile{
-    static final String contentType = 'text/cache-manifest'
-    static extensions = ['manifest']
-    static compiledExtension = 'manifest'
-    static processors = []
+class ManifestAssetFile extends AbstractAssetFile {
+	static final String contentType = 'text/cache-manifest'
+	static extensions = ['manifest']
+	static compiledExtension = 'manifest'
+	static processors = []
 
-    String directiveForLine(String line) {
-        return null
-    }
+	String directiveForLine(String line) {
+		return null
+	}
 }

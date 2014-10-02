@@ -30,8 +30,7 @@ target(dbmDropAll: 'Drops all database objects owned by the user') {
 		List<String> schemaNames = schemas ? StringUtils.splitAndTrim(schemas, ',') : null
 		if (schemaNames) {
 			liquibase.dropAll(schemaNames as String[])
-		}
-		else {
+		} else {
 			liquibase.dropAll()
 		}
 	}

@@ -24,7 +24,7 @@ import org.codehaus.groovy.grails.io.support.FileSystemResource
 
 includeTargets << grailsScript('_GrailsInit')
 
-target (createHibernateCfgXml: 'Creates a hibernate.cfg.xml file') {
+target(createHibernateCfgXml: 'Creates a hibernate.cfg.xml file') {
 	depends(checkVersion)
 
 	cfgFile = new File("$basedir/grails-app/conf/hibernate/hibernate.cfg.xml")
@@ -41,8 +41,7 @@ target (createHibernateCfgXml: 'Creates a hibernate.cfg.xml file') {
 		def pluginTemplateFiles = resolveResources("file:$pluginsHome/*/src/templates/artifacts/hibernate.cfg.xml")
 		if (pluginTemplateFiles) {
 			templateFile = pluginTemplateFiles[0]
-		}
-		else {
+		} else {
 			// template not found in application, use default template
 			templateFile = new FileSystemResource("$hibernate4PluginDir/src/java/hibernate.cfg.xml")
 		}

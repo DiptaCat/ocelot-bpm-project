@@ -18,12 +18,10 @@
  */
 
 import grails.util.Environment
-
-import java.sql.DriverManager
+import org.springframework.jndi.JndiObjectFactoryBean
 
 import javax.sql.DataSource
-
-import org.springframework.jndi.JndiObjectFactoryBean
+import java.sql.DriverManager
 
 includeTargets << new File("$databaseMigrationPluginDir/scripts/_DatabaseMigrationCommon.groovy")
 
@@ -90,8 +88,7 @@ buildOtherDatabase = { String otherEnv ->
 		def factory = new JndiObjectFactoryBean(jndiName: otherDsConfig.jndiName, expectedType: DataSource)
 		factory.afterPropertiesSet()
 		connection = factory.object.connection
-	}
-	else {
+	} else {
 		try {
 			Class.forName otherDsConfig.driverClassName, true, classLoader
 		}
@@ -117,8 +114,7 @@ resolvePassword = { ds ->
 	def encryptionCodec = ds.passwordEncryptionCodec
 	if (encryptionCodec instanceof Class) {
 		codecClass = encryptionCodec
-	}
-	else {
+	} else {
 		encryptionCodec = encryptionCodec.toString()
 		codecClass = grailsApp.codecClasses.find {
 			it.name.equalsIgnoreCase(encryptionCodec) || it.fullName == encryptionCodec
@@ -138,7 +134,7 @@ resolvePassword = { ds ->
 	}
 	catch (ClassNotFoundException e) {
 		throw new RuntimeException(
-			"Error decoding dataSource password. Codec class not found for name [$encryptionCodec]: $e.message", e)
+				"Error decoding dataSource password. Codec class not found for name [$encryptionCodec]: $e.message", e)
 	}
 	catch (e) {
 		throw new RuntimeException("Error decoding dataSource password with codec [$encryptionCodec]: $e.message", e)

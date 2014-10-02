@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import grails.util.GrailsUtil
 
+import grails.util.GrailsUtil
 import org.hibernate.tool.hbm2ddl.SchemaExport as HibernateSchemaExport
 
 includeTargets << grailsScript('_GrailsBootstrap')
@@ -32,11 +32,11 @@ target(schemaExport: 'Run Hibernate SchemaExport') {
 	boolean stdout = false
 
 	for (arg in argsMap.params) {
-		switch(arg) {
-			case 'export':   export = true;  break
+		switch (arg) {
+			case 'export': export = true; break
 			case 'generate': export = false; break
-			case 'stdout':   stdout = true;  break
-			default:         filename = arg
+			case 'stdout': stdout = true; break
+			default: filename = arg
 		}
 	}
 
@@ -49,9 +49,9 @@ target(schemaExport: 'Run Hibernate SchemaExport') {
 	def configuration = sessionFactory.configuration
 
 	def schemaExport = new HibernateSchemaExport(configuration, sessionFactory.dataSource.connection)
-		.setHaltOnError(true)
-		.setOutputFile(file.path)
-		.setDelimiter(';')
+			.setHaltOnError(true)
+			.setOutputFile(file.path)
+			.setDelimiter(';')
 
 	String action = export ? "Exporting" : "Generating script to ${file.path}"
 	String ds = argsMap.datasource ? "for DataSource '$argsMap.datasource'" : "for the default DataSource"

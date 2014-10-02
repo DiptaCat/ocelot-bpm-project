@@ -22,77 +22,76 @@ grails.project.source.level = 1.6
 //]
 
 grails.project.fork = [
-        test: false,
-        run: false
+		test: false,
+		run : false
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
-    // inherit Grails' default dependencies
-    inherits("global") {
-        // specify dependency exclusions here; for example, uncomment this to disable ehcache:
-        // excludes 'ehcache'
-    }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    checksums true // Whether to verify checksums on resolve
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+	// inherit Grails' default dependencies
+	inherits("global") {
+		// specify dependency exclusions here; for example, uncomment this to disable ehcache:
+		// excludes 'ehcache'
+	}
+	log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+	checksums true // Whether to verify checksums on resolve
+	legacyResolve false
+	// whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
-    repositories {
-        inherits true // Whether to inherit repository definitions from plugins
+	repositories {
+		inherits true // Whether to inherit repository definitions from plugins
 
-        grailsPlugins()
-        grailsHome()
-        mavenLocal()
-        grailsCentral()
-        mavenCentral()
-        mavenRepo "https://app.camunda.com/nexus/content/groups/public"
+		grailsPlugins()
+		grailsHome()
+		mavenLocal()
+		grailsCentral()
+		mavenCentral()
+		mavenRepo "https://app.camunda.com/nexus/content/groups/public"
 
+		// uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
+		//mavenRepo "http://repository.codehaus.org"
+		//mavenRepo "http://download.java.net/maven/2/"
+		//mavenRepo "http://repository.jboss.com/maven2/"
+	}
 
+	dependencies {
+		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
-    }
-
-    dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-
-        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+		// runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
 
 //        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 
 		//test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-    }
+	}
 
-    plugins {
-	    compile ":mysql-connectorj:5.1.22.1"
+	plugins {
+		compile ":mysql-connectorj:5.1.22.1"
 
 		test ":spock:0.7"
 
-        // plugins for the build system only
-        build ":tomcat:7.0.54"
+		// plugins for the build system only
+		build ":tomcat:7.0.54"
 
-        // plugins for the compile step
-        compile ":scaffolding:2.1.2"
-        compile ':cache:1.1.7'
+		// plugins for the compile step
+		compile ":scaffolding:2.1.2"
+		compile ':cache:1.1.7'
 
-        //compile ":asset-pipeline:1.8.11"
-        compile ":asset-pipeline:1.9.4"
-        //runtime ':resources:1.2.8'
+		//compile ":asset-pipeline:1.8.11"
+		compile ":asset-pipeline:1.9.4"
+		//runtime ':resources:1.2.8'
 
-        // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
-        runtime ":database-migration:1.4.0"
-        runtime ":jquery:1.11.1"
+		// plugins needed at runtime but not for compilation
+		runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+		runtime ":database-migration:1.4.0"
+		runtime ":jquery:1.11.1"
 
-        //compile ":rest-client-builder:2.0.3"
+		//compile ":rest-client-builder:2.0.3"
 
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":asset-pipeline:1.9.0"
-        //compile ":sass-asset-pipeline:1.7.4"
-        //compile ":less-asset-pipeline:1.7.0"
-        //compile ":coffee-asset-pipeline:1.7.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.3"
-    }
+		// Uncomment these to enable additional asset-pipeline capabilities
+		//compile ":asset-pipeline:1.9.0"
+		//compile ":sass-asset-pipeline:1.7.4"
+		//compile ":less-asset-pipeline:1.7.0"
+		//compile ":coffee-asset-pipeline:1.7.0"
+		//compile ":handlebars-asset-pipeline:1.3.0.3"
+	}
 }

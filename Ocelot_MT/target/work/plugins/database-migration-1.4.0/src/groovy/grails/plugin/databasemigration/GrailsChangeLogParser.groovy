@@ -20,7 +20,6 @@ import liquibase.changelog.DatabaseChangeLog
 import liquibase.exception.ChangeLogParseException
 import liquibase.parser.ChangeLogParser
 import liquibase.resource.ResourceAccessor
-
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -49,11 +48,11 @@ class GrailsChangeLogParser implements ChangeLogParser {
 	/**
 	 * {@inheritDoc}
 	 * @see liquibase.parser.ChangeLogParser#parse(java.lang.String, liquibase.changelog.ChangeLogParameters,
-	 * 	liquibase.resource.ResourceAccessor)
+	 * liquibase.resource.ResourceAccessor )
 	 */
 	DatabaseChangeLog parse(String physicalChangeLogLocation,
-			ChangeLogParameters changeLogParameters,
-			ResourceAccessor resourceAccessor) throws ChangeLogParseException {
+							ChangeLogParameters changeLogParameters,
+							ResourceAccessor resourceAccessor) throws ChangeLogParseException {
 
 		try {
 			log.debug "parsing $physicalChangeLogLocation"
@@ -77,7 +76,7 @@ class GrailsChangeLogParser implements ChangeLogParser {
 			setChangelogProperties changeLogParameters
 
 			def builder = new DslBuilder(changeLogParameters, resourceAccessor,
-				physicalChangeLogLocation, ctx)
+					physicalChangeLogLocation, ctx)
 
 			def root = script.databaseChangeLog
 			root.delegate = builder
@@ -85,7 +84,7 @@ class GrailsChangeLogParser implements ChangeLogParser {
 
 			builder.databaseChangeLog
 		}
-		catch(e) {
+		catch (e) {
 			println "problem parsing $physicalChangeLogLocation: $e.message (re-run with --verbose to see the stacktrace)"
 			throw GrailsUtil.deepSanitize(e)
 		}

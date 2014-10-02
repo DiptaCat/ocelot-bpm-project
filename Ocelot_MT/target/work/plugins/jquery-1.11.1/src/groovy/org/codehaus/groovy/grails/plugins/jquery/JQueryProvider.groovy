@@ -182,8 +182,7 @@ class JQueryProvider implements JavascriptProvider {
 		// Fix for http://jira.codehaus.org/browse/GRAILSPLUGINS-1865
 		if (attrs.forSubmitTag) {
 			attrs.params = "jQuery(this).parents('form:first').serialize()".toString()
-		}
-		else {
+		} else {
 			attrs.params = "jQuery(this).serialize()".toString()
 		}
 	}

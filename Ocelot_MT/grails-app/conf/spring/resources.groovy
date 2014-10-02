@@ -5,7 +5,7 @@ import util.PaletteMarshaller
 
 // Place your Spring DSL code here
 beans = {
-	customObjectMarshallers( CustomObjectMarshallers ) {
+	customObjectMarshallers(CustomObjectMarshallers) {
 		marshallers = [
 				new PaletteItemMarshaller(),
 				new PaletteMarshaller(),

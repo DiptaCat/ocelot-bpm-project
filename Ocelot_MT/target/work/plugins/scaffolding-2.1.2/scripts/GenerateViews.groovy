@@ -24,7 +24,7 @@
 
 includeTargets << new File(scaffoldingPluginDir, 'scripts/_GrailsGenerate.groovy')
 
-target (generateViews: "Generates the CRUD views for a specified domain class") {
+target(generateViews: "Generates the CRUD views for a specified domain class") {
 	depends(checkVersion, parseArguments, packageApp)
 
 	promptForName(type: "Domain Class")
@@ -34,8 +34,7 @@ target (generateViews: "Generates the CRUD views for a specified domain class") 
 	String name = argsMap['params'][0]
 	if (!name || name == '*') {
 		uberGenerate()
-	}
-	else {
+	} else {
 		generateForName = name
 		generateForOne()
 	}

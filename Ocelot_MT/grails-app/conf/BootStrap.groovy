@@ -12,7 +12,7 @@ class BootStrap {
 		def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
 		springContext.getBean("customObjectMarshallers").register()
 
-		if(true) {
+		if (true) {
 			new User(name: "Luis", login: "luis").save()
 			new User(name: "Julio", login: "julio").save()
 
@@ -57,7 +57,7 @@ class BootStrap {
 			def id;
 
 			e.each { item ->
-				id=item.categoryId
+				id = item.categoryId
 				CategoryItem.get(id).addToPaletteItems(item).save(flush: true)
 				p.addToPaletteItems(item)
 			}

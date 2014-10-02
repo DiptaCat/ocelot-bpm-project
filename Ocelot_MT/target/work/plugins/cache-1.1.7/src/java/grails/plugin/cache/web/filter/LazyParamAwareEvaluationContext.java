@@ -14,23 +14,24 @@
  */
 package grails.plugin.cache.web.filter;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.ObjectUtils;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+
 /**
  * Evaluation context class that adds a method parameters as SpEL
  * variables, in a lazy manner. The lazy nature eliminates unneeded
  * parsing of classes byte code for parameter discovery.
- *
+ * <p/>
  * <p>To limit the creation of objects, an ugly constructor is used
  * (rather then a dedicated 'closure'-like class for deferred execution).
- *
+ * <p/>
  * Based on package-scope org.springframework.cache.interceptor
+ *
  * @author Costin Leau
  * @author Burt Beckwith
  */
@@ -44,7 +45,7 @@ public class LazyParamAwareEvaluationContext extends StandardEvaluationContext {
 	protected boolean paramLoaded = false;
 
 	public LazyParamAwareEvaluationContext(Object rootObject, ParameterNameDiscoverer paramDiscoverer, Method method,
-			Object[] args, Class<?> targetClass, Map<String, Method> methodCache) {
+										   Object[] args, Class<?> targetClass, Map<String, Method> methodCache) {
 		super(rootObject);
 
 		this.paramDiscoverer = paramDiscoverer;

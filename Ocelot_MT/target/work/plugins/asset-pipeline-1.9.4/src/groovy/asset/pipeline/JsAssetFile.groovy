@@ -17,12 +17,12 @@
 package asset.pipeline
 
 class JsAssetFile extends AbstractAssetFile {
-    static final contentType = ['application/javascript', 'application/x-javascript','text/javascript']
-    static extensions = ['js']
-    static compiledExtension = 'js'
-    static processors = []
+	static final contentType = ['application/javascript', 'application/x-javascript', 'text/javascript']
+	static extensions = ['js']
+	static compiledExtension = 'js'
+	static processors = []
 
-    String directiveForLine(String line) {
-        line.find(/\/\/=(.*)/) { fullMatch, directive -> return directive }
-    }
+	String directiveForLine(String line) {
+		line.find(/\/\/=(.*)/) { fullMatch, directive -> return directive }
+	}
 }

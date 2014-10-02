@@ -1,6 +1,10 @@
-@artifact.package@import grails.plugin.spock.IntegrationSpec
+@ artifact.package
+@ import grails.plugin.spock.IntegrationSpec
 
-class @artifact.name@ extends IntegrationSpec {
+@
+import java.lang.Object
+
+class @artifact.name @ extends IntegrationSpec {
 
 	def setup() {
 	}

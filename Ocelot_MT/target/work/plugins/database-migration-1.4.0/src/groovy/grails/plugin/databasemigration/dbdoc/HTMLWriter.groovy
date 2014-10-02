@@ -14,13 +14,13 @@
  */
 package grails.plugin.databasemigration.dbdoc
 
-import java.text.DateFormat
-
 import liquibase.change.Change
 import liquibase.changelog.ChangeSet
 import liquibase.database.Database
 import liquibase.util.LiquibaseUtil
 import liquibase.util.StringUtils
+
+import java.text.DateFormat
 
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
@@ -80,8 +80,7 @@ abstract class HTMLWriter {
 		int colspan = 0
 		if (cells) {
 			colspan = cells[0].size()
-		}
-		else {
+		} else {
 			colspan = 0
 		}
 		content.append("""<table border="1" width="100%" cellpadding="3" cellspacing="0" summary="">\n""")
@@ -132,8 +131,7 @@ abstract class HTMLWriter {
 		ChangeSet lastChangeSet
 		if (!changes) {
 			content.append('<tr><td>None Found</td></tr>')
-		}
-		else {
+		} else {
 			for (Change change : changes) {
 				if (!change.changeSet.equals(lastChangeSet)) {
 					lastChangeSet = change.changeSet
@@ -150,19 +148,15 @@ abstract class HTMLWriter {
 					if (runStatus.equals(ChangeSet.RunStatus.NOT_RAN)) {
 						String anchor = change.changeSet.toString(false).replaceAll("\\W", "_")
 						writeTD(content, "NOT YET RAN [<a href='${pathStart}pending/sql#$anchor'>SQL</a>]")
-					}
-					else if (runStatus.equals(ChangeSet.RunStatus.INVALID_MD5SUM)) {
+					} else if (runStatus.equals(ChangeSet.RunStatus.INVALID_MD5SUM)) {
 						writeTD(content, "INVALID MD5SUM")
-					}
-					else if (runStatus.equals(ChangeSet.RunStatus.ALREADY_RAN)) {
+					} else if (runStatus.equals(ChangeSet.RunStatus.ALREADY_RAN)) {
 						writeTD(content, "Executed " +
-							DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(
-								database.getRanDate(change.changeSet)))
-					}
-					else if (runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
+								DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(
+										database.getRanDate(change.changeSet)))
+					} else if (runStatus.equals(ChangeSet.RunStatus.RUN_AGAIN)) {
 						writeTD(content, "Executed, WILL RUN AGAIN")
-					}
-					else {
+					} else {
 						throw new RuntimeException("Unknown run status: " + runStatus)
 					}
 
@@ -177,7 +171,7 @@ abstract class HTMLWriter {
 
 				content.append('<tr bgcolor="white" class="TableRowColor">\n')
 				content.append("<td colspan='4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-				       .append(change.confirmationMessage).append("</td></tr>")
+						.append(change.confirmationMessage).append("</td></tr>")
 			}
 		}
 

@@ -39,8 +39,7 @@ class MySQLCompatibleChangeLogSerializer extends XMLChangeLogSerializer {
 		for (ChangeSet changeSet in changeSets) {
 			if (hasForeignKeyConstraintChange(changeSet)) {
 				foreignKeyChangeSets << changeSet
-			}
-			else {
+			} else {
 				newChangeSets << changeSet
 			}
 		}

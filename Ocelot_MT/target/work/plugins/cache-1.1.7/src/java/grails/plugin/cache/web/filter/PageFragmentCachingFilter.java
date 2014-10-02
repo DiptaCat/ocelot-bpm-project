@@ -17,32 +17,8 @@ package grails.plugin.cache.web.filter;
 import grails.plugin.cache.GrailsAnnotationCacheOperationSource;
 import grails.plugin.cache.SerializableByteArrayOutputStream;
 import grails.plugin.cache.Timer;
-import grails.plugin.cache.web.ContentCacheParameters;
-import grails.plugin.cache.web.GenericResponseWrapper;
-import grails.plugin.cache.web.Header;
-import grails.plugin.cache.web.PageInfo;
-import grails.plugin.cache.web.SerializableCookie;
+import grails.plugin.cache.web.*;
 import grails.util.GrailsNameUtils;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeSet;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi;
 import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes;
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders;
@@ -59,12 +35,17 @@ import org.springframework.cache.interceptor.CachePutOperation;
 import org.springframework.cache.interceptor.CacheableOperation;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.util.StringUtils;
+import org.springframework.util.*;
 import org.springframework.web.context.request.RequestContextHolder;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * A simple page fragment {@link CachingFilter} suitable for most uses.
@@ -100,7 +81,7 @@ import org.springframework.web.context.request.RequestContextHolder;
  * <h3>Gzipping</h3> Page fragments should never be gzipped.
  * <p/>
  * Page fragments are stored in the cache ungzipped.
- *
+ * <p/>
  * Based on net.sf.ehcache.constructs.web.filter.SimplePageFragmentCachingFilter,
  * grails.plugin.springcache.web.GrailsFragmentCachingFilter, and
  * org.springframework.cache.interceptor.CacheAspectSupport
@@ -119,20 +100,24 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	protected static final String CACHEABLE = "cacheable";
 	protected static final String UPDATE = "cacheupdate";
 	protected static final String EVICT = "cacheevict";
-
-	// TODO share with ExpressionEvaluator
-	protected ParameterNameDiscoverer paramNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
-
 	@SuppressWarnings("unchecked")
 	protected static final Map<Class<?>, String> TYPE_TO_CONVERSION_METHOD_NAME = grails.util.CollectionUtils.<Class<?>, String>newMap(
-			Boolean.class,   "boolean",
-			Byte.class,      "byte",
+			Boolean.class, "boolean",
+			Byte.class, "byte",
 			Character.class, "char",
-			Double.class,    "double",
-			Float.class,     "float",
-			Integer.class,   "int",
-			Long.class,      "long",
-			Short.class,     "short");
+			Double.class, "double",
+			Float.class, "float",
+			Integer.class, "int",
+			Long.class, "long",
+			Short.class, "short");
+	protected static final Map<String, Method> PARAMS_METHODS = new HashMap<String, Method>();
+	static {
+		for (String typeName : TYPE_TO_CONVERSION_METHOD_NAME.values()) {
+			String methodName = GrailsNameUtils.getGetterName(typeName);
+			Method method = ClassUtils.getMethod(GrailsParameterMap.class, methodName, String.class);
+			PARAMS_METHODS.put(typeName, method);
+		}
+	}
 	protected static List<Class<?>> PRIMITIVE_CLASSES = grails.util.CollectionUtils.<Class<?>>newList(
 			boolean.class,
 			byte.class,
@@ -142,24 +127,15 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			int.class,
 			long.class,
 			short.class);
-	protected static final Map<String, Method> PARAMS_METHODS = new HashMap<String, Method>();
-	static {
-		for (String typeName : TYPE_TO_CONVERSION_METHOD_NAME.values()) {
-			String methodName = GrailsNameUtils.getGetterName(typeName);
-			Method method = ClassUtils.getMethod(GrailsParameterMap.class, methodName, String.class);
-			PARAMS_METHODS.put(typeName, method);
-		}
-	}
-
-	protected GrailsAnnotationCacheOperationSource cacheOperationSource;
-
 	protected final ThreadLocal<Stack<ContentCacheParameters>> contextHolder = new ThreadLocal<Stack<ContentCacheParameters>>() {
 		@Override
 		protected Stack<ContentCacheParameters> initialValue() {
 			return new Stack<ContentCacheParameters>();
 		}
 	};
-
+	// TODO share with ExpressionEvaluator
+	protected ParameterNameDiscoverer paramNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
+	protected GrailsAnnotationCacheOperationSource cacheOperationSource;
 	protected ExpressionEvaluator expressionEvaluator;
 	protected WebKeyGenerator keyGenerator;
 
@@ -173,7 +149,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			Object controller = lookupController(getContext().getControllerClass());
 			if (controller == null) {
 				log.debug("Not a controller request {}:{} {}",
-						new Object[] { request.getMethod(), request.getRequestURI(), getContext() });
+						new Object[]{request.getMethod(), request.getRequestURI(), getContext()});
 				chain.doFilter(request, response);
 				return;
 			}
@@ -185,7 +161,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			Method method = getContext().getMethod();
 			if (method == null) {
 				log.debug("No cacheable method found for {}:{} {}",
-						new Object[] { request.getMethod(), request.getRequestURI(), getContext() });
+						new Object[]{request.getMethod(), request.getRequestURI(), getContext()});
 				chain.doFilter(request, response);
 				return;
 			}
@@ -194,7 +170,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 			if (CollectionUtils.isEmpty(cacheOperations)) {
 				log.debug("No cacheable annotation found for {}:{} {}",
-						new Object[] { request.getMethod(), request.getRequestURI(), getContext() });
+						new Object[]{request.getMethod(), request.getRequestURI(), getContext()});
 				chain.doFilter(request, response);
 				return;
 			}
@@ -241,15 +217,14 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				}
 				update(caches, pageInfo, status, calculateKey(request));
 			}
-		}
-		finally {
+		} finally {
 			destroyContext();
 		}
 	}
 
 	protected PageInfo buildNewPageInfo(HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain, CacheStatus cacheStatus,
-			Map<String, Collection<CacheOperationContext>> operationsByType) throws Exception {
+										FilterChain chain, CacheStatus cacheStatus,
+										Map<String, Collection<CacheOperationContext>> operationsByType) throws Exception {
 
 		Timer timer = new Timer(getCachedUri(request));
 		timer.start();
@@ -261,11 +236,10 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			pageInfo = buildPage(request, response, chain);
 			if (pageInfo.isOk()) {
 				Object noCache = pageInfo.getCacheDirectives().get("no-cache");
-				if (noCache instanceof Boolean && ((Boolean)noCache)) {
+				if (noCache instanceof Boolean && ((Boolean) noCache)) {
 					log.debug("Response ok but Cache-Control: no-cache is present, not caching");
 					releaseCacheLocks(operationsByType, key);
-				}
-				else {
+				} else {
 					Collection<Cache> caches = new ArrayList<Cache>();
 					for (CacheOperationContext operationContext : operationsByType.get(UPDATE)) {
 						for (Cache cache : operationContext.getCaches()) {
@@ -274,22 +248,20 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 					}
 					update(caches, pageInfo, cacheStatus, key);
 				}
-			}
-			else {
+			} else {
 				for (CacheOperationContext operationContext : operationsByType.get(UPDATE)) {
 					for (Cache cache : operationContext.getCaches()) {
 						log.debug("Response not ok ({}). Putting null into cache {} with key {}",
-								new Object[] { pageInfo.getStatusCode(), cache.getName(), key } );
+								new Object[]{pageInfo.getStatusCode(), cache.getName(), key});
 					}
 				}
 				releaseCacheLocks(operationsByType, key);
 			}
-		}
-		catch (Exception e) {
-            if("net.sf.ehcache.constructs.blocking.LockTimeoutException".equals(e.getClass().getName())) {
-			    //do not release the lock, because you never acquired it
-			    throw e;
-            }
+		} catch (Exception e) {
+			if ("net.sf.ehcache.constructs.blocking.LockTimeoutException".equals(e.getClass().getName())) {
+				//do not release the lock, because you never acquired it
+				throw e;
+			}
 			// Must unlock the cache if the above fails. Will be logged at Filter
 			releaseCacheLocks(operationsByType, key);
 			throw e;
@@ -301,7 +273,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	}
 
 	protected PageInfo buildCachedPageInfo(HttpServletRequest request, HttpServletResponse response,
-			CacheStatus cacheStatus) throws Exception {
+										   CacheStatus cacheStatus) throws Exception {
 
 		Timer timer = new Timer(getCachedUri(request));
 		timer.start();
@@ -332,9 +304,10 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	/**
 	 * Store the PageInfo in the cache with the specified ttl.
-	 * @param cache the cache
-	 * @param key the key
-	 * @param pageInfo the info
+	 *
+	 * @param cache      the cache
+	 * @param key        the key
+	 * @param pageInfo   the info
 	 * @param timeToLive the ttl
 	 */
 	protected abstract void put(Cache cache, String key, PageInfo pageInfo, Integer timeToLive);
@@ -371,11 +344,10 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			for (String attrName : attributesAfter) {
 				Object value = request.getAttribute(attrName);
 				if (value instanceof Serializable) {
-					cacheableRequestAttributes.put(attrName, (Serializable)value);
+					cacheableRequestAttributes.put(attrName, (Serializable) value);
 				}
 			}
-		}
-		finally {
+		} finally {
 			if (isInclude) {
 				WrappedResponseHolder.setWrappedResponse(originalResponse);
 			}
@@ -390,7 +362,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 		}
 
 		return new PageInfo(wrapper.getStatus(), contentType, out.toByteArray(),
-			false, timeToLiveSeconds, wrapper.getAllHeaders(), wrapper.getCookies(), cacheableRequestAttributes);
+				false, timeToLiveSeconds, wrapper.getAllHeaders(), wrapper.getCookies(), cacheableRequestAttributes);
 	}
 
 	protected List<String> toList(Enumeration<String> e) {
@@ -409,7 +381,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	 * Writes the response from a PageInfo object.
 	 * <p/>
 	 * Headers are set last so that there is an opportunity to override
-	 *
+	 * <p/>
 	 * 1 - only set status, contentType, cookies, etc. if this is the "main"
 	 * request and not an include. 2 - send a status code 304 if appropriate.
 	 *
@@ -419,7 +391,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	 * @throws IOException
 	 */
 	protected void writeResponse(final HttpServletRequest request, final HttpServletResponse response,
-			final PageInfo pageInfo) throws IOException {
+								 final PageInfo pageInfo) throws IOException {
 
 		if (!WebUtils.isIncludeRequest(request)) {
 			int statusCode = determineResponseStatus(request, pageInfo);
@@ -436,8 +408,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 		if (!pageInfo.isModified(request)) {
 			log.debug("Content not modified since {} sending 304", request.getHeader(HttpHeaders.IF_MODIFIED_SINCE));
 			statusCode = HttpServletResponse.SC_NOT_MODIFIED;
-		}
-		else if (pageInfo.isMatch(request)) {
+		} else if (pageInfo.isMatch(request)) {
 			log.debug("Content matches entity tag {} sending 304", request.getHeader(HttpHeaders.IF_NONE_MATCH));
 			statusCode = HttpServletResponse.SC_NOT_MODIFIED;
 		}
@@ -460,6 +431,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	/**
 	 * Set the headers in the response object, excluding the Gzip header
+	 *
 	 * @param pageInfo
 	 * @param response
 	 */
@@ -478,8 +450,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				case STRING:
 					if (setHeaders.contains(name)) {
 						response.addHeader(name, (String) header.getValue());
-					}
-					else {
+					} else {
 						setHeaders.add(name);
 						response.setHeader(name, (String) header.getValue());
 					}
@@ -487,8 +458,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				case DATE:
 					if (setHeaders.contains(name)) {
 						response.addDateHeader(name, (Long) header.getValue());
-					}
-					else {
+					} else {
 						setHeaders.add(name);
 						response.setDateHeader(name, (Long) header.getValue());
 					}
@@ -496,8 +466,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				case INT:
 					if (setHeaders.contains(name)) {
 						response.addIntHeader(name, (Integer) header.getValue());
-					}
-					else {
+					} else {
 						setHeaders.add(name);
 						response.setIntHeader(name, (Integer) header.getValue());
 					}
@@ -509,7 +478,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	}
 
 	protected void initContext() {
-		GrailsWebRequest requestAttributes = (GrailsWebRequest)RequestContextHolder.getRequestAttributes();
+		GrailsWebRequest requestAttributes = (GrailsWebRequest) RequestContextHolder.getRequestAttributes();
 		contextHolder.get().push(new ContentCacheParameters(requestAttributes));
 	}
 
@@ -526,7 +495,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	protected String getCachedUri(HttpServletRequest request) {
 		if (WebUtils.isIncludeRequest(request)) {
-			return (String)request.getAttribute(WebUtils.INCLUDE_REQUEST_URI_ATTRIBUTE);
+			return (String) request.getAttribute(WebUtils.INCLUDE_REQUEST_URI_ATTRIBUTE);
 		}
 		return request.getRequestURI();
 	}
@@ -613,12 +582,11 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 			String conversionMethodName;
 			if (TYPE_TO_CONVERSION_METHOD_NAME.containsKey(type)) {
 				conversionMethodName = TYPE_TO_CONVERSION_METHOD_NAME.get(type);
-			}
-			else {
+			} else {
 				conversionMethodName = type.getName();
 			}
 
-			GrailsWebRequest grailsRequest = (GrailsWebRequest)RequestContextHolder.getRequestAttributes();
+			GrailsWebRequest grailsRequest = (GrailsWebRequest) RequestContextHolder.getRequestAttributes();
 			GrailsParameterMap params = grailsRequest.getParams();
 
 			return getParamValue(params, conversionMethodName, name);
@@ -682,21 +650,19 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 						if (evict.isCacheWide()) {
 							cache.clear();
 							logRequestDetails(operationContext.request, getContext(), "Flushing request");
-						}
-						else {
+						} else {
 							// check key
 							if (key == null) {
 								key = operationContext.generateKey();
 							}
 							if (trace) {
 								log.trace("Invalidating cache key {} for operation {} on method {}",
-										new Object[] { key, evict, operationContext.method });
+										new Object[]{key, evict, operationContext.method});
 							}
 							cache.evict(key);
 						}
 					}
-				}
-				else {
+				} else {
 					logRequestDetails(operationContext.request, getContext(), "Not flushing request");
 				}
 			}
@@ -724,12 +690,12 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				Object key = context.generateKey();
 
 				if (trace) {
-					log.trace("Computed cache key {} for operation {}", new Object[] { key, context.operation });
+					log.trace("Computed cache key {} for operation {}", new Object[]{key, context.operation});
 				}
 				if (key == null) {
 					throw new IllegalArgumentException(
 							"Null key returned for cache operation (maybe you are using named params on classes without debug info?) " +
-							context.operation);
+									context.operation);
 				}
 
 				// add op/key (in case an update is discovered later on)
@@ -752,10 +718,9 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 				if (!localCacheHit) {
 					updateRequired = true;
 				}
-			}
-			else {
+			} else {
 				if (trace) {
-					log.trace("Cache condition failed on method {} for operation {}", new Object[] { context.method, context.operation });
+					log.trace("Cache condition failed on method {} for operation {}", new Object[]{context.method, context.operation});
 				}
 			}
 		}
@@ -784,7 +749,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 				if (trace) {
 					log.trace("Computed cache key {} for operation {}",
-							new Object[] { key, context.operation });
+							new Object[]{key, context.operation});
 				}
 				if (key == null) {
 					throw new IllegalArgumentException(
@@ -794,11 +759,10 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 				// add op/key (in case an update is discovered later on)
 				cUpdates.put(context, key);
-			}
-			else {
+			} else {
 				if (trace) {
 					log.trace("Cache condition failed on method {} for operation {}",
-							new Object[] { context.method, context.operation} );
+							new Object[]{context.method, context.operation});
 				}
 			}
 		}
@@ -818,8 +782,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 		String implementationVendor = response.getClass().getPackage().getImplementationVendor();
 		if (implementationVendor != null && implementationVendor.equals("\"Evermind\"")) {
 			response.getOutputStream().print(page);
-		}
-		else {
+		} else {
 			response.getWriter().write(page);
 		}
 	}
@@ -827,10 +790,10 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 	protected void update(Collection<Cache> caches, PageInfo pageInfo, CacheStatus cacheStatus, String key) {
 		ValueWrapper element = cacheStatus == null ? null : cacheStatus.valueWrapper;
 		Object maxAge = pageInfo.getCacheDirectives().get("max-age");
-		int timeToLive = (maxAge instanceof Integer) ? ((Integer)maxAge) : (int)pageInfo.getTimeToLiveSeconds();
+		int timeToLive = (maxAge instanceof Integer) ? ((Integer) maxAge) : (int) pageInfo.getTimeToLiveSeconds();
 		for (Cache cache : caches) {
 			log.debug("Response ok. Adding to cache {} with key {} and ttl {}",
-					new Object[] { cache.getName(), key, getTimeToLive(element) });
+					new Object[]{cache.getName(), key, getTimeToLive(element)});
 			put(cache, key, pageInfo, timeToLive);
 		}
 	}
@@ -844,6 +807,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	/**
 	 * Dependency injection for GrailsAnnotationCacheOperationSource.
+	 *
 	 * @param source
 	 */
 	public void setCacheOperationSource(GrailsAnnotationCacheOperationSource source) {
@@ -852,6 +816,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	/**
 	 * Dependency injection for ExpressionEvaluator.
+	 *
 	 * @param source
 	 */
 	public void setExpressionEvaluator(ExpressionEvaluator evaluator) {
@@ -860,6 +825,7 @@ public abstract class PageFragmentCachingFilter extends AbstractFilter {
 
 	/**
 	 * Dependency injection for WebKeyGenerator.
+	 *
 	 * @param source
 	 */
 	public void setKeyGenerator(WebKeyGenerator generator) {

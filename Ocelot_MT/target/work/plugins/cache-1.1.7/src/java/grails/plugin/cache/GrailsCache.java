@@ -14,9 +14,9 @@
  */
 package grails.plugin.cache;
 
-import java.util.Collection;
-
 import org.springframework.cache.Cache;
+
+import java.util.Collection;
 
 /**
  * @author Burt Beckwith

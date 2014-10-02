@@ -14,15 +14,14 @@
  */
 package grails.plugin.cache.web.filter;
 
-import java.io.IOException;
+import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.filter.GenericFilterBean;
+import java.io.IOException;
 
 /**
  * Based on grails.plugin.springcache.web.NoOpFilter.
@@ -32,8 +31,8 @@ import org.springframework.web.filter.GenericFilterBean;
  */
 public class NoOpFilter extends GenericFilterBean {
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        ((HttpServletResponse)response).addHeader(PageFragmentCachingFilter.X_CACHED, "disabled");
-        chain.doFilter(request, response);
-    }
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		((HttpServletResponse) response).addHeader(PageFragmentCachingFilter.X_CACHED, "disabled");
+		chain.doFilter(request, response);
+	}
 }

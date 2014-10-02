@@ -14,10 +14,10 @@
  */
 package grails.plugin.cache;
 
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+
 import java.util.Collection;
 import java.util.concurrent.ConcurrentMap;
-
-import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 /**
  * Extends the default implementation to return GrailsValueWrapper instances instead of

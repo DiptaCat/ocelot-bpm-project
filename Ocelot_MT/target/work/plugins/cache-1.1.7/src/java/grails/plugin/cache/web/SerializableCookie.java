@@ -14,9 +14,8 @@
  */
 package grails.plugin.cache.web;
 
-import java.io.Serializable;
-
 import javax.servlet.http.Cookie;
+import java.io.Serializable;
 
 /**
  * Based on net.sf.ehcache.constructs.web.SerializableCookie.

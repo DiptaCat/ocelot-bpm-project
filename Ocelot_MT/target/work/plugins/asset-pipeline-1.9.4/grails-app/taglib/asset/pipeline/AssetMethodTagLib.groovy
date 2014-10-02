@@ -1,7 +1,5 @@
 package asset.pipeline
 
-import grails.util.Environment
-
 class AssetMethodTagLib {
 
 	static namespace = "g"
@@ -12,14 +10,14 @@ class AssetMethodTagLib {
 
 	def assetPath = { attrs ->
 		def src
-        //unused
+		//unused
 		def ignorePrefix = false
-        def absolute = false
+		def absolute = false
 		if (attrs instanceof Map) {
 			src = attrs.src
-            //unused
-			ignorePrefix = attrs.containsKey('ignorePrefix')? attrs.ignorePrefix : false
-            absolute = attrs.containsKey('absolute') ? attrs.absolute : false
+			//unused
+			ignorePrefix = attrs.containsKey('ignorePrefix') ? attrs.ignorePrefix : false
+			absolute = attrs.containsKey('absolute') ? attrs.absolute : false
 		} else {
 			src = attrs
 		}
@@ -28,9 +26,9 @@ class AssetMethodTagLib {
 
 		def assetUrl = assetUriRootPath(grailsApplication, request, absolute)
 
-		if(conf.precompiled) {
+		if (conf.precompiled) {
 			def realPath = conf.manifest.getProperty(src)
-			if(realPath) {
+			if (realPath) {
 				return "${assetUrl}${realPath}"
 			}
 		}
@@ -38,18 +36,18 @@ class AssetMethodTagLib {
 	}
 
 
-	private assetUriRootPath(grailsApplication, request, absolute=false) {
+	private assetUriRootPath(grailsApplication, request, absolute = false) {
 		def context = grailsApplication.mainContext //unused
-		def conf    = grailsApplication.config.grails.assets
+		def conf = grailsApplication.config.grails.assets
 		def mapping = assetProcessorService.assetMapping
-		if(conf.url && conf.url instanceof Closure) {
+		if (conf.url && conf.url instanceof Closure) {
 			return conf.url.call(request)
 		} else {
-            if(absolute && !conf.url){
-                return grailsApplication.config.grails.serverURL + "${request.contextPath?.endsWith('/') ? '' : '/'}$mapping/"
-            }
-            String relativePathToResource = (request.contextPath + "${request.contextPath?.endsWith('/') ? '' : '/'}$mapping/" )
-            return conf.url ?: relativePathToResource
+			if (absolute && !conf.url) {
+				return grailsApplication.config.grails.serverURL + "${request.contextPath?.endsWith('/') ? '' : '/'}$mapping/"
+			}
+			String relativePathToResource = (request.contextPath + "${request.contextPath?.endsWith('/') ? '' : '/'}$mapping/")
+			return conf.url ?: relativePathToResource
 		}
 
 	}

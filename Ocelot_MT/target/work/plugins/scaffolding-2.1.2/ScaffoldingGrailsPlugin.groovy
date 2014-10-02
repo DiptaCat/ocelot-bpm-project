@@ -13,17 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import java.lang.reflect.Method
-import java.lang.reflect.Modifier
-import java.util.concurrent.ConcurrentHashMap
 
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ASTTransformationCustomizer
-import org.codehaus.groovy.grails.commons.ControllerArtefactHandler
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
-import org.codehaus.groovy.grails.commons.GrailsControllerClass
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.codehaus.groovy.grails.commons.*
 import org.codehaus.groovy.grails.compiler.injection.NamedArtefactTypeAstTransformation
 import org.codehaus.groovy.grails.scaffolding.DefaultGrailsTemplateGenerator
 import org.codehaus.groovy.grails.scaffolding.GrailsTemplateGenerator
@@ -34,6 +27,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
 import org.springframework.context.ApplicationContext
+
+import java.lang.reflect.Method
+import java.lang.reflect.Modifier
+import java.util.concurrent.ConcurrentHashMap
 
 class ScaffoldingGrailsPlugin {
 
@@ -85,9 +82,9 @@ class ScaffoldingGrailsPlugin {
 		}
 
 		try {
-            log.info "configuring scaffolding..."
+			log.info "configuring scaffolding..."
 			configureScaffolding ctx, application
-            log.info "done configuring scaffolding."
+			log.info "done configuring scaffolding."
 		}
 		catch (e) {
 			log.error "Error configuration scaffolding: $e.message", e
@@ -103,8 +100,7 @@ class ScaffoldingGrailsPlugin {
 		if (event.source && application.isControllerClass(event.source)) {
 			GrailsControllerClass controllerClass = application.getControllerClass(event.source.name)
 			configureScaffoldingController(event.ctx, event.application, controllerClass)
-		}
-		else {
+		} else {
 			configureScaffolding(event.ctx, event.application)
 		}
 	}
@@ -153,7 +149,7 @@ class ScaffoldingGrailsPlugin {
 
 			if (!mp) {
 				Closure propertyValue = actionProp instanceof MetaProperty ? actionProp.getProperty(scaffoldedInstance) : actionProp
-				metaClass."${GrailsClassUtils.getGetterName(propertyName)}" = {->
+				metaClass."${GrailsClassUtils.getGetterName(propertyName)}" = { ->
 					propertyValue.delegate = delegate
 					propertyValue.resolveStrategy = Closure.DELEGATE_FIRST
 					propertyValue
@@ -189,13 +185,14 @@ class ScaffoldingGrailsPlugin {
 			try {
 				return mp.getProperty(scaffoldedInstance) instanceof Closure
 			}
-			catch (Exception ignored) {}
+			catch (Exception ignored) {
+			}
 		}
 
 		def methodActions = scaffoldedInstance.getClass().declaredMethods.findAll { Method m ->
 			def modifiers = m.modifiers
 			Modifier.isPublic(modifiers) && !Modifier.isAbstract(modifiers) && !Modifier.isStatic(modifiers) && !Modifier.isSynthetic(modifiers)
-		}.collect { Method m -> scaffoldedInstance.&"$m.name"}
+		}.collect { Method m -> scaffoldedInstance.&"$m.name" }
 		actionProperties.addAll methodActions
 		return actionProperties
 	}

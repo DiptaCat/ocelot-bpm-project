@@ -15,9 +15,6 @@
 package grails.plugin.databasemigration
 
 import groovy.sql.Sql
-
-import java.sql.Connection
-
 import liquibase.change.AbstractChange
 import liquibase.change.ChangeMetaData
 import liquibase.change.ChangeProperty
@@ -30,9 +27,10 @@ import liquibase.exception.Warnings
 import liquibase.executor.ExecutorService
 import liquibase.executor.LoggingExecutor
 import liquibase.statement.SqlStatement
-
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.context.ApplicationContext
+
+import java.sql.Connection
 
 /**
  * Custom Groovy-based change.
@@ -41,49 +39,49 @@ import org.springframework.context.ApplicationContext
  */
 class GrailsChange extends AbstractChange {
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	protected boolean validateClosureCalled
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	protected ValidationErrors validationErrors = new ValidationErrors()
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	protected Warnings warnings = new Warnings()
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	protected List<SqlStatement> allStatements = []
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	protected boolean shouldRun = true
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Database database
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Sql sql
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	ApplicationContext ctx
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Closure initClosure
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Closure validateClosure
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Closure changeClosure
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	Closure rollbackClosure
 
 	/**
 	 * @see liquibase.change.Change#getConfirmationMessage()
 	 */
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	String confirmationMessage = 'Executed GrailsChange'
 
-	@ChangeProperty(includeInSerialization=false)
+	@ChangeProperty(includeInSerialization = false)
 	String checksumString
 
 	/**
@@ -193,7 +191,7 @@ class GrailsChange extends AbstractChange {
 	 * @param statement the statement
 	 */
 	void sqlStatements(statements) {
-		if (shouldRun && statements) allStatements.addAll (statements as List)
+		if (shouldRun && statements) allStatements.addAll(statements as List)
 	}
 
 	/**

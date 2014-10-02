@@ -44,8 +44,7 @@ target(dbmListTags: "Lists the tags in the current database") {
 			for (tag in tags) {
 				println "   $tag"
 			}
-		}
-		else {
+		} else {
 			println "\nNo tags found"
 		}
 	}

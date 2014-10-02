@@ -14,30 +14,10 @@
  */
 package grails.plugin.cache.web;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.codehaus.groovy.grails.commons.GrailsClassUtils;
 import org.codehaus.groovy.grails.plugins.web.api.ControllersApi;
 import org.codehaus.groovy.grails.web.servlet.GrailsFlashScope;
 import org.codehaus.groovy.grails.web.servlet.HttpHeaders;
-import org.codehaus.groovy.grails.commons.*;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.TargetSource;
@@ -45,9 +25,22 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.FlashMap;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
 /**
  * A Serializable representation of a {@link HttpServletResponse}.
- *
+ * <p/>
  * Based on net.sf.ehcache.constructs.web.PageInfo and grails.plugin.springcache.web.HeadersCategory.
  *
  * @author Adam Murdoch
@@ -56,8 +49,6 @@ import org.springframework.web.servlet.FlashMap;
  * @author Burt Beckwith
  */
 public class PageInfo implements Serializable {
-	private static final long serialVersionUID = 1;
-
 	protected static final Pattern PATTERN_CACHE_DIRECTIVE = Pattern.compile("([\\w-]+)(?:=(.+))?");
 	protected static final int FOUR_KB = 4196;
 	protected static final int GZIP_MAGIC_NUMBER_BYTE_1 = 31;
@@ -67,8 +58,7 @@ public class PageInfo implements Serializable {
 		add("net.sf.cglib.proxy");
 		add("javassist.util.proxy.ProxyObject");
 	}};
-
-
+	private static final long serialVersionUID = 1;
 	protected final HttpDateFormatter httpDateFormatter = new HttpDateFormatter();
 	protected final List<Header<? extends Serializable>> responseHeaders = new ArrayList<Header<? extends Serializable>>();
 	protected final List<SerializableCookie> serializableCookies = new ArrayList<SerializableCookie>();
@@ -88,7 +78,7 @@ public class PageInfo implements Serializable {
 	 * @param contentType
 	 * @param cookies
 	 * @param body
-	 * @param storeGzipped set this to false for images and page fragments which should never
+	 * @param storeGzipped      set this to false for images and page fragments which should never
 	 * @param timeToLiveSeconds the time to Live in seconds. 0 means maximum, which is one year per RFC2616.
 	 * @param headers
 	 * @param cookies
@@ -96,9 +86,9 @@ public class PageInfo implements Serializable {
 	 * @throws AlreadyGzippedException
 	 */
 	public PageInfo(final int statusCode, final String contentType, final byte[] body,
-	        boolean storeGzipped, long timeToLiveSeconds, final Collection<Header<? extends Serializable>> headers,
-	        @SuppressWarnings("unused") final Collection<Cookie> cookies,
-	        Map<String, Serializable> requestAttributes) throws AlreadyGzippedException {
+					boolean storeGzipped, long timeToLiveSeconds, final Collection<Header<? extends Serializable>> headers,
+					@SuppressWarnings("unused") final Collection<Cookie> cookies,
+					Map<String, Serializable> requestAttributes) throws AlreadyGzippedException {
 
 		if (headers != null) {
 			responseHeaders.addAll(headers);
@@ -120,19 +110,35 @@ public class PageInfo implements Serializable {
 				ungzippedBody = null;
 				if (isBodyParameterGzipped()) {
 					gzippedBody = body;
-				}
-				else {
+				} else {
 					gzippedBody = gzip(body);
 				}
-			}
-			else {
+			} else {
 				Assert.isTrue(!isBodyParameterGzipped(), "Non gzip content has been gzipped.");
 				ungzippedBody = body;
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			LoggerFactory.getLogger(getClass()).error("Error ungzipping gzipped body", e);
 		}
+	}
+
+	/**
+	 * Checks the first two bytes of the candidate byte array for the magic
+	 * number 0x677a. This magic number was obtained from /usr/share/file/magic.
+	 * The line for gzip is:
+	 * <p/>
+	 * <code>
+	 * >>14    beshort 0x677a          (gzipped)
+	 * </code>
+	 *
+	 * @param candidate the byte array to check
+	 * @return true if gzipped, false if null, less than two bytes or not gzipped
+	 */
+	public static boolean isGzipped(byte[] candidate) {
+		if (candidate == null || candidate.length < 2) {
+			return false;
+		}
+		return (candidate[0] == GZIP_MAGIC_NUMBER_BYTE_1 && candidate[1] == GZIP_MAGIC_NUMBER_BYTE_2);
 	}
 
 	/**
@@ -141,21 +147,19 @@ public class PageInfo implements Serializable {
 	 * approximately one year from the time the response is sent. HTTP/1.1
 	 * servers SHOULD NOT send Expires dates more than one year in the future.
 	 *
-	 * @param ttlSeconds
-	 *           accepts 0, which means eternal. If the time is 0 or > one year,
-	 *           it is set to one year in accordance with the RFC.
-	 *           <p/>
-	 *           Note: PageInfo does not hold a reference to the Element
-	 *           and therefore does not know what the Element ttl is. It would
-	 *           normally make most sense to set the TTL to the same as the
-	 *           element expiry.
+	 * @param ttlSeconds accepts 0, which means eternal. If the time is 0 or > one year,
+	 *                   it is set to one year in accordance with the RFC.
+	 *                   <p/>
+	 *                   Note: PageInfo does not hold a reference to the Element
+	 *                   and therefore does not know what the Element ttl is. It would
+	 *                   normally make most sense to set the TTL to the same as the
+	 *                   element expiry.
 	 */
 	protected void setTimeToLiveWithCheckForNeverExpires(long ttlSeconds) {
 		// 0 means eternal
 		if (ttlSeconds == 0 || ttlSeconds > ONE_YEAR_IN_SECONDS) {
 			timeToLiveSeconds = ONE_YEAR_IN_SECONDS;
-		}
-		else {
+		} else {
 			timeToLiveSeconds = ttlSeconds;
 		}
 	}
@@ -187,25 +191,6 @@ public class PageInfo implements Serializable {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Checks the first two bytes of the candidate byte array for the magic
-	 * number 0x677a. This magic number was obtained from /usr/share/file/magic.
-	 * The line for gzip is:
-	 * <p/>
-	 * <code>
-	 * >>14    beshort 0x677a          (gzipped)
-	 * </code>
-	 *
-	 * @param candidate the byte array to check
-	 * @return true if gzipped, false if null, less than two bytes or not gzipped
-	 */
-	public static boolean isGzipped(byte[] candidate) {
-		if (candidate == null || candidate.length < 2) {
-			return false;
-		}
-		return (candidate[0] == GZIP_MAGIC_NUMBER_BYTE_1 && candidate[1] == GZIP_MAGIC_NUMBER_BYTE_2);
 	}
 
 	/**
@@ -245,7 +230,7 @@ public class PageInfo implements Serializable {
 
 	/**
 	 * @return the ungzipped version of the body. This gunzipped on demand when
-	 *         storedGzipped, otherwise the ungzipped body is returned.
+	 * storedGzipped, otherwise the ungzipped body is returned.
 	 */
 	public byte[] getUngzippedBody() throws IOException {
 		return storeGzipped ? ungzip(gzippedBody) : ungzippedBody;
@@ -322,7 +307,7 @@ public class PageInfo implements Serializable {
 	public String getHeader(String headerName) {
 		for (Header<? extends Serializable> header : responseHeaders) {
 			if (header.getName().equals(headerName)) {
-				return (String)header.getValue();
+				return (String) header.getValue();
 			}
 		}
 		return null;
@@ -336,8 +321,7 @@ public class PageInfo implements Serializable {
 
 		try {
 			return Long.valueOf(header);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return httpDateFormatter.parseDateFromHttpDate(header).getTime();
 		}
 	}
@@ -385,12 +369,10 @@ public class PageInfo implements Serializable {
 				if (StringUtils.hasLength(value)) {
 					try {
 						directives.put(name, Integer.valueOf(value));
-					}
-					catch (NumberFormatException e) {
+					} catch (NumberFormatException e) {
 						directives.put(name, value);
 					}
-				}
-				else {
+				} else {
 					directives.put(name, true);
 				}
 			}
@@ -406,23 +388,17 @@ public class PageInfo implements Serializable {
 
 			if (value instanceof GrailsFlashScope) {
 				continue;
-			}
-			else if (value instanceof FlashMap) {
+			} else if (value instanceof FlashMap) {
 				continue;
-			}
-			else if (value instanceof HttpServletResponse) {
+			} else if (value instanceof HttpServletResponse) {
 				continue;
-			}
-			else if (value instanceof ControllersApi) {
+			} else if (value instanceof ControllersApi) {
 				continue;
-			}
-			else if (value instanceof PointcutAdvisor || value instanceof PointcutAdvisor[]) {
+			} else if (value instanceof PointcutAdvisor || value instanceof PointcutAdvisor[]) {
 				continue;
-			}
-			else if (value instanceof TargetSource) {
+			} else if (value instanceof TargetSource) {
 				continue;
-			}
-			else if(isInvalidObject(value)) {
+			} else if (isInvalidObject(value)) {
 				continue;
 			}
 
@@ -431,12 +407,12 @@ public class PageInfo implements Serializable {
 	}
 
 	protected boolean isInvalidObject(Object object) {
-			Class[] interfaces = GrailsClassUtils.getAllInterfaces(object);
-			for(Class i : interfaces) {
-				if(IGNORED_INTERFACES.contains(i.getName())) {
-					return true;
-				}
+		Class[] interfaces = GrailsClassUtils.getAllInterfaces(object);
+		for (Class i : interfaces) {
+			if (IGNORED_INTERFACES.contains(i.getName())) {
+				return true;
 			}
-			return false;
+		}
+		return false;
 	}
 }

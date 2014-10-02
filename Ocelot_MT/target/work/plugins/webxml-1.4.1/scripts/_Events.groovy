@@ -60,7 +60,7 @@ private void fixWebXml() {
 private Set<String> findFilterMappingNames(dom) {
 	Set names = []
 
-	use (DOMCategory) {
+	use(DOMCategory) {
 		def mappingNodes = dom.'filter-mapping'
 		mappingNodes.each { n ->
 			names << n.'filter-name'.text()
@@ -74,7 +74,7 @@ private void sortFilterMappingNodes(dom, orderedFilterNames) {
 	def sortedMappingNodes = []
 	def followingNode
 
-	use (DOMCategory) {
+	use(DOMCategory) {
 		def mappingNodes = dom.'filter-mapping'
 		if (mappingNodes.size()) {
 			followingNode = mappingNodes[-1].nextSibling

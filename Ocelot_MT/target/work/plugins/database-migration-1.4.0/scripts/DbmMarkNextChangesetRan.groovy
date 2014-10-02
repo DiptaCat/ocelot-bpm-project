@@ -26,8 +26,7 @@ target(markNextChangesetRan: 'Mark the next change set as executed in the databa
 
 		if (argsList[0] && okToWrite()) {
 			liquibase.markNextChangeSetRan contexts, ScriptUtils.newPrintWriter(argsList)
-		}
-		else {
+		} else {
 			liquibase.markNextChangeSetRan contexts
 		}
 	}

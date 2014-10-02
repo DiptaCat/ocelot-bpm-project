@@ -18,19 +18,6 @@ package org.codehaus.groovy.grails.scaffolding;
 import grails.build.logging.GrailsConsole;
 import groovy.text.SimpleTemplateEngine;
 import groovy.text.Template;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.groovy.grails.commons.GrailsApplication;
@@ -51,6 +38,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.io.*;
+import java.util.*;
+
 public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateGenerator, ResourceLoaderAware, PluginManagerAware {
 
 	protected static final Log log = LogFactory.getLog(AbstractGrailsTemplateGenerator.class);
@@ -63,12 +53,6 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 	protected String domainSuffix = "";
 	protected GrailsPluginManager pluginManager;
 	protected GrailsApplication grailsApplication;
-
-	protected enum GrailsControllerType {
-		DEFAULT,
-		RESTFUL,
-		ASYNC
-	}
 
 	protected AbstractGrailsTemplateGenerator(ClassLoader classLoader) {
 		engine = new SimpleTemplateEngine(classLoader);
@@ -116,9 +100,9 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 				generateController(controllerType, domainClass, writer);
 				try {
 					writer.flush();
-				} catch (IOException ignored) {}
-			}
-			finally {
+				} catch (IOException ignored) {
+				}
+			} finally {
 				IOGroovyMethods.closeQuietly(writer);
 			}
 
@@ -180,10 +164,9 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 			generateView(domainClass, viewName, writer);
 			try {
 				writer.flush();
+			} catch (IOException ignored) {
 			}
-			catch (IOException ignored) {}
-		}
-		finally {
+		} finally {
 			IOGroovyMethods.closeQuietly(writer);
 		}
 	}
@@ -196,15 +179,15 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 	protected void generateController(GrailsControllerType controllerType, GrailsDomainClass domainClass, Writer out) throws IOException {
 		String templateText = null;
 		switch (controllerType) {
-		case DEFAULT:
-			templateText = getTemplateText("Controller.groovy");
-			break;
-		case RESTFUL:
-			templateText = getTemplateText("RestfulController.groovy");
-			break;
-		case ASYNC:
-			templateText = getTemplateText("AsyncController.groovy");
-			break;
+			case DEFAULT:
+				templateText = getTemplateText("Controller.groovy");
+				break;
+			case RESTFUL:
+				templateText = getTemplateText("RestfulController.groovy");
+				break;
+			case ASYNC:
+				templateText = getTemplateText("AsyncController.groovy");
+				break;
 		}
 
 		Map<String, Object> binding = createBinding(domainClass);
@@ -249,10 +232,9 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 			generate(templateText, binding, writer);
 			try {
 				writer.flush();
+			} catch (IOException ignored) {
 			}
-			catch (IOException ignored) {}
-		}
-		finally {
+		} finally {
 			IOGroovyMethods.closeQuietly(writer);
 		}
 	}
@@ -273,11 +255,9 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 	protected void generate(String templateText, Map<String, Object> binding, Writer out) {
 		try {
 			engine.createTemplate(templateText).make(binding).writeTo(out);
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -290,8 +270,7 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 		InputStream inputStream = null;
 		if (resourceLoader != null && grailsApplication.isWarDeployed()) {
 			inputStream = resourceLoader.getResource("/WEB-INF/templates/scaffolding/" + template).getInputStream();
-		}
-		else {
+		} else {
 			AbstractResource templateFile = getTemplateResource(template);
 			if (templateFile.exists()) {
 				inputStream = templateFile.getInputStream();
@@ -324,11 +303,10 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 		try {
 			String relative = makeRelativeIfPossible(testFile.getAbsolutePath(), basedir);
 			String response = GrailsConsole.getInstance().userInput(
-					"File " + relative + " already exists. Overwrite?", new String[] { "y", "n", "a" });
+					"File " + relative + " already exists. Overwrite?", new String[]{"y", "n", "a"});
 			overwrite = overwrite || "a".equals(response);
 			return overwrite || "y".equals(response);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// failure to read from standard in means we're probably running from an automation tool like a build server
 			return true;
 		}
@@ -347,8 +325,7 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 			try {
 				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(resourceLoader);
 				return extractNames(resolver.getResources("/WEB-INF/templates/scaffolding/*.gsp"));
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				return Collections.emptySet();
 			}
 		}
@@ -361,8 +338,7 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 		if (templatesDir.exists()) {
 			try {
 				resources.addAll(extractNames(resolver.getResources("file:" + templatesDirPath + "/*.gsp")));
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				log.error("Error while loading views from " + basedir, e);
 			}
 		}
@@ -370,8 +346,7 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 		File pluginDir = getPluginDir();
 		try {
 			resources.addAll(extractNames(resolver.getResources("file:" + pluginDir + "/src/templates/scaffolding/*.gsp")));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// ignore
 			log.error("Error locating templates from " + pluginDir + ": " + e.getMessage(), e);
 		}
@@ -409,5 +384,11 @@ public abstract class AbstractGrailsTemplateGenerator implements GrailsTemplateG
 
 	public void setOverwrite(boolean shouldOverwrite) {
 		overwrite = shouldOverwrite;
+	}
+
+	protected enum GrailsControllerType {
+		DEFAULT,
+		RESTFUL,
+		ASYNC
 	}
 }

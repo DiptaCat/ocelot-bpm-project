@@ -24,23 +24,22 @@
 
 includeTargets << new File(scaffoldingPluginDir, 'scripts/_GrailsGenerate.groovy')
 
-target (generateController: "Generates the CRUD controller for a specified domain class") {
-    depends(checkVersion, parseArguments, packageApp)
+target(generateController: "Generates the CRUD controller for a specified domain class") {
+	depends(checkVersion, parseArguments, packageApp)
 
-    promptForName(type: "Domain Class")
+	promptForName(type: "Domain Class")
 
-    generateViews = false
-    generateController = false
-    generateAsyncController = true
+	generateViews = false
+	generateController = false
+	generateAsyncController = true
 
-    String name = argsMap['params'][0]
-    if (!name || name == '*') {
-        uberGenerate()
-    }
-    else {
-        generateForName = name
-        generateForOne()
-    }
+	String name = argsMap['params'][0]
+	if (!name || name == '*') {
+		uberGenerate()
+	} else {
+		generateForName = name
+		generateForOne()
+	}
 }
 
 USAGE = """

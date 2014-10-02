@@ -15,33 +15,35 @@
  */
 
 package asset.pipeline.processors
+
 import java.util.regex.Pattern
+
 class CssMinifyPostProcessor {
-    static contentTypes = ['text/css']
-    
-    CssMinifyPostProcessor() {
+	static contentTypes = ['text/css']
 
-    }
+	CssMinifyPostProcessor() {
 
-    def process(inputText, options = [:]) {
-    	def removeComments = options.containsKey('removeComments') ? options.removeComments : true
-    	def stripWhitespace = options.containsKey('stripWhitespace') ? options.stripWhitespace : true
+	}
+
+	def process(inputText, options = [:]) {
+		def removeComments = options.containsKey('removeComments') ? options.removeComments : true
+		def stripWhitespace = options.containsKey('stripWhitespace') ? options.stripWhitespace : true
 
 
 
-        def processedCss = inputText
-        if(removeComments) {
-            Pattern p = Pattern.compile("/\\*+(.*?)\\*+/", Pattern.DOTALL);
-        	processedCss = processedCss.replaceAll(p,"")	
-        }
-        if(stripWhitespace) {
-        	processedCss = processedCss.replaceAll("\r\n","\n")
-        	def cssLines = processedCss.split("\n")
-        	cssLines = cssLines.collect { it.trim() }
-        	processedCss = cssLines.join("")
-        }
-        
-        return processedCss
+		def processedCss = inputText
+		if (removeComments) {
+			Pattern p = Pattern.compile("/\\*+(.*?)\\*+/", Pattern.DOTALL);
+			processedCss = processedCss.replaceAll(p, "")
+		}
+		if (stripWhitespace) {
+			processedCss = processedCss.replaceAll("\r\n", "\n")
+			def cssLines = processedCss.split("\n")
+			cssLines = cssLines.collect { it.trim() }
+			processedCss = cssLines.join("")
+		}
 
-    }
+		return processedCss
+
+	}
 }

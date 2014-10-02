@@ -24,7 +24,7 @@
 
 includeTargets << grailsScript("_GrailsCreateArtifacts")
 
-target (createScaffoldController: "Creates a new scaffolding controller for a domain class") {
+target(createScaffoldController: "Creates a new scaffolding controller for a domain class") {
 	depends(checkVersion, parseArguments)
 
 	String suffix = "Controller"
@@ -41,14 +41,14 @@ target (createScaffoldController: "Creates a new scaffolding controller for a do
 		}
 
 		createArtifact(
-			name: name,
-			suffix: suffix,
-			type: "ScaffoldingController",
-			path: "grails-app/controllers",
-			skipPackagePrompt: true)
+				name: name,
+				suffix: suffix,
+				type: "ScaffoldingController",
+				path: "grails-app/controllers",
+				skipPackagePrompt: true)
 
 		String viewsDir = "${basedir}/grails-app/views/${propertyName}"
-		ant.mkdir(dir:viewsDir)
+		ant.mkdir(dir: viewsDir)
 		event("CreatedFile", [viewsDir])
 
 		createUnitTest(name: name, suffix: suffix, superClass: "ControllerUnitTestCase", skipPackagePrompt: true)

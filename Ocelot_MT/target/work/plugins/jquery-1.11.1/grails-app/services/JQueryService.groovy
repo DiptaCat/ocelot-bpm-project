@@ -14,72 +14,72 @@
  * limitations under the License.
  */
 
-import grails.util.Environment
 
+import grails.util.Environment
 import org.springframework.beans.factory.InitializingBean
 
 class JQueryService implements InitializingBean {
 
-    static transactional = false
+	static transactional = false
 
-    String jsFolder
-    String cssFolder
-    String cssDefault
-    String coreSuffix
-    String minFolder
-    String minExt
+	String jsFolder
+	String cssFolder
+	String cssDefault
+	String coreSuffix
+	String minFolder
+	String minExt
 
-    def grailsApplication
+	def grailsApplication
 
-    def pathChecked = []
-    def pathWhichDoNotExist = []
+	def pathChecked = []
+	def pathWhichDoNotExist = []
 
-    void afterPropertiesSet() {
-        ConfigObject config = new ConfigSlurper(Environment.current.name).parse(grailsApplication.classLoader.loadClass('JQueryConfig'))
+	void afterPropertiesSet() {
+		ConfigObject config = new ConfigSlurper(Environment.current.name).parse(grailsApplication.classLoader.loadClass('JQueryConfig'))
 
-        jsFolder    = config?.jquery?.sources ?: 'js/jquery'
-        coreSuffix  = config?.jquery?.coreSuffix?: 'core'
+		jsFolder = config?.jquery?.sources ?: 'js/jquery'
+		coreSuffix = config?.jquery?.coreSuffix ?: 'core'
 
-        cssFolder   = config?.jquery?.cssFolder ?: 'theme'
-        cssDefault  = config?.jquery?.cssDefault ?: 'base'
-        minFolder   = config?.jquery?.minFolder ?: 'minified'
-        minExt      = config?.jquery?.minExtentsion ?: 'min'
+		cssFolder = config?.jquery?.cssFolder ?: 'theme'
+		cssDefault = config?.jquery?.cssDefault ?: 'base'
+		minFolder = config?.jquery?.minFolder ?: 'minified'
+		minExt = config?.jquery?.minExtentsion ?: 'min'
 
-        // to be sure we're talking about the same thing'
-        if (!jsFolder.startsWith('js')) {
-            jsFolder = 'js/' + jsFolder
-        }
+		// to be sure we're talking about the same thing'
+		if (!jsFolder.startsWith('js')) {
+			jsFolder = 'js/' + jsFolder
+		}
 
-        // clean or prepare the folder path
-        jsFolder    = cleanPath(jsFolder)
-        cssFolder   = cleanPath(cssFolder)
-        minFolder   = cleanPath(minFolder)
-    }
+		// clean or prepare the folder path
+		jsFolder = cleanPath(jsFolder)
+		cssFolder = cleanPath(cssFolder)
+		minFolder = cleanPath(minFolder)
+	}
 
-    // all this is to avoid checking the filesystem too often
-    def exist = { String dirPath, String filePath ->
-        existPath(dirPath) && existPath(dirPath + '/' + filePath)
-    }
+	// all this is to avoid checking the filesystem too often
+	def exist = { String dirPath, String filePath ->
+		existPath(dirPath) && existPath(dirPath + '/' + filePath)
+	}
 
-    def existPath = { String path ->
-        if (!pathChecked.contains(path)) {
-            checkPath path
-        }
+	def existPath = { String path ->
+		if (!pathChecked.contains(path)) {
+			checkPath path
+		}
 
-        !pathWhichDoNotExist.contains(path)
-    }
+		!pathWhichDoNotExist.contains(path)
+	}
 
-    def checkPath = {path ->
-        if (!grailsApplication.mainContext.getResource(path).exists()) {
-            pathWhichDoNotExist << path
-        }
-        pathChecked << path
-    }
+	def checkPath = { path ->
+		if (!grailsApplication.mainContext.getResource(path).exists()) {
+			pathWhichDoNotExist << path
+		}
+		pathChecked << path
+	}
 
-    def cleanPath = { path ->
-        if (path && !path?.endsWith('/')) {
-            path += '/'
-        }
-        path
-    }
+	def cleanPath = { path ->
+		if (path && !path?.endsWith('/')) {
+			path += '/'
+		}
+		path
+	}
 }

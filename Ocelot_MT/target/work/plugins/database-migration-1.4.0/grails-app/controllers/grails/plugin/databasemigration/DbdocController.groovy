@@ -98,11 +98,9 @@ class DbdocController {
 		if (files.containsKey(key)) {
 			if (key.endsWith('.xml')) {
 				render text: files[key], contentType: 'text/xml'
-			}
-			else if (key.endsWith('.groovy')) {
+			} else if (key.endsWith('.groovy')) {
 				render text: '<pre>\n' + files[key] + '\n</pre>', contentType: 'text/html'
-			}
-			else {
+			} else {
 				render files[key]
 			}
 			return
@@ -122,15 +120,15 @@ class DbdocController {
 			lockService.waitForLock()
 
 			DatabaseChangeLog changeLog = ChangeLogParserFactory.instance.getParser(
-				changelogFileName, migrationResourceAccessor).parse(
-				changelogFileName, new ChangeLogParameters(database), migrationResourceAccessor)
+					changelogFileName, migrationResourceAccessor).parse(
+					changelogFileName, new ChangeLogParameters(database), migrationResourceAccessor)
 
 			checkDatabaseChangeLogTable changeLog, database
 
 			changeLog.validate database
 
 			ChangeLogIterator logIterator = new ChangeLogIterator(
-				changeLog, new DbmsChangeSetFilter(database))
+					changeLog, new DbmsChangeSetFilter(database))
 
 			MemoryDocVisitor visitor = new MemoryDocVisitor(database)
 			logIterator.run visitor, database
@@ -142,8 +140,14 @@ class DbdocController {
 			files
 		}
 		finally {
-			try { lockService.releaseLock() } catch (ignored) {}
-			try { database?.close() } catch (ignored) {}
+			try {
+				lockService.releaseLock()
+			} catch (ignored) {
+			}
+			try {
+				database?.close()
+			} catch (ignored) {
+			}
 		}
 	}
 

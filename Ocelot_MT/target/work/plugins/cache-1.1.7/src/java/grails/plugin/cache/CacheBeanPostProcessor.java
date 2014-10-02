@@ -63,15 +63,14 @@ public class CacheBeanPostProcessor implements BeanDefinitionRegistryPostProcess
 		String beanName = null;
 
 		if (registry.containsBeanDefinition(GrailsAnnotationCacheOperationSource.BEAN_NAME)) {
-			beanDef = (AbstractBeanDefinition)registry.getBeanDefinition(
+			beanDef = (AbstractBeanDefinition) registry.getBeanDefinition(
 					GrailsAnnotationCacheOperationSource.BEAN_NAME);
 			beanName = GrailsAnnotationCacheOperationSource.BEAN_NAME;
-		}
-		else {
+		} else {
 			String className = AnnotationCacheOperationSource.class.getName();
 			for (String name : registry.getBeanDefinitionNames()) {
 				if (className.equals(registry.getBeanDefinition(name).getBeanClassName())) {
-					beanDef = (AbstractBeanDefinition)registry.getBeanDefinition(name);
+					beanDef = (AbstractBeanDefinition) registry.getBeanDefinition(name);
 					beanName = name;
 					break;
 				}

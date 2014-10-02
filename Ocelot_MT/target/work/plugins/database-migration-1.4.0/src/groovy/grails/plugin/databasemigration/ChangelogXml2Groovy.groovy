@@ -49,8 +49,7 @@ class ChangelogXml2Groovy {
 		for (child in node.children()) {
 			if (child instanceof String) {
 				mixedText = child
-			}
-			else {
+			} else {
 				children << child
 			}
 		}
@@ -64,8 +63,7 @@ class ChangelogXml2Groovy {
 			}
 			appendWithIndent indentLevel, groovy, '}'
 			groovy.append NEWLINE
-		}
-		else {
+		} else {
 			groovy.append NEWLINE
 		}
 	}

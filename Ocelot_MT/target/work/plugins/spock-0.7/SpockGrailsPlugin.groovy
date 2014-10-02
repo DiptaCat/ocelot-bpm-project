@@ -16,18 +16,18 @@
 
 class SpockGrailsPlugin {
 
-  def version = "0.7"
+	def version = "0.7"
 
-  def grailsVersion = "1.3.0 > *"
-  def dependsOn = [:]
-  def pluginExcludes = [
-      "grails-app/**",
-      "web-app"
-  ]
+	def grailsVersion = "1.3.0 > *"
+	def dependsOn = [:]
+	def pluginExcludes = [
+			"grails-app/**",
+			"web-app"
+	]
 
-  def author = "Spock Framework"
-  def authorEmail = "user@forum.spockframework.org"
-  def title = "Spock Plugin - spockframework.org"
-  def description = 'Test your Grails apps with Spock'
-  def documentation = 'http://grails.org/plugin/spock'
+	def author = "Spock Framework"
+	def authorEmail = "user@forum.spockframework.org"
+	def title = "Spock Plugin - spockframework.org"
+	def description = 'Test your Grails apps with Spock'
+	def documentation = 'http://grails.org/plugin/spock'
 }

@@ -14,11 +14,11 @@
  */
 package grails.plugin.cache.web.filter;
 
-import java.lang.reflect.Method;
-import java.util.Collection;
-
 import org.springframework.cache.Cache;
 import org.springframework.util.Assert;
+
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 /**
  * Based on package-scope org.springframework.cache.interceptor.

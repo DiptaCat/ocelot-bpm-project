@@ -5,11 +5,11 @@ package util
  */
 class CustomObjectMarshallers {
 
-    def marshallers = []
+	def marshallers = []
 
-    def register(){
-        marshallers.each {
-            it.register()
-        }
-    }
+	def register() {
+		marshallers.each {
+			it.register()
+		}
+	}
 }

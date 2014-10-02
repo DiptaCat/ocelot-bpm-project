@@ -15,9 +15,6 @@
 package grails.plugin.cache.compiler;
 
 import grails.util.CollectionUtils;
-
-import java.util.Map;
-
 import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.AnnotatedNode;
 import org.codehaus.groovy.ast.AnnotationNode;
@@ -28,17 +25,19 @@ import org.codehaus.groovy.control.SourceUnit;
 import org.codehaus.groovy.transform.ASTTransformation;
 import org.codehaus.groovy.transform.GroovyASTTransformation;
 
+import java.util.Map;
+
 /**
  * @author Jeff Brown
  */
 @GroovyASTTransformation(phase = CompilePhase.CANONICALIZATION)
 public class CacheTransformation implements ASTTransformation {
 
-   @SuppressWarnings("unchecked")
-   protected static final Map<ClassNode, ClassNode> GRAILS_ANNOTATION_CLASS_NODE_TO_SPRING_ANNOTATION_CLASS_NODE = CollectionUtils.<ClassNode, ClassNode>newMap(
-   		new ClassNode(grails.plugin.cache.Cacheable.class),  new ClassNode(org.springframework.cache.annotation.Cacheable.class),
-   		new ClassNode(grails.plugin.cache.CachePut.class),   new ClassNode(org.springframework.cache.annotation.CachePut.class),
-   		new ClassNode(grails.plugin.cache.CacheEvict.class), new ClassNode(org.springframework.cache.annotation.CacheEvict.class));
+	@SuppressWarnings("unchecked")
+	protected static final Map<ClassNode, ClassNode> GRAILS_ANNOTATION_CLASS_NODE_TO_SPRING_ANNOTATION_CLASS_NODE = CollectionUtils.<ClassNode, ClassNode>newMap(
+			new ClassNode(grails.plugin.cache.Cacheable.class), new ClassNode(org.springframework.cache.annotation.Cacheable.class),
+			new ClassNode(grails.plugin.cache.CachePut.class), new ClassNode(org.springframework.cache.annotation.CachePut.class),
+			new ClassNode(grails.plugin.cache.CacheEvict.class), new ClassNode(org.springframework.cache.annotation.CacheEvict.class));
 
 	public void visit(final ASTNode[] astNodes, final SourceUnit sourceUnit) {
 		final ASTNode firstNode = astNodes[0];

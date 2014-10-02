@@ -16,26 +16,22 @@ package grails.plugin.cache.web;
 
 import grails.plugin.cache.SerializableOutputStream;
 import grails.plugin.cache.web.Header.Type;
-import javassist.util.proxy.*;
+import javassist.util.proxy.MethodHandler;
+import javassist.util.proxy.ProxyFactory;
+import javassist.util.proxy.ProxyObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.*;
 
 
 /**
@@ -45,7 +41,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * target of the request has delivered its response.
  * <p/>
  * It uses the Wrapper pattern.
- *
+ * <p/>
  * Based on net.sf.ehcache.constructs.web.GenericResponseWrapper.
  *
  * @author Greg Luck
@@ -54,26 +50,25 @@ import javax.servlet.http.HttpServletResponseWrapper;
 @SuppressWarnings("deprecation")
 public class GenericResponseWrapper extends HttpServletResponseWrapper implements Serializable {
 
-  private static final long serialVersionUID = 1;
-  public static final Log LOG = LogFactory.getLog(GenericResponseWrapper.class);
-
-  protected int statusCode = SC_OK;
-	protected int contentLength;
-	protected String contentType;
+	public static final Log LOG = LogFactory.getLog(GenericResponseWrapper.class);
+	private static final long serialVersionUID = 1;
 	protected final Map<String, List<Serializable>> headersMap = new TreeMap<String, List<Serializable>>(
 			String.CASE_INSENSITIVE_ORDER);
 	protected final List<Cookie> cookies = new ArrayList<Cookie>();
+	protected int statusCode = SC_OK;
+	protected int contentLength;
+	protected String contentType;
 	protected ServletOutputStream out;
 	protected transient PrintWriter writer;
 	protected boolean disableFlushBuffer = true;
 
-  static {
-    ProxyFactory.classLoaderProvider = new ProxyFactory.ClassLoaderProvider() {
-      public ClassLoader get(ProxyFactory pf) {
-          return Thread.currentThread().getContextClassLoader();
-      }
-    };
-  }
+	static {
+		ProxyFactory.classLoaderProvider = new ProxyFactory.ClassLoaderProvider() {
+			public ClassLoader get(ProxyFactory pf) {
+				return Thread.currentThread().getContextClassLoader();
+			}
+		};
+	}
 
 	/**
 	 * Creates a GenericResponseWrapper
@@ -81,42 +76,39 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	public GenericResponseWrapper(final HttpServletResponse response, final SerializableOutputStream outputStream) {
 		super(response);
 
-    ProxyFactory factory = new ProxyFactory();
+		ProxyFactory factory = new ProxyFactory();
 
-    factory.setSuperclass(ServletOutputStream.class);
-    Class clazz = factory.createClass();
+		factory.setSuperclass(ServletOutputStream.class);
+		Class clazz = factory.createClass();
 
-    try {
-      this.out = (ServletOutputStream)clazz.newInstance();
-      MethodHandler handler = new MethodHandler() {
+		try {
+			this.out = (ServletOutputStream) clazz.newInstance();
+			MethodHandler handler = new MethodHandler() {
 
-              public Object invoke(Object o, Method method, Method forwarder, Object[] args) throws Throwable {
-                  if("write".equals(method.getName())) {
-                      switch(args.length) {
-                          case 1:
-                              Object arg = args[0];
-                              if(arg instanceof Integer) {
-                                  outputStream.write((Integer)arg);
-                              }
-                              else {
-                                  outputStream.write((byte[])arg);
-                              }
-                          case 3:
-                              outputStream.write((byte[])args[0], (Integer)args[1], (Integer)args[2]);
-                      }
-                      return null;
-                  }
-                  else {
-                      return forwarder.invoke(o, args);
-                  }
-              }
-        };
+				public Object invoke(Object o, Method method, Method forwarder, Object[] args) throws Throwable {
+					if ("write".equals(method.getName())) {
+						switch (args.length) {
+							case 1:
+								Object arg = args[0];
+								if (arg instanceof Integer) {
+									outputStream.write((Integer) arg);
+								} else {
+									outputStream.write((byte[]) arg);
+								}
+							case 3:
+								outputStream.write((byte[]) args[0], (Integer) args[1], (Integer) args[2]);
+						}
+						return null;
+					} else {
+						return forwarder.invoke(o, args);
+					}
+				}
+			};
 
-        ((ProxyObject) out).setHandler(handler);
-    }
-    catch(Exception e) {
-          throw new RuntimeException("Cannot create output stream proxy: " + e.getMessage(), e);
-    }
+			((ProxyObject) out).setHandler(handler);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot create output stream proxy: " + e.getMessage(), e);
+		}
 
 
 	}
@@ -126,17 +118,11 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 		return out;
 	}
 
-	@Override
-	public void setStatus(final int code) {
-		statusCode = code;
-		super.setStatus(code);
-	}
-
 	/**
 	 * Send the error. If the response is not ok, most of the logic is bypassed
 	 * and the error is sent raw Also, the content is not cached.
 	 *
-	 * @param code the status code
+	 * @param code   the status code
 	 * @param string the error message
 	 * @throws IOException
 	 */
@@ -185,9 +171,9 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	}
 
 	@Override
-	public void setContentLength(final int length) {
-		contentLength = length;
-		super.setContentLength(length);
+	public void setStatus(final int code) {
+		statusCode = code;
+		super.setStatus(code);
 	}
 
 	public int getContentLength() {
@@ -195,14 +181,20 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	}
 
 	@Override
-	public void setContentType(final String type) {
-		contentType = type;
-		super.setContentType(type);
+	public void setContentLength(final int length) {
+		contentLength = length;
+		super.setContentLength(length);
 	}
 
 	@Override
 	public String getContentType() {
 		return contentType;
+	}
+
+	@Override
+	public void setContentType(final String type) {
+		contentType = type;
+		super.setContentType(type);
 	}
 
 	@Override
@@ -285,18 +277,18 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 
 				// Null Check for value before doing value.getClass()
 				// FIX for: http://jira.grails.org/browse/GPCACHE-37
-				if(value != null) {
+				if (value != null) {
 
 					Type type = Header.Type.determineType(value.getClass());
 					switch (type) {
 						case STRING:
-							headers.add(new Header<String>(name, (String)value));
+							headers.add(new Header<String>(name, (String) value));
 							break;
 						case DATE:
-							headers.add(new Header<Long>(name, (Long)value));
+							headers.add(new Header<Long>(name, (Long) value));
 							break;
 						case INT:
-							headers.add(new Header<Integer>(name, (Integer)value));
+							headers.add(new Header<Integer>(name, (Integer) value));
 							break;
 						default:
 							throw new IllegalArgumentException("No mapping for Header.Type: " + type);

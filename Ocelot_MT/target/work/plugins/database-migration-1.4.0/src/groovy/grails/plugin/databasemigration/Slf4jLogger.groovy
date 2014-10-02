@@ -15,7 +15,6 @@
 package grails.plugin.databasemigration
 
 import liquibase.logging.LogLevel
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

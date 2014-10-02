@@ -15,7 +15,6 @@
 package grails.plugin.cache
 
 import grails.plugin.cache.util.ClassUtils
-
 import org.codehaus.groovy.grails.web.pages.GroovyPageTemplate
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
 import org.codehaus.groovy.grails.web.util.StreamCharBuffer
@@ -53,8 +52,7 @@ class CacheTagLib {
 		if (content == null) {
 			content = cloneIfNecessary(body())
 			cache.put(key, content)
-		}
-		else {
+		} else {
 			content = content.get()
 		}
 
@@ -77,7 +75,7 @@ class CacheTagLib {
 	 */
 	def render = { attrs ->
 		if (!grailsCacheManager) {
-			out <<  g.render(attrs)
+			out << g.render(attrs)
 			return
 		}
 
@@ -91,8 +89,7 @@ class CacheTagLib {
 		if (content == null) {
 			content = cloneIfNecessary(g.render(attrs))
 			cache.put(key, content)
-		}
-		else {
+		} else {
 			content = content.get()
 		}
 		out << content
@@ -103,7 +100,7 @@ class CacheTagLib {
 		String uri = webRequest.attributes.getTemplateUri(templateName, webRequest.request)
 
 		GroovyPageTemplate t = groovyPagesTemplateRenderer.findAndCacheTemplate(
-			webRequest, pageScope, templateName, contextPath, pluginName, uri)
+				webRequest, pageScope, templateName, contextPath, pluginName, uri)
 		if (!t) {
 			throwTagError("Template not found for name [$templateName] and path [$uri]")
 		}
@@ -115,8 +112,7 @@ class CacheTagLib {
 		if (content instanceof StreamCharBuffer) {
 			if (content instanceof Cloneable) {
 				content = content.clone()
-			}
-			else {
+			} else {
 				// pre Grails 2.3
 				content = content.toString()
 			}

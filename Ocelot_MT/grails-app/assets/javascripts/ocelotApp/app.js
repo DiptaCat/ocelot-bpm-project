@@ -1,4 +1,4 @@
-//= require angular-route/angular-route
+//= require_tree bower_components
 //= require services
 //= require controllers
 //= require directives

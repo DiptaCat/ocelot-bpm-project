@@ -16,37 +16,37 @@
 grails.project.work.dir = "target"
 grails.project.dependency.resolution = {
 
-  def spockVersion = "0.7-groovy-1.8"
-  def isSnapshot = spockVersion.endsWith("-SNAPSHOT")
-  
-  def isSpockBuild = System.getProperty("spock.building") != null
+	def spockVersion = "0.7-groovy-1.8"
+	def isSnapshot = spockVersion.endsWith("-SNAPSHOT")
 
-  inherits "global" // inherit Grails' default dependencies
-  log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+	def isSpockBuild = System.getProperty("spock.building") != null
 
-  repositories {
-    grailsHome()
-    grailsCentral()
-    mavenCentral()
-    if (!isSpockBuild) {
-      mavenLocal()
-    }
-    if (isSnapshot) {
-      mavenRepo "http://oss.sonatype.org/content/repositories/snapshots/"
-    }
-  }
+	inherits "global" // inherit Grails' default dependencies
+	log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
 
-  dependencies {
-    if (!isSpockBuild) {
-      compile("org.spockframework:spock-grails-support:${spockVersion}")
-    }
-  }
+	repositories {
+		grailsHome()
+		grailsCentral()
+		mavenCentral()
+		if (!isSpockBuild) {
+			mavenLocal()
+		}
+		if (isSnapshot) {
+			mavenRepo "http://oss.sonatype.org/content/repositories/snapshots/"
+		}
+	}
 
-  plugins {
-    compile(":release:2.0.3") {
-      export = false
-    }
-  }
+	dependencies {
+		if (!isSpockBuild) {
+			compile("org.spockframework:spock-grails-support:${spockVersion}")
+		}
+	}
+
+	plugins {
+		compile(":release:2.0.3") {
+			export = false
+		}
+	}
 }
 
 grails.release.scm.enabled = false

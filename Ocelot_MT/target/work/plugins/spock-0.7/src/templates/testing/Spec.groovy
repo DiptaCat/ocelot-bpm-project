@@ -1,9 +1,14 @@
-@artifact.package@import spock.lang.*
+@ artifact.package
+
 import grails.plugin.spock.*
+@ import spock.lang.*
 
-class @artifact.name@ extends @artifact.superclass@ {
+@
+import java.lang.Object
 
-    def "feature method"() {
+class @artifact.name @ extends @artifact.superclass @ {
 
-    }
+	def "feature method"() {
+
+	}
 }

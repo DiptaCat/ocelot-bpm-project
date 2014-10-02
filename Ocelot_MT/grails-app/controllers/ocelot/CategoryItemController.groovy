@@ -4,13 +4,13 @@ import grails.rest.RestfulController
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class CategoryItemController extends RestfulController{
+class CategoryItemController extends RestfulController {
 
-    static responseFormats = ['json']
+	static responseFormats = ['json']
 
-    CategoryItemController(){
-        super(CategoryItem)
-    }
+	CategoryItemController() {
+		super(CategoryItem)
+	}
 
 
 }
