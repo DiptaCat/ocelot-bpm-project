@@ -15,12 +15,15 @@ class TaskController {
 
         tasks.each {Task t ->
             println t.getName()
+            println 'Task ID->\t' + t.id
+            println 'task definition key  '+t.taskDefinitionKey
+            println 'Process ID->\t' + t.getProcessDefinitionId()
             ProcessDefinition processDefinition = workflowService.getProcessDefinitionByProcessDefinitionId(t.getProcessDefinitionId())
             println processDefinition.getName()
             processDefinitions.add(processDefinition)
             println t.getOwner()
+            println '--------------\n'
         }
-
         [tasks: tasks, processDefinitions: processDefinitions]
     }
 
@@ -32,7 +35,6 @@ class TaskController {
     }
 
     def completeTask() {
-
 
     }
 }

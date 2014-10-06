@@ -13,6 +13,12 @@ import org.camunda.bpm.engine.task.Task
 import org.camunda.bpm.engine.repository.ProcessDefinition
 import org.camunda.bpm.model.bpmn.Bpmn
 import org.camunda.bpm.model.bpmn.instance.UserTask
+import org.camunda.bpm.model.bpmn.impl.instance.camunda.CamundaFormDataImpl as CamundaForm
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormField
+import org.camunda.bpm.model.xml.instance.DomElement
+import org.camunda.bpm.model.xml.instance.ModelElementInstance
+
+import static groovy.util.XmlSlurper.*
 
 class WorkflowService {
 
@@ -53,7 +59,7 @@ class WorkflowService {
         int revision = 0
 
         String xmlString = readBpmnFile(fileStream) //task interception mechanism
-        println xmlString
+        //println xmlString
 
         DeploymentEntity d = (DeploymentEntity) repositoryService.createDeployment()
                 .name(fileName.toString())
@@ -80,10 +86,25 @@ class WorkflowService {
         def modelInstance = Bpmn.readModelFromStream(fileStream)
         println "MODEL : "+ modelInstance.dump()
         def taskType = modelInstance.model.getType(UserTask.class)
+        def list = []
         if (taskType) {
             def taskInstances = modelInstance.getModelElementsByType(taskType)
-            taskInstances.each { task ->
+            taskInstances.each { UserTask task ->
                 println "TASK : " + task?.dump()
+                task.extensionElements.elements.each { ModelElementInstance mei ->
+                   println "Model Element Instnace${mei.domElement.getChildElements().dump()}"
+                    mei.domElement.getChildElements().each {DomElement de ->
+                        println "xml : ${de.element}"
+                        list.add(new XmlSlurper().parseText(de.element.toString()))
+                    }
+
+                    println "LA LLISTA DE MERDA ${list.dump()}"
+//                   def text = list.join()
+//                   println "SOC EL MILLOR 2: ${text}"
+//                   println text.toString().getClass()
+//                   def xml = new XmlSlurper().parseText(text.toString())
+//                   xml."camunda:formData".each {println it.dump()}
+                }
             }
         }
         Bpmn.convertToString(modelInstance)
@@ -363,7 +384,7 @@ class WorkflowService {
         }
 
         def getFormData(String taskId) {
-            List<FormField>  formFields = formService.getTaskFormData(taskId).getFormFields()
+            def formFields = taskService.getVariablesLocal(taskId)
             println formFields
             formFields
         }
