@@ -18,6 +18,13 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormField
 import org.camunda.bpm.model.xml.instance.DomElement
 import org.camunda.bpm.model.xml.instance.ModelElementInstance
 
+import org.xml.sax.InputSource;
+
+import javax.lang.model.element.Element
+import org.w3c.dom.Document;
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.parsers.DocumentBuilder
+
 import static groovy.util.XmlSlurper.*
 
 class WorkflowService {
@@ -81,33 +88,62 @@ class WorkflowService {
 
     }
 
+    //TODO: 
     def readBpmnFile(fileStream) {
 
+        /*
         def modelInstance = Bpmn.readModelFromStream(fileStream)
-        println "MODEL : "+ modelInstance.dump()
+        println "MODEL : "+ modelInstance.document.getRootElement().localName
         def taskType = modelInstance.model.getType(UserTask.class)
+        println "TASKTYPE: " + taskType.getExtendingTypes()
         def list = []
+        def xml
+        String asd
+        XmlSlurper xmlParser = new XmlSlurper()
         if (taskType) {
             def taskInstances = modelInstance.getModelElementsByType(taskType)
             taskInstances.each { UserTask task ->
+                println "TASK : " + task.textContent
                 println "TASK : " + task?.dump()
                 task.extensionElements.elements.each { ModelElementInstance mei ->
-                   println "Model Element Instnace${mei.domElement.getChildElements().dump()}"
+                    println "Model Element Instnace: ${mei.domElement.getChildElements().dump()}"
                     mei.domElement.getChildElements().each {DomElement de ->
+                        asd = de.element.toString()
                         println "xml : ${de.element}"
-                        list.add(new XmlSlurper().parseText(de.element.toString()))
+                        println "Partial " + asd.class
+                        println xml
                     }
 
-                    println "LA LLISTA DE MERDA ${list.dump()}"
-//                   def text = list.join()
-//                   println "SOC EL MILLOR 2: ${text}"
-//                   println text.toString().getClass()
-//                   def xml = new XmlSlurper().parseText(text.toString())
-//                   xml."camunda:formData".each {println it.dump()}
+                    println "Partial " + xmlParser.parseText(java.io.StringReader.StringReader(asd))
+                   def text = list.join()
+                   println "SOC EL MILLOR 2: ${text}"
+                   println text.toString().getClass()
+                   def xml = new XmlSlurper().parseText(text.toString())
+                   xml."camunda:formData".each {println it.dump()}
                 }
             }
         }
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
+        DocumentBuilder db = dbf.newDocumentBuilder()
+        Document doc = db.parse(fileStream)
+        System.out.println("type = " + langs.getAttribute("userTask"))
+        println "Partial " + xmlParser.parseText(java.io.StringReader.StringReader(asd))
         Bpmn.convertToString(modelInstance)
+        */
+
+        def modelInstance = Bpmn.readModelFromStream(fileStream)
+        String xmlBpmn = Bpmn.convertToString(modelInstance)
+        println xmlBpmn
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
+        DocumentBuilder db = dbf.newDocumentBuilder()
+        ByteArrayInputStream bin = new ByteArrayInputStream(xmlBpmn.getBytes("utf-8"))
+        InputSource ins = new InputSource(new StringReader(xmlBpmn))
+        Document doc = db.parse(ins)
+
+        println 'childnodes\n'+doc.getChildNodes().dump()
+
+       println "Root element :" + doc.getDocumentElement().getNodeName()
+       NodeList nList = doc.getElementsByTagName("bpmn2:extensionElements");
     }
 
 //    def deployProcess(fileContent, fileName) {
