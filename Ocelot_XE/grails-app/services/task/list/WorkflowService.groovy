@@ -12,18 +12,24 @@ import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
 import org.camunda.bpm.engine.repository.ProcessDefinition
 import org.camunda.bpm.model.bpmn.Bpmn
+import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.UserTask
 import org.camunda.bpm.model.bpmn.impl.instance.camunda.CamundaFormDataImpl as CamundaForm
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormField
 import org.camunda.bpm.model.xml.instance.DomElement
 import org.camunda.bpm.model.xml.instance.ModelElementInstance
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormData;
 
 import org.xml.sax.InputSource;
 
-import javax.lang.model.element.Element
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.parsers.DocumentBuilder
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
 
 import static groovy.util.XmlSlurper.*
 
@@ -131,19 +137,29 @@ class WorkflowService {
         Bpmn.convertToString(modelInstance)
         */
 
-        def modelInstance = Bpmn.readModelFromStream(fileStream)
-        String xmlBpmn = Bpmn.convertToString(modelInstance)
-        println xmlBpmn
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
-        DocumentBuilder db = dbf.newDocumentBuilder()
-        ByteArrayInputStream bin = new ByteArrayInputStream(xmlBpmn.getBytes("utf-8"))
-        InputSource ins = new InputSource(new StringReader(xmlBpmn))
-        Document doc = db.parse(ins)
 
-        println 'childnodes\n'+doc.getChildNodes().dump()
+        BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
+        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class);
+        println "Size => " + extensionElements.size()
 
-       println "Root element :" + doc.getDocumentElement().getNodeName()
-       NodeList nList = doc.getElementsByTagName("bpmn2:extensionElements");
+        CamundaFormData camundaFormData
+
+        extensionElements.each {ExtensionElements ee ->
+            println "Parent Element: " + ee.getParentElement() + "\n"
+
+
+            if(ee.getParentElement().toString().substring(0, ee.getParentElement().toString().indexOf('@')).equals("org.camunda.bpm.model.bpmn.impl.instance.UserTaskImpl")) {
+                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult();
+                camundaFormData.camundaFormFields.each { CamundaFormField ff ->
+                    println "Id = " + ff.camundaId
+                    println "Label = " + ff.camundaLabel
+                    println "Value = " + ff.camundaDefaultValue
+                    println "\n"
+                }
+            }
+        }
+
+        Bpmn.convertToString(modelInstance)
     }
 
 //    def deployProcess(fileContent, fileName) {
