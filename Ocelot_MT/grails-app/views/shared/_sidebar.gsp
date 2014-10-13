@@ -5,13 +5,13 @@
 		<li><a href="${createLink(uri: '/')}"><i class="glyphicon glyphicon-home"></i><span class="menu-text"><g:message
 				code="default.home.label"/></span></a></li>
 
-		<li><g:link controller="user" action="index"><i class="glyphicon glyphicon-user"></i> <span
+		<li><g:link controller="member" action="index"><i class="glyphicon glyphicon-user"></i> <span
 				class="menu-text">Users</span></g:link></li>
 
 		<li><g:link controller="model" action="index"><i class="glyphicon glyphicon-briefcase"></i> <span
 				class="menu-text">Models</span></g:link></li>
 
-		<li><a href="palette"><i class="icon-list-alt"></i> <span
+		<li><a href="http://localhost:8080/ocelot/palette#/palette"><i class="icon-list-alt"></i> <span
 				class="menu-text">Palette</span></a></li>
 	</ul>
 

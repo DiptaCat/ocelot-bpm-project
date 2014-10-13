@@ -12,7 +12,7 @@ class ModelControllerSpec extends Specification {
 		assert params != null
 		// TODO: Populate valid properties like...
 		params["name"] = 'Proj1'
-		params["user"] = new User()
+		params["user"] = new Member()
 	}
 
 	void "Test the index action returns the correct model"() {

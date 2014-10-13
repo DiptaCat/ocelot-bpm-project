@@ -57,7 +57,7 @@
 								<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 									<td><g:link controller="model" action="show"
 												id="${model.id}">${model?.name}</g:link>
-									<td><g:link controller="user" action="show"
+									<td><g:link controller="member" action="show"
 												id="${model?.user?.id}">${model.user?.login}</g:link>
 								</tr>
 							</g:each>

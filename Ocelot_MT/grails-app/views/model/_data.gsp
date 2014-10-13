@@ -20,7 +20,7 @@
 	</label>
 
 	<div class="controls" style="font-style: italic">
-		<td><g:link action="show" controller="user"
+		<td><g:link action="show" controller="member"
 					id="${modelInstance.user?.id}">${fieldValue(bean: modelInstance, field: "user.login")}</g:link></td>
 
 	</div>

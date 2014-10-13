@@ -1,4 +1,4 @@
-<%@ page import="ocelot.User" %>
+<%@ page import="ocelot.Member; ocelot.Member" %>
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'name', 'error')} required col-xs-12">
 	<label class="control-label" for="name">
@@ -21,7 +21,7 @@
 
 	<div class="controls">
 
-		<g:select id="user" name="user.id" from="${User.list()}" optionKey="id" required=""
+		<g:select id="user" name="user.id" from="${Member.list()}" optionKey="id" required=""
 				  value="${modelInstance?.user?.id}" class="many-to-one"/>
 
 	</div>

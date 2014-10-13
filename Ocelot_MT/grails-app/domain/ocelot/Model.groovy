@@ -7,9 +7,9 @@ class Model {
 	Date lastUpdated
 	boolean temporal
 
-	static belongsTo = [user: User]
+	static belongsTo = [user: Member]
 	boolean favourite = false
-	/*static hasMany = [usersFavs: User]
+	/*static hasMany = [usersFavs: Member]
 	static mappedBy = [usersFavs: "none"]*/
 
 	static constraints = {

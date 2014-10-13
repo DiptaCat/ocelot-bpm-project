@@ -59,6 +59,9 @@ grails {
 	}
 }
 
+grails.gorm.default.mapping = {
+	id generator:'identity'
+}
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration

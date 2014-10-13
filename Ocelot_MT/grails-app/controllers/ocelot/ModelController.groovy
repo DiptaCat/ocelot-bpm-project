@@ -125,7 +125,7 @@ class ModelController {
 		def jsonObj = JSON.parse(json)
 		def jsonStr = jsonObj.toString()
 		def getBackJsonObj = JSON.parse(jsonStr)
-		User owner = new User(name: getBackJsonObj.users.name,
+		Member owner = new Member(name: getBackJsonObj.users.name,
 				login: getBackJsonObj.users.name,
 				dateCreated: Date().parse("E MMM dd H:m:s z yyyy", getBackJsonObj.users.dateCreated))
 		Model model = new Model(name: getBackJsonObj.models.name,

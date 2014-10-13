@@ -3,6 +3,8 @@
 //= require bootstrap-editable.min.js
 //= require ace.min.js
 //= require ace-editable.min.js
+//= require ace-elements.min.js
+//= require ace-extra.min.js
 //= require_self
 
 if (typeof jQuery !== 'undefined') {

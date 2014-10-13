@@ -172,8 +172,8 @@
 	 *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
 	 *   read, update, delete) on server-side data like this:
 	 *   ```js
-	 *   var User = $resource('/user/:userId', {userId:'@id'});
-	 *   var user = User.get({userId:123}, function() {
+	 *   var Member = $resource('/user/:userId', {userId:'@id'});
+	 *   var user = Member.get({userId:123}, function() {
  *     user.abc = true;
  *     user.$save();
  *   });
@@ -269,8 +269,8 @@
 	 * operations (create, read, update, delete) on server-side data.
 
 	 ```js
-	 var User = $resource('/user/:userId', {userId:'@id'});
-	 User.get({userId:123}, function(user) {
+	 var Member = $resource('/user/:userId', {userId:'@id'});
+	 Member.get({userId:123}, function(user) {
        user.abc = true;
        user.$save();
      });
@@ -281,8 +281,8 @@
 	 * could rewrite the above example and get access to http headers as:
 	 *
 	 ```js
-	 var User = $resource('/user/:userId', {userId:'@id'});
-	 User.get({userId:123}, function(u, getResponseHeaders){
+	 var Member = $resource('/user/:userId', {userId:'@id'});
+	 Member.get({userId:123}, function(u, getResponseHeaders){
        u.abc = true;
        u.$save(function(u, putResponseHeaders) {
          //u => saved user object
@@ -294,8 +294,8 @@
 	 * You can also access the raw `$http` promise via the `$promise` property on the object returned
 	 *
 	 ```
-	 var User = $resource('/user/:userId', {userId:'@id'});
-	 User.get({userId:123})
+	 var Member = $resource('/user/:userId', {userId:'@id'});
+	 Member.get({userId:123})
 	 .$promise.then(function(user) {
            $scope.user = user;
          });
