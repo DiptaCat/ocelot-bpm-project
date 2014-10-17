@@ -1,4 +1,4 @@
 function test() {
-  debugger;
-  return;
+	debugger;
+	return;
 }

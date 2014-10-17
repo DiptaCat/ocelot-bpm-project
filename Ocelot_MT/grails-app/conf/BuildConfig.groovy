@@ -63,7 +63,7 @@ grails.project.dependency.resolution = {
 
 //        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 
-		//test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+		test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
 	}
 
 	plugins {

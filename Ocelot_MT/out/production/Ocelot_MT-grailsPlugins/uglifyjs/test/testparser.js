@@ -5,25 +5,25 @@ var parseJS = require("../lib/parse-js");
 var sys = require("util");
 
 // write debug in a very straightforward manner
-var debug = function(){
-        sys.log(Array.prototype.slice.call(arguments).join(', '));
+var debug = function () {
+	sys.log(Array.prototype.slice.call(arguments).join(', '));
 };
 
 var testsPassed = true;
 
-ParserTestSuite(function(i, input, desc){
+ParserTestSuite(function (i, input, desc) {
 	try {
 		parseJS.parse(input);
 		debug("ok " + i + ": " + desc);
-	} catch(e){
+	} catch (e) {
 		debug("FAIL " + i + " " + desc + " (" + e + ")");
-    testsPassed = false;
+		testsPassed = false;
 	}
 });
 
 process.exit(testsPassed ? 0 : 1);
 
-function ParserTestSuite(callback){
+function ParserTestSuite(callback) {
 	var inps = [
 		["var abc;", "Regular variable statement w/o assignment"],
 		["var abc = 5;", "Regular variable statement with assignment"],
@@ -69,22 +69,22 @@ function ParserTestSuite(callback){
 		// comments
 		['//foo!@#^&$1234\nbar;', 'single line comment'],
 		['/* abcd!@#@$* { } && null*/;', 'single line multi line comment'],
-		['/*foo\nbar*/;','multi line comment'],
-		['/*x*x*/;','multi line comment with *'],
-		['/**/;','empty comment'],
+		['/*foo\nbar*/;', 'multi line comment'],
+		['/*x*x*/;', 'multi line comment with *'],
+		['/**/;', 'empty comment'],
 		// identifiers
-		["x;",'1 identifier'],
-		["_x;",'2 identifier'],
-		["xyz;",'3 identifier'],
-		["$x;",'4 identifier'],
-		["x$;",'5 identifier'],
-		["_;",'6 identifier'],
-		["x5;",'7 identifier'],
-		["x_y;",'8 identifier'],
-		["x+5;",'9 identifier'],
-		["xyz123;",'10 identifier'],
-		["x1y1z1;",'11 identifier'],
-		["foo\\u00D8bar;",'12 identifier unicode escape'],
+		["x;", '1 identifier'],
+		["_x;", '2 identifier'],
+		["xyz;", '3 identifier'],
+		["$x;", '4 identifier'],
+		["x$;", '5 identifier'],
+		["_;", '6 identifier'],
+		["x5;", '7 identifier'],
+		["x_y;", '8 identifier'],
+		["x+5;", '9 identifier'],
+		["xyz123;", '10 identifier'],
+		["x1y1z1;", '11 identifier'],
+		["foo\\u00D8bar;", '12 identifier unicode escape'],
 		//["foo�bar;",'13 identifier unicode embedded (might fail)'],
 		// numbers
 		["5;", '1 number'],
@@ -345,8 +345,8 @@ function ParserTestSuite(callback){
 		["function f() { return }", "9 asi"],
 
 		// use strict
-                // XXX: some of these should actually fail?
-                //      no support for "use strict" yet...
+		// XXX: some of these should actually fail?
+		//      no support for "use strict" yet...
 		['"use strict"; \'bla\'\n; foo;', "1 directive"],
 		['(function() { "use strict"; \'bla\';\n foo; });', "2 directive"],
 		['"use\\n strict";', "3 directive"],
@@ -393,17 +393,18 @@ function ParserTestSuite(callback){
 		['/ // / /', '2 whitespace before regex causes regex to fail?'],
 		['/ / / / /', '3 whitespace before regex causes regex to fail?'],
 
-		['\n\t// Used for trimming whitespace\n\ttrimLeft = /^\\s+/;\n\ttrimRight = /\\s+$/;\t\n','turned out this didnt crash (the test below did), but whatever.'],
+		['\n\t// Used for trimming whitespace\n\ttrimLeft = /^\\s+/;\n\ttrimRight = /\\s+$/;\t\n', 'turned out this didnt crash (the test below did), but whatever.'],
 		['/[\\/]/;', 'escaped forward slash inside class group (would choke on fwd slash)'],
 		['/[/]/;', 'also broke but is valid in es5 (not es3)'],
-		['({get:5});','get property name thats not a getter'],
-		['({set:5});','set property name thats not a setter'],
+		['({get:5});', 'get property name thats not a getter'],
+		['({set:5});', 'set property name thats not a setter'],
 		['l !== "px" && (d.style(h, c, (k || 1) + l), j = (k || 1) / f.cur() * j, d.style(h, c, j + l)), i[1] && (k = (i[1] === "-=" ? -1 : 1) * k + j), f.custom(j, k, l)', 'this choked regex/div at some point'],
 		['(/\'/g, \'\\\\\\\'\') + "\'";', 'the sequence of escaped characters confused the tokenizer'],
-                ['if (true) /=a/.test("a");', 'regexp starting with "=" in not obvious context (not implied by preceding token)']
+		['if (true) /=a/.test("a");', 'regexp starting with "=" in not obvious context (not implied by preceding token)']
 	];
 
-	for (var i=0; i<inps.length; ++i) {
+	for (var i = 0; i < inps.length; ++i) {
 		callback(i, inps[i][0], inps[i][1]);
-	};
+	}
+	;
 };

@@ -24,10 +24,3 @@
 
 	</div>
 </div>
-
-<div>
-	<g:link class="edit btn btn-sm btn-pink " action="getModelTabs" id="${memberInstance?.id}">
-		<i class="glyphicon glyphicon-pencil"></i>
-		<g:message code="default.button.tabsModel.label" default="Models Manager"/>
-	</g:link>
-</div>

@@ -2,7 +2,6 @@ package ocelot
 
 import grails.rest.RestfulController
 import grails.transaction.Transactional
-
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = false)
@@ -25,10 +24,10 @@ class PaletteItemController extends RestfulController {
 		item.description = jsonReq.description
 		item.activated = jsonReq.activated
 		item.props = jsonReq.props
+
+		//TODO dar al usuario la opcion de subir su svg y subir o seleccionar de una lista el icono
 		item.icon = "hola"
 		item.svg = "hola"
-
-
 
 		def category = CategoryItem.get(jsonReq.category.id)
 		category.addToPaletteItems(item)
@@ -82,8 +81,8 @@ class PaletteItemController extends RestfulController {
 //        println instance.dump()
 
 		render status: OK
-
 	}
+
 //    @Override
 //    def update(){
 //        def jsonReq = request.JSON

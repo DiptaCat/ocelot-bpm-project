@@ -20,8 +20,8 @@ class MemberControllerSpec extends Specification {
 		def controller = controller.index()
 
 		then: "The model is correct"
-		!controller.userInstanceList
-		controller.userInstanceCount == 0
+		!controller.memberInstanceList
+		controller.memberInstanceCount == 0
 	}
 
 	void "Test the create action returns the correct model"() {
@@ -29,7 +29,7 @@ class MemberControllerSpec extends Specification {
 		controller.create()
 
 		then: "The model is correctly created"
-		model.userInstance != null
+		model.memberInstance != null
 	}
 
 	void "Test the save action correctly persists an instance"() {
@@ -37,23 +37,23 @@ class MemberControllerSpec extends Specification {
 		when: "The save action is executed with an invalid instance"
 		request.contentType = FORM_CONTENT_TYPE
 		request.method = 'POST'
-		def user = new Member()
-		user.validate()
+		def member = new Member()
+		member.validate()
 		controller.save()
 
 		then: "The create view is rendered again with the correct model"
-		model.userInstance != null
+		model.memberInstance != null
 		view == 'create'
 
 		when: "The save action is executed with a valid instance"
 		response.reset()
 		populateValidParams(params)
-		user = new Member(params)
+		member = new Member(params)
 
 		controller.save()
 
 		then: "A redirect is issued to the show action"
-		response.redirectedUrl == '/user/show/1'
+		response.redirectedUrl == '/member/show/1'
 		controller.flash.message != null
 		Member.count() == 1
 	}
@@ -67,11 +67,11 @@ class MemberControllerSpec extends Specification {
 
 		when: "A domain instance is passed to the show action"
 		populateValidParams(params)
-		def user = new Member(params)
-		controller.show(user)
+		def member = new Member(params)
+		controller.show(member)
 
 		then: "A model is populated containing the domain instance"
-		model.userInstance == user
+		model.memberInstance == member
 	}
 
 	void "Test that the edit action returns the correct model"() {
@@ -83,11 +83,11 @@ class MemberControllerSpec extends Specification {
 
 		when: "A domain instance is passed to the edit action"
 		populateValidParams(params)
-		def user = new Member(params)
-		controller.edit(user)
+		def member = new Member(params)
+		controller.edit(member)
 
 		then: "A model is populated containing the domain instance"
-		model.userInstance == user
+		model.memberInstance == member
 	}
 
 	void "Test the update action performs an update on a valid domain instance"() {
@@ -97,28 +97,28 @@ class MemberControllerSpec extends Specification {
 		controller.update(null)
 
 		then: "A 404 error is returned"
-		response.redirectedUrl == '/user/index'
+		response.redirectedUrl == '/member/index'
 		flash.message != null
 
 
 		when: "An invalid domain instance is passed to the update action"
 		response.reset()
-		def user = new Member()
-		user.validate()
-		controller.update(user)
+		def member = new Member()
+		member.validate()
+		controller.update(member)
 
 		then: "The edit view is rendered again with the invalid instance"
 		view == 'edit'
-		model.userInstance == user
+		model.memberInstance == member
 
 		when: "A valid domain instance is passed to the update action"
 		response.reset()
 		populateValidParams(params)
-		user = new Member(params).save(flush: true)
-		controller.update(user)
+		member = new Member(params).save(flush: true)
+		controller.update(member)
 
 		then: "A redirect is issues to the show action"
-		response.redirectedUrl == "/user/show/$user.id"
+		response.redirectedUrl == "/member/show/$member.id"
 		flash.message != null
 	}
 
@@ -129,23 +129,23 @@ class MemberControllerSpec extends Specification {
 		controller.delete(null)
 
 		then: "A 404 is returned"
-		response.redirectedUrl == '/user/index'
+		response.redirectedUrl == '/member/index'
 		flash.message != null
 
 		when: "A domain instance is created"
 		response.reset()
 		populateValidParams(params)
-		def user = new Member(params).save(flush: true)
+		def member = new Member(params).save(flush: true)
 
 		then: "It exists"
 		Member.count() == 1
 
 		when: "The domain instance is passed to the delete action"
-		controller.delete(user)
+		controller.delete(member)
 
 		then: "The instance is deleted"
 		Member.count() == 0
-		response.redirectedUrl == '/user/index'
+		response.redirectedUrl == '/member/index'
 		flash.message != null
 	}
 }

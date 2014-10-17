@@ -10,7 +10,6 @@ class ModelControllerSpec extends Specification {
 
 	def populateValidParams(params) {
 		assert params != null
-		// TODO: Populate valid properties like...
 		params["name"] = 'Proj1'
 		params["user"] = new Member()
 	}

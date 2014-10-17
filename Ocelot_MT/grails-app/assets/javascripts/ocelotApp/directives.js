@@ -28,7 +28,7 @@ app.directive('loadSvg', function ($compile) {
 
 	function link(scope, element, attrs) {
 		scope.$watch(attrs.loadSvg, function (value) {
-			console.log(value);
+			//console.log(value);
 			element.append(value);
 		});
 	}

@@ -10,8 +10,8 @@
 			<ul class="nav ace-nav">
 				<li>
 					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-						<g:if test="${profile?.foto}">
-							<asset:image src="${profile?.foto}"/>
+						<g:if test="${session.profile?.foto}">
+							<asset:image src="${session.profile?.foto}"/>
 
 						</g:if>
 						<g:else>
