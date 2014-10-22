@@ -1,10 +1,11 @@
-@ artifact.package @
-import spock.lang.Specification
+@artifact.package@
+
+import spock.lang.*
 
 /**
  *
  */
-class @artifact.name @ extends Specification {
+class @artifact.name@ extends Specification {
 
 	def setup() {
 	}
