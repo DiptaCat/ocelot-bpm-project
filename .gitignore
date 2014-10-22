@@ -39,7 +39,7 @@ TaskList/.idea/
 TaskList/target/
 TaskList/*.log
 
-Blank_app/*.iml
-Blank_app/.idea/
-Blank_app/target/
-Blank_app/*.log
+Ocelot_MT/*.iml
+Ocelot_MT/.idea/
+Ocelot_MT/target/
+Ocelot_MT/*.log
