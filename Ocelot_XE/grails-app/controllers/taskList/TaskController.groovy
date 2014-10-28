@@ -9,6 +9,7 @@ class TaskController {
     def workflowService
 
     def index() {
+        //TODO: Get only tasks for user session
         def tasks = workflowService.getUnassignedTasks()
         def processDefinitions = []
 
