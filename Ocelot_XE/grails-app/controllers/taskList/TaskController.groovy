@@ -10,6 +10,7 @@ class TaskController {
     def workflowService
 
     def index() {
+        //TODO: Get only tasks for user session
         def tasks = workflowService.getUnassignedTasks()
         def processDefinitions = []
 
@@ -50,6 +51,9 @@ class TaskController {
         redirect(controller:'Task',action:'index')
 
     }
+    /*
+    * Unused method at moment
+    * */
     def saveTask() {
         println 'params savebghjghjvghj' + params
 

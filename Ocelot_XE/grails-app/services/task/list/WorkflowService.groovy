@@ -94,70 +94,35 @@ class WorkflowService {
 
     }
 
-    //TODO: 
     def readBpmnFile(fileStream) {
 
-        /*
-        def modelInstance = Bpmn.readModelFromStream(fileStream)
-        println "MODEL : "+ modelInstance.document.getRootElement().localName
-        def taskType = modelInstance.model.getType(UserTask.class)
-        println "TASKTYPE: " + taskType.getExtendingTypes()
-        def list = []
-        def xml
-        String asd
-        XmlSlurper xmlParser = new XmlSlurper()
-        if (taskType) {
-            def taskInstances = modelInstance.getModelElementsByType(taskType)
-            taskInstances.each { UserTask task ->
-                println "TASK : " + task.textContent
-                println "TASK : " + task?.dump()
-                task.extensionElements.elements.each { ModelElementInstance mei ->
-                    println "Model Element Instnace: ${mei.domElement.getChildElements().dump()}"
-                    mei.domElement.getChildElements().each {DomElement de ->
-                        asd = de.element.toString()
-                        println "xml : ${de.element}"
-                        println "Partial " + asd.class
-                        println xml
-                    }
-
-                    println "Partial " + xmlParser.parseText(java.io.StringReader.StringReader(asd))
-                   def text = list.join()
-                   println "SOC EL MILLOR 2: ${text}"
-                   println text.toString().getClass()
-                   def xml = new XmlSlurper().parseText(text.toString())
-                   xml."camunda:formData".each {println it.dump()}
-                }
-            }
-        }
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
-        DocumentBuilder db = dbf.newDocumentBuilder()
-        Document doc = db.parse(fileStream)
-        System.out.println("type = " + langs.getAttribute("userTask"))
-        println "Partial " + xmlParser.parseText(java.io.StringReader.StringReader(asd))
-        Bpmn.convertToString(modelInstance)
-        */
-
-
         BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
-        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class);
-        println "Size => " + extensionElements.size()
-
-        CamundaFormData camundaFormData
-
-        extensionElements.each {ExtensionElements ee ->
-            println "Parent Element: " + ee.getParentElement() + "\n"
 
 
-            if(ee.getParentElement().toString().substring(0, ee.getParentElement().toString().indexOf('@')).equals("org.camunda.bpm.model.bpmn.impl.instance.UserTaskImpl")) {
-                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult();
-                camundaFormData.camundaFormFields.each { CamundaFormField ff ->
-                    println "Id = " + ff.camundaId
-                    println "Label = " + ff.camundaLabel
-                    println "Value = " + ff.camundaDefaultValue
-                    println "\n"
-                }
-            }
-        }
+/**
+ * Method to read extensions elements. TODO: Implement it into a separate method to handle the extensions elements.
+ *
+//        BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
+//        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class);
+//        println "Size => " + extensionElements.size()
+//
+//        CamundaFormData camundaFormData
+//
+//        extensionElements.each {ExtensionElements ee ->
+//            println "Parent Element: " + ee.getParentElement() + "\n"
+//
+//
+//            if(ee.getParentElement().toString().substring(0, ee.getParentElement().toString().indexOf('@')).equals("org.camunda.bpm.model.bpmn.impl.instance.UserTaskImpl")) {
+//                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult();
+//                camundaFormData.camundaFormFields.each { CamundaFormField ff ->
+//                    println "Id = " + ff.camundaId
+//                    println "Label = " + ff.camundaLabel
+//                    println "Value = " + ff.camundaDefaultValue
+//                    println "\n"
+//                }
+//            }
+//        }
+ **/
 
         Bpmn.convertToString(modelInstance)
     }
@@ -228,180 +193,6 @@ class WorkflowService {
             deployment
 
         }
-
-        /**
-         * Every time you want to save variables should run this method, making maintenance to the variables so that everything is consistent
-         *
-         * @param taskid
-         * @param vars
-         * @return
-         * */
-
-        def saveTask(taskid, vars, complete = false) {
-
-            def existingVars = taskService.getVariables(taskid)
-
-            println "SAVE TASK $taskid: complete=$complete: $vars"
-            println "SAVE TASK $taskid: complete=$complete: $vars"
-
-            removeFromArrays(taskid, existingVars, vars)
-            if (complete)
-                taskService.complete(taskid, vars)
-            else
-                taskService.setVariables(taskid, vars)
-        }
-
-        /**
-         * Multivalue variables are stored as single variables with names: varid, varid-1, varid-2, ..., varid-n
-         * When the newly assigned multivalue variable is assigned, some existing indices must be removed when the new size is smaller than the existing one.
-         * Every existing var has to be checked. If the var base name is being assigned but the existing index is not in the assigned one, must be removed.
-         *
-         * @param taskid ID of task
-         * @param existingVars Existing vars in process
-         * @params assignedVars    Vars that have recently been assigned
-         * @return Nothing
-         */
-        def removeFromArrays(taskid, Map existingVars = [:], Map assignedVars = [:]) {
-            def toremove = []
-            existingVars.each { k, v ->
-                def kbase = k.replaceAll(/\-\d+$/, "")
-                if (k.contains('-') &&
-                        assignedVars.containsKey(kbase) &&
-                        !assignedVars.containsKey(k)) {
-                    // array component in assigned vars. check if array is reassigned and if index exists
-                    toremove.add(k)
-                }
-            }
-            taskService.removeVariables(taskid, toremove)
-        }
-
-
-        def getVars(taskId, user = null, vars = [:], formdata = [:], taskdata = [:]) {
-
-            def tasksdata = [:]
-
-            if (!taskId) { // start task
-                taskId = '_start'
-            } else {
-                tasksdata = taskService.getVariable(taskId, '_tasks')
-                //println tasksdata
-            }
-
-            if (!formdata) {
-                formdata = getFormData(taskId)
-            } else if (formdata instanceof Task) {
-                formdata = getFormData(formdata)
-            }
-            if (!formdata)
-                throw new Exception("No form data found.")
-
-            def fd = [:]
-            //println vars
-            formdata.each {
-                fd[it.id] = ['name': it.id, 'type': it?.type?.name ?: 'string']
-
-                def values = it?.type?.getInformation('values') ?: [:]
-                def value = vars?."$it.id" ?: null
-                if (values && value != null && values.containsKey(value)) {
-                    fd[it.id]['label'] = values[value]
-                }
-                if (vars.__extra__?."$it.id"?.label) {
-                    fd[it.id]['label'] = vars.__extra__?."$it.id"?.label
-                }
-                if (fd[it.id]?.type == 'date' && it?.type?.datePattern) {
-                    fd[it.id]['pattern'] = it.type.datePattern
-                }
-            }
-            def r = ['_formdata': fd]
-            // it contains the configuration of form fields of the tasks that have already been visited
-            if (user)
-                r['_user'] = user
-            vars.remove('__extra__') // extra information of values provided. filled at getFormData
-            vars
-        }
-
-        /**
-         * Get data to show.
-         *
-         * @param processInstance The processInstance to get data from
-         * @param hist Historic info
-         * @return All values ​​of the variables in the different tasks
-         */
-        def getData(processInstance, hist = [:]) {
-
-            if (!hist)
-                hist = getActivities(processInstance.id).collectEntries({ [it.id, it] })
-
-            //		println "HISTORIC: ${hist*.value.activityName}"
-            def data = [:]
-
-            def histvars = historyService.createHistoricDetailQuery().variableUpdates().processInstanceId(processInstance.id).list()
-            //		println "HISTORICS VARIABLES: $histvars"
-            histvars = histvars.groupBy({ it.activityInstanceId })
-
-            //		println hist
-            //		println "HISTORICS VARIABLES: $histvars"
-            def pv = processInstance.processVariables
-
-            hist.each { acid, h ->
-                def did = h.activityType == 'startEvent' ? '_start' : h.taskId
-                data[did] = [:]
-                try {
-                    def groupedhv = histvars[h.id]?.groupBy({ it.name }) ?: [:] // full hist
-                    def hv = groupedhv?.collectEntries({ k, v -> [k, v[-1]] }) ?: [:]
-                    // only one value per variable and task
-                    //				println "HISTORICS (TOTS): $h.activityName --> " + hv?._tasks?.value
-                    //				println "HISTORICS: $h.activityName --> " + hv?._tasks?.value?."$did"
-                    data[did]['_values'] = getTaskData(hv, hv?._tasks?.value?."$did"?.'_formdata')
-                    data[did]['_user'] = hv?._tasks?.value?."$did"?._user
-                    data[did]['_historic'] = groupedhv
-                } catch (e) {
-                    log.error e.message, e
-                }
-            }
-            println "DATA: $data"
-            data
-        }
-
-        /**
-         * Get data corresponding to a task
-         *
-         * @param values Raw values
-         * @param definition Values types and definitions
-         * @return Map with values and metadata
-         */
-        def getTaskData(values, definition) {
-            def data = [:]
-            println "VALUES: $values"
-            //		println "DEFINITION: $definition"
-            definition.each { k, v ->
-                if (values?.containsKey(k)) {
-                    data[v.name] = [value: values[k].value, time: values[k].time]
-                } else {
-                    data[v.name] = [value: null]
-                }
-                if (v.label) {
-                    data[v.name].label = v.label
-                }
-                if (v.type == 'file') { // special type
-                    data[v.name] = [type: 'file', id: data[v.name].value, label: v.label, time: data[v.name].time]
-                } else if (v.label && v.label == data[v.name]) {
-                    // enum post process and other types that do have a label
-                    data[v.name].label = v.label
-                }
-                if (v.type == 'date' && v.pattern) {
-                    data[v.name].pattern = v.pattern
-                }
-            }
-            data
-        }
-
-        def assignCurrentTask(String taskId, String user) {
-            // assign task to current user
-            def task = getTask(taskId, "taskCandidateUser", user)
-            claimTask(task.id, user)
-        }
-
         def getProcessDefinitionByProcessDefinitionId(String processDefinitionId) {
             ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult()
             processDefinition
@@ -414,6 +205,7 @@ class WorkflowService {
             List<FormField> formFields = startFormData.getFormFields()
             formFields // codi HTML a sac (injectar-ho a una vista! )
         }
+
         def submitStartForm(String processDefinitionId, Map<String, Object> properties){
             formService.submitStartForm(processDefinitionId, properties)
         }
@@ -425,43 +217,6 @@ class WorkflowService {
         def getFormData(String taskId) {
             def formFields = formService.getTaskFormData(taskId).getFormFields()
             formFields
-        }
-
-
-        // Values from the process variables
-        def getTaskLocalValues(taskId, values) {
-            return values?._tasks?."$taskId"?._taskdata ?: [:]
-        }
-
-        // Values from the process variables
-        def getFormValuesExtra(taskId, values) {
-            def extra = [:]
-            values?._tasks?.each { tid, task ->
-                task._formdata.each { fid, field ->
-                    extra[fid] = field
-                }
-            }
-            return extra
-        }
-
-        // Values via getFormData
-        def getFormValuesExtra(values) {
-            println "EXTRA VALUES: $values"
-            return values?.__extra__ ?: [:]
-        }
-
-        private findTasks(String methodName, String username, int firstResult, int maxResults, Map orderBy) {
-            def taskQuery = taskService.createTaskQuery()
-            if (methodName) {
-                taskQuery."${methodName}"(username)
-            }
-
-            if (orderBy) {
-                orderBy.each { k, v ->
-                    taskQuery."orderByTask${GrailsNameUtils.getClassNameRepresentation(k)}"()."${v}"()
-                }
-            }
-            taskQuery.listPage(firstResult, maxResults)
         }
 
         def Long getTasksCount(String methodName, String username) {
@@ -480,10 +235,6 @@ class WorkflowService {
             orderBy['priority'] = 'desc'
             //println "$method $params"
             findTasks(method, params.user, getOffset(params.offset), params.max, orderBy)
-        }
-
-        private getOffset(def offset) {
-            return offset ? Integer.parseInt(offset) : 0
         }
 
         def getProcessInstances(filters, params) {
@@ -505,60 +256,6 @@ class WorkflowService {
         def getNumInstances(ProcessDefinition processDefinition) {
             historyService.createHistoricProcessInstanceQuery().processDefinitionId(processDefinition.getId()).count();
         }
-        def getNumInstancesList(List<ProcessDefinition> processDefinitionList){
-
-        }
-
-
-        def getPITasks(processInstanceId) {
-            historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().asc().list()
-        }
-
-        def getPIOpenTasks(processInstanceId) {
-            taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list()
-
-        }
-
-        def getPIOpenTasks(List processInstanceIds) {
-            processInstanceIds.collectEntries({ [it.id, getPIOpenTasks(it.id)] })
-        }
-
-        def getActiveActivities(List processInstanceIds) {
-            processInstanceIds.collectEntries({
-                def exs = runtimeService.createExecutionQuery().processInstanceId(it.activitiId).list()
-                def acts = exs.collect({
-                    historyService.createHistoricActivityInstanceQuery().executionId(it.id).unfinished().list()
-                }).flatten().unique({ it.id })
-                [it.id, acts]
-            })
-        }
-
-        def getActivities(String processInstanceId, params = [:]) {
-            def q = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId)
-            if (params.finished != null) {
-                if (params.finished)
-                    q = q.finished()
-                else
-                    q = q.unfinished()
-            }
-            if (params.order) {
-                q = q.orderBy "$params.sort.capitalize()"()
-                q = params.order ? q."$params.order"() : q.asc() // it's a must when using orderBy
-            }
-            //		else {
-            //			q = q.orderByHistoricActivityInstanceStartTime()
-            //			q = params.order ? q."$params.order"() : q.asc() // it's a must when using orderBy
-            //		}
-            def l = q.list()
-
-            if (!params.sort)
-                l = l.sort { a, b ->
-                    a.startTime != b.startTime && (a.activityType != 'gateway' || b.activityType != 'gateway') ?
-                            a.startTime <=> b.startTime :
-                            a.activityType == 'gateway' ? -1 : 1
-                }
-            l
-        }
 
         def getTask(String processInstanceId, String methodName = null, String username = '') {
             def q = taskService.createTaskQuery().processInstanceId(processInstanceId)
@@ -571,6 +268,34 @@ class WorkflowService {
             taskService.createTaskQuery().taskId(taskId).singleResult()
         }
 
+        def removeFromArrays(taskid, Map existingVars = [:], Map assignedVars = [:]) {
+            def toremove = []
+            existingVars.each { k, v ->
+                def kbase = k.replaceAll(/\-\d+$/, "")
+                if (k.contains('-') &&
+                        assignedVars.containsKey(kbase) &&
+                        !assignedVars.containsKey(k)) {
+                    // array component in assigned vars. check if array is reassigned and if index exists
+                    toremove.add(k)
+                }
+            }
+            taskService.removeVariables(taskid, toremove)
+        }
+
+        def saveTask(taskid, vars, complete = false) {
+
+            def existingVars = taskService.getVariables(taskid)
+
+            println "SAVE TASK $taskid: complete=$complete: $vars"
+            println "SAVE TASK $taskid: complete=$complete: $vars"
+
+            removeFromArrays(taskid, existingVars, vars)
+            if (complete)
+                taskService.complete(taskid, vars)
+            else
+                taskService.setVariables(taskid, vars)
+        }
+
         def claimTask(String taskId, String username) {
             taskService.claim(taskId, username)
         }
@@ -578,89 +303,6 @@ class WorkflowService {
         def completeTask(String taskId, Map params) {
             taskService.setVariablesLocal(taskId, params)
             taskService.complete(taskId, params)
-        }
-
-
-        def getTotalProcessInfo(processInstanceId) {
-
-            def tasks = getPITasks(processInstanceId).collectEntries({ [it.id, it] })
-
-            def activities = getActivities(processInstanceId).collectEntries({ [it.id, it] })
-
-            def fullHist = (activities*.value.collectEntries({ [it.taskId ?: it.id, it] }) + tasks).values().sort {
-                it.startTime
-            }
-
-            def fullHistNoSubProcesses = fullHist.grep {
-                it.hasProperty('taskDefinitionKey') || it.activityType != 'subProcess'
-                // is task or not is subprocess === is not subprocess
-            }
-
-            def processInstance = getProcessInstance(processInstanceId)
-            println "PROCESS INSTANCE: $processInstance"
-            println "HISTORIC ACTIVITIES: ${activities*.value*.activityId}"
-            println "HISTORIC TASKS: ${tasks*.value*.name}"
-
-            def totals = [
-                    startTime                 : fullHist ? fullHist[0].startTime : null,
-                    endTime                   : fullHist ? fullHist[-1].endTime : null,
-                    cumulativeDurationInMillis: fullHistNoSubProcesses*.durationInMillis?.grep({ it }).sum() ?: 0,
-                    durationInMillis          : fullHist ? (fullHist[-1].endTime ?: new Date()).time - fullHist[0].startTime.time : null
-            ]
-
-            [historic: fullHist, totals: totals, activities: activities, tasks: tasks]
-        }
-
-        def setAssignee(String taskId, String username) {
-            taskService.setAssignee(taskId, username)
-        }
-
-        def setPriority(String taskId, int priority) {
-            taskService.setPriority(taskId, priority)
-        }
-
-        def getCandidateUserIds(String taskId) {
-            def identityLinks = getIdentityLinksForTask(taskId)
-            def userIds = []
-            def users
-            identityLinks.each { identityLink ->
-                if (identityLink.groupId) {
-                    users = identityService.createUserQuery()
-                            .memberOfGroup(identityLink.groupId)
-                            .orderByUserId().asc().list()
-
-                    userIds << users?.collect { it.id }
-                } else {
-                    userIds << identityLink.userId
-                }
-            }
-            return userIds.flatten().unique()
-        }
-
-        def getIdentityLinksForTask(String taskId) {
-            taskService.getIdentityLinksForTask(taskId)
-        }
-
-        def syncUser(userId, groupIds) {
-
-            def user = identityService.createUserQuery().userId(userId).list()
-            if (!user) identityService.saveUser(identityService.newUser(userId))
-
-            groupIds.each { gid ->
-                def group = identityService.createGroupQuery().groupId(gid).list()
-                if (!group) identityService.saveGroup(identityService.newGroup(gid))
-            }
-
-            def userGroups = identityService.createGroupQuery().groupMember(userId).list()
-
-            //new membership?
-            def newGroups = groupIds - userGroups*.id
-            newGroups.each { group -> identityService.createMembership(userId, group) }
-
-            //leave membership?
-            def oldGroups = userGroups*.id - groupIds
-            oldGroups.each { group -> identityService.deleteMembership(userId, group) }
-
         }
 
 

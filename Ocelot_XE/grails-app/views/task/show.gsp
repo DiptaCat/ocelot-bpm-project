@@ -26,7 +26,7 @@
             </tr>
         </g:each>
     </table>
-    <g:actionSubmit class="edit btn btn-sm btn-pink" action="saveTask" value="Save Task" />
+    %{--<g:actionSubmit class="edit btn btn-sm btn-pink" action="saveTask" value="Save Task" />--}%
     <g:actionSubmit class="edit btn btn-sm btn-pink" action="completeTask"  value="Task Done" />
 </g:form>
 
