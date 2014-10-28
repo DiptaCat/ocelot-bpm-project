@@ -34,8 +34,7 @@ class ProcessController {
             def startFormData = workflowService.getStartFormData(processDefinition.id)
             HashMap<String, Object> vars = new HashMap<String, Object>()
             startFormData.each {FormField d ->
-                d.defaultValue = params[d.id]
-                vars.put(d.id, d.defaultValue)
+                vars.put(d.id, params[d.id])
             }
 
             def response = workflowService.startProcess(processDefinition.id, vars)

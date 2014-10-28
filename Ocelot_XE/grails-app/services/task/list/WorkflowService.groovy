@@ -297,14 +297,9 @@ class WorkflowService {
 
             def fd = [:]
             //println vars
-            formdata.formProperties.each {
+            formdata.each {
                 fd[it.id] = ['name': it.id, 'type': it?.type?.name ?: 'string']
-                if (!it.writable) { // assign default value
-                    fd[it.id] = it?.value
-                }
-                if (it.name) {
-                    fd[it.id]['name'] = it.name
-                }
+
                 def values = it?.type?.getInformation('values') ?: [:]
                 def value = vars?."$it.id" ?: null
                 if (values && value != null && values.containsKey(value)) {
@@ -321,12 +316,6 @@ class WorkflowService {
             // it contains the configuration of form fields of the tasks that have already been visited
             if (user)
                 r['_user'] = user
-            if (taskdata)
-                r['_taskdata'] = taskdata
-            //		def aux = ['_tasks':[:]]
-            //		aux['_tasks'][taskId] = r
-            vars['_tasks'] = tasksdata
-            vars['_tasks'][taskId] = r
             vars.remove('__extra__') // extra information of values provided. filled at getFormData
             vars
         }
@@ -414,9 +403,7 @@ class WorkflowService {
         }
 
         def getProcessDefinitionByProcessDefinitionId(String processDefinitionId) {
-            println processDefinitionId
             ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult()
-            println processDefinition
             processDefinition
         }
 
@@ -436,8 +423,7 @@ class WorkflowService {
         }
 
         def getFormData(String taskId) {
-            def formFields = taskService.getVariablesLocal(taskId)
-            println formFields
+            def formFields = formService.getTaskFormData(taskId).getFormFields()
             formFields
         }
 

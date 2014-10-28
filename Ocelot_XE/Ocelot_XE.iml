@@ -95,7 +95,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" name="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER" level="application" />
-    <orderEntry type="library" exported="" name="grails-2.4.2 (3)" level="application" />
+    <orderEntry type="library" name="grails-2.4.2 (3)" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Ocelot_XE)">
         <CLASSES>
@@ -249,7 +249,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="Ocelot_XE-grailsPlugins" />
-    <orderEntry type="library" name="grails-2.4.3" level="application" />
+    <orderEntry type="library" exported="" name="grails-2.4.3" level="application" />
   </component>
 </module>
 

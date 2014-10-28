@@ -5,7 +5,7 @@
     <title>New</title>
 </head>
 
-<g:form controller="process" action="newInstance" name="newInstance" id="${processDefinitionId}"> <!-- action="submitMethod -> newInstance?" -->
+<g:form controller="task" id="${taskId}"> <!-- action="submitMethod -> newInstance?" -->
     <table class="table table-striped table-bordered" align="center">
         <tr>
             <th class="panel-title"><g:message align="center" code="form.field.label" default="Field"/></th>
@@ -26,7 +26,8 @@
             </tr>
         </g:each>
     </table>
-    <g:submitButton name="update" value="Start process" />
+    <g:actionSubmit class="edit btn btn-sm btn-pink" action="saveTask" value="Save Task" />
+    <g:actionSubmit class="edit btn btn-sm btn-pink" action="completeTask"  value="Task Done" />
 </g:form>
 
 %{--<g:link class="edit btn btn-sm btn-pink " action="newInstance" id="${processDefinitionId}" params="${['startFormData':startFormData]}">
