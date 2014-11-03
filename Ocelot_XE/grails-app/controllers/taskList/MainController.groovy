@@ -28,8 +28,8 @@ class MainController {
         def f = request.getFile('myFile')
 
         if (f.empty) {
-            flash.message = 'file cannot be empty'
-            render(view: 'uploadForm')
+            flash.error = 'ERROR: File cannot be empty'
+            redirect(action:'index')
             return
         }
         print f.originalFilename
@@ -39,7 +39,8 @@ class MainController {
         print f.getClass()
         def fileContent = f.getInputStream()
         workflowService.deployProcess(fileContent, f.originalFilename)
-        response.sendError(200, 'Done')
+        flash.message = 'The file was uploaded'
+        redirect(action:'index')
     }
     def saveFile() {
         def webRootDir = servletContext.getRealPath("/")
@@ -50,10 +51,6 @@ class MainController {
          println "OriginalFileName:          ${uploadedFile.originalFilename}"
          println "Size: ${uploadedFile.size}"
          println "ContentType: ${uploadedFile.contentType}"*/
-    }
-
-    def emptyView() {
-        render(view: 'emptyView')
     }
 
     //

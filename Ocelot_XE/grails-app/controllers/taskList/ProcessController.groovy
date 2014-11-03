@@ -36,10 +36,13 @@ class ProcessController {
             startFormData.each {FormField d ->
                 vars.put(d.id, params[d.id])
             }
-
-            def response = workflowService.startProcess(processDefinition.id, vars)
-
-            println response
+            try {
+                def response = workflowService.startProcess(processDefinition.id, vars)
+            }
+            catch(Exception e){
+                flash.error = "ERROR: We don't support some element of this BPMN2.0. \r\n"+
+                        "Details: " + e.message
+            }
 
             //println processDefinition.properties
             //vars and processDefinition

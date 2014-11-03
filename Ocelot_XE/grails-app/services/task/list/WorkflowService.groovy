@@ -141,10 +141,14 @@ class WorkflowService {
 //
 //    }
 
-    def startProcess(String taskId, Map vars) {
+    def startProcess(String taskId, Map vars) throws Exception {
         //log.info "STARTING PROCESS $p: ${vars.grep({it.key!='__files__'})}"
-        println vars
-        ProcessInstance pi = runtimeService.startProcessInstanceById(taskId, vars)
+        try {
+            ProcessInstance pi = runtimeService.startProcessInstanceById(taskId, vars)
+        }
+        catch(Exception e){
+            throw e
+        }
         //println "STARTED PROCESS $p: ${vars.grep({it.key!='__files__'})}: $pi"
         pi
     }
