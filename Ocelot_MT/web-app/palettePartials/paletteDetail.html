@@ -2,13 +2,12 @@
 	<div class="btn-group pull-right">
 		<a href="#/palette" class="btn btn-primary">List Palette Items</a>
 	</div>
-	<h2>Palette List</h2>
+	<h2>{{item.name}}</h2>
 </div>
 
 <div class="row">
 	<!--<show-palette class="col-md-2"></show-palette>-->
 	<div class="col-md-10">
-		<h2>{{item.name}}</h2>
 
 		Name:
 		<input type="text" ng-model="item.name">
@@ -27,14 +26,13 @@
 	</div>
 </div>
 
-<!--{{item | json}}-->
 <div>
 	<table class="table" style="max-width: 600px">
 		<thead class="table-header">
 		<tr>
-			<th>name</th>
-			<th>type</th>
-			<th>default value</th>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Value</th>
 			<th style="max-width: 50px; text-align: right">
 				<a class="btn btn-mini" ng-click="addProperty()"><i class="icon-plus"></i></a>
 			</th>
@@ -52,16 +50,16 @@
 			</td>
 			<td>
 				<select ng-model="property.type" ng-click="resetValue(property)">
-					<option value="string">string</option>
-					<option value="boolean">boolean</option>
+					<option value="String">String</option>
+					<option value="Boolean">Boolean</option>
 				</select>
 			</td>
 			<td>
 				<div ng-switch on="property.type">
-					<div ng-switch-when="boolean">
+					<div ng-switch-when="Boolean">
 						<input ng-model="property.value" type="checkbox">
 					</div>
-					<div ng-switch-default>
+					<div ng-switch-when="String">
 						<input ng-model="property.value">
 					</div>
 				</div>

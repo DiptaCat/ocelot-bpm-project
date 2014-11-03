@@ -11,8 +11,11 @@
 		<li><g:link controller="model" action="index"><i class="glyphicon glyphicon-briefcase"></i> <span
 				class="menu-text">Models</span></g:link></li>
 
-		<li><a href="http://localhost:8080/ocelot/palette#/palette"><i class="icon-list-alt"></i> <span
+		<li><a href="http://localhost:8080/ocelot/palette#/palette"><i class="glyphicon glyphicon-list-alt"></i> <span
 				class="menu-text">Palette</span></a></li>
+
+		<li><g:link controller="modeler" action="index"><i class="glyphicon glyphicon-briefcase"></i> <span
+				class="menu-text">Canvas</span></g:link></li>
 	</ul>
 
 	<div class="sidebar-collapse" id="sidebar-collapse">

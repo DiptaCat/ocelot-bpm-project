@@ -1,7 +1,7 @@
 <div class="navbar navbar-default navbar-fixed-top" id="navbar">
 	<div class="navbar-container" id="navbar-container">
 		<div class="navbar-header pull-left">
-			<div style="display:inline;">
+			<div style="padding-top: 10px">
 				<g:link controller="main" action="index"><asset:image src="logodipu.gif"/></g:link>
 			</div>
 		</div>

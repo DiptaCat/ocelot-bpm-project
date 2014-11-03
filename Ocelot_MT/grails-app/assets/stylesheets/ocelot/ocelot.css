@@ -1,0 +1,23 @@
+div {
+	/*border: 1px #000000 dotted;*/
+}
+#palette{
+	border: 1px #000000 dotted;
+	width: 20%;
+	height: 100%;
+	min-height: 600px;
+}
+#canvas {
+	border: 1px #000000 dotted;
+	height: 80%;
+	min-height: 500px;
+}
+
+#properties {
+	border: 1px #000000 dotted;
+	height: 20%;
+	min-height: 100px;
+}
+#col2 {
+	width: 80%;
+}

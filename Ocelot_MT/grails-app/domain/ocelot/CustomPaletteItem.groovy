@@ -10,7 +10,7 @@ class CustomPaletteItem extends APaletteItem {
 	static hasMany = [palettes: Palette]
 
 	static constraints = {
-		props nullable: true, maxSize: 5000
-		svg maxSize: 5000
+		props nullable: true, maxSize: 10000
+		svg maxSize: 10000
 	}
 }

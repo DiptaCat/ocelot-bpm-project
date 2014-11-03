@@ -11,5 +11,4 @@ class PaletteController extends RestfulController {
 	PaletteController() {
 		super(Palette)
 	}
-
 }

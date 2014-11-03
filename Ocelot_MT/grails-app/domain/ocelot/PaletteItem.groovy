@@ -11,7 +11,7 @@ class PaletteItem extends APaletteItem {
 	static constraints = {
 //        properties column: "properties", sqlType: "varchar(5000)"
 //        icon column: "icon", sqlType: "varchar(5000)"
-		props nullable: true, maxSize: 5000
+		props nullable: true, maxSize: 10000
 		svg maxSize: 10000
 	}
 }
