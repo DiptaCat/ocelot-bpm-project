@@ -1,4 +1,4 @@
-<%@ page import="ocelot.Member; ocelot.Member; ocelot.Model" %>
+<%@ page import="ocelot.Member; ocelot.Model" %>
 
 <div class="control-group ${hasErrors(bean: modelInstance, field: 'name', 'error')} required col-xs-12">
 	<label class="control-label" for="name">

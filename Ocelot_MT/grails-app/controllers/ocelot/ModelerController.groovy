@@ -1,17 +1,20 @@
 package ocelot
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.converters.JSON
 
 @Transactional(readOnly = true)
 class ModelerController {
 
 	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def index(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
-		[modelerInstanceList: Modeler.list(params), modelerInstanceCount: Modeler.count()]
+	def index() {
+
+	}
+
+	def _properties(PaletteItem element){
+		[props: JSON.parse(element.props.toString())]
 	}
 
 	def show(Modeler modelerInstance) {

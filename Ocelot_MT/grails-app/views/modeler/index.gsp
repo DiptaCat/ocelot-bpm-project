@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="ocelot.PaletteItem; grails.converters.JSON" contentType="text/html;charset=UTF-8" %>
 
 <html>
 <head>
@@ -21,7 +21,9 @@
 			</div>
 
 			<div id="properties">
-				Properties
+				%{--Properties--}%
+				%{--<g:render template="properties" model="${['element': PaletteItem.get(1)]}"/>--}%
+				<g:render template="properties" model="${['properties': JSON.parse(PaletteItem.get(10).props)]}"/>
 			</div>
 		</div>
 
@@ -29,33 +31,3 @@
 </div>
 </body>
 </html>
-
-%{--<style>
-div{
-border: 1px #000000 solid;
-}
-#canvas{
-height: 80%;
-}
-#properties{
-height: 20%;
-position: relative;
-}
-</style>--}%
-
-%{--<div style="min-height: 300px; width: 100%;">
-	<div style="height: 100%; width: 20%">
-		Palette<br>
-		Palette<br>
-		Palette<br>
-		Palette<br>
-	</div>
-	<div style="height: 100%; width: 80%; float: right; vertical-align: top;">
-		<div style="height: 80%;">
-			Canvas
-		</div>
-		<div style="height: 20%;">
-			Properties
-		</div>
-	</div>
-</div>--}%
