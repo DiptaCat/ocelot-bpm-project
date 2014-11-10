@@ -1,11 +1,15 @@
 package ocelot
 
+import grails.rest.RestfulController
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.converters.*
 
 @Transactional(readOnly = true)
-class ModelController {
+class ModelController extends RestfulController {
+
+	static responseFormats = ['xml']
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     def index(Integer max) {
@@ -100,14 +104,15 @@ class ModelController {
         }
     }
 
-	def display(Model modelInstance) {
-		if(params.id){
-			if (modelInstance) render modelInstance as JSON
-			else render(status: 404, text: 'Model not found')
-		}
-		else render Model.list() as JSON
+	def display() {
+		println "Model Controller - Display"
+
+		def model = Model.findById(params.id)
+		println model
+		if(model != null) respond model
 	}
 
+	@Deprecated
     def jsonToOject() {
         def json = '''{
                   "users": {
