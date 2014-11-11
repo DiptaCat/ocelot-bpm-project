@@ -3,21 +3,32 @@ div {
 }
 #palette{
 	border: 1px #000000 dotted;
+	top: 0;
+	left: 0;
 	width: 20%;
 	height: 100%;
 	min-height: 600px;
 }
+
 #canvas {
+	/*width: 67%;*/
+	left: 0;
+	top: 0;
 	border: 1px #000000 dotted;
-	height: 80%;
+	height: 70%;
 	min-height: 500px;
 }
 
 #properties {
 	border: 1px #000000 dotted;
-	height: 20%;
+	/*position: relative;*/
+	/*bottom: 0;*/
+	height: 24%;
+	/*width: 67%;*/
 	min-height: 100px;
+	overflow: auto;
 }
 #col2 {
+	/*position: absolute;*/
 	width: 80%;
 }

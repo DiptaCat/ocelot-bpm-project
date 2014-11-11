@@ -24,9 +24,14 @@ class BootStrap {
 				new CategoryItem(name: it).save()
 			}
 
-			new ProcessBuilder("/home/luis/tmp/SVG/script").start().waitFor()
+			File current = new File( "grails-app/utils/" )
+			def path = current.getAbsolutePath()
+			println(path)
+			current.delete()
 
-			new Palette(name: "Palette").save(flush: true, failOnError: true)
+			new ProcessBuilder(path+"/insertToDatabase", path).start().waitFor()
+
+			new Palette(name:"TestPalette").save(flush: true, failOnError: true)
 
 			def p = Palette.get(1)
 			def e = PaletteItem.list()
