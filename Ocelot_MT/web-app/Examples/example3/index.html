@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Ehé</title>
+	<script src="http://d3js.org/d3.v2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body ng-app="docsTimeDirective">
+<div ng-controller="Controller">
+	Date format: <input ng-model="item">
+	<button><a class="btn btn-mini" ng-click="asdf(item)">Boton</a></button>
+	<hr/>
+	Current time is: <span my-current-time="form">{{pimpollo}}</span>
+	<my-current-time val="data" grouped="grouped"></my-current-time>
+</div>
+</body>
+</html>
