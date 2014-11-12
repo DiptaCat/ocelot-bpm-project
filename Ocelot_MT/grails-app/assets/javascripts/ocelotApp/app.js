@@ -1,7 +1,7 @@
 //= require_tree bower_components
 //= require services
 //= require controllers
-//= require directives
+//= require directivesOut
 //= require filters
 
 /**
@@ -35,6 +35,10 @@ ocelotApp.config(function ($routeProvider) {
 			templateUrl: 'palettePartials/proves.html',
 			controller: 'ProvesCtrl'
 		}).
+        when('/modeler', {
+            templateUrl: 'modelerPartials/modeler.html',
+            controller: 'ModelerCtrl'
+        }).
 		otherwise({
 			redirectTo: '/palette'
 		});
