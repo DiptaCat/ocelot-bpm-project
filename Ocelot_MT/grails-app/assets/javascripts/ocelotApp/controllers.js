@@ -35,6 +35,11 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 	});
 
 	$scope.orderProp = 'name';
+	$scope.level = 1;
+
+	$scope.filterByLvl = function(item) {
+		return item.level <= $scope.level;
+	};
 
 	$scope.change = function (item) {
 		item.activated = !item.activated;
@@ -76,7 +81,6 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
     //TODO add scope variable that changes bpmn.io
 });
 
-
 //ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteItem) {
 //    $scope.accordionDict = {};
 //    $scope.paletteItems = [];
@@ -110,7 +114,6 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 //
 //    $scope.orderProp = 'name';
 //});
-
 
 ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem) {
 	//Get all categories available

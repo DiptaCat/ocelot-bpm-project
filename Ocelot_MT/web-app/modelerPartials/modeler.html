@@ -1,47 +1,36 @@
 <div>
     <div class="btn-group pull-right">
-        <a href="#/palette/{{paletteId}}/paletteItem/create" class="btn btn-primary">Create PaletteItem</a>
     </div>
-    <h2>Palette List</h2>
+    <h2>Palette</h2>
 </div>
 
 <div class="container-fluid">
     <div class="row">
 
         <show-palette id="palette" class="col-md-2"></show-palette>
-        <!--<div id="palette" class="col-md-2">-->
-            <!--Palette-->
-        <!--</div>-->
-
 
         <div id="col2" class="col-md-10">
-            <div id="canvas">
-                <!--Date format: <input ng-model="item">-->
-                <!--<button><a class="btn btn-mini" ng-click="asdf(item)">Boton</a></button>-->
-                <!--<hr/>-->
-                <!--<span my-current-time="form">{{pimpollo}}</span>-->
-                <!--Canvas-->
-                <div draw-modeler grouped="grouped"></div>
-                <!--<draw-modeler val="data" grouped="grouped"></draw-modeler>-->
+            <div id="canvas" style="border: 1px solid #000000">
+                <div draw-modeler></div>
+            </div>
+
+            <div id="properties">
+				Properties
+            </div>
+        </div>
+        <!--<div id="col2" class="col-md-10">
+            <div id="canvas" ng-app="docsTimeDirective" ng-controller="Controller">
+                Date format: <input ng-model="item">
+                <button><a class="btn btn-mini" ng-click="asdf(item)">Boton</a></button>
+                <hr/>
+                <span my-current-time="form">{{pimpollo}}</span>
+                Canvas
+                <my-current-time val="data" grouped="grouped"></my-current-time>
             </div>
 
             <div id="properties">
 
             </div>
-        </div>
-        <!--<div id="col2" class="col-md-10">-->
-            <!--<div id="canvas" ng-app="docsTimeDirective" ng-controller="Controller">-->
-                <!--%{--Date format: <input ng-model="item">--}%-->
-                <!--%{--<button><a class="btn btn-mini" ng-click="asdf(item)">Boton</a></button>--}%-->
-                <!--%{--<hr/>--}%-->
-                <!--<span my-current-time="form">{{pimpollo}}</span>-->
-                <!--%{--Canvas--}%-->
-                <!--<my-current-time val="data" grouped="grouped"></my-current-time>-->
-            <!--</div>-->
-
-            <!--<div id="properties">-->
-
-            <!--</div>-->
-        <!--</div>-->
+        </div>-->
     </div>
 </div>

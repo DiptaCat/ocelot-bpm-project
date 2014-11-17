@@ -1,9 +1,9 @@
 #!/bin/bash
 
-file1=MainElements.txt
-file2=Events.txt
+file1=$1"/MainElements"
+file2=$1"/Events"
 
-echo "1"
+#echo "1"
 
 while read var  
 do
@@ -14,12 +14,13 @@ do
 			nom=$(cut -f1 -d'?' <<< $var) 
 			cat=$(cut -f2 -d'?' <<< $var)
 			icon=$(cut -f3 -d'?' <<< $var)
-			props=$(cut -f4 -d'?' <<< $var)
+			level=$(cut -f4 -d'?' <<< $var)
+			props=$(cut -f5 -d'?' <<< $var)
 		fi
 	else
 		cos=$var
 
-		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', '$icon.png', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -p 5432 -U camundabpm -d ocelotmt
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', '$icon.png', '$level', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
 	fi
 	
 done < $file1
@@ -27,8 +28,9 @@ done < $file1
 var=""
 cos=""
 nom=""
+level=""
 
-echo "2"
+#echo "2"
 
 while read var  
 do
@@ -38,14 +40,15 @@ do
 		then
 			nom=$(cut -f1 -d'?' <<< $var) 
 			cat=$(cut -f2 -d'?' <<< $var)
-			props=$(cut -f3 -d'?' <<< $var)
+			level=$(cut -f3 -d'?' <<< $var)
+			props=$(cut -f4 -d'?' <<< $var)
 		fi
 	else
 		cos=$var
 
-		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', 'none(2).png', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -p 5432 -U camundabpm -d ocelotmt
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', 'none(2).png', '$level', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
 	fi
 
 done < $file2
 
-echo "done"
+#echo "done"
