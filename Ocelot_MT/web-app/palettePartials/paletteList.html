@@ -11,7 +11,6 @@
 	<div class="col-md-10">
 
 		<i class="glyphicon glyphicon-search"></i>
-		<!--<i class="icon-search"></i>-->
 		<input type="text" ng-model="query" placeholder="Search">
 
 		Sort by:
@@ -20,9 +19,19 @@
 			<option value="category.id">Category</option>
 		</select>
 
+		Filter by:
+		<select ng-model="level">
+			<option value=1>Level 1</option>
+			<option value=2>Level 2</option>
+			<option value=3>Level 3</option>
+			<option value=4>Level 4</option>
+			<option value=5>Level 5</option>
+		</select>
+
 		<table class="table table-striped">
 			<thead>
 			<tr>
+				<th>Level</th>
 				<th>Name</th>
 				<th>Icon</th>
 				<th>Category</th>
@@ -30,16 +39,16 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="item in paletteItems | filter:query | orderBy:orderProp">
-				<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
-				<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img ng-src="images/icons/{{item.icon}}"></a>
-				</td>
-				<td>{{item.category.name}}</td>
-				<td ng-click="change(item)">{{item.activated | checkmark}}</td>
+			<tr ng-repeat="item in paletteItems | filter:filterByLvl | filter:query | orderBy:orderProp">
+					<td>{{item.level}}</td>
+					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
+					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img
+							ng-src="images/icons/{{item.icon}}"></a>
+					</td>
+					<td>{{item.category.name}}</td>
+					<td ng-click="change(item)">{{item.activated | checkmark}}</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
-
-
 </div>

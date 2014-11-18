@@ -62,6 +62,7 @@ class PaletteItemController extends RestfulController {
 		instance.props = jsonReq.props.toString()
 		instance.activated = jsonReq.activated
 		instance.icon = jsonReq.icon
+		instance.level = jsonReq.level
 
 		//COSA MEVA
 //        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))
