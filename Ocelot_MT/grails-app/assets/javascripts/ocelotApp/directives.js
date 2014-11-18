@@ -39,6 +39,20 @@ app.directive('loadSvg', function ($compile) {
 
 });
 
+app.directive('paletteModeler', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'modelerPartials/paletteModeler.html',
+        link: function (scope, element, attrs) {
+            scope.$watch('categoryGroup', function (newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    console.log("Palette has changed", newValue);
+                }
+            }, true);
+        }
+    }
+});
+
 app.directive('drawModeler', function () {
 
     function link(scope, element, attrs) {

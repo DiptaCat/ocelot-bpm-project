@@ -2534,6 +2534,13 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   var actions = {};
 
+  //TODO THIS IS NOT A GOOD PLACE
+    console.log("HEllo I am the element "+ element); //In this point we will save the element selected
+    if(typeof angular != 'undefined') {
+         scope.asdf(element.id);
+    }
+
+
   if (element.type === 'label') {
     return actions;
   }
@@ -45722,7 +45729,21 @@ app.directive('loadSvg', function ($compile) {
 
 });
 
-app.directive('drawModeler', ['$interval', 'dateFilter', function () {
+app.directive('paletteModeler', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'modelerPartials/paletteModeler.html',
+        link: function (scope, element, attrs) {
+            scope.$watch('categoryGroup', function (newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    console.log("Palette has changed", newValue);
+                }
+            }, true);
+        }
+    }
+});
+
+app.directive('drawModeler', function () {
 
     function link(scope, element, attrs) {
         var BpmnModeler = require('bpmn-js/lib/Modeler');
@@ -45747,7 +45768,7 @@ app.directive('drawModeler', ['$interval', 'dateFilter', function () {
     return {
         link: link
     };
-}]);
+});
 },{"bpmn-js/lib/Modeler":1}],156:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.

@@ -1,0 +1,10 @@
+<accordion close-others="oneAtATime">
+    <accordion-group heading="{{category}}" ng-repeat="category in categories">
+        <div ng-repeat="element in categoryGroup[category]" ng-if="element.activated">
+            <div ng-click="select(item)">
+                {{element.name}}:
+                <div load-svg="element.svg"></div>
+            </div>
+        </div>
+    </accordion-group>
+</accordion>
