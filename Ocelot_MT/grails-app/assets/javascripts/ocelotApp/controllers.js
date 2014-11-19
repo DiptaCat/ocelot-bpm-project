@@ -80,14 +80,18 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 
     //TODO add scope variable that changes bpmn.io
 
-    // This function selects an element from paletteModeler and notifies the modeler directive
-    $scope.select = function(item){
-        console.log("Item selected");
-    }
+	$scope.canvasSelectedItem = "StartEvent_1";
+	$scope.paletteSelectedItem = "";
 
-    $scope.asdf = function(item){
-      console.log("Item selected controller"+ item)
-      $scope.selected = item;
+    // This function selects an element from paletteModeler and notifies the modeler directive
+    $scope.selectPalette = function(item){
+//		console.log("Item selected: "+item.id);
+		$scope.paletteSelectedItem = item;
+    };
+
+    $scope.selectedCanvas = function(item){
+//		console.log("Item selected controller: "+ item.id)
+		$scope.canvasSelectedItem = item;
     };
 });
 

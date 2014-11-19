@@ -29,6 +29,9 @@ class PaletteItemController extends RestfulController {
 		item.icon = "hola"
 		item.svg = "hola"
 
+		item.level = jsonReq.level
+		item.bpmnElem = "bpmn:UndefinedTask"
+
 		def category = CategoryItem.get(jsonReq.category.id)
 		category.addToPaletteItems(item)
 
@@ -63,6 +66,7 @@ class PaletteItemController extends RestfulController {
 		instance.activated = jsonReq.activated
 		instance.icon = jsonReq.icon
 		instance.level = jsonReq.level
+		instance.bpmnElem = jsonReq.bpmnElem
 
 		//COSA MEVA
 //        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))

@@ -7,38 +7,16 @@
 <div class="container-fluid">
     <div class="row">
 
-<<<<<<< HEAD
         <palette-modeler id="palette" class="col-md-2"></palette-modeler>
-        <!--<div id="palette" class="col-md-2">-->
-            <!--Palette-->
-        <!--</div>-->
-
-=======
-        <show-palette id="palette" class="col-md-2"></show-palette>
->>>>>>> 2d6b5b8da5e3bf2cdd83d840e4de219b0ee1d785
 
         <div id="col2" class="col-md-10">
-            <div id="canvas" style="border: 1px solid #000000">
-                <div draw-modeler></div>
+            <div id="canvas" style="border: 1px solid #000000; max-height: 600px">
+                <div draw-modeler="paletteSelectedItem" id="modeler"></div>
             </div>
 
             <div id="properties">
 				Properties
             </div>
         </div>
-        <!--<div id="col2" class="col-md-10">
-            <div id="canvas" ng-app="docsTimeDirective" ng-controller="Controller">
-                Date format: <input ng-model="item">
-                <button><a class="btn btn-mini" ng-click="asdf(item)">Boton</a></button>
-                <hr/>
-                <span my-current-time="form">{{pimpollo}}</span>
-                Canvas
-                <my-current-time val="data" grouped="grouped"></my-current-time>
-            </div>
-
-            <div id="properties">
-
-            </div>
-        </div>-->
     </div>
 </div>

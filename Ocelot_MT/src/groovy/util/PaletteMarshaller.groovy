@@ -21,7 +21,8 @@ class PaletteMarshaller implements OcelotMarshaller {
 								svg        : paletteItem.svg,
 								category   : [id: paletteItem.category.id, name: paletteItem.category.name],
 								activated  : paletteItem.activated,
-								level	   : paletteItem.level
+								level	   : paletteItem.level,
+								bpmnElem   : paletteItem.bpmnElem
 						]
 
 					}
