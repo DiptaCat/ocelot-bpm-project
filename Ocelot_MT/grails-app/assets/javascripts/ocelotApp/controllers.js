@@ -90,6 +90,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
     };
 
     $scope.selectedCanvas = function(item){
+		//TODO metodo para mostrar propiedades
 //		console.log("Item selected controller: "+ item.id)
 		$scope.canvasSelectedItem = item;
     };
