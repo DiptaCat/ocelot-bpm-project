@@ -7,7 +7,7 @@
 
 <body>
 <div class="page-header">
-    <h1>Process</h1>
+    <h1>Process Details</h1>
 </div>
 <div>
     <div class="tab-content">
@@ -18,25 +18,29 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th><g:message code="deployment.process.id" default="Id"/></th>
-                            <th><g:message  code="deployment.process.name" default="Name"/></th>
-                            <th><g:message  code="default.process.RunningInstances" default="Running Instances"/></th>
+                            <th><g:message code="default.process.id" default="Id"/></th>
+                            <th><g:message  code="default.process.name" default="Name"/></th>
+                            <th><g:message  code="default.process.key" default="Key"/></th>
+                            <th><g:message  code="default.process.version" default="Version"/></th>
+                            <th><g:message  code="default.process.instances" default="Instances"/></th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <td>${deployment.getId()}</td>
-                        <td>${deployment.getName()}</td>
-                        <td>${numInstnaces}</td>
+                        <td>${process.deploymentId}</td>
+                        <td>${process.name}</td>
+                        <td>${process.id}</td>
+                        <td>${process.version}</td>
+                        <td>${numInstances}</td>
                         </tbody>
                     </table>
                 </ul>
             </div>
         </div>
     </div>
-    <g:link class="edit btn btn-sm btn-pink" action="newInstanceView" id="${deployment.getId()}">
+    <g:link class="edit btn btn-sm btn-pink" action="create" id="${process.deploymentId}">
         <i class="icon-trash icon-pencil"></i>
-        <g:message code="instance.process.new" default="New Instance"/>
+        <g:message code="default.button.create.label" default="Create"/>
     </g:link>
 </div>
 

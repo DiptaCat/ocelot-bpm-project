@@ -27,6 +27,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="Gorm" />
+          <unit-entry name="hibernate.cfg.xml" />
           <unit-entry name="target:work:plugins:hibernate4-4.3.5.5:src:java:hibernate.cfg.xml" />
           <unit-entry name="target:work:resources:hibernate.cfg.xml" />
         </datasource-map>
@@ -77,7 +78,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="grails-2.4.3" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Ocelot_XE)">
         <CLASSES>
@@ -130,6 +130,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="Ocelot_XE-grailsPlugins" />
+    <orderEntry type="library" name="grails-2.4.3" level="application" />
   </component>
 </module>
 
