@@ -2,7 +2,11 @@
 
 import grails.util.GrailsNameUtils
 import org.camunda.bpm.engine.*
+import org.camunda.bpm.engine.impl.persistence.entity.DeploymentEntity
+import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity
 import org.camunda.bpm.engine.repository.ProcessDefinition
+import org.camunda.bpm.model.bpmn.BpmnModelInstance
+import org.camunda.bpm.model.bpmn.Bpmn
 
 class CamundaService {
 
@@ -13,6 +17,68 @@ class CamundaService {
     RepositoryService repositoryService
     HistoryService historyService
 
+
+    def deployProcess(fileStream, fileName) {
+
+        String processName = fileName
+        int version = 0
+        int revision = 0
+
+        String xmlString = readBpmnFile(fileStream) //task interception mechanism
+        //println xmlString
+
+        DeploymentEntity d = (DeploymentEntity) repositoryService.createDeployment()
+                .name(fileName.toString())
+                .addString(processName + ".bpmn20.xml", xmlString)
+                .deploy()
+
+
+        if (d) {
+            ProcessDefinitionEntity pde = d.getDeployedArtifacts(ProcessDefinitionEntity).first()
+            //println "PDE : ${pde.dump()}"
+            if (pde) {
+                processName = pde.name
+                version = pde.version
+                revision = pde.revision
+            }
+        }
+
+        [object:d, name:processName, version:version, revision:revision]
+
+    }
+
+    def readBpmnFile(fileStream) {
+
+        BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
+
+
+/**
+ * Method to read extensions elements. TODO: Implement it into a separate method to handle the extensions elements.
+ *
+ //        BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
+ //        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class);
+ //        println "Size => " + extensionElements.size()
+ //
+ //        CamundaFormData camundaFormData
+ //
+ //        extensionElements.each {ExtensionElements ee ->
+ //            println "Parent Element: " + ee.getParentElement() + "\n"
+ //
+ //
+ //            if(ee.getParentElement().toString().substring(0, ee.getParentElement().toString().indexOf('@')).equals("org.camunda.bpm.model.bpmn.impl.instance.UserTaskImpl")) {
+ //                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult();
+ //                camundaFormData.camundaFormFields.each { CamundaFormField ff ->
+ //                    println "Id = " + ff.camundaId
+ //                    println "Label = " + ff.camundaLabel
+ //                    println "Value = " + ff.camundaDefaultValue
+ //                    println "\n"
+ //                }
+ //            }
+ //        }
+ **/
+
+        Bpmn.convertToString(modelInstance)
+    }
     def startProcess(String processDefinitionId, Map vars, String user) {
         vars.user = user
         runtimeService.startProcessInstanceById(processDefinitionId, vars)

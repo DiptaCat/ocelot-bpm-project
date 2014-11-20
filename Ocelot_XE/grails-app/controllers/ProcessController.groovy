@@ -60,5 +60,25 @@ class ProcessController {
 
     }
 
+    def upload() {
+        def f = request.getFile('myFile')
+
+        if (f.empty) {
+            flash.error = 'ERROR: File cannot be empty'
+            redirect(action:'index')
+            return
+        }
+        print f.originalFilename
+        print f.name
+        print f.size
+        print f.contentType
+        print f.getClass()
+        def fileContent = f.getInputStream()
+        camundaService.deployProcess(fileContent, f.originalFilename)
+        flash.message = 'The file was uploaded'
+        redirect(action:'index')
+    }
+
+
 
 }

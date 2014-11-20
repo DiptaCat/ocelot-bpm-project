@@ -10,6 +10,19 @@
     <h1>Process Management</h1>
 </div>
 <div>
+    <g:if test="${flash.error}">
+        <div class="alert alert-error" style="display: block">${flash.error}</div>
+    </g:if>
+    <g:if test="${flash.message}">
+        <div class="message" style="display: block">${flash.message}</div>
+    </g:if>
+
+    Upload Form: <br />
+    <g:uploadForm action="upload">
+        <input type="file" name="myFile" />
+        <input type="submit" />
+    </g:uploadForm>
+
     <div class="tab-content">
         <div class="tab-pane active" id="processes">
 
