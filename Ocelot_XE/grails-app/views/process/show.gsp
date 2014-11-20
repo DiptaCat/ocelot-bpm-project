@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <g:link class="edit btn btn-sm btn-pink" action="create" id="${process.deploymentId}">
+    <g:link class="edit btn btn-sm btn-pink" action="create" id="${process.id}">
         <i class="icon-trash icon-pencil"></i>
         <g:message code="default.button.create.label" default="Create"/>
     </g:link>

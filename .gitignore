@@ -34,10 +34,10 @@
 *.class #Ignore .class files
 *.log	#Ignore .log files
 
-TaskList/*.iml
-TaskList/.idea/
-TaskList/target/
-TaskList/*.log
+Ocelot_XE/*.iml
+Ocelot_XE/.idea/
+Ocelot_XE/target/
+Ocelot_XE/*.log
 
 Ocelot_MT/*.iml
 Ocelot_MT/.idea/

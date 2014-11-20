@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/bpmn" xmlns:camunda_1="http://activiti.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="definitions" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://camunda.org/bpmn20">
+  <process id="vacationProcess" name="Vacation Process" isExecutable="true">
+    <startEvent id="initiateVacationRequest" camunda_1:formKey="/vacationRequest/create" name="Initiate Vacation Request">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+    <sequenceFlow id="flow1" sourceRef="initiateVacationRequest" targetRef="handleVacationRequest"/>
+    <userTask id="handleVacationRequest" camunda_1:candidateGroups="ROLE_MANAGER" camunda_1:formKey="/vacationRequest/approval" name="Handle Vacation Request">
+      <documentation>Vacation request by ${employeeName}</documentation>
+      <incoming>flow1</incoming>
+      <incoming>flow7</incoming>
+      <outgoing>flow2</outgoing>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="handleVacationRequest" targetRef="requestApproved"/>
+    <serviceTask id="sendConfirmationE-mail" camunda_1:delegateExpression="#{emailService}" name="Send Confirmation E-mail">
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow4" sourceRef="sendConfirmationE-mail" targetRef="end0"/>
+    <endEvent id="end0">
+      <incoming>flow4</incoming>
+    </endEvent>
+    <userTask id="adjustVacationRequest" camunda_1:assignee="${user}" camunda_1:formKey="/vacationRequest/edit" name="Adjust Vacation Request">
+      <documentation>Your manager has not approved your vacation request.</documentation>
+      <incoming>flow5</incoming>
+      <outgoing>flow6</outgoing>
+    </userTask>
+    <sequenceFlow id="flow6" sourceRef="adjustVacationRequest" targetRef="resendRequest"/>
+    <exclusiveGateway id="resendRequest" name="Resend Request?">
+      <incoming>flow6</incoming>
+      <outgoing>flow7</outgoing>
+      <outgoing>flow8</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="flow7" sourceRef="resendRequest" targetRef="handleVacationRequest">
+      <conditionExpression xsi:type="tFormalExpression">${resendRequest}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="resendRequest" targetRef="end1">
+      <conditionExpression xsi:type="tFormalExpression">${!resendRequest}</conditionExpression>
+    </sequenceFlow>
+    <endEvent id="end1">
+      <incoming>flow8</incoming>
+    </endEvent>
+    <exclusiveGateway id="requestApproved" name="Request Approved?">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+      <outgoing>flow5</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="flow3" sourceRef="requestApproved" targetRef="sendConfirmationE-mail">
+      <conditionExpression xsi:type="tFormalExpression">${vacationApproved}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="requestApproved" targetRef="adjustVacationRequest">
+      <conditionExpression xsi:type="tFormalExpression">${!vacationApproved}</conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_vacationProcess">
+    <bpmndi:BPMNPlane id="BPMNPlane_vacationProcess" bpmnElement="vacationProcess">
+      <bpmndi:BPMNShape id="BPMNShape_initiateVacationRequest" bpmnElement="initiateVacationRequest">
+        <omgdc:Bounds height="60.0" width="100.0" x="80.0" y="156.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_handleVacationRequest" bpmnElement="handleVacationRequest">
+        <omgdc:Bounds height="60.0" width="100.0" x="230.0" y="159.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_requestApproved" bpmnElement="requestApproved">
+        <omgdc:Bounds height="40.0" width="40.0" x="379.0" y="165.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="17.0" width="99.0" x="350.0" y="210.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_sendConfirmationE-mail" bpmnElement="sendConfirmationE-mail">
+        <omgdc:Bounds height="60.0" width="100.0" x="470.0" y="0.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_end0" bpmnElement="end0">
+        <omgdc:Bounds height="35.0" width="35.0" x="625.0" y="15.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_adjustVacationRequest" bpmnElement="adjustVacationRequest">
+        <omgdc:Bounds height="60.0" width="100.0" x="510.0" y="112.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_resendRequest" bpmnElement="resendRequest">
+        <omgdc:Bounds height="40.0" width="40.0" x="620.0" y="233.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_end1" bpmnElement="end1">
+        <omgdc:Bounds height="35.0" width="35.0" x="710.0" y="233.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow1" bpmnElement="flow1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="180.0" y="186.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="192.0" y="186.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="192.0" y="189.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="230.0" y="189.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow2" bpmnElement="flow2">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="330.0" y="189.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="379.0" y="186.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="355.0" y="188.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow3" bpmnElement="flow3">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="419.0" y="185.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="432.0" y="185.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="432.0" y="30.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="470.0" y="30.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="432.0" y="122.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow4" bpmnElement="flow4">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="570.0" y="30.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="582.0" y="30.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="582.0" y="30.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="625.0" y="32.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow5" bpmnElement="flow5">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="419.0" y="185.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="432.0" y="185.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="432.0" y="226.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="560.0" y="226.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="560.0" y="172.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="477.0" y="226.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow6" bpmnElement="flow6">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="560.0" y="172.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="582.0" y="190.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="639.0" y="190.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="640.0" y="233.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow7" bpmnElement="flow7">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="620.0" y="253.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="608.0" y="253.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="280.0" y="253.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="280.0" y="219.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow8" bpmnElement="flow8">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="660.0" y="253.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="710.0" y="250.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
