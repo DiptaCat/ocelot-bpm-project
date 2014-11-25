@@ -27,8 +27,8 @@
         </g:each>
     </table>
     <fieldset class="buttons">
-        <span class="button"><g:submitButton name="save" class="save" value="${message(code: 'default.button.save.label', default: 'Save')}" /></span>
-        <span class="button"><g:submitButton name="complete" class="save" value="${message(code: 'default.button.complete.label', default: 'Complete')}" /></span>
+        <g:submitButton name="save" class="edit btn btn-sm btn-grey" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+        <g:submitButton name="complete" class="edit btn btn-sm btn-grey" value="${message(code: 'default.button.complete.label', default: 'Complete')}" />
         <g:hiddenField name="taskId" value="${taskId}" />
     </fieldset>
 </g:form>

@@ -20,7 +20,7 @@
     Upload Form: <br />
     <g:uploadForm action="upload">
         <input type="file" name="myFile" />
-        <input type="submit" />
+        <input type="submit" class="edit btn btn-sm btn-grey"/>
     </g:uploadForm>
 
     <div class="tab-content">
@@ -46,7 +46,7 @@
                                 <td>${process.name}</td>
                                 <td>${process.version}</td>
                                 <td>${process.numInstances}</td>
-                                <td><g:link class="edit btn btn-sm btn-pink" action="create" id="${process.id}">
+                                <td><g:link class="edit btn btn-sm btn-grey" action="create" id="${process.id}">
                                     <i class="icon-trash icon-pencil"></i>
                                     <g:message code="default.button.create.label" default="Create"/>
                                 </g:link></td>

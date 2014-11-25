@@ -2,24 +2,17 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'vacationRequest.label', default: 'VacationRequest')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
-	</head>
+<head>
+    <meta name="layout" content="main"/>
+    <title><g:message code="vacationRequest.label"/></title>
+</head>
 	<body>
-		<a href="#list-vacationRequest" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+    <div class="page-header">
+        <h1>Vacations Request List</h1>
+    </div>
     <div class="tab-content">
-        <div class="tab-pane active" id="list-vacationRequest", role="main">
+        <div class="tab-pane active" id="list-vacationRequest" role="main">
 
-            <div class="controls" style="font-style: italic">
-                <ul class="one-to-many">
-
-
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
