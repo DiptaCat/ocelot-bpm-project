@@ -19226,7 +19226,7 @@ module.exports = CommandStack;
  * Execute a command
  *
  * @param {String} command the command to execute
- * @param {Object} ctx is a parameter object for the executed action
+ * @param {Object} context is a parameter object for the executed action
  */
 CommandStack.prototype.execute = function(command, context) {
   if (!command) {
@@ -45738,7 +45738,7 @@ module.exports = Refs;
 var app = angular.module('ocelotDirectives', []);
 
 app.directive('loadAngularBootstrap', [function () {
-	return function (scope, element, attrs) {
+	return function (scope, element) {
 		angular.element('<script src="/ocelot/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js?compile=false" type="text/javascript"></script>').appendTo(element);
 	}
 }]);
@@ -45747,7 +45747,7 @@ app.directive('showPalette', function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'palettePartials/palette.html',
-		link: function (scope, element, attrs) {
+		link: function (scope) {
 			scope.$watch('categoryGroup', function (newValue, oldValue) {
 				if (newValue !== oldValue) {
 					console.log("Palette has changed", newValue);
@@ -45761,7 +45761,6 @@ app.directive('loadSvg', function ($compile) {
 
 	function link(scope, element, attrs) {
 		scope.$watch(attrs.loadSvg, function (value) {
-			//console.log(value);
 			element.append(value);
 		});
 	}
@@ -45776,12 +45775,22 @@ app.directive('paletteModeler', function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'modelerPartials/paletteModeler.html',
-		link: function (scope, element, attrs) {
+		link: function (scope) {
 			scope.$watch('categoryGroup', function (newValue, oldValue) {
 				if (newValue !== oldValue) {
 					console.log("Palette has changed", newValue);
 				}
 			}, true);
+		}
+	}
+});
+
+app.directive('properties', function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'modelerPartials/properties.html',
+		link: function(scope, element, attrs) {
+
 		}
 	}
 });
@@ -45801,11 +45810,8 @@ app.directive('drawModeler', function () {
 
 		modeler.importXML(xml);
 
-		scope.$watch(attrs.drawModeler, function (value) {
-//			console.log(scope.canvasSelectedItem.id);
-//			console.log(scope.paletteSelectedItem.bpmnElem);
+		scope.$watch(attrs.drawModeler, function () {
 			cli.append(scope.canvasSelectedItem.id, scope.paletteSelectedItem.bpmnElem, '150,0');
-//			console.log("hola");
 		});
 	}
 

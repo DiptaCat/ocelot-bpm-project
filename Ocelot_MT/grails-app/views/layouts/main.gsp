@@ -11,7 +11,7 @@
 
 	<asset:stylesheet href="application.css"/>
 
-	<asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	%{--<asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>--}%
 
 	<g:layoutHead/>
 </head>

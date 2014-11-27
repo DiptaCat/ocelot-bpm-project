@@ -80,7 +80,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 
     //TODO add scope variable that changes bpmn.io
 
-	$scope.canvasSelectedItem = "StartEvent_1";
+	$scope.canvasSelectedItem = "";
 	$scope.paletteSelectedItem = "";
 
     // This function selects an element from paletteModeler and notifies the modeler directive
@@ -91,44 +91,11 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 
     $scope.selectedCanvas = function(item){
 		//TODO metodo para mostrar propiedades
-//		console.log("Item selected controller: "+ item.id)
+//		console.log("Item selected controller: "+ item);
 		$scope.canvasSelectedItem = item;
+		console.log("", item);
     };
 });
-
-//ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteItem) {
-//    $scope.accordionDict = {};
-//    $scope.paletteItems = [];
-//
-//
-//    var query = Palette.query();
-//    query.$promise.then(function (data) {
-//        var palette = data[0];
-//        palette.paletteItems.map(function (element) {
-//            PaletteItem.get({id: element.id}).$promise.then(function (item) {
-//
-//                $scope.paletteItems.push(item);
-//
-//                var category = item.category;
-//
-//                $scope.accordionDict[category] = $scope.accordionDict[category] || [];
-//
-//                if (item.activated) {
-//                    $scope.accordionDict[category].push(item);
-//                }
-////                console.log(item);
-//            });
-//        })
-//    });
-//
-//    $scope.change = function (item) {
-//        item.activated = !item.activated;
-//        // Notify server of changes
-//        PaletteItem.update({id: item.id}, item);
-//    };
-//
-//    $scope.orderProp = 'name';
-//});
 
 ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem) {
 	//Get all categories available

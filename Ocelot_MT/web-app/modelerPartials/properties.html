@@ -1,0 +1,39 @@
+<div>
+	<table class="table">
+		<thead class="table-header">
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Value</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-show="!item.props || item.props.length <= 0">
+			<td>
+				No items found
+			</td>
+		</tr>
+		<tr ng-show="item.props && item.props.length > 0" ng-repeat="property in item.props">
+			<td>
+				<input ng-model="property.name" type="text" placeholder="name">
+			</td>
+			<td>
+				<select ng-model="property.type" ng-click="resetValue(property)">
+					<option value="String">String</option>
+					<option value="Boolean">Boolean</option>
+				</select>
+			</td>
+			<td>
+				<div ng-switch on="property.type">
+					<div ng-switch-when="Boolean">
+						<input ng-model="property.value" type="checkbox">
+					</div>
+					<div ng-switch-when="String">
+						<input ng-model="property.value">
+					</div>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

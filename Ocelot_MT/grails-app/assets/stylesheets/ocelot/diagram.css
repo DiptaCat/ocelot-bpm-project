@@ -41,6 +41,10 @@
   stroke: #333;
 }
 
+.djs-container svg{
+	min-height: 600px;
+}
+
 .djs-dragging {
   opacity: 0.3;
 }
