@@ -13,6 +13,7 @@ class PaletteMarshaller implements OcelotMarshaller {
 			[
 					id          : palette.id,
 					paletteItems: palette.paletteItems.collect { PaletteItem paletteItem ->
+                        def pProps = paletteItem.props == null ? [] : JSON.parse(paletteItem.props.toString())
 						[
 								id         : paletteItem.id,
 								name       : paletteItem.name,
@@ -22,7 +23,8 @@ class PaletteMarshaller implements OcelotMarshaller {
 								category   : [id: paletteItem.category.id, name: paletteItem.category.name],
 								activated  : paletteItem.activated,
 								level	   : paletteItem.level,
-								bpmnElem   : paletteItem.bpmnElem
+								bpmnElem   : paletteItem.bpmnElem,
+                                props      : pProps
 						]
 
 					}

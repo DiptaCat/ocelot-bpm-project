@@ -4,6 +4,8 @@
 
 var ocelotControllers = angular.module('ocelotControllers', []);
 
+
+
 ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteItem, Category) {
 	//Get all categories available
 	$scope.paletteId = 1;
@@ -51,6 +53,13 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category) {
     //Get all categories available
     $scope.paletteId = 1;
+    $scope.categoryGroup = {};
+    $scope.bpmnInfo = {};
+    $scope.canvasSelectedItem = "";
+    $scope.paletteSelectedItem = "";
+    $scope.itemInfo = {};
+
+    var paletteProps = {};
 
     Category.query().$promise.then(function (data) {
         //Sort categories by its id
@@ -64,7 +73,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
         });
     });
 
-    $scope.categoryGroup = {};
+
     Palette.get({id: $scope.paletteId}).$promise.then(function (palette) {
 
         $scope.paletteItems = palette.paletteItems;
@@ -72,16 +81,14 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
         palette.paletteItems.map(function (item) {
             var category = item.category.name;
 
+            paletteProps[item.bpmnElem] = item.props;
+
             $scope.categoryGroup[category] = $scope.categoryGroup[category] || [];
 
             $scope.categoryGroup[category].push(item);
         });
     });
 
-    //TODO add scope variable that changes bpmn.io
-
-	$scope.canvasSelectedItem = "";
-	$scope.paletteSelectedItem = "";
 
     // This function selects an element from paletteModeler and notifies the modeler directive
     $scope.selectPalette = function(item){
@@ -89,11 +96,19 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 		$scope.paletteSelectedItem = item;
     };
 
+    //This function will be triggered at ContextPadProviders. This method also shows the
+    // information of the selected info
     $scope.selectedCanvas = function(item){
-		//TODO metodo para mostrar propiedades
-//		console.log("Item selected controller: "+ item);
 		$scope.canvasSelectedItem = item;
 		console.log("", item);
+
+        if(!$scope.bpmnInfo[item.id]){
+            //Search the properties in the palette and copy their properties
+            var props = JSON.parse(JSON.stringify(paletteProps[item.type]));
+            $scope.bpmnInfo[item.id] = props;
+        }
+
+        $scope.itemInfo = $scope.bpmnInfo[item.id];
     };
 });
 

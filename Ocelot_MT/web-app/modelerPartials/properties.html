@@ -8,12 +8,12 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-show="!item.props || item.props.length <= 0">
+		<tr ng-show="!itemInfo || itemInfo.length <= 0">
 			<td>
 				No items found
 			</td>
 		</tr>
-		<tr ng-show="item.props && item.props.length > 0" ng-repeat="property in item.props">
+		<tr ng-show="itemInfo && itemInfo.length > 0" ng-repeat="property in itemInfo">
 			<td>
 				<input ng-model="property.name" type="text" placeholder="name">
 			</td>
