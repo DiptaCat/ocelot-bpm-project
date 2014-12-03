@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div id="options" style="border: solid black 1px" class="col-md-2">
+            <i class="glyphicon glyphicon-search"></i>
+            <input type="text" ng-model="query" placeholder="Search">
+
+            <button class="btn btn-xs btn-default" >Create</button>
+        </div>
+
+        <div id="grid" style="border: solid black 1px" class="col-md-10">
+            <tr ng-repeat="model in models | filter:query">
+                <div style="border: solid black 1px" class="col-md-2 offset1">
+                    {{model.svg}}
+                    {{model.name}}
+                </div>
+            </tr>
+        </div>
+    </div>
+</div>

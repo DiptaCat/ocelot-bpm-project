@@ -6,6 +6,9 @@ class Model {
 	Date dateCreated
 	Date lastUpdated
 	boolean temporal
+	String svg
+	String xml
+	String json
 
 	static belongsTo = [user: Member]
 	boolean favourite = false
@@ -14,6 +17,9 @@ class Model {
 
 	static constraints = {
 		name blank: false, unique: 'user'
+		svg type: "text", nullable: true
+		xml type: "text", nullable: true
+		json type: "text", nullable: true
 	}
 
 	static mapping = {

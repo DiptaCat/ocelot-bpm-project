@@ -14,7 +14,7 @@
 		<li><a href="${createLink(uri: '/palette#/palette')}"><i class="glyphicon glyphicon-list-alt"></i> <span
 				class="menu-text">Palette</span></a></li>
 
-		<li><a href="${createLink(uri: '/palette#/modeler')}"><i class="glyphicon glyphicon-briefcase"></i> <span
+		<li><a href="${createLink(uri: '/palette#/modelerIndex')}"><i class="glyphicon glyphicon-briefcase"></i> <span
 				class="menu-text">Canvas</span></a></li>
 	</ul>
 

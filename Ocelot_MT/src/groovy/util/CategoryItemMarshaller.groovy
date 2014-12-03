@@ -13,7 +13,6 @@ class CategoryItemMarshaller implements OcelotMarshaller {
 					id  : categoryItem.id,
 					name: categoryItem.name
 			]
-
 		}
 	}
 }
