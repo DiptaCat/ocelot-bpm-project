@@ -1,20 +1,20 @@
 <div class="container-fluid">
-    <div class="row">
 
-        <div id="options" style="border: solid black 1px" class="col-md-2">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="text" ng-model="query" placeholder="Search">
+    <div id="options" style="border: solid black 1px" class="col-md-2">
+        <i class="glyphicon glyphicon-search"></i>
+        <input type="text" ng-model="query" placeholder="Search">
 
-            <button class="btn btn-xs btn-default" >Create</button>
-        </div>
+        <button class="btn btn-xs btn-default">Create</button>
+    </div>
 
-        <div id="grid" style="border: solid black 1px" class="col-md-10">
-            <tr ng-repeat="model in models | filter:query">
-                <div style="border: solid black 1px" class="col-md-2 offset1">
+    <div id="grid" style="border: solid black 1px" class="col-md-10">
+        <tr ng-repeat="model in models | filter:query">
+            <div class="col-xs-6 col-md-3">
+                <a href="" class="thumbnail">
                     {{model.svg}}
                     {{model.name}}
-                </div>
-            </tr>
-        </div>
+                </a>
+            </div>
+        </tr>
     </div>
 </div>

@@ -17,12 +17,16 @@ class Model {
 
 	static constraints = {
 		name blank: false, unique: 'user'
-		svg type: "text", nullable: true
-		xml type: "text", nullable: true
-		json type: "text", nullable: true
+		svg nullable: true
+		xml nullable: true
+		json nullable: true
 	}
 
 	static mapping = {
+		svg type: "text"
+		xml type: "text"
+		json type: "text"
+
 		// batchSize 10
 		autoTimestamp true
 		/*usersFavs joinTable: [name: 'FavModels', column: 'UserId', key: 'ModelId']
