@@ -53,7 +53,7 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, ModelService, $location){
     $scope.models = Model.query();
 
-    $scope.item = {name: "Hello", description: "Description"};
+    $scope.item = {name: "Ocelot Bpmn", description: "Description"};
 
     $scope.open = function () {
 
@@ -72,6 +72,8 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, Model
             console.log(modifiedItem);
             ModelService.setName(modifiedItem.name);
             ModelService.setDescription(modifiedItem.description);
+            ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\"Process_1\" isExecutable=\"false\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
+            ModelService.setInfo({});
             $location.path('/modeler');
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -85,25 +87,27 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
     //Clone the default item
     $scope.item = JSON.parse(JSON.stringify(item));
 
+    //Pass the clone-modified item to ModelCtrl
     $scope.ok = function () {
-        //TODO create new model here
-        console.log("OK!!!!");
-        $modalInstance.close(item);
-//        $modalInstance.close($scope.selected.item);
+        $modalInstance.close($scope.item);
     };
 
     $scope.cancel = function () {
-        console.log("Cancel!!!!");
         $modalInstance.dismiss('cancel');
     };
 });
 
 
-ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, Model) {
+ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, ModelService) {
+    $scope.bpmnName = ModelService.getName();
+    $scope.bpmnDescription = ModelService.getDescription();
+    $scope.bpmnXML = ModelService.getXML();
+    $scope.bpmnInfo = ModelService.getInfo();
+
     //Get all categories available
     $scope.paletteId = 1;
     $scope.categoryGroup = {};
-    $scope.bpmnInfo = {};
+//    $scope.bpmnInfo = {}; //TODO this is done above -> remove this line if works
     $scope.canvasSelectedItem = "";
     $scope.paletteSelectedItem = "";
     $scope.itemInfo = {};
