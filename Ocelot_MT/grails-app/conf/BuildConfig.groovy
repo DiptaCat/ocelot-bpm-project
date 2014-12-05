@@ -64,6 +64,16 @@ grails.project.dependency.resolution = {
 //        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
 
 		test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+
+		/**************************************************************************/
+		//Addded by us
+		compile ("org.camunda.bpm:camunda-engine:7.1.0-Final") {
+			excludes 'spring-beans'
+		}
+		runtime ("org.camunda.bpm:camunda-engine-spring:7.1.0-Final") {
+			excludes 'spring-context', 'spring-jdbc', 'spring-orm'
+		}
+		/**************************************************************************/
 	}
 
 	plugins {
