@@ -50,7 +50,56 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 	};
 });
 
-ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category) {
+ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, ModelService, $location){
+    $scope.models = Model.query();
+
+    $scope.item = {name: "Hello", description: "Description"};
+
+    $scope.open = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'modelerPartials/modelerModal.html',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            resolve: {
+                item : function () {
+                    return $scope.item;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (modifiedItem) {
+            console.log(modifiedItem);
+            ModelService.setName(modifiedItem.name);
+            ModelService.setDescription(modifiedItem.description);
+            $location.path('/modeler');
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+    //TODO order prop?
+});
+
+ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstance, item) {
+
+    //Clone the default item
+    $scope.item = JSON.parse(JSON.stringify(item));
+
+    $scope.ok = function () {
+        //TODO create new model here
+        console.log("OK!!!!");
+        $modalInstance.close(item);
+//        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        console.log("Cancel!!!!");
+        $modalInstance.dismiss('cancel');
+    };
+});
+
+
+ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, Model) {
     //Get all categories available
     $scope.paletteId = 1;
     $scope.categoryGroup = {};

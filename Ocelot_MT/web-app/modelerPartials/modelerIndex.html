@@ -1,10 +1,11 @@
+
 <div class="container-fluid">
 
     <div id="options" style="border: solid black 1px" class="col-md-2">
         <i class="glyphicon glyphicon-search"></i>
         <input type="text" ng-model="query" placeholder="Search">
 
-        <button class="btn btn-xs btn-default">Create</button>
+        <button ng-click="open()" class="btn btn-xs btn-default">Create</button>
     </div>
 
     <div id="grid" style="border: solid black 1px" class="col-md-10">
