@@ -17,11 +17,33 @@
         <div class="message" style="display: block">${flash.message}</div>
     </g:if>
 
-    Upload Form: <br />
-    <g:uploadForm action="upload">
-        <input type="file" name="myFile" />
-        <input type="submit" class="edit btn btn-sm btn-grey"/>
-    </g:uploadForm>
+    <div class="tab-content">
+        <div class="tab-pane active" id="fileUpload">
+            <div class="controls" style="font-style: italic">
+                <ul class="one-to-many">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><g:message code="deployment.upload.file" default="Upload Form: "/></th>
+                            <th><g:message  code="deployment.upload.list" default="Name"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><g:uploadForm action="upload">
+                                <input type="file" name="myFile" />
+                                <input type="submit" />
+                            </g:uploadForm></td>
+                            <td><g:link class="edit btn btn-sm btn-grey" controller="deployment" action="index">
+                                <g:message code="default.list.label" default="List"/>
+                            </g:link></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <div class="tab-content">
         <div class="tab-pane active" id="processes">
