@@ -1,18 +1,32 @@
 package ocelot
 
 import grails.converters.JSON
+import grails.rest.RestfulController
 import grails.transaction.Transactional
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
-class ModelController {
+class ModelController extends RestfulController{
+
+    static responseFormats = ['json']
 
 	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def index(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
-		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count()]
+	def index() {
+        params.max = Math.min(params.max ?: 10, 100)
+        params.offset = params.offset == null ? 0 : params.offset
+
+        def member = null //TODO this is a fake user!!!
+        def models = Model.findAllByUser(member, params)
+
+        respond models.collect{ Model m ->
+            [
+                    id : m.id,
+                    svg : m.svg,
+                    name : m.name
+            ]
+        }
 	}
 
 	def show(Model modelInstance) {
