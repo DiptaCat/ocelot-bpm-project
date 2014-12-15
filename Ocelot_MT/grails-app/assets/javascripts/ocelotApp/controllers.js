@@ -112,6 +112,8 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
     $scope.paletteSelectedItem = "";
     $scope.itemInfo = {};
 
+    $scope.level = 1;
+
     var paletteProps = {};
 
     Category.query().$promise.then(function (data) {
@@ -162,6 +164,10 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
         }
 
         $scope.itemInfo = $scope.bpmnInfo[item.id];
+    };
+
+    $scope.filterByLvl = function(item) {
+        return item.level <= $scope.level;
     };
 });
 

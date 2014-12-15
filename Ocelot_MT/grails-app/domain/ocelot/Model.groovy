@@ -2,7 +2,7 @@ package ocelot
 
 class Model {
 
-	String name //, description
+	String name, description
 	Date dateCreated
 	Date lastUpdated
 	boolean temporal

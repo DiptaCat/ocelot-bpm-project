@@ -7,6 +7,15 @@
 
         <palette-modeler id="palette" class="col-md-2"></palette-modeler>
 
+        Filter by:
+        <select ng-model="level">
+            <option value=1>Level 1</option>
+            <option value=2>Level 2</option>
+            <option value=3>Level 3</option>
+            <option value=4>Level 4</option>
+            <option value=5>Level 5</option>
+        </select>
+
         <div id="col2" class="col-md-10">
             <div id="modeler" draw-modeler="paletteSelectedItem" style="border: 1px solid black">
                 <div id="buttons" class="btn-group" style="border-bottom: 1px solid black; border-right: 1px solid black">

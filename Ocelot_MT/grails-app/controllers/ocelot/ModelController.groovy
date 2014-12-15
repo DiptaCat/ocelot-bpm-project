@@ -13,7 +13,12 @@ class ModelController extends RestfulController{
 
 	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def index() {
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count]
+	}
+
+	def otherMethod() {
         params.max = Math.min(params.max ?: 10, 100)
         params.offset = params.offset == null ? 0 : params.offset
 
