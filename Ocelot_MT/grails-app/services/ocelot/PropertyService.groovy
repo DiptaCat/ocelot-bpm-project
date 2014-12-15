@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.transaction.Transactional
 import org.camunda.bpm.model.bpmn.Bpmn
 import org.camunda.bpm.model.bpmn.BpmnModelInstance
+import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants
 import org.codehaus.groovy.grails.web.json.JSONArray
 
 @Transactional
@@ -33,8 +34,13 @@ class PropertyService {
 				/*TODO: if there is a camunda extension implement
 					ELSE and use node.setAttributeValueNS(BpmnModelConstants.CAMUNDA_NS, "name", "value")
 				 */
-				if(!jsonArray[z].value.toString().empty)
-					node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
+				if(!jsonArray[z].value.toString().empty) {
+
+					if(!jsonArray[z].extension.toString().equals("bpmn"))
+						node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
+					else
+						node.setAttributeValueNS(BpmnModelConstants.CAMUNDA_NS, jsonArray[z].name, jsonArray[z].value.toString())
+				}
 			}
 			i++
 		}

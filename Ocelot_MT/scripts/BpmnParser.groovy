@@ -16,7 +16,7 @@ includeTargets << grailsScript("_GrailsInit")
 
 target(bpmnParser: "The description of the script goes here!") {
 	// TODO: Implement script here
-	def jsonString = '''{"StartEvent_1":[],"Task_1nsex6a":[{"name":"Id","type":"String","value":"","$$hashKey":"081"},{"name":"Name","type":"String","value":"","$$hashKey":"082"},{"name":"ForCompensation","type":"Boolean","value":"false","$$hashKey":"083"},{"name":"Documentation","type":"String","value":"","$$hashKey":"084"}],"UserTask_04red4y":[{"name":"Id","type":"String","value":"","$$hashKey":"08D"},{"name":"Name","type":"String","value":"hola","$$hashKey":"08E"},{"name":"Assignee","type":"String","value":"q","$$hashKey":"08F"},{"name":"CandIdateUsers","type":"String","value":"tal","$$hashKey":"08G"},{"name":"CandIdateGroups","type":"String","value":"va","$$hashKey":"08H"},{"name":"FormKey","type":"String","value":"tot","$$hashKey":"08I"},{"name":"DueDate","type":"String","value":"avui","$$hashKey":"08J"},{"name":"FollowUpDate","type":"String","value":"per","$$hashKey":"08K"},{"name":"Priority","type":"String","value":"aqui","$$hashKey":"08L"},{"name":"Asynchronous","type":"Boolean","value":"false","$$hashKey":"08M"},{"name":"Exclusive","type":"Boolean","value":true,"$$hashKey":"08N"},{"name":"RetryTimeCycle","type":"String","value":"nuse","$$hashKey":"08O"},{"name":"ForCompensation","type":"Boolean","value":"false","$$hashKey":"08P"},{"name":"Documentation","type":"String","value":"calla","$$hashKey":"08Q"}],"EndEvent_0tp30lc":[]}'''
+	def jsonString = '''{"StartEvent_1":[],"Task_1nsex6a":[{"name":"isForCompensation","type":"Boolean","value":"true","$$hashKey":"083"}],"UserTask_04red4y":[{"name":"isForCompensation","type":"Boolean","value":"false","$$hashKey":"08P"},{"name":"id","type":"String","value":"UserTaskJulio","$$hashKey":"08P"}],"EndEvent_0tp30lc":[]}'''
 	def xmlString = """<?xml version="1.0" encoding="UTF-8"?>
 	<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
 	  <bpmn2:process id="Process_1" isExecutable="false">
@@ -97,9 +97,17 @@ target(bpmnParser: "The description of the script goes here!") {
 	BpmnModelInstance modelInstance = Bpmn.readModelFromStream(f.newInputStream())
 
 	def node = modelInstance.getModelElementById("StartEvent_1")
-	node.setAttributeValue("name","StartEvent_1");
+	//node.setAttributeValue("name","StartEvent_1");
 	node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, "assignee","Julio Bondia")
 	println "Testing CamundaExtension => ${node.getAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, "assignee")}"
+	node.setAttributeValue("name","JulioBondia")
+	//node.setAttributeValue("triggeredByElement","JulioBondia")
+	//node.setAttributeValue("isForCompensation","true")
+	//node.setAttributeValue("default","Julio Bondia")
+
+	node = modelInstance.getModelElementById("UserTask_04red4y")
+	node.setAttributeValue("isForCompensation","true")
+
 
 	ExtensionElements extensionElements = modelInstance.newInstance(ExtensionElements.class)
 	CamundaFormData camundaFormData = extensionElements.addExtensionElement(CamundaFormData.class)
@@ -123,8 +131,9 @@ target(bpmnParser: "The description of the script goes here!") {
 			print "Value => ${jsonArray[z].value}\t"
 			println "Type => ${jsonArray[z].type}\n"
 
-			if(!jsonArray[z].value.toString().empty)
-				node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS,jsonArray[z].name, jsonArray[z].value.toString())
+			//if(!jsonArray[z].value.toString().empty)
+				//node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
+				//node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS,jsonArray[z].name, jsonArray[z].value.toString())
 		}
 		i++
 	}
