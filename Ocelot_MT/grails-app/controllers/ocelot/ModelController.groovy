@@ -85,8 +85,60 @@ class ModelController extends RestfulController{
         render status: OK
 	}
 
+
 	@Transactional
 	def delete() {
+
+    }
+
+	def list() {
+
+		println "Number of Models => ${Model.count}"
+
+		def response = Model.list().collect{Model m ->
+			[
+			        id: m.id,
+					name: m.name,
+					description: m.description
+			]
+		}
+		response = [numModels: Model.count, models: response]
+		respond response
+	}
+
+	def singleModel(){
+
+		def model = null
+		println 'singleModel()'
+
+		try {
+			model = Model.get(params.id)
+			println 'Model exists'
+		}catch (Exception e){
+			println 'Model does not exist'
+			render status: BAD_REQUEST
+		}
+
+		if(model == null){
+			println 'Model is null'
+			render status: NOT_FOUND
+		} else {
+			println 'Model is NOT null'
+			//println model.json
+			//println model.xml
+			def response = [
+			        id: model.id,
+					name: model.name,
+					description: model.description,
+					dateCreated: model.dateCreated,
+					lastUpdated: model.lastUpdated,
+					temporal: model.temporal,
+					svg: model.svg,
+					bpmn: model.xml//propertyService.injectAttributes(model.xml, model.json)
+			]
+
+			respond response
+		}
 
 	}
 

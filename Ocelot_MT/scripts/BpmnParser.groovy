@@ -4,7 +4,9 @@ import org.camunda.bpm.engine.form.StartFormData
 import org.camunda.bpm.engine.impl.form.FormDataImpl
 import org.camunda.bpm.model.bpmn.Bpmn
 import org.camunda.bpm.model.bpmn.BpmnModelInstance
+import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements
+import org.camunda.bpm.model.bpmn.instance.StartEvent
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormData
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormField
 import org.codehaus.groovy.grails.web.json.JSONArray
@@ -91,11 +93,13 @@ target(bpmnParser: "The description of the script goes here!") {
 	def f = new File("/Users/detritus/Downloads/julio.bpmn")
 	def items = new XmlParser().parseText(xmlString)
 
-	def node
+
 	BpmnModelInstance modelInstance = Bpmn.readModelFromStream(f.newInputStream())
 
-	modelInstance.getModelElementById("StartEvent_1")
-
+	def node = modelInstance.getModelElementById("StartEvent_1")
+	node.setAttributeValue("name","StartEvent_1");
+	node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, "assignee","Julio Bondia")
+	println "Testing CamundaExtension => ${node.getAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, "assignee")}"
 
 	ExtensionElements extensionElements = modelInstance.newInstance(ExtensionElements.class)
 	CamundaFormData camundaFormData = extensionElements.addExtensionElement(CamundaFormData.class)
@@ -103,22 +107,9 @@ target(bpmnParser: "The description of the script goes here!") {
 	formField.camundaId = 's'
 	formField.camundaLabel = 'Toda'
 	formField.camundaDefaultValue = 'Sergi Toda'
+	formField.camundaType = 'String'
 	camundaFormData.addChildElement(formField)
 	modelInstance.getModelElementById("StartEvent_1").addChildElement(extensionElements)
-	modelInstance.get
-
-
-	String elementsStart = '''
-					<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" xmlns:camunda="http://activiti.org/bpmn">
-						<bpmn2:extensionElements>
-
-							<camunda:formData>
-					'''
-	String elementsEnd = '''
-							</camunda:formData>
-						</bpmn2:extensionElements>
-					</bpmn2:definitions>
-						'''
 
 	while(i < jsonObj.size()) {
 
@@ -132,49 +123,18 @@ target(bpmnParser: "The description of the script goes here!") {
 			print "Value => ${jsonArray[z].value}\t"
 			println "Type => ${jsonArray[z].type}\n"
 
-			node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
+			if(!jsonArray[z].value.toString().empty)
+				node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS,jsonArray[z].name, jsonArray[z].value.toString())
 		}
 		i++
 	}
+
+	//StartEvent startEvent = (StartEvent)modelInstance.getModelElementById("StartEvent_1")
+
 
 	println "/++++++++++++++++++++++++++++++++++++++++++++++++++\\"
 
-	i = 0
-	while(i < jsonObj.size()) {
-
-		jsonFieldKey = jsonObj.keys()[i]
-		JSONArray jsonArray = jsonObj.get(jsonFieldKey)
-		node = modelInstance.getModelElementById(jsonObj.keys()[i])
-		//println "Node => ${node.getTextContent()}"
-
-		for (int z = 0; z < jsonArray.size(); z++) {
-			print "KEY:${jsonObj.keys()[i]}\t"
-			print "NAME => ${jsonArray[z].name}\tVALUE => ${node.getAttributeValue(jsonArray[z].name)}"
-		}
-		i++
-	}
+	println Bpmn.convertToString(modelInstance)
 }
 
 setDefaultTarget(bpmnParser)
-
-/*
-			String nodeString = elementsStart +
-					"<camunda:formField id=\"${jsonArray[z].name}\" type=\"${jsonArray[z].type}\" defaultValue=\"${jsonArray[z].value}\"/>" +
-					elementsEnd
-
-			println nodeString
-
-
-			node.getDomElement().appendChild(DocumentBuilderFactory
-					.newInstance()
-					.newDocumentBuilder()
-					.parse(new ByteArrayInputStream(nodeString.getBytes()))
-					.getDocumentElement())
-			node.addChildElement()
-
-			def nodeStringXml = new XmlSlurper().parseText(nodeString)
-
-
-			node.addChildElement(nodeStringXml)
-
-			println "Node => ${node.getTextContent()}" */
