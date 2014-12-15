@@ -80,6 +80,8 @@ app.directive('drawModeler', function () {
 			cli: { bindTo: 'cli' }
 		});
 
+        scope.modelerInstance = modeler;
+
 		modeler.importXML(xml);
 
 		scope.$watch(attrs.drawModeler, function () {

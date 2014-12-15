@@ -55,7 +55,7 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, Model
 
     $scope.item = {name: "Ocelot Bpmn", description: "Description"};
 
-    $scope.open = function () {
+    $scope.createBpmn= function () {
 
         var modalInstance = $modal.open({
             templateUrl: 'modelerPartials/modelerModal.html',
@@ -70,13 +70,26 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, Model
 
         modalInstance.result.then(function (modifiedItem) {
             console.log(modifiedItem);
+            ModelService.setId(-1);
             ModelService.setName(modifiedItem.name);
             ModelService.setDescription(modifiedItem.description);
-            ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\"Process_1\" isExecutable=\"false\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
+            ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\""+modifiedItem.name+"\" name=\""+modifiedItem.name+"\" isExecutable=\"true\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\""+modifiedItem.name+"\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
             ModelService.setInfo({});
             $location.path('/modeler');
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    //This function opens an element selected in the index
+    $scope.open = function(id){
+        Model.get({id: id}).$promise.then(function (model) {
+            ModelService.setId(id);
+            ModelService.setName(model.name);
+            ModelService.setDescription(model.description);
+            ModelService.setXML(model.xml);
+            ModelService.setInfo(JSON.parse(model.json));
+            $location.path('/modeler');
         });
     };
     //TODO order prop?
@@ -98,11 +111,13 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
 });
 
 
-ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, ModelService) {
+ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, ModelService, Model) {
+    $scope.bpmnId = ModelService.getId();
     $scope.bpmnName = ModelService.getName();
     $scope.bpmnDescription = ModelService.getDescription();
     $scope.bpmnXML = ModelService.getXML();
     $scope.bpmnInfo = ModelService.getInfo();
+    $scope.bpmnSVG = "";
 
     //Get all categories available
     $scope.paletteId = 1;
@@ -117,7 +132,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
     var paletteProps = {};
 
     Category.query().$promise.then(function (data) {
-        //Sort categories by its id
+        //Sort categories by their id
         data.sort(function (a, b) {
             return a.id - b.id;
         });
@@ -168,6 +183,24 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
 
     $scope.filterByLvl = function(item) {
         return item.level <= $scope.level;
+    };
+
+    $scope.saveModel = function(){
+        var modeler = $scope.modelerInstance;
+
+        modeler.saveSVG(function(err, svg){
+            $scope.bpmnSVG = svg;
+        });
+
+        modeler.saveXML(function(err, xml){
+           $scope.bpmnXML = xml;
+        });
+
+        if($scope.bpmnId > 0){
+            Model.update({id: $scope.bpmnId}, {name: $scope.bpmnName, description: $scope.bpmnDescription, xml: $scope.bpmnXML, json: $scope.bpmnInfo, svg: $scope.bpmnSVG});
+        }else{
+            Model.save({name: $scope.bpmnName, description: $scope.bpmnDescription, xml: $scope.bpmnXML, json: $scope.bpmnInfo, svg: $scope.bpmnSVG});
+        }
     };
 });
 
