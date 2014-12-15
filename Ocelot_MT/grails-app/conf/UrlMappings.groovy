@@ -45,11 +45,14 @@ class UrlMappings {
 
 		"/api/category"(controller: 'categoryItem', action: 'index', method: 'GET')
 
-		"/model/index"(controller: 'model', action: 'index', method: 'GET')
-        "/api/model"(controller: 'model', action: 'otherMethod', method: 'GET')
+        "/api/model" {
+            controller = 'model'
+            action = [GET: 'index', POST: 'save']
+        }
+
         "/api/model/$id" {
             controller = 'model'
-            action = [GET: 'show', PUT: 'update', POST: 'update', POST: 'save', DELETE: 'delete']
+            action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
         }
 
 		//"/api/paletteItem/" (controller: 'paletteItem', action: 'save', method: 'POST')

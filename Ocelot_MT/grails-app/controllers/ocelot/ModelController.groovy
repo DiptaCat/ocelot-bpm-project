@@ -14,139 +14,80 @@ class ModelController extends RestfulController{
 	def propertyService
 	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def index(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
-		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count]
-	}
+//	def index(Integer max) {
+//		params.max = Math.min(max ?: 10, 100)
+//		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count]
+//	}
 
-	def otherMethod() {
+	def index() {
         params.max = Math.min(params.max ?: 10, 100)
         params.offset = params.offset == null ? 0 : params.offset
 
-        def member = null //TODO this is a fake user!!!
+        def member = Member.get(1) //TODO this is a fake user!!!
         def models = Model.findAllByUser(member, params)
 
-        respond models.collect{ Model m ->
-            [
-                    id : m.id,
-                    svg : m.svg,
-                    name : m.name
-            ]
+        if(models == null){
+            respond []
+        }else{
+            respond models.collect{ Model m ->
+                [
+                        id : m.id,
+                        svg : m.svg,
+                        name : m.name
+                ]
+            }
         }
 	}
 
-	def show(Model modelInstance) {
-		respond modelInstance
-	}
+	def show() {
+        //TODO check user
 
-	def create() {
-		respond new Model(params)
-	}
+        def model = Model.get params.id
 
-	def edit(Model modelInstance) {
-		respond modelInstance
+		respond model
 	}
 
 	@Transactional
-	def save(Model modelInstance) {
-		if (modelInstance == null) {
-			notFound()
-			return
-		}
+	def save() {
+        def member = Member.get(1) //TODO this is a fake user!!!
 
-		if (modelInstance.hasErrors()) {
-			respond modelInstance.errors, view: 'create'
-			return
-		}
+        def jsonReq = request.JSON
 
-		modelInstance.save flush: true
+        def model = new Model()
 
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'Model.label', default: 'Model'), modelInstance.name])
-				redirect modelInstance
-			}
-			'*' { respond modelInstance, [status: CREATED] }
-		}
+        model.name = jsonReq.name
+        model.description = jsonReq.description
+        model.svg = jsonReq.svg
+        model.xml = jsonReq.xml
+        model.json = jsonReq.json
+
+        member.addToModels(model)
+        member.save flush: true, failOnError: true
+
+        render status: CREATED
 	}
 
 	@Transactional
-	def update(Model modelInstance) {
-		if (modelInstance == null) {
-			notFound()
-			return
-		}
+	def update() {
+        //TODO check user
+        def jsonReq = request.JSON
 
-		if (modelInstance.hasErrors()) {
-			respond modelInstance.errors, view: 'edit'
-			return
-		}
+        def model = Model.get params.id
 
-		modelInstance.save flush: true
+        model.name = jsonReq.name
+        model.description = jsonReq.description
+        model.svg = jsonReq.svg
+        model.xml = jsonReq.xml
+        model.json = jsonReq.json
 
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'Model.label', default: 'Model'), modelInstance.name])
-				redirect modelInstance
-			}
-			'*' { respond modelInstance, [status: OK] }
-		}
+        model.save(flush: true, failOnError: true)
+
+        render status: OK
 	}
 
 	@Transactional
-	def delete(Model modelInstance) {
+	def delete() {
 
-		if (modelInstance == null) {
-			notFound()
-			return
-		}
-
-		modelInstance.delete flush: true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'Model.label', default: 'Model'), modelInstance.name])
-				redirect action: "index", method: "GET"
-			}
-			'*' { render status: NO_CONTENT }
-		}
 	}
 
-	protected void notFound() {
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.not.found.message', args: [message(code: 'Model.label', default: 'Model'), params.id])
-				redirect action: "index", method: "GET"
-			}
-			'*' { render status: NOT_FOUND }
-		}
-	}
-
-	def display(Model modelInstance) {
-		if (params.id) {
-			if (modelInstance) render modelInstance as JSON
-			else render(status: 404, text: 'Model not found')
-		} else render Model.list() as JSON
-	}
-
-	def exportToFile() {
-
-		//Model.get(params.modelId)
-		//TODO call propertyservice to add attributes
-		def model = Model.get(params.id)
-		String xmlToConvert = propertyService.injectAttributes(model.xml,model.json)
-
-		byte[] bytes = xmlToConvert.bytes
-
-		response.contentType 'text/plain'
-		response.setHeader "Content-disposition", "filename=\"model.bpmn\""
-		response.contentLength = bytes.length
-		response.outputStream << bytes
-		response.outputStream.flush()
-	}
-
-	def list() {
-		params.max = Math.min(max ?: 10, 100)
-		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count()]
-	}
 }
