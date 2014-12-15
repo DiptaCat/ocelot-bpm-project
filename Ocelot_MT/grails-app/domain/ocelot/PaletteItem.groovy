@@ -12,7 +12,6 @@ class PaletteItem extends APaletteItem {
 //        properties column: "properties", sqlType: "varchar(5000)"
 //        icon column: "icon", sqlType: "varchar(5000)"
 		props nullable: true
-
 	}
 
 	static mapping = {

@@ -41,7 +41,7 @@ ocelotApp.config(function ($routeProvider) {
         }).
         when('/modelerIndex', {
             templateUrl: 'modelerPartials/modelerIndex.html',
-            controller: 'ModelerCtrl'
+            controller: 'ModelCtrl'
         }).
 		otherwise({
 			redirectTo: '/palette'
