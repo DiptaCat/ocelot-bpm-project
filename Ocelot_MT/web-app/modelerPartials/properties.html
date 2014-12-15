@@ -3,7 +3,6 @@
 		<thead class="table-header">
 		<tr>
 			<th>Name</th>
-			<th>Type</th>
 			<th>Value</th>
 		</tr>
 		</thead>
@@ -16,9 +15,6 @@
 		<tr ng-show="itemInfo && itemInfo.length > 0" ng-repeat="property in itemInfo">
 			<td>
 				{{property.name}}
-			</td>
-			<td>
-				{{property.type}}
 			</td>
 			<td>
 				<div ng-switch on="property.type">

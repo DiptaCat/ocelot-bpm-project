@@ -1,6 +1,4 @@
 <div>
-    <!--    <div class="btn-group pull-right">
-        </div>-->
     <h2>Palette</h2>
 </div>
 
@@ -10,29 +8,20 @@
         <palette-modeler id="palette" class="col-md-2"></palette-modeler>
 
         <div id="col2" class="col-md-10">
-            <div id="canvas" style="border: 1px solid black; max-height: 600px">
-                <div draw-modeler="paletteSelectedItem" id="modeler">
-                    <ul class="buttons">
-                        <li>
-                            Download
-                        </li>
-                        <li>
-                            <a id="js-download-diagram" href title="download BPMN diagram">
-                                BPMN diagram
-                            </a>
-                        </li>
-                        <li>
-                            <a id="js-download-svg" href title="download as SVG image">
-                                SVG image
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div id="modeler" draw-modeler="paletteSelectedItem" style="border: 1px solid black">
+                <div id="buttons" class="btn-group" style="border-bottom: 1px solid black; border-right: 1px solid black">
+                    <a id="js-download-diagram" role="button" class="btn btn-sm btn-info" href title="download BPMN diagram">
+                        Download as BPMN diagram
+                    </a>
 
+                    <a id="js-download-svg" role="button" class="btn btn-sm btn-success" href title="download as SVG image">
+                        Download as SVG image
+                    </a>
+                </div>
             </div>
 
             <div id="properties" style="border: 1px solid lightgrey;">
-                <properties style=""></properties>
+                <properties></properties>
             </div>
         </div>
     </div>
