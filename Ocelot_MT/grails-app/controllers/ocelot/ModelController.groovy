@@ -146,7 +146,46 @@ class ModelController extends RestfulController{
 	}
 
 	def list() {
-		params.max = Math.min(max ?: 10, 100)
-		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count()]
+
+		println "Number of Models => ${Model.count}"
+
+		def response = Model.list().collect{Model m ->
+			[
+			        id: m.id,
+					name: m.name,
+					description: m.description
+			]
+		}
+		response = [numModels: Model.count, models: response]
+		respond response
+	}
+
+	def singleModel(){
+
+		def model = null
+
+		try {
+			model = Model.get(params.id)
+		}catch (Exception e){
+			render status: BAD_REQUEST
+		}
+
+		if(model == null){
+			render status: NOT_FOUND
+		} else {
+
+			def response = [
+			        id: model.id,
+					name: model.name,
+					description: model.description,
+					dateCreated: model.dateCreated,
+					lastUpdated: model.lastUpdated,
+					temporal: model.temporal,
+					svg: model.svg,
+					bpmn: propertyService.injectAttributes(model.xml, model.json)
+			]
+
+			respond response
+		}
 	}
 }

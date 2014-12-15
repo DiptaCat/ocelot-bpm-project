@@ -59,9 +59,19 @@ class UrlMappings {
 			action = [GET: 'show', PUT: 'update', POST: 'update', POST: 'save', DELETE: 'delete']
 		}
 
-		"/api/export/$modelId" {
+		"/api/model/export/$id" {
 			controller = 'model'
 			action = [POST: 'exportToFile']
+		}
+
+		"/api/model/list" {
+			controller = 'model'
+			action = [GET: 'list']
+		}
+
+		"/api/model/show/$id" {
+			controller = 'model'
+			action = [GET: 'singleModel']
 		}
 	}
 }
