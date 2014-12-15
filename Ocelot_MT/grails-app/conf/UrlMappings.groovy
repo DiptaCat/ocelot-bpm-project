@@ -58,5 +58,10 @@ class UrlMappings {
 			controller = 'paletteItem'
 			action = [GET: 'show', PUT: 'update', POST: 'update', POST: 'save', DELETE: 'delete']
 		}
+
+		"/api/export/$modelId" {
+			controller = 'model'
+			action = [POST: 'exportToFile']
+		}
 	}
 }
