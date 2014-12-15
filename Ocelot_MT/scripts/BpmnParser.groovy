@@ -123,7 +123,8 @@ target(bpmnParser: "The description of the script goes here!") {
 			print "Value => ${jsonArray[z].value}\t"
 			println "Type => ${jsonArray[z].type}\n"
 
-			node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, jsonArray[z].name, jsonArray[z].value.toString())
+			if(!jsonArray[z].value.toString().empty)
+				node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS,jsonArray[z].name, jsonArray[z].value.toString())
 		}
 		i++
 	}
