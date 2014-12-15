@@ -1,5 +1,6 @@
 package ocelot
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 import org.camunda.bpm.model.bpmn.Bpmn
 import org.camunda.bpm.model.bpmn.BpmnModelInstance
@@ -9,10 +10,11 @@ import org.codehaus.groovy.grails.web.json.JSONArray
 @Transactional
 class PropertyService {
 
-	def injectAttributes(xmlBpmn2, jsonAttributes) {
+	def injectAttributes(xmlBpmn2, jsonString) {
 
-		Node node
+		def node
 		def jsonFieldKey
+		def jsonAttributes = JSON.parse(jsonString)
 		BpmnModelInstance modelInstance = Bpmn.readModelFromStream(new ByteArrayInputStream(xmlBpmn2.getBytes("UTF-8")))
 
 		int i = 0
