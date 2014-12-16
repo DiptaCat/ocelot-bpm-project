@@ -1,5 +1,6 @@
 import util.CategoryItemMarshaller
 import util.CustomObjectMarshallers
+import util.CustomPaletteItemMarshaller
 import util.PaletteItemMarshaller
 import util.PaletteMarshaller
 
@@ -8,6 +9,7 @@ beans = {
 	customObjectMarshallers(CustomObjectMarshallers) {
 		marshallers = [
 				new PaletteItemMarshaller(),
+                new CustomPaletteItemMarshaller(),
 				new PaletteMarshaller(),
 				new CategoryItemMarshaller()
 		]
