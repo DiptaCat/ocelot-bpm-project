@@ -117,23 +117,16 @@ class ModelController extends RestfulController{
 	def singleModel(){
 
 		def model = null
-		println 'singleModel()'
 
 		try {
 			model = Model.get(params.id)
-			println 'Model exists'
 		}catch (Exception e){
-			println 'Model does not exist'
 			render status: BAD_REQUEST
 		}
 
 		if(model == null){
-			println 'Model is null'
 			render status: NOT_FOUND
 		} else {
-			println 'Model is NOT null'
-			//println model.json
-			//println model.xml
 			def response = [
 			        id: model.id,
 					name: model.name,
