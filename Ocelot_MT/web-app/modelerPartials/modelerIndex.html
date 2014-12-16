@@ -1,27 +1,22 @@
-
+<style>
+    svg {
+        height: 200px;
+        width: 250px;
+        border-bottom: 1px solid black;
+    }
+</style>
 <div class="row">
-    <div id="options" style="border: solid black 1px" class="col-md-2">
+    <div id="options" class="col-md-2">
         <i class="glyphicon glyphicon-search"></i>
         <input type="text" ng-model="query" placeholder="Search">
-
         <button ng-click="createBpmn()" class="btn btn-xs btn-default">Create</button>
     </div>
-
-    <!--<div id="grid" style="border: solid black 1px" class="col-md-10">-->
-        <!--<tr ng-repeat="model in models | filter:query">-->
-            <!--<div class="col-xs-6 col-md-3">-->
-                <!--<a href="" class="thumbnail">-->
-                    <!--{{model.svg}}-->
-                    <!--{{model.name}}-->
-                <!--</a>-->
-            <!--</div>-->
-        <!--</tr>-->
-    <!--</div>-->
-
-    <div ng-repeat="model in models | filter:query" class="col-md-10">
-        <div ng-click="open(model.id)" class="col-md-3">
-            <div load-svg="model.svg"></div>
-            {{model.name}}
+    <div class="col-md-10">
+        <div ng-repeat="model in models | filter:query">
+            <div ng-click="open(model.id)" class="col-md-3" style="border: lightgray 1px solid; border-radius: 20px">
+                <div load-svg="model.svg" style="max-width: 50px"></div>
+                {{model.name}}
+            </div>
         </div>
     </div>
 </div>
