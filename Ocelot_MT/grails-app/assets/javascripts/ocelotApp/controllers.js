@@ -43,6 +43,12 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 		return item.level <= $scope.level;
 	};
 
+    //TODO move this filter to filters.js
+    $scope.showCustomPaletteItems = function(item){
+        //Custom defined in PaletteMarshaller.groovy
+        return item.type == 'custom';
+    };
+
 	$scope.change = function (item) {
 		item.activated = !item.activated;
 		// Notify server of changes

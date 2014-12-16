@@ -39,7 +39,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="item in paletteItems | filter:filterByLvl | filter:query | orderBy:orderProp">
+			<tr ng-repeat="item in paletteItems |filter:showCustomPaletteItems | filter:filterByLvl | filter:query | orderBy:orderProp">
 					<td>{{item.level}}</td>
 					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
 					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img

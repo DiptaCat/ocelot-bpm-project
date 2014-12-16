@@ -9,3 +9,9 @@ app.filter('checkmark', function () {
 		return input ? '\u2713' : '\u2718';
 	};
 });
+
+app.filter('showCustomPaletteItems', function(){
+    return function(paletteItem){
+        return paletteItem.type == 'custom';
+    };
+});
