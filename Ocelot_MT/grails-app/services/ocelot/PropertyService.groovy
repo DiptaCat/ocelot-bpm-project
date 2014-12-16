@@ -30,7 +30,7 @@ class PropertyService {
 				print "Name => ${jsonArray[z].name}\t"
 				print "Value => ${jsonArray[z].value}\n"
 
-				if(!jsonArray[z].value.toString().empty) {
+				if(!jsonArray[z].value.toString().empty && node != null) {
 
 					if(!jsonArray[z].extension.equals("camunda"))
 						node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
