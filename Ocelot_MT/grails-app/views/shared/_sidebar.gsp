@@ -8,14 +8,11 @@
 		<li><g:link controller="member" action="index"><i class="glyphicon glyphicon-user"></i> <span
 				class="menu-text">Users</span></g:link></li>
 
-		<li><g:link controller="model" action="index"><i class="glyphicon glyphicon-briefcase"></i> <span
-				class="menu-text">Models</span></g:link></li>
+        <li><a href="${createLink(uri: '/palette#/modelerIndex')}"><i class="glyphicon glyphicon-briefcase"></i> <span
+                class="menu-text">Models</span></a></li>
 
 		<li><a href="${createLink(uri: '/palette#/palette')}"><i class="glyphicon glyphicon-list-alt"></i> <span
 				class="menu-text">Palette</span></a></li>
-
-		<li><a href="${createLink(uri: '/palette#/modelerIndex')}"><i class="glyphicon glyphicon-briefcase"></i> <span
-				class="menu-text">Canvas</span></a></li>
 	</ul>
 
 	<div class="sidebar-collapse" id="sidebar-collapse">

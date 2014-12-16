@@ -43,6 +43,12 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 		return item.level <= $scope.level;
 	};
 
+    //TODO move this filter to filters.js
+    $scope.showCustomPaletteItems = function(item){
+        //Custom defined in PaletteMarshaller.groovy
+        return item.type == 'custom';
+    };
+
 	$scope.change = function (item) {
 		item.activated = !item.activated;
 		// Notify server of changes
@@ -250,7 +256,7 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
 	//Get all categories available
 	$scope.categories = Category.query();
 
-	$scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, props: []};
+	$scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, props: [], level: 1};
 
 	$scope.save = function () {
 

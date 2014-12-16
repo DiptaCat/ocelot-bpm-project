@@ -85,7 +85,10 @@ app.directive('drawModeler', function () {
 		modeler.importXML(xml);
 
 		scope.$watch(attrs.drawModeler, function () {
-			cli.append(scope.canvasSelectedItem.id, scope.paletteSelectedItem.bpmnElem, '150,0');
+			var newElem = cli.append(scope.canvasSelectedItem.id, scope.paletteSelectedItem.bpmnElem, '150,0');
+            if(scope.paletteSelectedItem.type === "custom"){
+                cli.setLabel(newElem, scope.paletteSelectedItem.name);
+            }
 		});
 
         var downloadLink = $('#js-download-diagram');

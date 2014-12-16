@@ -33,18 +33,18 @@
 			<tr>
 				<th>Level</th>
 				<th>Name</th>
-				<th>Icon</th>
+				<!--<th>Icon</th>-->
 				<th>Category</th>
 				<th>Activated</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="item in paletteItems | filter:filterByLvl | filter:query | orderBy:orderProp">
+			<tr ng-repeat="item in paletteItems |filter:showCustomPaletteItems | filter:filterByLvl | filter:query | orderBy:orderProp">
 					<td>{{item.level}}</td>
 					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}">{{item.name}}</a></td>
-					<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img
+					<!--<td><a href="#/palette/{{paletteId}}/paletteItem/{{item.id}}"><img
 							ng-src="images/icons/{{item.icon}}"></a>
-					</td>
+					</td>-->
 					<td>{{item.category.name}}</td>
 					<td ng-click="change(item)">{{item.activated | checkmark}}</td>
 			</tr>
