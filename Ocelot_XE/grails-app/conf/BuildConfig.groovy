@@ -53,7 +53,7 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.29'
+        runtime 'mysql:mysql-connector-java:5.1.29'
 
         /**************************************************************************/
         //Addded by us
@@ -84,6 +84,7 @@ grails.project.dependency.resolution = {
         //runtime ':resources:1.2.8'
 
 	    compile ':asset-pipeline:1.9.6'
+        compile ":rest-client-builder:2.0.3"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.16"

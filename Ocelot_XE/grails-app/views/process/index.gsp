@@ -9,7 +9,7 @@
 <div class="page-header">
     <h1>Process Management</h1>
 </div>
-<div>
+
     <g:if test="${flash.error}">
         <div class="alert alert-error" style="display: block">${flash.error}</div>
     </g:if>
@@ -17,11 +17,52 @@
         <div class="message" style="display: block">${flash.message}</div>
     </g:if>
 
-    Upload Form: <br />
-    <g:uploadForm action="upload">
-        <input type="file" name="myFile" />
-        <input type="submit" class="edit btn btn-sm btn-grey"/>
-    </g:uploadForm>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <g:message code="deployment.upload.file" default="Upload Form: "/>
+                <g:uploadForm action="upload">
+                    <input type="file" name="myFile" />
+                    <input type="submit" />
+                </g:uploadForm>
+            </div>
+            <div class="col-md-6">
+                <g:message  code="deployment.upload.list" default="Name"/><br>
+                <g:link class="edit btn btn-sm btn-grey" controller="deployment" action="index">
+                    <g:message code="default.list.button.label" default="List"/>
+                </g:link>
+            </div>
+        </div>
+    </div>
+
+    %{--<div class="tab-content">
+        <div class="tab-pane active" id="fileUpload">
+            <div class="controls" style="font-style: italic">
+                <ul class="one-to-many">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><g:message code="deployment.upload.file" default="Upload Form: "/></th>
+                            <th><g:message  code="deployment.upload.list" default="Name"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><g:uploadForm action="upload">
+                                <input type="file" name="myFile" />
+                                <input type="submit" />
+                            </g:uploadForm></td>
+                            <td><g:link class="edit btn btn-sm btn-grey" controller="deployment" action="index">
+                                <g:message code="default.list.label" default="List"/>
+                            </g:link></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ul>
+            </div>
+        </div>
+    </div>--}%
 
     <div class="tab-content">
         <div class="tab-pane active" id="processes">
@@ -58,7 +99,7 @@
             </div>
             </div>
     </div>
-</div>
+
 
 </body>
 </html>

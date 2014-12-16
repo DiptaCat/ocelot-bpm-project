@@ -1,6 +1,6 @@
 <div class="sidebar sidebar-fixed" id="sidebar">
 	<ul class="nav nav-list">
-		<li class="sidebar-app-title sidebar-appsti" id="app-title">Ocelot XE</li>
+		<li class="sidebar-app-title sidebar-manager" id="app-title">Ocelot XE</li>
 		<li><a href="${createLink(uri: '/')}"><i class="icon-home"></i> <span class="menu-text"><g:message code="default.home.label" /></span></a></li>
         <li><g:link controller="task" action="index"><i class="icon-tasks"></i> <span class="menu-text"><g:message code="default.tasks.label" /></span></g:link></li>
         <li><g:link controller="vacationRequest" action="index"><i class="icon-tasks"></i> <span class="menu-text"><g:message code="default.vacationRequest.label" /></span></g:link></li>

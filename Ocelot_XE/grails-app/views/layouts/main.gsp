@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <asset:javascript src="application.js"/>
-
     <asset:stylesheet href="application.css"/>
-
     <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <g:layoutHead/>

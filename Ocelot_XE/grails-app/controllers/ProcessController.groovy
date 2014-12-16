@@ -68,14 +68,14 @@ class ProcessController {
             redirect(action:'index')
             return
         }
-        print f.originalFilename
-        print f.name
-        print f.size
-        print f.contentType
-        print f.getClass()
         def fileContent = f.getInputStream()
-        camundaService.deployProcess(fileContent, f.originalFilename)
-        flash.message = 'The file was uploaded'
+        try {
+            camundaService.deployProcess(fileContent, f.originalFilename)
+            flash.message = 'The file was uploaded'
+
+        }catch(Exception e){
+            flash.error = 'ERROR: File cannot be read'
+        }
         redirect(action:'index')
     }
 

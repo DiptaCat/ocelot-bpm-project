@@ -1,4 +1,4 @@
-var APP_TITLE = "Task List";
+var APP_TITLE = "Ocelot XE";
 
 $('.sidebar-collapse').on('click', function () {
 	var title = $('#app-title').html();
