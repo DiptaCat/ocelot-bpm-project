@@ -88,4 +88,17 @@ class CustomPaletteItemController extends RestfulController{
 
         render status: OK
     }
+
+    @Transactional
+    def delete(){
+        //TODO check user
+        CustomPaletteItem item = CustomPaletteItem.get params.id
+
+        if(item == null){
+            render status: NOT_FOUND
+        }else{
+            item.delete flush: true
+            render status: OK
+        }
+    }
 }
