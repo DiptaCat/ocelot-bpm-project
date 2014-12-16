@@ -26,7 +26,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+			dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
 
 //			url = "jdbc:mysql://localhost/ocelot?useUnicode=yes&characterEncoding=UTF-8"
 //			username = "root"

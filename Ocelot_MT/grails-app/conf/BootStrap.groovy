@@ -13,7 +13,7 @@ class BootStrap {
 		def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
 		springContext.getBean("customObjectMarshallers").register()
 
-		if(false) {
+		if(true) {
 			new Member(name: "Luis", login: "luis").save()
 			new Member(name: "Julio", login: "julio").save()
 
