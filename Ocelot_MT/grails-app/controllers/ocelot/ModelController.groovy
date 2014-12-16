@@ -88,7 +88,15 @@ class ModelController extends RestfulController{
 
 	@Transactional
 	def delete() {
+        //TODO check user
+        Model model = Model.get params.id
 
+        if(model == null){
+            render status: NOT_FOUND
+        }else{
+            model.delete flush: true
+            render status: OK
+        }
     }
 
 	def list() {

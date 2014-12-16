@@ -13,9 +13,15 @@
     </div>
     <div class="col-md-10">
         <div ng-repeat="model in models | filter:query">
-            <div ng-click="open(model.id)" class="col-md-3" style="border: lightgray 1px solid; border-radius: 20px">
-                <div load-svg="model.svg" style="max-width: 50px"></div>
-                {{model.name}}
+            <div class="col-md-3" style="border: lightgray 1px solid; border-radius: 20px">
+                <div ng-click="open(model.id)" load-svg="model.svg" style="max-width: 50px"></div>
+
+
+                <div class="btn-group" role="group">
+                    <button ng-click="open(model.id)" class="btn btn-xs">{{model.name}}</button>
+                    <button ng-click="modifyDescription(model)" class="btn btn-xs">Description</button>
+                    <button ng-click="removeModel(model)" class="btn btn-xs"> Delete</button>
+                </div>
             </div>
         </div>
     </div>

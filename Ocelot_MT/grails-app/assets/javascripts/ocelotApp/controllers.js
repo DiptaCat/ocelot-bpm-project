@@ -54,9 +54,41 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 		// Notify server of changes
 		PaletteItem.update({id: item.id}, item);
 	};
+
+    $scope.delete = function(item){
+        var id = item.id;
+        var category = item.category.name;
+        PaletteItem.delete({id: id}).$promise.then(function () {
+            var list = $scope.paletteItems;
+            var i = 0;
+            while(i<list.length){
+                if(list[i].type == 'custom' && list[i].id == id){
+                    break;
+                }
+                i++;
+            }
+
+            if(i<list.length){
+                list.splice(i,1);
+            }
+
+            list = $scope.categoryGroup[category];
+            i = 0;
+            while(i<list.length){
+                if(list[i].type == 'custom' && list[i].id == id){
+                    break;
+                }
+                i++;
+            }
+
+            if(i<list.length){
+                list.splice(i,1);
+            }
+        });
+    };
 });
 
-ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, ModelService, $location){
+ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Model, ModelService, $location){
     $scope.models = Model.query();
 
     $scope.item = {name: "Ocelot Bpmn", description: "Description"};
@@ -83,7 +115,7 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, Model
             ModelService.setInfo({});
             $location.path('/modeler');
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+//            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
@@ -97,6 +129,37 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, Model, Model
             ModelService.setInfo(JSON.parse(model.json));
             $location.path('/modeler');
         });
+    };
+
+    $scope.removeModel = function(model){
+        if($window.confirm("Do you want to remove "+model.name+"?")){
+            Model.delete({id: model.id}, function(){$scope.models = Model.query();});
+        }
+    };
+
+    $scope.modifyDescription = function (model) {
+
+//        var modalInstance = $modal.open({
+//            templateUrl: 'modelerPartials/modelerModal.html',
+//            controller: 'ModalInstanceCtrl',
+//            size: 'lg',
+//            resolve: {
+//                item : function () {
+//                    return $scope.item;
+//                }
+//            }
+//        });
+//
+//        modalInstance.result.then(function (modifiedItem) {
+//            console.log(modifiedItem);
+//            ModelService.setId(-1);
+//            ModelService.setName(modifiedItem.name);
+//            ModelService.setDescription(modifiedItem.description);
+//            ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\""+modifiedItem.name+"\" name=\""+modifiedItem.name+"\" isExecutable=\"true\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\""+modifiedItem.name+"\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
+//            ModelService.setInfo({});
+//        }, function () {
+////            $log.info('Modal dismissed at: ' + new Date());
+//        });
     };
     //TODO order prop?
 });
@@ -117,7 +180,7 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
 });
 
 
-ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteItem, Category, ModelService, Model) {
+ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, PaletteItem, Category, ModelService, Model) {
     $scope.bpmnId = ModelService.getId();
     $scope.bpmnName = ModelService.getName();
     $scope.bpmnDescription = ModelService.getDescription();
@@ -208,6 +271,22 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, Palette, PaletteIt
             Model.save({name: $scope.bpmnName, description: $scope.bpmnDescription, xml: $scope.bpmnXML, json: $scope.bpmnInfo, svg: $scope.bpmnSVG});
         }
     };
+
+    $scope.exportAndSave = function(){
+        $scope.saveModel();
+        $http.get('/ocelot/api/model/show/'+ $scope.bpmnId).success(function(data) {
+            var bpmn = data.bpmn;
+            var encodedData = 'data:application/bpmn20-xml;charset=UTF-8,' + encodeURIComponent(bpmn);
+
+            var pom = document.createElement('a');
+            pom.setAttribute('href', encodedData);
+            pom.setAttribute('download', $scope.bpmnName+".bpmn");
+            pom.click();
+
+         });
+    };
+
+
 });
 
 ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem) {
@@ -252,7 +331,7 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
 	}
 });
 
-ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem) {
+ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routeParams, $location, Category, PaletteItem) {
 	//Get all categories available
 	$scope.categories = Category.query();
 
@@ -262,7 +341,10 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
 
 		console.log("Route params = " + $routeParams.paletteId);
 
-		PaletteItem.save({id: $routeParams.paletteId}, $scope.item);
+		PaletteItem.save({id: $routeParams.paletteId}, $scope.item).$promise.then(function(){
+            $location.path('/palette');
+        });
+
 	};
 
 
