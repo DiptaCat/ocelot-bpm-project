@@ -10,7 +10,7 @@ class ModelerController {
 	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def index() {
-
+        redirect(uri: "/palette#/modelerIndex")
 	}
 
 	def _properties(PaletteItem element){

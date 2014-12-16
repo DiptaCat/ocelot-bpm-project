@@ -16,7 +16,7 @@ class UrlMappings {
 		}
 
 
-		"/"(controller: 'main')
+		"/"(controller: 'modeler')
 		"500"(view: '/error')
 
 		//TODO: palette view should be changed
