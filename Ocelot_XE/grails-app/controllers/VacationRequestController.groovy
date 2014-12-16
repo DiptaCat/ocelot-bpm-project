@@ -17,7 +17,7 @@ class VacationRequestController {
 
     def create() {
 
-        def processDefinition = camundaService.getProcessDefinition(params.id)
+        def processDefinition = camundaService.getProcessDefinitionById(params.id)
         session.currentProcDefId = processDefinition.id
 
         respond new VacationRequest(params)
