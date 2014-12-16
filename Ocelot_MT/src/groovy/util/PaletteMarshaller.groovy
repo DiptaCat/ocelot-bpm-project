@@ -23,7 +23,7 @@ class PaletteMarshaller implements OcelotMarshaller {
         [[type: 'default', attr : 'paletteItems'], [type: 'custom', attr : 'customPaletteItems']].each {
             def attr = it.attr
             def type = it.type
-            list += palette."$attr".collect { PaletteItem paletteItem ->
+            list += palette."$attr".collect { paletteItem ->
                 def pProps = paletteItem.props == null ? [] : JSON.parse(paletteItem.props.toString())
                 [
                         id         : paletteItem.id,

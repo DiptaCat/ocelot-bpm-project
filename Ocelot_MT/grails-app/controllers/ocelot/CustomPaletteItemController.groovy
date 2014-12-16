@@ -14,7 +14,7 @@ class CustomPaletteItemController extends RestfulController{
         super(CustomPaletteItem)
     }
 
-    @Override
+    @Transactional
     def save() {
 
         def jsonReq = request.JSON
@@ -47,7 +47,7 @@ class CustomPaletteItemController extends RestfulController{
     }
 
 
-    @Override
+    @Transactional
     def update() {
         def jsonReq = request.JSON
 
