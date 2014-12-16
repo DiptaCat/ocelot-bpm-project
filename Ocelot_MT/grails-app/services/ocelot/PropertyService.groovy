@@ -26,11 +26,8 @@ class PropertyService {
 			node = modelInstance.getModelElementById(jsonFieldKey)
 
 			for (int z = 0; z < jsonArray.size(); z++) {
-				print "KEY:${jsonAttributes.keys()[i]}\t"
-				print "Name => ${jsonArray[z].name}\t"
-				print "Value => ${jsonArray[z].value}\n"
 
-				if(!jsonArray[z].value.toString().empty) {
+				if(!jsonArray[z].value.toString().empty && node != null) {
 
 					if(!jsonArray[z].extension.equals("camunda"))
 						node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
