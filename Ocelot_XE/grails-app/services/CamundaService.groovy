@@ -23,7 +23,12 @@ class CamundaService {
         String processName = fileName
         int version = 0
         int revision = 0
-        String xmlString = readBpmnFile(fileStream) //task interception mechanism
+        String xmlString
+        try {
+            xmlString = readBpmnFile(fileStream) //task interception mechanism
+        }catch(Exception e){
+            throw e
+        }
 
         //println xmlString
 
@@ -32,11 +37,8 @@ class CamundaService {
                 .addString(processName + ".bpmn20.xml", xmlString)
                 .deploy()
 
-        println 'd -> ' + d.dump()
-
         if (d) {
             ProcessDefinitionEntity pde = d.getDeployedArtifacts(ProcessDefinitionEntity).first()
-            println 'd getDeployedArtifacts'
             //println "PDE : ${pde.dump()}"
             if (pde) {
                 processName = pde.name
@@ -52,7 +54,7 @@ class CamundaService {
     def readBpmnFile(fileStream) throws Exception{
 
         BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fileStream)
-        print modelInstance
+
 
 
 /**

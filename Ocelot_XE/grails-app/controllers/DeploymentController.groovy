@@ -14,22 +14,21 @@ class DeploymentController {
         [processes: list, numModels: numModels]
     }
     def show(){
-        println 'id -> '+params.id
         def resp = new RestBuilder().get("http://localhost:9090/ocelot/api/model/show/$params.id")
         def xml = resp.json.bpmn
-        if (xml.empty) {
+        if (!xml || xml == "") {
             flash.error = 'ERROR: File cannot be empty'
             redirect(controller:'process',action:'index')
             return
         }
-        println xml
-        def merda = new ByteArrayInputStream(xml.getBytes("UTF-8"))
-        println merda
-        def name = resp.json.name
-        println name
-            camundaService.deployProcess(merda, resp.json.name)
+
+        try {
+            camundaService.deployProcess(new ByteArrayInputStream(xml.getBytes("UTF-8")), resp.json.name)
             flash.message = 'The file was uploaded'
 
+        }catch(Exception e){
+            flash.error = 'ERROR: File cannot be read'
+        }
 
 
         redirect(controller:'process', action:'index')
