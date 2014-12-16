@@ -134,7 +134,7 @@ class ModelController extends RestfulController{
 					lastUpdated: model.lastUpdated,
 					temporal: model.temporal,
 					svg: model.svg,
-					bpmn: model.xml//propertyService.injectAttributes(model.xml, model.json)
+					bpmn: propertyService.injectAttributes(model.xml, model.json)
 			]
 
 			respond response

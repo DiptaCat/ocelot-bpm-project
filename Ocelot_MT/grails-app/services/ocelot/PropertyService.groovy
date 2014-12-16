@@ -23,23 +23,19 @@ class PropertyService {
 
 			jsonFieldKey = jsonAttributes.keys()[i]
 			JSONArray jsonArray = jsonAttributes.get(jsonFieldKey)
-			node = modelInstance.getModelElementById(jsonAttributes.keys()[i])
+			node = modelInstance.getModelElementById(jsonFieldKey)
 
 			for (int z = 0; z < jsonArray.size(); z++) {
 				print "KEY:${jsonAttributes.keys()[i]}\t"
 				print "Name => ${jsonArray[z].name}\t"
-				print "Value => ${jsonArray[z].value}\t"
-				println "Type => ${jsonArray[z].type}\n"
+				print "Value => ${jsonArray[z].value}\n"
 
-				/*TODO: if there is a camunda extension implement
-					ELSE and use node.setAttributeValueNS(BpmnModelConstants.CAMUNDA_NS, "name", "value")
-				 */
 				if(!jsonArray[z].value.toString().empty) {
 
-					if(!jsonArray[z].extension.toString().equals("bpmn"))
+					if(!jsonArray[z].extension.equals("camunda"))
 						node.setAttributeValue(jsonArray[z].name, jsonArray[z].value.toString())
 					else
-						node.setAttributeValueNS(BpmnModelConstants.CAMUNDA_NS, jsonArray[z].name, jsonArray[z].value.toString())
+						node.setAttributeValueNs(BpmnModelConstants.CAMUNDA_NS, jsonArray[z].name, jsonArray[z].value.toString())
 				}
 			}
 			i++
