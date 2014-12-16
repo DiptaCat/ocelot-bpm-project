@@ -1,7 +1,7 @@
 <style>
     svg {
-        height: 200px;
         width: 250px;
+        height: 200px;
         border-bottom: 1px solid black;
     }
 </style>
@@ -13,7 +13,8 @@
     </div>
     <div class="col-md-10">
         <div ng-repeat="model in models | filter:query">
-            <div ng-click="open(model.id)" class="col-md-3" style="border: lightgray 1px solid; border-radius: 20px">
+            <div ng-click="open(model.id)" class="col-md-3"
+                 style="border: lightgray 1px solid; border-radius: 20px; margin-bottom: 10px">
                 <div load-svg="model.svg" style="max-width: 50px"></div>
                 {{model.name}}
             </div>

@@ -5,6 +5,9 @@ file2=$1"/Events"
 
 #echo "1"
 
+host=10.30.103.250
+port=5432
+
 while read var  
 do
 	if [[ `echo $var | grep svg` = "" ]] 
@@ -21,7 +24,7 @@ do
 	else
 		cos=$var
 
-		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,BPMN_ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', '$icon.png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,BPMN_ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', '$icon.png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h ${host} -Ucamundabpm -p${port} -docelotmt
 	fi
 	
 done < $file1
@@ -48,7 +51,7 @@ do
 	else
 		cos=$var
 
-		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,BPMN_ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', 'none(2).png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,BPMN_ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', 'none(2).png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h $host -Ucamundabpm -p$port -docelotmt
 	fi
 
 done < $file2
