@@ -12,12 +12,6 @@ class ModelController extends RestfulController{
     static responseFormats = ['json']
 
 	def propertyService
-	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-//	def index(Integer max) {
-//		params.max = Math.min(max ?: 10, 100)
-//		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count]
-//	}
 
 	def index() {
         params.max = Math.min(params.max ?: 10, 100)
@@ -33,7 +27,8 @@ class ModelController extends RestfulController{
                 [
                         id : m.id,
                         svg : m.svg,
-                        name : m.name
+                        name : m.name,
+                        description: m.description
                 ]
             }
         }
@@ -74,11 +69,17 @@ class ModelController extends RestfulController{
 
         def model = Model.get params.id
 
-        model.name = jsonReq.name
-        model.description = jsonReq.description
-        model.svg = jsonReq.svg
-        model.xml = jsonReq.xml
-        model.json = jsonReq.json
+        ['name', 'description', 'svg', 'xml', 'json'].each {
+            if(jsonReq[it] != null){
+                model."$it" = jsonReq."$it"
+            }
+        }
+
+//        model.name = jsonReq.name
+//        model.description = jsonReq.description
+//        model.svg = jsonReq.svg
+//        model.xml = jsonReq.xml
+//        model.json = jsonReq.json
 
         model.save(flush: true, failOnError: true)
 

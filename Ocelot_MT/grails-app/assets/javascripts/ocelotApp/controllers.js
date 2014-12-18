@@ -91,7 +91,7 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
 ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Model, ModelService, $location){
     $scope.models = Model.query();
 
-    $scope.item = {name: "Ocelot Bpmn", description: "Description"};
+    $scope.item = {name: "OcelotBpmn", description: "Description"};
 
     $scope.createBpmn= function () {
 
@@ -109,7 +109,7 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Mod
         modalInstance.result.then(function (modifiedItem) {
             console.log(modifiedItem);
             ModelService.setId(-1);
-            ModelService.setName(modifiedItem.name);
+            ModelService.setName(modifiedItem.name.replace(/\s/g, ""));
             ModelService.setDescription(modifiedItem.description);
             ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\""+modifiedItem.name+"\" name=\""+modifiedItem.name+"\" isExecutable=\"true\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\""+modifiedItem.name+"\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
             ModelService.setInfo({});
@@ -139,33 +139,31 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Mod
 
     $scope.modifyDescription = function (model) {
 
-//        var modalInstance = $modal.open({
-//            templateUrl: 'modelerPartials/modelerModal.html',
-//            controller: 'ModalInstanceCtrl',
-//            size: 'lg',
-//            resolve: {
-//                item : function () {
-//                    return $scope.item;
-//                }
-//            }
-//        });
-//
-//        modalInstance.result.then(function (modifiedItem) {
-//            console.log(modifiedItem);
-//            ModelService.setId(-1);
-//            ModelService.setName(modifiedItem.name);
-//            ModelService.setDescription(modifiedItem.description);
-//            ModelService.setXML("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://bpmn.io/schema/bpmn\">\n  <bpmn2:process id=\""+modifiedItem.name+"\" name=\""+modifiedItem.name+"\" isExecutable=\"true\">\n    <bpmn2:StartEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\""+modifiedItem.name+"\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>");
-//            ModelService.setInfo({});
-//        }, function () {
-////            $log.info('Modal dismissed at: ' + new Date());
-//        });
+        var modalInstance = $modal.open({
+            templateUrl: 'modelerPartials/descriptionModal.html',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            resolve: {
+                item : function () {
+                    return model;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (modifiedItem) {
+            console.log("TO POTA MADRE");
+            console.log(modifiedItem);
+            Model.update({id: modifiedItem.id}, {description: modifiedItem.description}, function(){
+                model.description = modifiedItem.description;
+            });
+        }, function () {
+//            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
     //TODO order prop?
 });
 
 ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstance, item) {
-
     //Clone the default item
     $scope.item = JSON.parse(JSON.stringify(item));
 
@@ -270,6 +268,21 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
         }else{
             Model.save({name: $scope.bpmnName, description: $scope.bpmnDescription, xml: $scope.bpmnXML, json: $scope.bpmnInfo, svg: $scope.bpmnSVG});
         }
+    };
+
+    $scope.downloadSVG = function(){
+        var modeler = $scope.modelerInstance;
+
+        modeler.saveSVG(function(err, svg){
+            $scope.bpmnSVG = svg;
+        });
+
+        var encodedData = 'data:application/bpmn20-xml;charset=UTF-8,' + encodeURIComponent($scope.bpmnSVG);
+
+        var pom = document.createElement('a');
+        pom.setAttribute('href', encodedData);
+        pom.setAttribute('download', $scope.bpmnName+".svg");
+        pom.click();
     };
 
     $scope.exportAndSave = function(){

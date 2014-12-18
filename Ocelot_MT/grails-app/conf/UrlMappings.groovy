@@ -15,19 +15,8 @@ class UrlMappings {
 			action = [PUT: "modify"]
 		}
 
-		//TODO: ask Ruben about 'create' action
-		/*"/$controller/new/$id"{
-			action = [POST:"new"]
-		}*/
 
-		//TODO: ask Ruben about 'remove' action
-		/*"/$controller/remove/$id"{
-			action = [DELETE:"remove"]
-		}*/
-
-		//"/"(view:"/index")
-		//"/users"(resources:'user')
-		"/"(controller: 'main')
+		"/"(controller: 'modeler')
 		"500"(view: '/error')
 
 		//TODO: palette view should be changed

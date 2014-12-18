@@ -2,11 +2,11 @@
 	<ul class="nav nav-list">
 		<li class="sidebar-app-title sidebar-manager" id="app-title">Ocelot MT</li>
 
-		<li><a href="${createLink(uri: '/')}"><i class="glyphicon glyphicon-home"></i><span class="menu-text"><g:message
-				code="default.home.label"/></span></a></li>
+		%{--<li><a href="${createLink(uri: '/')}"><i class="glyphicon glyphicon-home"></i><span class="menu-text"><g:message--}%
+				%{--code="default.home.label"/></span></a></li>--}%
 
-		<li><g:link controller="member" action="index"><i class="glyphicon glyphicon-user"></i> <span
-				class="menu-text">Users</span></g:link></li>
+		%{--<li><g:link controller="member" action="index"><i class="glyphicon glyphicon-user"></i> <span--}%
+				%{--class="menu-text">Users</span></g:link></li>--}%
 
         <li><a href="${createLink(uri: '/palette#/modelerIndex')}"><i class="glyphicon glyphicon-briefcase"></i> <span
                 class="menu-text">Models</span></a></li>
