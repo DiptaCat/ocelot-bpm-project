@@ -18,8 +18,7 @@
             </td>
             <td>
                 <div ng-if="property.name == 'formData'">
-                    Esto es un formData //TODO Add button that redirects to formModal
-                    <button ng-click="addFormField(model)" class="btn btn-info">Add Form Field</button>
+                    <button ng-click="addFormField(model)" class="btn btn-sm btn-info">Add Form Field</button>
                 </div>
                 <div ng-if="property.name != 'formData'">
                     <div ng-switch on="property.type">
