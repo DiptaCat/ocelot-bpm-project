@@ -12,12 +12,6 @@ class ModelController extends RestfulController{
     static responseFormats = ['json']
 
 	def propertyService
-	//static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-//	def index(Integer max) {
-//		params.max = Math.min(max ?: 10, 100)
-//		[modelInstanceList: Model.list(params), modelInstanceCount: Model.count]
-//	}
 
 	def index() {
         params.max = Math.min(params.max ?: 10, 100)
@@ -33,7 +27,8 @@ class ModelController extends RestfulController{
                 [
                         id : m.id,
                         svg : m.svg,
-                        name : m.name
+                        name : m.name,
+                        description: m.description
                 ]
             }
         }
@@ -74,11 +69,17 @@ class ModelController extends RestfulController{
 
         def model = Model.get params.id
 
-        model.name = jsonReq.name
-        model.description = jsonReq.description
-        model.svg = jsonReq.svg
-        model.xml = jsonReq.xml
-        model.json = jsonReq.json
+        ['name', 'description', 'svg', 'xml', 'json'].each {
+            if(jsonReq[it] != null){
+                model."$it" = jsonReq."$it"
+            }
+        }
+
+//        model.name = jsonReq.name
+//        model.description = jsonReq.description
+//        model.svg = jsonReq.svg
+//        model.xml = jsonReq.xml
+//        model.json = jsonReq.json
 
         model.save(flush: true, failOnError: true)
 
@@ -88,7 +89,15 @@ class ModelController extends RestfulController{
 
 	@Transactional
 	def delete() {
+        //TODO check user
+        Model model = Model.get params.id
 
+        if(model == null){
+            render status: NOT_FOUND
+        }else{
+            model.delete flush: true
+            render status: OK
+        }
     }
 
 	def list() {
@@ -109,23 +118,16 @@ class ModelController extends RestfulController{
 	def singleModel(){
 
 		def model = null
-		println 'singleModel()'
 
 		try {
 			model = Model.get(params.id)
-			println 'Model exists'
 		}catch (Exception e){
-			println 'Model does not exist'
 			render status: BAD_REQUEST
 		}
 
 		if(model == null){
-			println 'Model is null'
 			render status: NOT_FOUND
 		} else {
-			println 'Model is NOT null'
-			//println model.json
-			//println model.xml
 			def response = [
 			        id: model.id,
 					name: model.name,
@@ -134,7 +136,7 @@ class ModelController extends RestfulController{
 					lastUpdated: model.lastUpdated,
 					temporal: model.temporal,
 					svg: model.svg,
-					bpmn: model.xml//propertyService.injectAttributes(model.xml, model.json)
+					bpmn: propertyService.injectAttributes(model.xml, model.json)
 			]
 
 			respond response

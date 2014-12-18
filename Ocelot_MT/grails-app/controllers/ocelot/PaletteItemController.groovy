@@ -26,7 +26,7 @@ class PaletteItemController extends RestfulController {
 		item.props = jsonReq.props
 
 		//TODO dar al usuario la opcion de subir su svg y subir o seleccionar de una lista el icono
-		item.icon = "hola"
+		item.icon = "wrench"
 		item.svg = "hola"
 
 		item.level = jsonReq.level

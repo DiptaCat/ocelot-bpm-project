@@ -36,6 +36,7 @@
 				<!--<th>Icon</th>-->
 				<th>Category</th>
 				<th>Activated</th>
+                <th>Delete Item</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -47,6 +48,7 @@
 					</td>-->
 					<td>{{item.category.name}}</td>
 					<td ng-click="change(item)">{{item.activated | checkmark}}</td>
+                    <td ng-click="delete(item)"><div class="btn btn-xs btn-danger glyphicon glyphicon-trash"></div></td>
 			</tr>
 			</tbody>
 		</table>

@@ -1,5 +1,5 @@
 <div>
-    <h2>{{bpmnName}}</h2>
+    <h2 class="page-header">{{bpmnName}}</h2>
 </div>
 
 <div class="container-fluid">
@@ -18,17 +18,13 @@
 
         <div id="col2" class="col-md-10">
             <div id="modeler" draw-modeler="paletteSelectedItem" style="border: 1px solid black">
-                <div id="buttons" class="btn-group" style="border-bottom: 1px solid black; border-right: 1px solid black">
-                    <a id="js-download-diagram" role="button" class="btn btn-sm btn-info" href title="download BPMN diagram">
-                        Download as BPMN diagram
-                    </a>
-
-                    <a id="js-download-svg" role="button" class="btn btn-sm btn-success" href title="download as SVG image">
-                        Download as SVG image
-                    </a>
+                <div id="buttons" class="btn-group" style="border-bottom: 1px solid black; border-right: 1px solid black;">
+                    <button ng-click="downloadSVG()" class="btn btn-xs btn-grey glyphicon glyphicon-picture"> SVG</button>
+                    <button ng-click="saveModel()" class="btn btn-xs btn-info glyphicon glyphicon-save"> Save</button>
+                    <button id="#exportAndSave" ng-click="exportAndSave()" class="btn btn-xs btn-success glyphicon glyphicon-download"> Save and Export</button>
                 </div>
             </div>
-            <button ng-click="saveModel()" class="btn-info">Save</button>
+
             <div id="properties" style="border: 1px solid lightgrey;">
                 <properties></properties>
             </div>

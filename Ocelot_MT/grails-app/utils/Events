@@ -1,4 +1,4 @@
-None Normal?1?1?StartEvent?[]
+None Normal?1?1?StartEvent?[{"name":"formKey","type":"string","value":"","extension":"camunda"},{"name":"formData","type"="string","value"=[],"extension"="camundaFormData"}]
 <svg height="40" version="1.1" width="40" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.5px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><circle cx="20" cy="20" r="15" fill="#ffffff" stroke="#ff8c00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" id="svg_1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></circle></svg>
 
 None Throw?6?2?Event?[]

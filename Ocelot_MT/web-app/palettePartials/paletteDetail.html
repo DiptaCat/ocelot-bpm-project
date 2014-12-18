@@ -34,7 +34,7 @@
 			<th>Type</th>
 			<th>Value</th>
 			<th style="max-width: 50px; text-align: right">
-				<a class="btn btn-mini" ng-click="addProperty()"><i class="icon-plus"></i></a>
+				<a class="btn btn-xs" ng-click="addProperty()"><i class="glyphicon glyphicon-plus"></i></a>
 			</th>
 		</tr>
 		</thead>
@@ -56,16 +56,16 @@
 			</td>
 			<td>
 				<div ng-switch on="property.type">
-					<div ng-switch-when="Boolean">
+					<div ng-switch-when="boolean">
 						<input ng-model="property.value" type="checkbox">
 					</div>
-					<div ng-switch-when="String">
+					<div ng-switch-when="string">
 						<input ng-model="property.value">
 					</div>
 				</div>
 			</td>
 			<td style="text-align: right; vertical-align: middle">
-				<a class="btn btn-mini" ng-click="removeProperty($index)"><i class="icon-trash"></i></a>
+				<a class="btn btn-xs" ng-click="removeProperty($index)"><i class="glyphicon glyphicon-trash"></i></a>
 			</td>
 		</tr>
 		</tbody>
