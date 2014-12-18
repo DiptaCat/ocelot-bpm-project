@@ -51,11 +51,11 @@ class PropertyService {
 						CamundaFormField formField = modelInstance.newInstance(CamundaFormField)
 
 						//Find and insert the given camunda:formField
-						for(int y = 0; y < jsonArray[z].formFields.size(); y++) {
-							formField.camundaId = jsonArray[z].formFields[y].id
-							formField.camundaLabel = jsonArray[z].formFields[y].label
-							formField.camundaDefaultValue = jsonArray[z].formFields[y].defaultValue
-							formField.camundaType = jsonArray[z].formFields[y].type
+						for(int y = 0; y < jsonArray[z].value[y].size(); y++) {
+							formField.camundaId = jsonArray[z].value[y].id
+							formField.camundaLabel = jsonArray[z].value[y].label
+							formField.camundaType = jsonArray[z].value[y].type
+							formField.camundaDefaultValue = jsonArray[z].value[y].defaultValue
 
 							//Add camunda:formField to camunda:formData
 							camundaFormData.addChildElement(formField)
