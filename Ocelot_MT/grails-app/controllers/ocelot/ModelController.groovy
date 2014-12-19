@@ -141,7 +141,5 @@ class ModelController extends RestfulController{
 
 			respond response
 		}
-
 	}
-
 }

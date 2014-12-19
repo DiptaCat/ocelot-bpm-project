@@ -152,7 +152,6 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Mod
         });
 
         modalInstance.result.then(function (modifiedItem) {
-            console.log("TO POTA MADRE");
             console.log(modifiedItem);
             Model.update({id: modifiedItem.id}, {description: modifiedItem.description}, function () {
                 model.description = modifiedItem.description;

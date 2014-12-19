@@ -69,9 +69,6 @@ class CustomPaletteItemController extends RestfulController {
 		instance.level = jsonReq.level
 		instance.bpmnElem = jsonReq.bpmnElem
 
-		//COSA MEVA
-//        println("Hola carapolla " + JSON.parse(jsonReq.props.toString()))
-
 		if (instance.category.id != jsonReq.category.id) {
 			def category = CategoryItem.get(instance.category.id)
 			category.removeFromCustomPaletteItems(instance)

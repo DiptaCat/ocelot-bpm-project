@@ -56,9 +56,6 @@ app.directive('properties', function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'modelerPartials/properties.html'
-//		link: function(scope, element, attrs) {
-//			//TODO el asunto de las properties
-//		}
 	}
 });
 
