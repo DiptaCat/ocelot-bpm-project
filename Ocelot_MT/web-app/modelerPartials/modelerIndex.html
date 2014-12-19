@@ -1,0 +1,27 @@
+<style>
+    svg {
+        width: 25em;
+        height: 15em;
+        padding: 10px;
+    }
+</style>
+<div class="row">
+    <div id="options" class="col-md-2">
+        <i class="glyphicon glyphicon-search"></i>
+        <input type="text" ng-model="query" placeholder="Search">
+        <button ng-click="createBpmn()" class="btn btn-sm btn-primary">Create</button>
+    </div>
+    <div class="col-md-10">
+        <div ng-repeat="model in models | filter:query">
+            <div class="col-md-4" style="border: lightgray 1px solid; border-radius: 20px">
+                <div ng-click="open(model.id)" load-svg="model.svg"></div>
+
+                <div class="btn-group-xs" role="group" style="padding: 5px; border-top: 1px solid black;">
+                    <button ng-click="open(model.id)" class="btn btn-success">{{model.name}}</button>
+                    <button ng-click="modifyDescription(model)" class="btn btn-info">Description</button>
+                    <button ng-click="removeModel(model)" class="btn btn-danger"> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

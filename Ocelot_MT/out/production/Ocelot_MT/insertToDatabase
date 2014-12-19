@@ -1,0 +1,56 @@
+#!/bin/bash
+
+file1=$1"/MainElements"
+file2=$1"/Events"
+
+#echo "1"
+
+while read var  
+do
+	if [[ `echo $var | grep svg` = "" ]] 
+	then
+		if [[ $var != "" ]]
+		then
+			nom=$(cut -f1 -d'?' <<< $var) 
+			cat=$(cut -f2 -d'?' <<< $var)
+			icon=$(cut -f3 -d'?' <<< $var)
+			level=$(cut -f4 -d'?' <<< $var)
+			elem="bpmn:"$(cut -f5 -d'?' <<< $var)
+			props=$(cut -f6 -d'?' <<< $var)
+		fi
+	else
+		cos=$var
+
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', '$icon.png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
+	fi
+	
+done < $file1
+
+var=""
+cos=""
+nom=""
+level=""
+
+echo "2"
+
+while read var  
+do
+	if [[ `echo $var | grep svg` = "" ]] 
+	then
+		if [[ $var != "" ]]
+		then
+			nom=$(cut -f1 -d'?' <<< $var) 
+			cat=$(cut -f2 -d'?' <<< $var)
+			level=$(cut -f3 -d'?' <<< $var)
+			elem="bpmn:"$(cut -f4 -d'?' <<< $var)
+			props=$(cut -f5 -d'?' <<< $var)
+		fi
+	else
+		cos=$var
+
+		echo "INSERT INTO palette_item (VERSION, ACTIVATED,CATEGORY_ID,DESCRIPTION,ICON,LEVEL,ELEM,NAME,PROPS,SVG) VALUES (1, TRUE, '$cat', 'no desc', 'none(2).png', '$level', '$elem', '$nom', '$props', '$cos');" | psql -h 10.30.103.250 -Ucamundabpm -p5432 -docelotmt
+	fi
+
+done < $file2
+
+#echo "done"

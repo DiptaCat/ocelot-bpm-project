@@ -1,0 +1,52 @@
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+/web-app/WEB-INF/classes
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+
+# project release file
+/*.war
+
+# plugin release files
+/*.zip
+/plugin.xml
+
+# older plugin install locations
+/plugins
+/web-app/plugins
+
+# "temporary" build files
+/target
+
+#Added by Julio
+.idea/ 	#Ignore IE files
+*.class #Ignore .class files
+*.log	#Ignore .log files
+
+<<<<<<< HEAD
+Ocelot_XE/*.iml
+Ocelot_XE/.idea/
+Ocelot_XE/target/
+Ocelot_XE/*.log
+=======
+TaskList/*.iml
+TaskList/.idea/
+TaskList/target/
+TaskList/*.log
+>>>>>>> feature/ocelotPalete
+
+Ocelot_MT/*.iml
+Ocelot_MT/.idea/
+Ocelot_MT/target/
+Ocelot_MT/*.log

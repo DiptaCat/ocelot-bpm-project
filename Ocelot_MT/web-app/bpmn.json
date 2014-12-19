@@ -1,0 +1,1119 @@
+[
+	{
+		"element": "Task",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ManualTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "UserTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Assignee",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "CandIdateUsers",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "CandIdateGroups",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "FormKey",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "DueDate",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "FollowUpDate",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Priority",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ScriptTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ScriptLenguage",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Script",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "BusinessRuleTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Class",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Expression",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ExpressionDelegate",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ResultVariable",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ServiceTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Class",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Expression",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ExpressionDelegate",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ResultVariable",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "SendTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Class",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Expression",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ExpressionDelegate",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ResultVariable",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ReceiveTask",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Message",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "InclusiveGateway",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "DefaultFlow",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ExclusiveGateway",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "DefaultFlow",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ParallelGateway",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "EventBasedGateway",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ComplexGateway",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "StartEvent",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "FormKey",
+				"type": "Documentation"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "EndEvent",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "IntermediateThrowEvent",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "IntermediateCatchEvent",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "BoundaryEvent",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ConditionalEventDefinition",
+		"properties": [
+			{
+				"name": "CancelActivity",
+				"type": "Boolean",
+				"value": "false"
+			}
+		]
+	},
+	{
+		"element": "TimerDefinition",
+		"properties": [
+			{
+				"OneOf": [
+					{
+						"name": "Date",
+						"type": "String",
+						"value": ""
+					},
+					{
+						"name": "Duration",
+						"type": "String",
+						"value": ""
+					},
+					{
+						"name": "Cycle",
+						"type": "String",
+						"value": ""
+					}
+				]
+			},
+			{
+				"name": "CancelActivity",
+				"type": "Boolean",
+				"value": "false"
+			}
+		]
+	},
+	{
+		"element": "SignalDefinition",
+		"properties": [
+			{
+				"name": "Signal",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "CancelActivity",
+				"type": "Boolean",
+				"value": "false"
+			}
+		]
+	},
+	{
+		"element": "EscalationDefinition",
+		"properties": [
+			{
+				"name": "CancelActivity",
+				"type": "Boolean",
+				"value": "false"
+			}
+		]
+	},
+	{
+		"element": "CompensateDefinition",
+		"properties": [
+			{}
+		]
+	},
+	{
+		"element": "LinkDefinition",
+		"properties": [
+			{
+				"name": "LinkId",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "LinkName",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "ErrorDefinition",
+		"properties": [
+			{
+				"name": "Error",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "CancelDefinition",
+		"properties": [
+			{}
+		]
+	},
+	{
+		"element": "TerminateDefinition",
+		"properties": [
+			{}
+		]
+	},
+	{
+		"element": "DataobjectReference",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "DataStoreReference",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "DataInput",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "DataOutput",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Subprocess",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "TriggeredByEvent",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Transaction",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "TriggeredByEvent",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "CallActivity",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Asynchronous",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Exclusive",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "RetryTimeCycle",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "CalledElement",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ElementBinding",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ElementVersion",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "BussinessKey",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "InputMapping",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "AllVariables",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "OutputMapping",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "AllVariables",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "ForCompensation",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Anotation",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Text",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "SequenceFlow",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Condition",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Pool",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ProcessId",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "ProcessName",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "IsExecutable",
+				"type": "Boolean",
+				"value": "false"
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Lane",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+	{
+		"element": "Group",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	},
+//TODO Template of element and properties
+	{
+		"element": "",
+		"properties": [
+			{
+				"name": "Id",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "Name",
+				"type": "String",
+				"value": ""
+			},
+			{
+				"name": "",
+				"type": ""
+			},
+			{
+				"name": "Documentation",
+				"type": "String",
+				"value": ""
+			}
+		]
+	}
+]
+
