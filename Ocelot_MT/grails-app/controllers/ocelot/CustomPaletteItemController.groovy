@@ -14,8 +14,28 @@ class CustomPaletteItemController extends RestfulController {
 		super(CustomPaletteItem)
 	}
 
+    def show(){
+        def member = session.user
+        def palette = Palette.get(params.id)
+        def item = CustomPaletteItem.get(params.itemId)
+
+        if(member.id != palette.user.id && item.palette.id == palette.id){
+            render status: UNAUTHORIZED
+            return
+        }
+
+        respond item
+    }
+
 	@Transactional
 	def save() {
+        def member = session.user
+        def palette = Palette.get(params.id)
+
+        if(member.id != palette.user.id){
+            render status: UNAUTHORIZED
+            return
+        }
 
 		def jsonReq = request.JSON
 
@@ -38,8 +58,6 @@ class CustomPaletteItemController extends RestfulController {
 
 		item.save(flush: true)
 
-		def palette = Palette.get(params.id)
-
 		palette.addToCustomPaletteItems(item).save flush: true, failOnError: true
 
 
@@ -49,16 +67,29 @@ class CustomPaletteItemController extends RestfulController {
 
 	@Transactional
 	def update() {
+        def member = session.user
+
+        println params.dump()
+
+        def palette = Palette.get(params.id)
+
+        if(member.id != palette.user.id){
+            render status: UNAUTHORIZED
+            return
+        }
 		def jsonReq = request.JSON
 
-		if (params.id != jsonReq.id) {
+        println "params.itemId = "+params.itemId+" - jsonReq.id = "+jsonReq.ids
+		if (params.itemId as int != jsonReq.id as int) {
 			render status: CONFLICT
+            return
 		}
 
-		def instance = CustomPaletteItem.get(params.id)
+		def instance = CustomPaletteItem.get(params.itemId)
 
 		if (instance == null) {
 			render status: NOT_FOUND
+            return
 		}
 
 		instance.name = jsonReq.name
@@ -79,17 +110,13 @@ class CustomPaletteItemController extends RestfulController {
 
 		instance.save flush: true
 
-		//TODO preguntar a Ruben què fer en cas d'error
-
-//        println instance.dump()
-
 		render status: OK
 	}
 
 	@Transactional
 	def delete() {
 		//TODO check user
-		CustomPaletteItem item = CustomPaletteItem.get params.id
+		CustomPaletteItem item = CustomPaletteItem.get params.itemId
 
 		if (item == null) {
 			render status: NOT_FOUND

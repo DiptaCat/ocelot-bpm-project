@@ -51,13 +51,13 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
     $scope.change = function (item) {
         item.activated = !item.activated;
         // Notify server of changes
-        PaletteItem.update({id: item.id}, item);
+        PaletteItem.update({id: $scope.paletteId, itemId: item.id}, item);
     };
 
     $scope.delete = function (item) {
         var id = item.id;
         var category = item.category.name;
-        PaletteItem.delete({id: id}).$promise.then(function () {
+        PaletteItem.delete({id: $scope.paletteId, itemId: id}).$promise.then(function () {
             var list = $scope.paletteItems;
             var i = 0;
             while (i < list.length) {
@@ -189,7 +189,6 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
     //Get all categories available
     $scope.paletteId = 1;
     $scope.categoryGroup = {};
-//    $scope.bpmnInfo = {}; //TODO this is done above -> remove this line if works
     $scope.canvasSelectedItem = "";
     $scope.paletteSelectedItem = "";
     $scope.itemInfo = {};
@@ -229,7 +228,6 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 
     // This function selects an element from paletteModeler and notifies the modeler directive
     $scope.selectPalette = function (item) {
-//		console.log("Item selected: "+item.id);
         $scope.paletteSelectedItem = item;
     };
 
@@ -304,10 +302,10 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
     //Get all categories available
     $scope.categories = Category.query();
 
-    $scope.item = PaletteItem.get({id: $routeParams.itemId});
+    $scope.item = PaletteItem.get({id: $routeParams.paletteId, itemId: $routeParams.itemId});
 
     $scope.save = function () {
-        PaletteItem.update({id: $scope.item.id}, $scope.item);
+        PaletteItem.update({id: $routeParams.paletteId,itemId: $scope.item.id}, $scope.item);
     };
 
     $scope.addProperty = function () {

@@ -5,7 +5,7 @@ file2=$1"/Events"
 
 host="ip"
 port="port"
-username="user"
+username="username"
 database="database"
 
 while read var  

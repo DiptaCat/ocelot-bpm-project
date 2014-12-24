@@ -44,12 +44,15 @@ class UrlMappings {
             action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
         }
 
-		//"/api/paletteItem/" (controller: 'paletteItem', action: 'save', method: 'POST')
-
         //TODO decide if url should be paletteItem or customPaletteItem
-		"/api/palette/$id/paletteItem/$id" {
+        "/api/palette/$id/paletteItem" {
+            controller = 'customPaletteItem'
+            action = [POST: 'save']
+        }
+
+		"/api/palette/$id/paletteItem/$itemId" {
 			controller = 'customPaletteItem'
-			action = [GET: 'show', PUT: 'update', POST: 'update', POST: 'save', DELETE: 'delete']
+			action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
 		}
 
 		"/api/model/export/$id" {

@@ -12,16 +12,16 @@ ocelotServices.factory("Model", function ($resource) {
 });
 
 ocelotServices.factory("PaletteItem", function ($resource) {
-	return $resource("/ocelot/api/palette/:id/paletteItem/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
+	return $resource("/ocelot/api/palette/:id/paletteItem/:itemId", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
 });
 
 ocelotServices.factory("Category", function ($resource) {
 	return $resource("/ocelot/api/category/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
 });
 
-ocelotServices.factory("PaletteItem", function ($resource) {
-    return $resource("/ocelot/api/palette/:id/paletteItem/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
-});
+//ocelotServices.factory("PaletteItem", function ($resource) {
+//    return $resource("/ocelot/api/palette/:id/paletteItem/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
+//});
 
 //notice that this service uses service instead of factory because will be a shared service
 ocelotServices.service("ModelService", function(){

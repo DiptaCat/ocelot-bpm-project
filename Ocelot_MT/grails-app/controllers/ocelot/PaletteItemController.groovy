@@ -15,6 +15,13 @@ class PaletteItemController extends RestfulController {
 
 	@Override
 	def save() {
+        def member = session.user
+        def palette = Palette.get(params.id)
+
+        if(member.id != palette.user.id){
+            render status: UNAUTHORIZED
+            return
+        }
 
 		def jsonReq = request.JSON
 
@@ -37,8 +44,6 @@ class PaletteItemController extends RestfulController {
 
 		item.save(flush: true)
 
-		def palette = Palette.get(params.id)
-
 		palette.addToPaletteItems(item).save flush: true, failOnError: true
 
 
@@ -48,7 +53,14 @@ class PaletteItemController extends RestfulController {
 
 	@Override
 	def update() {
+        //TODO check user!!
+
 		def jsonReq = request.JSON
+
+        if(member.id != palette.user.id){
+            render status: UNAUTHORIZED
+            return
+        }
 
 		if (params.id != jsonReq.id) {
 			render status: CONFLICT
@@ -78,48 +90,7 @@ class PaletteItemController extends RestfulController {
 
 		instance.save flush: true
 
-		//TODO preguntar a Ruben què fer en cas d'error
-
-//        println instance.dump()
-
 		render status: OK
 	}
 
-//    @Override
-//    def update(){
-//        def jsonReq = request.JSON
-//
-//        if(params.id != jsonReq.id){
-//            render status: CONFLICT
-//        }
-//
-//        def instance = PaletteItem.get(params.id)
-//
-//        if(instance == null){
-//            render status: NOT_FOUND
-//        }
-//
-//        instance.name = jsonReq.name
-//        instance.description = jsonReq.description
-//        instance.props = jsonReq.props
-//        instance.activated = jsonReq.activated
-//        instance.icon = jsonReq.icon
-//
-//        if(instance.category.id != jsonReq.category.id){
-//            def category = CategoryItem.get(instance.category.id)
-//            category.removeFromPaletteItems(instance)
-//
-//            category = CategoryItem.get(jsonReq.category.id)
-//            category.addToPaletteItems(instance)
-//        }
-//
-//        instance.save flush : true
-//
-//        //TODO preguntar a Ruben què fer en cas d'error
-//
-//        println instance.dump()
-//
-//        render status: OK
-//
-//    }
 }

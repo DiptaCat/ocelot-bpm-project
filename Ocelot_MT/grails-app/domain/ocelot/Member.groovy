@@ -5,6 +5,7 @@ class Member {
 	String name
 	String login
 	Date dateCreated
+    Palette palette
 
 	static hasMany = [models: Model]
 	//static mappedBy = [ favourites: "none"]

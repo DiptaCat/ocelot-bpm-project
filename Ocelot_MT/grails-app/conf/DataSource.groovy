@@ -18,7 +18,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+			dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
 
 			url = "jdbc:postgresql:"    //TODO change url, username and password of the database
 		}

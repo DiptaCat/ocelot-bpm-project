@@ -17,7 +17,7 @@ class ModelController extends RestfulController{
         params.max = Math.min(params.max ?: 10, 100)
         params.offset = params.offset == null ? 0 : params.offset
 
-        def member = Member.get(1) //TODO this is a fake user!!!
+        def member = session.user //TODO this is a fake user!!!
         def models = Model.findAllByUser(member, params)
 
         if(models == null){
@@ -36,15 +36,23 @@ class ModelController extends RestfulController{
 
 	def show() {
         //TODO check user
+        def member = session.user
 
         def model = Model.get params.id
 
-		respond model
+        if(model.user.id == member.id){
+            respond model
+        }else{
+            render status: UNAUTHORIZED
+        }
+
+
 	}
 
 	@Transactional
 	def save() {
-        def member = Member.get(1) //TODO this is a fake user!!!
+//        def member = Member.get(1) //TODO this is a fake user!!!
+        def member = session.user
 
         def jsonReq = request.JSON
 
@@ -65,38 +73,43 @@ class ModelController extends RestfulController{
 	@Transactional
 	def update() {
         //TODO check user
+        def member = session.user
+
         def jsonReq = request.JSON
 
         def model = Model.get params.id
 
-        ['name', 'description', 'svg', 'xml', 'json'].each {
-            if(jsonReq[it] != null){
-                model."$it" = jsonReq."$it"
+        if(model.user.id != member.id){
+            render status: UNAUTHORIZED
+        }else{
+
+            ['name', 'description', 'svg', 'xml', 'json'].each {
+                if(jsonReq[it] != null){
+                    model."$it" = jsonReq."$it"
+                }
             }
+
+            model.save(flush: true, failOnError: true)
+
+            render status: OK
         }
-
-//        model.name = jsonReq.name
-//        model.description = jsonReq.description
-//        model.svg = jsonReq.svg
-//        model.xml = jsonReq.xml
-//        model.json = jsonReq.json
-
-        model.save(flush: true, failOnError: true)
-
-        render status: OK
 	}
 
 
 	@Transactional
 	def delete() {
         //TODO check user
+        def member = session.user
+
         Model model = Model.get params.id
 
         if(model == null){
             render status: NOT_FOUND
-        }else{
+        }else if(model.user.id == member.id){
             model.delete flush: true
             render status: OK
+        }else{
+            render status: UNAUTHORIZED
         }
     }
 
