@@ -18,9 +18,3 @@ This application allows the user to execute the process in the Camunda platform 
 
 | [![Diputació de Tarragona](http://greachconf.com/wp-content/uploads/2014/01/diputacio-tarragona.png)](http://www.diputaciodetarragona.cat/)      | [![Universitat Rovira i Virgili](http://www.urv.cat/media/gif/logo_urv.png)](http://www.urv.cat)     
 | :-------------: |:-------------:| 
-
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
