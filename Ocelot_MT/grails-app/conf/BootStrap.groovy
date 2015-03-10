@@ -14,7 +14,7 @@ class BootStrap {
 		def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
 		springContext.getBean("customObjectMarshallers").register()
 
-		if (initDatabase) {
+		if (PaletteItem.count() == 0) {
 			def user = new Member(name: "test", login: "test")
 
 			//Category List
@@ -41,7 +41,6 @@ class BootStrap {
 					} else {
 						pItem = new PaletteItem(name: name, category: CategoryItem.get(cat), icon: icon, level: level, bpmnElem: elem, props: props, svg: line, activated: true, description: "no desc")
 						pItem.save(flush: true, failOnError: true)
-						println(pItem)
 					}
 				}
 			}
@@ -60,7 +59,6 @@ class BootStrap {
 					} else {
 						pItem = new PaletteItem(name: name, category: CategoryItem.get(cat), icon: 'none(2).png', level: level, bpmnElem: elem, props: props, svg: line, activated: true, description: "no desc")
 						pItem.save(flush: true, failOnError: true)
-						println(pItem)
 					}
 				}
 			}
