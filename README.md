@@ -20,4 +20,4 @@ This application allows the user to execute the process in the Camunda platform 
 This project has been funded by Diputació de Tarragona and developed in Universitat Rovira i Virgili, by the AST Research Group
 
 | [![Diputació de Tarragona](http://greachconf.com/wp-content/uploads/2014/01/diputacio-tarragona.png)](http://www.diputaciodetarragona.cat/) |     | [![Universitat Rovira i Virgili](http://www.urv.cat/media/gif/logo_urv.png)](http://www.urv.cat)     
-| :-------------: |:-------------:||:-------------:| 
+| :-------------: |:-------------:|:-------------:| 
