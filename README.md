@@ -16,3 +16,8 @@ On the other side there is the Ocelot XE application. This application allows th
 
 This application allows the user to execute the process in the Camunda platform in a minimalist way. The user can deploy the models, manage them, manage tasks, etc. All these services are available through the RESTfull API given by Camunda. It is a simple application, easy to use and to extend in order to adapt it to the user needs. Moreover, a user management system has not been implemented so the user can use the one he/she was using previously or to implement his/her own service.
 
+##Acknowledge
+This project has been funded by Diputació de Tarragona and developed in Universitat Rovira i Virgili, by the [AST Research Group](http://ast-deim.urv.cat/)
+
+| [![Diputació de Tarragona](http://greachconf.com/wp-content/uploads/2014/01/diputacio-tarragona.png)](http://www.diputaciodetarragona.cat/) |     | [![Universitat Rovira i Virgili](http://www.urv.cat/media/gif/logo_urv.png)](http://www.urv.cat)     
+| :-------------: |:-------------:|:-------------:| 
