@@ -1,20 +1,19 @@
+<%@ page import="ocelot.Modeler" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="main"/>
-	<title><g:message code="default.home.label"/></title>
+	<meta name="layout" content="main">
+	<title>Modeler</title>
+	<asset:javascript src="ocelotApp/app.js"/>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 </head>
 
 <body>
-<div class="page-header">
-	<h1>Pàgina d'inici</h1>
+
+<div>
+    <g:link action="load">Start modeling</g:link>
 </div>
-
-<g:link controller="member" class="btn btn-sm btn-info" action="create"><i
-		class="glyphicon glyphicon-plus"></i>New User</g:link>
-
-<g:link controller="model" class="btn btn-sm btn-info" action="create"><i
-		class="glyphicon glyphicon-plus"></i>New Model</g:link>
 
 </body>
 </html>

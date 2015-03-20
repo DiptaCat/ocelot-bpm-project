@@ -16,16 +16,14 @@ class UrlMappings {
 		}
 
 
-		"/"(controller: 'modeler')
+		"/"(controller: 'main')
+
 		"500"(view: '/error')
 
 		//TODO: palette view should be changed
 		'/palette'(view: '/palette/index')
 
-		// RESTService api
-//        "/api/palette" (controller: 'palette', action: 'index', method: 'GET')
-//        "/api/palette/$id" (controller: 'palette', action: 'show', method: 'GET')
-
+		// REST API
 
 		"/api/palette/$id" {
 			controller = 'palette'
