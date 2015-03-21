@@ -31,7 +31,7 @@ class ModelController extends RestfulController{
             }
         }
 
-        respond []
+        []
 	}
 
 	def show() {
@@ -101,6 +101,8 @@ class ModelController extends RestfulController{
 	}
 
 	def export() {
+
+        println "export $params"
 
 		def model = null
 

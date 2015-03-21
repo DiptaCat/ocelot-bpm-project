@@ -4,7 +4,6 @@
 
 var ocelotControllers = angular.module('ocelotControllers', []);
 
-
 ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteItem, Category) {
     //Get all categories available
     $scope.paletteId = 1;
@@ -87,7 +86,7 @@ ocelotControllers.controller('PaletteCtrl', function ($scope, Palette, PaletteIt
     };
 });
 
-ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Model, ModelService, $location) {
+ocelotControllers.controller('ModelCtrl', function ($scope, $http, $modal, $window, Model, ModelService, $location) {
     $scope.models = Model.query();
 
     $scope.item = {name: "OcelotBpmn", description: "Description"};
@@ -136,6 +135,19 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $modal, $window, Mod
                 $scope.models = Model.query();
             });
         }
+    };
+
+    $scope.exportBpmn = function (model) {
+        $http.get('/ocelot-mt/api/model/export/' + model.id).success(function (data) {
+            var bpmn = data.bpmn;
+            var encodedData = 'data:application/bpmn20-xml;charset=UTF-8,' + encodeURIComponent(bpmn);
+
+            var pom = document.createElement('a');
+            pom.setAttribute('href', encodedData);
+            pom.setAttribute('download', model.name + ".bpmn.xml");
+            pom.click();
+
+        });
     };
 
     $scope.modifyDescription = function (model) {
@@ -285,13 +297,13 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 
     $scope.exportAndSave = function () {
         $scope.saveModel();
-        $http.get('/ocelot/api/model/show/' + $scope.bpmnId).success(function (data) {
+        $http.get('/ocelot-mt/api/model/export/' + $scope.bpmnId).success(function (data) {
             var bpmn = data.bpmn;
             var encodedData = 'data:application/bpmn20-xml;charset=UTF-8,' + encodeURIComponent(bpmn);
 
             var pom = document.createElement('a');
             pom.setAttribute('href', encodedData);
-            pom.setAttribute('download', $scope.bpmnName + ".bpmn");
+            pom.setAttribute('download', $scope.bpmnName + ".bpmn.xml");
             pom.click();
 
         });

@@ -16,6 +16,11 @@ class Model {
 	/*static hasMany = [usersFavs: Member]
 	static mappedBy = [usersFavs: "none"]*/
 
+    String setJson(String json) {
+        if (!json || json.empty) this.json = "{}"
+        else this.json = json
+    }
+
 	static constraints = {
 		name blank: false, unique: 'user'
 		svg nullable: true

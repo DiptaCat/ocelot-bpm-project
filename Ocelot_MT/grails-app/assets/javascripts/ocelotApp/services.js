@@ -4,19 +4,19 @@
 var ocelotServices = angular.module('ocelotServices', ['ngResource']);
 
 ocelotServices.factory("Palette", function ($resource) {
-	return $resource("/ocelot/api/palette/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
+	return $resource("/ocelot-mt/api/palette/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
 });
 
 ocelotServices.factory("Model", function ($resource) {
-    return $resource("/ocelot/api/model/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
+    return $resource("/ocelot-mt/api/model/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
 });
 
 ocelotServices.factory("PaletteItem", function ($resource) {
-	return $resource("/ocelot/api/palette/:id/paletteItem/:itemId", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
+	return $resource("/ocelot-mt/api/palette/:id/paletteItem/:itemId", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: false}});
 });
 
 ocelotServices.factory("Category", function ($resource) {
-	return $resource("/ocelot/api/category/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
+	return $resource("/ocelot-mt/api/category/:id", null, {'update': {method: 'PUT'}, 'query': {method: 'GET', isArray: true}});
 });
 
 //ocelotServices.factory("PaletteItem", function ($resource) {

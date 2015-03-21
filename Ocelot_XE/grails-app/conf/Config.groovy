@@ -98,7 +98,7 @@ camunda {
 ocelot {
     mt {
         rest {
-            api = "http://localhost:9090/ocelot/api/"
+            api = "http://localhost:9090/ocelot-mt/api/"
             list = "${api}models"
             export ="${api}model/export"
         }
