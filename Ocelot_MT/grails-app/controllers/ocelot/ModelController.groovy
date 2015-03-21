@@ -17,12 +17,10 @@ class ModelController extends RestfulController{
         params.max = Math.min(params.max ?: 10, 100)
         params.offset = params.offset == null ? 0 : params.offset
 
-        def member = session.user //TODO this is a fake user!!!
-        def models = Model.findAllByUser(member, params)
+        def models = Model.findAllByUser(session.user, params)
 
-        if(models == null){
-            respond []
-        }else{
+
+        if(models){
             respond models.collect{ Model m ->
                 [
                         id : m.id,
@@ -32,6 +30,8 @@ class ModelController extends RestfulController{
                 ]
             }
         }
+
+        respond []
 	}
 
 	def show() {
@@ -51,45 +51,25 @@ class ModelController extends RestfulController{
 
 	@Transactional
 	def save() {
-//        def member = Member.get(1) //TODO this is a fake user!!!
-        def member = session.user
+        def model = new Model(request.JSON)
+        model.user = session.user
 
-        def jsonReq = request.JSON
-
-        def model = new Model()
-
-        model.name = jsonReq.name
-        model.description = jsonReq.description
-        model.svg = jsonReq.svg
-        model.xml = jsonReq.xml
-        model.json = jsonReq.json
-
-        member.addToModels(model)
-        member.save flush: true, failOnError: true
+        model.save flush: true, failOnError: true
 
         render status: CREATED
 	}
 
 	@Transactional
 	def update() {
-        //TODO check user
-        def member = session.user
-
-        def jsonReq = request.JSON
 
         def model = Model.get params.id
 
-        if(model.user.id != member.id){
+        if(model.user.name != session.user.name){
             render status: UNAUTHORIZED
         }else{
-
-            ['name', 'description', 'svg', 'xml', 'json'].each {
-                if(jsonReq[it] != null){
-                    model."$it" = jsonReq."$it"
-                }
-            }
-
-            model.save(flush: true, failOnError: true)
+            model.properties = request.JSON
+            model.user = session.user
+            model.save flush: true, failOnError: true
 
             render status: OK
         }
@@ -115,44 +95,35 @@ class ModelController extends RestfulController{
 
 	def list() {
 
-		println "Number of Models => ${Model.count}"
-
-		def response = Model.list().collect{Model m ->
-			[
-			        id: m.id,
-					name: m.name,
-					description: m.description
-			]
-		}
+		def response = Model.list().collect{ [id: it.id, name: it.name, description: it.description] }
 		response = [numModels: Model.count, models: response]
 		respond response
 	}
 
-	def singleModel(){
+	def export() {
 
 		def model = null
 
 		try {
 			model = Model.get(params.id)
-		}catch (Exception e){
-			render status: BAD_REQUEST
-		}
 
-		if(model == null){
-			render status: NOT_FOUND
-		} else {
-			def response = [
-			        id: model.id,
-					name: model.name,
-					description: model.description,
-					dateCreated: model.dateCreated,
-					lastUpdated: model.lastUpdated,
-					temporal: model.temporal,
-					svg: model.svg,
-					bpmn: propertyService.injectAttributes(model.xml, model.json)
-			]
+		} catch (e) { render status: BAD_REQUEST }
 
-			respond response
-		}
+		if (model) {
+
+            def response = [
+                    id: model.id,
+                    name: model.name,
+                    description: model.description,
+                    dateCreated: model.dateCreated,
+                    lastUpdated: model.lastUpdated,
+                    temporal: model.temporal,
+                    svg: model.svg,
+                    bpmn: propertyService.injectAttributes(model.xml, model.json)
+            ]
+
+            respond response
+
+		} else { render status: NOT_FOUND }
 	}
 }

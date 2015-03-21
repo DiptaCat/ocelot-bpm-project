@@ -5,27 +5,25 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-grails.server.port.http=9090
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-//grails.project.fork = [
-//    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
-//    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
-//
-//    // configure settings for the test-app JVM, uses the daemon by default
-//    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
-//    // configure settings for the run-app JVM
-//    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
-//    // configure settings for the run-war JVM
-//    war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
-//    // configure settings for the Console UI JVM
-//    console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
-//]
 
 grails.project.fork = [
-		test: false,
-		run : false
+        // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
+        //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+
+        // configure settings for the test-app JVM, uses the daemon by default
+        test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+        // configure settings for the run-app JVM
+        run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+        // configure settings for the run-war JVM
+        war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+        // configure settings for the Console UI JVM
+        console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
+
+
+grails.server.port.http=9090
+grails.project.war.file = "target/${appName}.war"
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
@@ -56,7 +54,7 @@ grails.project.dependency.resolution = {
 	}
 
 	dependencies {
-		runtime "postgresql:postgresql:9.1-901.jdbc4"
+		//runtime "postgresql:postgresql:9.1-901.jdbc4"
 
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
@@ -74,20 +72,21 @@ grails.project.dependency.resolution = {
 	}
 
 	plugins {
-		//compile ":mysql-connectorj:5.1.22.1"
 
-		// plugins for the build system only
-		build ":tomcat:7.0.54"
+        // plugins for the build system only
+        build ":tomcat:7.0.55"
 
-		// plugins for the compile step
-		compile ":scaffolding:2.1.2"
-		compile ':cache:1.1.7'
-		compile ":asset-pipeline:1.9.4"
+        // plugins for the compile step
+        compile ":scaffolding:2.1.2"
+        compile ':cache:1.1.8'
+        compile ":asset-pipeline:1.9.6"
+        //compile ":asset-pipeline:1.9.7" -> [JS error] ReferenceError: angular is not defined
 
-		// plugins needed at runtime but not for compilation
-        //runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
-        runtime ":hibernate:3.6.10.17"
-		runtime ":jquery:1.11.1"
 
-	}
+        // plugins needed at runtime but not for compilation
+        runtime ":hibernate:3.6.10.18"
+        //runtime ":hibernate4:4.3.6.1"
+        runtime ":jquery:1.11.1"
+
+    }
 }

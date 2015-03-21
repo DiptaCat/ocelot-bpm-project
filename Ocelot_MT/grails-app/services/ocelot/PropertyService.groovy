@@ -15,6 +15,10 @@ class PropertyService {
 
 	def injectAttributes(xmlBpmn2, jsonString) {
 
+        if (!jsonString || jsonString.size()==0) jsonString = "{}"
+
+        println "inject\nbpmn : $xmlBpmn2\njson : $jsonString"
+
 		def node
 		def jsonFieldKey
 		def jsonAttributes = JSON.parse(jsonString)

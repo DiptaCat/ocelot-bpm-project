@@ -88,13 +88,22 @@ grails.hibernate.osiv.readonly = false
 camunda {
     engine {
         configuration {
-            databaseSchemaUpdate = false
+            databaseSchemaUpdate = true
             history = "full"
             deploymentResources = ['classpath:/**/*.bpmn']
         }
     }
 }
 
+ocelot {
+    mt {
+        rest {
+            api = "http://localhost:9090/ocelot/api/"
+            list = "${api}models"
+            export ="${api}model/export"
+        }
+    }
+}
 
 environments {
     development {
