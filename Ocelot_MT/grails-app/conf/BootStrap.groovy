@@ -18,7 +18,7 @@ class BootStrap {
 			def user = new Member(name: "test", login: "test")
 
 			//Category List
-			def categories = ["Start Events", "Activities", "Structural", "Gateways", "Boundary Events", "Intermediate Events", "End Events", "Swimlanes", "Udefined"]
+			def categories = ["Start Events", "Activities", "Structural", "Gateways", "Boundary Events", "Intermediate Events", "End Events", "Swimlanes", "Undefined"]
 
 			categories.each {
 				new CategoryItem(name: it).save()

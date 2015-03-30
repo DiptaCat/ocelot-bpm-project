@@ -2,7 +2,8 @@ package ocelot
 
 class Model {
 
-	String name, description
+	String name
+    String description
 	Date dateCreated
 	Date lastUpdated
 	boolean temporal
@@ -14,6 +15,11 @@ class Model {
 	boolean favourite = false
 	/*static hasMany = [usersFavs: Member]
 	static mappedBy = [usersFavs: "none"]*/
+
+    String setJson(String json) {
+        if (!json || json.empty) this.json = "{}"
+        else this.json = json
+    }
 
 	static constraints = {
 		name blank: false, unique: 'user'

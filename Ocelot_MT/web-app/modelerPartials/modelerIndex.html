@@ -19,12 +19,14 @@
 			<div class="col-md-3" style="border: lightgray 1px solid; border-radius: 20px; margin: 1%;">
 				<div ng-click="open(model.id)" load-svg="model.svg"></div>
 
-				<div class="btn-group-xs" role="group" style="padding: 5px; border-top: 1px solid black;">
-					<button ng-click="open(model.id)" class="btn btn-success">{{model.name}}</button>
-					<button ng-click="modifyDescription(model)" class="btn btn-info">Description</button>
-					<button ng-click="removeModel(model)" class="btn btn-danger"> Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="btn-group-xs" role="group" style="padding: 5px; border-top: 1px solid black;">
+                    <button ng-click="modifyDescription(model)" class="btn btn-info">{{model.name}}</button>
+                    <button ng-click="open(model.id)" class="btn btn-success">Edit</button>
+                    <button ng-click="removeModel(model)" class="btn btn-danger">Remove</button>
+                    <button ng-click="exportBpmn(model)" class="btn btn-warning">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -1,16 +1,18 @@
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.postgresql.Driver"
-    dialect = "org.hibernate.dialect.PostgreSQLDialect"
-    username = "ocelotuser"
-    password = "ocelotbpmn"
+
+    driverClassName = "org.h2.Driver"
+    username = "sa"
+    password = ""
 }
+
+
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
-//    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
-    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
+    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
+//    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
     singleSession = true // configure OSIV singleSession mode
 }
 
@@ -19,9 +21,8 @@ environments {
     development {
         dataSource {
             dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
-			url = "jdbc:postgresql://localhost/ocelot"
 
-			// url = "jdbc:postgresql:server/database"    //TODO change url, username and password of the database
+            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     test {
@@ -32,8 +33,17 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+
+            dbCreate = "validate"
+            url = "jdbc:postgresql:server/database"    //TODO change url, username and password of the database
+
+            pooled = true
+            jmxExport = true
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            username = ""
+            password = ""
+
             properties {
                 // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                 jmxEnabled = true
