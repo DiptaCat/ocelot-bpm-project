@@ -8,6 +8,10 @@ class PaletteController extends RestfulController {
 
 	static responseFormats = ['json']
 
+	def index() {
+
+	}
+
 	PaletteController() {
 		super(Palette)
 	}

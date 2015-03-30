@@ -344,7 +344,7 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
     //Get all categories available
     $scope.categories = Category.query();
 
-    $scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, props: [], level: 1};
+    $scope.item = {name: "New Item", description: "Place a description here", icon: "No Icon", category: {id: 1}, activated: false, props: [{"name":"formKey","type":"string","value":"","extension":"camunda"},{"name":"formData","type":"string","value":[],"extension":"camundaFormData"}], level: 1};
 
     $scope.save = function () {
 

@@ -55,12 +55,17 @@
 				</select>
 			</td>
 			<td>
-				<div ng-switch on="property.type">
-					<div ng-switch-when="boolean">
-						<input ng-model="property.value" type="checkbox">
-					</div>
-					<div ng-switch-when="string">
-						<input ng-model="property.value">
+				<div ng-if="property.name == 'formData'">
+					<button ng-click="addFormField(model)" class="btn btn-sm btn-info">Add Form Field</button>
+				</div>
+				<div ng-if="property.name != 'formData'">
+					<div ng-switch on="property.type">
+						<div ng-switch-when="boolean">
+							<input ng-model="property.value" type="checkbox">
+						</div>
+						<div ng-switch-when="string">
+							<input ng-model="property.value">
+						</div>
 					</div>
 				</div>
 			</td>

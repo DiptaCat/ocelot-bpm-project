@@ -3,8 +3,8 @@ dataSource {
     jmxExport = true
     driverClassName = "org.postgresql.Driver"
     dialect = "org.hibernate.dialect.PostgreSQLDialect"
-    username = ""
-    password = ""
+    username = "ocelotuser"
+    password = "ocelotbpmn"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -19,8 +19,9 @@ environments {
     development {
         dataSource {
             dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
-			
-			url = "jdbc:postgresql:server/database"    //TODO change url, username and password of the database
+			url = "jdbc:postgresql://localhost/ocelot"
+
+			// url = "jdbc:postgresql:server/database"    //TODO change url, username and password of the database
         }
     }
     test {

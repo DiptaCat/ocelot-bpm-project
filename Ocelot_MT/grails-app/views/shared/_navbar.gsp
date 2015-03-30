@@ -2,7 +2,7 @@
 	<div class="navbar-container" id="navbar-container">
 		<div class="navbar-header pull-left">
 			<div style="margin-top: 10px">
-				<g:link controller="main" action="index"><asset:image src="logodipu.gif"/></g:link>
+				<a href="palette#/modelerIndex"><asset:image src="logodipu.gif"/></a>
 			</div>
 		</div>
 
