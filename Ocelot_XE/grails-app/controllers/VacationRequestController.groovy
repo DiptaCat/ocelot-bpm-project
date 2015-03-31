@@ -8,7 +8,7 @@ class VacationRequestController {
 
     static allowedMethods = [save: "POST", performApproval: "POST", update: "POST"]
 
-    def camundaService
+    def workflowService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -17,7 +17,7 @@ class VacationRequestController {
 
     def create() {
 
-        def processDefinition = camundaService.getProcessDefinitionById(params.id)
+        def processDefinition = workflowService.getProcessDefinitionById(params.id)
         session.currentProcDefId = processDefinition.id
 
         respond new VacationRequest(params)
@@ -35,7 +35,7 @@ class VacationRequestController {
             return
         }
 
-        def pi = camundaService.startProcess(session.currentProcDefId, vacationRequestInstance.properties, session.user)
+        def pi = workflowService.startProcess(session.currentProcDefId, session.user, vacationRequestInstance.properties)
         vacationRequestInstance.processInstanceId = pi.processInstanceId
 
         vacationRequestInstance.save flush: true
@@ -55,9 +55,9 @@ class VacationRequestController {
 
     def approval() {
 
-        def t = camundaService.getTaskById(params.id)
+        def t = workflowService.getTaskById(params.id)
         VacationRequest vacationRequestInstance = VacationRequest.findByProcessInstanceId(t.processInstanceId)
-        def vars = camundaService.getTaskVars(t.id)
+        def vars = workflowService.getTaskVars(t.id)
         vars.each { k, v ->
             vacationRequestInstance.properties."$k" = v
         }
@@ -68,19 +68,19 @@ class VacationRequestController {
 
         VacationRequest vacationRequestInstance = VacationRequest.get(params.id)
         vacationRequestInstance.properties = params
-        def t = camundaService.getTaskById(params.taskId)
+        def t = workflowService.getTaskById(params.taskId)
 
         if (!vacationRequestInstance.hasErrors() && vacationRequestInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.updated.message', args: [message(code: 'vacationRequest.label', default: 'VacationRequest'), vacationRequestInstance.id])}"
 
             if (params.save) {
-                camundaService.saveTask(t.id, params, session.user)
+                workflowService.saveTask(t.id, params, session.user)
                 //redirect(action:'show', params:[id:"${params.id}"])
             } else {
                 params.id = vacationRequestInstance.id
                 params.vacationApproved = vacationRequestInstance.approvalStatus.toUpperCase() == "APPROVED"
                 params.approvalRemark = params.approvalRemark && params.approvalRemark != "" ? params.approvalRemark : "No Approval Remark."
-                camundaService.completeTask(t.id, params, session.user)
+                workflowService.completeTask(t.id, params, session.user)
 
                 params.isApproval = true
             }
@@ -93,9 +93,9 @@ class VacationRequestController {
 
     def edit() {
 
-        def t = camundaService.getTaskById(params.id)
+        def t = workflowService.getTaskById(params.id)
         VacationRequest vacationRequestInstance = VacationRequest.findByProcessInstanceId(t.processInstanceId)
-        def vars = camundaService.getTaskVars(t.id)
+        def vars = workflowService.getTaskVars(t.id)
         vars.each { k, v ->
             vacationRequestInstance.properties."$k" = v
         }
@@ -106,16 +106,16 @@ class VacationRequestController {
 
         VacationRequest vacationRequestInstance = VacationRequest.get(params.id)
         vacationRequestInstance.properties = params
-        def t = camundaService.getTaskById(params.taskId)
+        def t = workflowService.getTaskById(params.taskId)
 
         if (!vacationRequestInstance.hasErrors() && vacationRequestInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.updated.message', args: [message(code: 'vacationRequest.label', default: 'VacationRequest'), vacationRequestInstance.id])}"
 
             if (params.save) {
-                camundaService.saveTask(t.id, params, session.user)
+                workflowService.saveTask(t.id, params, session.user)
             } else {
                 params.resendRequest = vacationRequestInstance.resendRequest
-                camundaService.completeTask(t.id, params, session.user)
+                workflowService.completeTask(t.id, params, session.user)
             }
             redirect(action: "show", id: vacationRequestInstance.id, params: [taskId: params.taskId, complete: true])
         } else {

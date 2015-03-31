@@ -1,28 +1,25 @@
-
-import org.camunda.bpm.engine.form.FormField
-import org.camunda.bpm.engine.form.TaskFormData
 import org.camunda.bpm.engine.task.Task
 
 class TaskController {
 
     static allowedMethods = [update: "POST"]
 
-    def camundaService
+    def workflowService
 
     def index() {
 
         def assignedTasks = []
-        def at = camundaService.getAssignedTasks(session.user)
+        def at = workflowService.getAssignedTasks(session.user)
         at.each { Task t ->
-            def pd = camundaService.getProcessDefinitionById(t.processDefinitionId)
+            def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
             def exp = new Expando(id:t.id, name:t.name, processId: t.processDefinitionId, processName:pd.name, date:t.createTime, assignee:t.assignee)
             assignedTasks << exp
         }
 
         def unassignedTaks =[]
-        def ut = camundaService.getUnassignedTasks()
+        def ut = workflowService.getUnassignedTasks()
         ut.each { Task t ->
-            def pd = camundaService.getProcessDefinitionById(t.processDefinitionId)
+            def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
             def exp = new Expando(id:t.id, name:t.name, processId: t.processDefinitionId, processName:pd.name, date:t.createTime)
             unassignedTaks << exp
         }
@@ -30,28 +27,28 @@ class TaskController {
     }
 
     def claim() {
-        camundaService.claimTask(params.id, session.user)
+        workflowService.claimTask(params.id, session.user)
         redirect(action:'index')
     }
 
     def unclaim() {
-        camundaService.unclaimTask(params.id, session.user)
+        workflowService.unclaimTask(params.id)
         redirect(action:'index')
     }
 
     def show(String id){
 
         //external form ?
-        def formKey = camundaService.getTaskFormKey(params.id)
+        def formKey = workflowService.getTaskFormKey(params.id)
 
         if (formKey) {
             redirect uri:"$formKey/$id"
         }
         else { //or generate form
 
-            def vars = camundaService.getTaskVars(params.id)
+            def vars = workflowService.getTaskVars(params.id)
 
-            def formData = camundaService.getFormData(params.id)
+            def formData = workflowService.getFormData(params.id)
             formData.each { property ->
                 property.defaultValue = vars."${property.id}"
             }
@@ -62,7 +59,7 @@ class TaskController {
 
     def update(){
 
-        def formData = camundaService.getFormData(params.taskId)
+        def formData = workflowService.getFormData(params.taskId)
 
         def vars = [:]
         formData.each { property ->
@@ -75,10 +72,10 @@ class TaskController {
         }
 
         if (params.save) {
-            camundaService.saveTask(params.taskId, vars, session.user)
+            workflowService.saveTask(params.taskId, vars, session.user)
         }
         else {
-            camundaService.completeTask(params.taskId, vars, session.user)
+            workflowService.completeTask(params.taskId, vars, session.user)
         }
         redirect(action:'index')
 

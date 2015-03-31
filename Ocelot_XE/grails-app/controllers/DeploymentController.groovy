@@ -2,7 +2,7 @@
 class DeploymentController {
 
     def modelerService
-    def camundaService
+    def workflowService
 
     def index() {
 
@@ -24,7 +24,7 @@ class DeploymentController {
         }
 
         try {
-            camundaService.deployProcess(new ByteArrayInputStream(xml.getBytes("UTF-8")), result.name)
+            workflowService.deployProcess(new ByteArrayInputStream(xml.getBytes("UTF-8")), result.name)
             flash.message = 'The file was uploaded'
 
         }catch(Exception e){

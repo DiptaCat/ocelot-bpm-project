@@ -4,15 +4,15 @@ import org.camunda.bpm.engine.repository.ProcessDefinition
 
 class ProcessController {
 
-    def camundaService
+    def workflowService
 
     def index() {
 
-        def processDefinitions = camundaService.deploymentList()
+        def processDefinitions = workflowService.getDeployments()
         def data = []
         processDefinitions.each { ProcessDefinition p ->
 
-            def numInstances = camundaService.getNumInstances(p)
+            def numInstances = workflowService.getNumInstances(p)
             Expando exp = new Expando(id:p.id, name:p.name, version:p.version, numInstances:numInstances)
             data << exp
         }
@@ -21,32 +21,31 @@ class ProcessController {
     }
 
     def show() {
-        def processDefinition = camundaService.getProcessDefinitionById(params.id)
+        def processDefinition = workflowService.getProcessDefinitionById(params.id)
 
-        def numInstances = camundaService.getNumInstances(processDefinition)
+        def numInstances = workflowService.getNumInstances(processDefinition)
         [process: processDefinition, numInstances: numInstances]
     }
 
     def create(String id){
 
-        def processDefinition = camundaService.getProcessDefinitionById(id)
+        def processDefinition = workflowService.getProcessDefinitionById(id)
 
         //external form ?
-        def formKey = camundaService.getStartFormKey(id)
+        def formKey = workflowService.getStartFormKey(id)
 
         if (formKey) {
             redirect uri:"$formKey/$id"
         }
         else { //or generate form
-            def startFormData = camundaService.getStartFormData(id)
+            def startFormData = workflowService.getStartFormData(id)
             render(view: 'create.gsp', model: [startFormData: startFormData, processDefinitionId: processDefinition.id])
         }
     }
 
     def save(){
 
-//        def processDefinition = camundaService.getProcessDefinitionById(params.id)
-        def startFormData = camundaService.getStartFormData(params.id)
+        def startFormData = workflowService.getStartFormData(params.id)
 
         def vars = [:]
         startFormData.each { FormField d ->
@@ -54,7 +53,7 @@ class ProcessController {
             vars.put(d.id, d.defaultValue)
         }
 
-        camundaService.startProcess(params.id, vars, session.user)
+        workflowService.startProcess(params.id, session.user, vars)
 
         redirect(action:'index')
 
@@ -70,7 +69,7 @@ class ProcessController {
         }
         def fileContent = f.getInputStream()
         try {
-            camundaService.deployProcess(fileContent, f.originalFilename)
+            workflowService.deployProcess(fileContent, f.originalFilename)
             flash.message = 'The file was uploaded'
 
         }catch(Exception e){

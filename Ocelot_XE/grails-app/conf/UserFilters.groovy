@@ -1,6 +1,6 @@
 class UserFilters {
 
-    def camundaService
+    def workflowService
 
     def filters = {
         loginCheck(controller: '*', action: '*') {
@@ -14,7 +14,7 @@ class UserFilters {
                     return false
                 }
                 else {
-                    session.userTasksCount = camundaService.getAssignedTasks(session.user)?.size()
+                    session.userTasksCount = workflowService.getAssignedTasks(session.user)?.size()
 
                 }
             }

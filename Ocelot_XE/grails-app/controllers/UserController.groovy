@@ -1,6 +1,6 @@
 class UserController {
 
-    def camundaService
+    def workflowService
 
     def index() {
         [user: session.user, group: session.group]
@@ -11,7 +11,7 @@ class UserController {
         session.user = params.user
         session.group = params.group
 
-        camundaService.syncUser(session.user, [session.group])
+        workflowService.syncUser(session.user, [session.group])
 
         redirect(controller:'task', action:'index')
     }
