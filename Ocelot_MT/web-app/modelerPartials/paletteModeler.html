@@ -1,9 +1,0 @@
-<accordion close-others="oneAtATime">
-    <accordion-group heading="{{category}}" ng-repeat="category in categories">
-        <div ng-repeat="element in categoryGroup[category] | filter:filterByLvl" ng-if="element.activated">
-            <div ng-click="selectPalette(element)">
-                <div load-svg="element.svg"></div>
-            </div>
-        </div>
-    </accordion-group>
-</accordion>

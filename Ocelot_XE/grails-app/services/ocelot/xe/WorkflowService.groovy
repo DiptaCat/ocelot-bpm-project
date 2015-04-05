@@ -1,7 +1,12 @@
 package ocelot.xe
 
 import grails.util.GrailsNameUtils
-import org.camunda.bpm.engine.*
+import org.camunda.bpm.engine.FormService
+import org.camunda.bpm.engine.HistoryService
+import org.camunda.bpm.engine.IdentityService
+import org.camunda.bpm.engine.RepositoryService
+import org.camunda.bpm.engine.RuntimeService
+import org.camunda.bpm.engine.TaskService
 import org.camunda.bpm.engine.impl.persistence.entity.DeploymentEntity
 import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity
 import org.camunda.bpm.engine.repository.ProcessDefinition
@@ -33,7 +38,7 @@ class WorkflowService {
     def getProcessDefinition(String deploymentId) {
         repositoryService.createProcessDefinitionQuery()
                 .deploymentId(deploymentId)
-                .singleResult();
+                .singleResult()
     }
 
     def getProcessDefinitionById(String processDefinitionId) {
@@ -73,16 +78,16 @@ class WorkflowService {
 
     }
 
-    def extractBpmn(modelStream) throws Exception{
+    private def extractBpmn(modelStream) throws Exception{
 
         BpmnModelInstance modelInstance = Bpmn.readModelFromStream(modelStream)
         handleBpmnExtension(modelInstance)
         Bpmn.convertToString(modelInstance)
     }
 
-    def handleBpmnExtension(modelInstance) {
+    private def handleBpmnExtension(modelInstance) {
 
-        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class);
+        Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class)
         println "Size => " + extensionElements.size()
 
         CamundaFormData camundaFormData
@@ -92,7 +97,7 @@ class WorkflowService {
 
 
             if(ee.getParentElement().toString().substring(0, ee.getParentElement().toString().indexOf('@')).equals("org.camunda.bpm.model.bpmn.impl.instance.UserTaskImpl")) {
-                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult();
+                camundaFormData = ee.getElementsQuery().filterByType(CamundaFormData.class).singleResult()
                 camundaFormData.camundaFormFields.each { CamundaFormField ff ->
                     println "Id = " + ff.camundaId
                     println "Label = " + ff.camundaLabel
@@ -111,13 +116,6 @@ class WorkflowService {
         runtimeService.startProcessInstanceById(processDefinitionId, vars)
     }
 
-    def startProcessById(processDefinitionId, user = null) {
-
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult()
-        def vars = user ? [user:user] : [:]
-        runtimeService.startProcessInstanceById(processDefinition.id, vars)
-    }
-
     //task service
 
     def getUnassignedTasks() {
@@ -132,25 +130,8 @@ class WorkflowService {
         taskService.createTaskQuery().taskCandidateGroupIn(groups).list()
     }
 
-    def getUserTaskById(id) {
+    def getTasksByUser(id) {
         taskService.createTaskQuery().taskId(id)
-    }
-
-    def getProcessInstanceOpenTasks(processInstanceId) {
-        taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list()
-
-    }
-
-    def getPIOpenTasks(List processInstanceIds) {
-        processInstanceIds.collectEntries({ [it.id, getPIOpenTasks(it.id)] })
-    }
-
-
-    def getTask(String processInstanceId, String methodName = null, String user = '') {
-        def q = taskService.createTaskQuery().processInstanceId(processInstanceId)
-        if (methodName)
-            q = q."${methodName}"(user)
-        q.singleResult()
     }
 
     def getTaskById(String taskId) {
@@ -189,7 +170,7 @@ class WorkflowService {
         taskService.setPriority(taskId, priority)
     }
 
-    def getIdentityLinksForTask(String taskId) {
+    private def getIdentityLinksForTask(String taskId) {
         taskService.getIdentityLinksForTask(taskId)
     }
 
@@ -207,9 +188,25 @@ class WorkflowService {
         taskQuery.listPage(firstResult, maxResults)
     }
 
+    private def getProcessInstanceOpenTasks(processInstanceId) {
+        taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list()
+    }
+
+    private def getPIOpenTasks(List processInstanceIds) {
+        processInstanceIds.collectEntries({ [it.id, getPIOpenTasks(it.id)] })
+    }
+
+
+    private def getTask(String processInstanceId, String methodName = null, String user = '') {
+        def q = taskService.createTaskQuery().processInstanceId(processInstanceId)
+        if (methodName)
+            q = q."${methodName}"(user)
+        q.singleResult()
+    }
+
     //form service
 
-    String getStartFormKey(String processDefinitionId) {
+    def getStartFormKey(String processDefinitionId) {
         formService.getStartFormKey(processDefinitionId)
     }
 
@@ -224,14 +221,22 @@ class WorkflowService {
         startFormData?.formFields
     }
 
-    def getFormData(String taskId) {
+    def getTaskFormData(String taskId) {
         def formData = formService.getTaskFormData(taskId)
         formData?.formFields
     }
 
     //history service
 
-    def getProcessInstance(id) {
+    def countProcessInstances(procDefId) {
+        historyService.createHistoricProcessInstanceQuery().processDefinitionId(procDefId).count()
+    }
+
+    def getProcessInstanceTasks(processInstanceId) {
+        historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().asc().list()
+    }
+
+    private def getProcessInstance(id) {
         def q = runtimeService.createProcessInstanceQuery().processInstanceId(id)
         def pi = q.singleResult()
         if (!pi) {
@@ -241,17 +246,9 @@ class WorkflowService {
         pi
     }
 
-    def getNumInstances(ProcessDefinition processDefinition) {
-        historyService.createHistoricProcessInstanceQuery().processDefinitionId(processDefinition.getId()).count();
-    }
-
-    def getProcessInstanceTasks(processInstanceId) {
-        historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().asc().list()
-    }
-
     //identity service
 
-    def getCandidateUserIds(String taskId) {
+    def getCandidatesByTask(String taskId) {
         def identityLinks = getIdentityLinksForTask(taskId)
         def userIds = []
         def users

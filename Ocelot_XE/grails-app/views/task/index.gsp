@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title><g:message code="default.home.label"/></title>
 </head>
 
 <body>
@@ -33,8 +32,8 @@
                                 <td>${t.processName}</td>
                                 <td>${t.date}</td>
                                 <td>${t.assignee}</td>
-                                <td><g:link class="edit btn btn-sm btn-grey" controller="task" action="show" id="${t.id}">Show</g:link>
-                                    | <g:link class="edit btn btn-sm btn-grey" controller="task" action="unclaim" id="${t.id}">Unclaim</g:link>
+                                <td><g:link class="edit btn btn-sm btn-primary" controller="task" action="show" id="${t.id}"><i class="icon-eye-open"></i> Show</g:link>
+                                     <g:link class="edit btn btn-sm btn-warning" controller="task" action="unclaim" id="${t.id}"><i class="icon-eject"></i> Unclaim</g:link>
                                 </td>
                             </tr>
                         </g:each>
@@ -57,7 +56,7 @@
                                 <td>${t.name}</td>
                                 <td>${t.processName}</td>
                                 <td>${t.date}</td>
-                                <td><g:link class="edit btn btn-sm btn-grey" controller="task" action="claim" id="${t.id}">Claim</g:link></td>
+                                <td><g:link class="edit btn btn-sm btn-success" controller="task" action="claim" id="${t.id}"><i class="icon-comment"></i> Claim</g:link></td>
                             </tr>
                         </g:each>
                         </tbody>

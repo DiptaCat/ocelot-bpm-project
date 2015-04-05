@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title><g:message code="default.home.label"/></title>
 </head>
 
 <body>
@@ -17,52 +16,6 @@
         <div class="message" style="display: block">${flash.message}</div>
     </g:if>
 
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-6">
-                <g:message code="deployment.upload.file" default="Upload Form: "/>
-                <g:uploadForm action="upload">
-                    <input type="file" name="myFile" />
-                    <input type="submit" />
-                </g:uploadForm>
-            </div>
-            <div class="col-md-6">
-                <g:message  code="deployment.upload.list" default="Name"/><br>
-                <g:link class="edit btn btn-sm btn-grey" controller="deployment" action="index">
-                    <g:message code="default.list.button.label" default="List"/>
-                </g:link>
-            </div>
-        </div>
-    </div>
-
-    %{--<div class="tab-content">
-        <div class="tab-pane active" id="fileUpload">
-            <div class="controls" style="font-style: italic">
-                <ul class="one-to-many">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th><g:message code="deployment.upload.file" default="Upload Form: "/></th>
-                            <th><g:message  code="deployment.upload.list" default="Name"/></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><g:uploadForm action="upload">
-                                <input type="file" name="myFile" />
-                                <input type="submit" />
-                            </g:uploadForm></td>
-                            <td><g:link class="edit btn btn-sm btn-grey" controller="deployment" action="index">
-                                <g:message code="default.list.label" default="List"/>
-                            </g:link></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </ul>
-            </div>
-        </div>
-    </div>--}%
 
     <div class="tab-content">
         <div class="tab-pane active" id="processes">
@@ -87,9 +40,9 @@
                                 <td>${process.name}</td>
                                 <td>${process.version}</td>
                                 <td>${process.numInstances}</td>
-                                <td><g:link class="edit btn btn-sm btn-grey" action="create" id="${process.id}">
-                                    <i class="icon-trash icon-pencil"></i>
-                                    <g:message code="default.button.create.label" default="Create"/>
+                                <td><g:link class="edit btn btn-sm btn-success" action="create" id="${process.id}">
+                                    <i class="icon-trash icon-paste"></i>
+                                    <g:message code="default.button.startform.label" default="Start Form"/>
                                 </g:link></td>
                             </tr>
                         </g:each>
@@ -100,6 +53,30 @@
             </div>
     </div>
 
+<br/>
+<br/>
+<br/>
+
+<fieldset class="buttons">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <g:message code="deployment.upload.file" default="Upload Model: "/>
+                <g:uploadForm action="upload">
+                    <input type="file" name="myFile" />
+                    <input type="submit" />
+                </g:uploadForm>
+            </div>
+            <div class="col-md-6">
+                <g:message  code="deployment.upload.list" default="Name"/><br>
+                <g:link class="edit btn btn-sm btn-primary" controller="deployment" action="index">
+                    <i class="icon-list"></i><g:message code="default.ocelot-mt.button.label" default="List (Ocelot MT)"/>
+                </g:link>
+            </div>
+        </div>
+    </div>
+</fieldset>
 
 </body>
 </html>
