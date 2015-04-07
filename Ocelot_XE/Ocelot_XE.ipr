@@ -7,6 +7,14 @@
       </root>
     </artifact>
   </component>
+  <component name="BPMNEditorStateService">
+    <stateFile url="file://$PROJECT_DIR$/grails-app/processes/VacationProcess2.bpmn">
+      <view grid="false" />
+    </stateFile>
+    <stateFile url="file://$PROJECT_DIR$/grails-app/processes/VacationProcess.bpmn">
+      <view grid="false" />
+    </stateFile>
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions />
@@ -163,6 +171,9 @@
       <module fileurl="file://$PROJECT_DIR$/Ocelot_XE.iml" filepath="$PROJECT_DIR$/Ocelot_XE.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ocelot_XE-grailsPlugins.iml" filepath="$PROJECT_DIR$/Ocelot_XE-grailsPlugins.iml" />
     </modules>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/grails-app/processes/VacationProcess.bpmn" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

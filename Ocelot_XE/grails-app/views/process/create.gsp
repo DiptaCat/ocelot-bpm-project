@@ -5,6 +5,9 @@
         <meta name="layout" content="main"/>
         <title>New Process Instance</title>
     </head>
+<div class="page-header">
+    <h1><g:message code="default.create.instance.label" default="Create Process Instance" /></h1>
+</div>
 
     <g:form controller="process" action="save" name="save" id="${processDefinitionId}">
         <table class="table table-striped table-bordered" align="center">
@@ -27,7 +30,15 @@
                 </tr>
             </g:each>
         </table>
-        <g:submitButton name="update" value="Start process" />
+        <fieldset class="form-actions">
+            <button type="submit" name="update" class="btn btn-sm btn-success save">
+                <i class="icon-ok"></i>
+                ${message(code: 'default.button.create.label', default: 'Create')}
+            </button>
+            <button type="submit" name="_action_index" class="btn btn-sm">
+                ${message(code: 'default.button.cancel.label', default: 'Cancel')}
+            </button>
+        </fieldset>
     </g:form>
 
 

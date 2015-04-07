@@ -7,7 +7,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="icon-paper-clip"></i> Examples <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><g:link controller="vacationRequest" action="index"><i class="icon-reply"></i> <span class="menu-text"><g:message code="default.vacationRequest.label" /></span></g:link></li>
+                <li><g:link controller="vacationRequest" action="index"><i class="icon-reply"></i> <span class="menu-text"><g:message code="vacationRequest.label" /></span></g:link></li>
 
             </ul>
         </li>
