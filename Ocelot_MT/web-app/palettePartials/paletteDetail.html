@@ -56,9 +56,15 @@
 			</td>
 			<td>
 				<div ng-if="property.name == 'formData'">
-					<button ng-click="addFormField(model)" class="btn btn-sm btn-info">Add Form Field</button>
+					<button ng-click="addFormField(property)" class="btn btn-sm btn-info">Add Form Field</button>
 				</div>
-				<div ng-if="property.name != 'formData'">
+				<div ng-if="property.name == 'formKey'">
+					<select ng-model="formK">
+						<option value="">Select a key</option>
+						<option ng-repeat="form in forms" value="form" ng-click="changeData(form)">{{form.key}}</option>
+					</select>
+				</div>
+				<div ng-if="property.name != 'formData' && property.name != 'formKey'">
 					<div ng-switch on="property.type">
 						<div ng-switch-when="boolean">
 							<input ng-model="property.value" type="checkbox">
@@ -76,7 +82,6 @@
 		</tbody>
 	</table>
 </div>
-
 
 <div class="row bottom btn-group pull-right">
 	<a href="#/palette" class="btn btn-primary">Cancel</a>

@@ -43,6 +43,18 @@ ocelotApp.config(function ($routeProvider) {
             templateUrl: 'modelerPartials/modelerIndex.html',
             controller: 'ModelCtrl'
         }).
+		when('/formData', {	//TODO: make sure the controller is correct
+			templateUrl: 'formDataPartials/formDataList.html',
+			controller: 'FormCtrl'
+		}).
+		when('/formData/create', {
+			templateUrl: 'formDataPartials/formDataCreate.html',
+			controller: 'CreateFormCtrl'
+		}).
+		when('/formData/:formId', {
+			templateUrl: 'formDataPartials/formDataDetail.html',
+			controller: 'DetailFormCtrl'
+		}).
 		otherwise({
 			redirectTo: '/palette'
 		});

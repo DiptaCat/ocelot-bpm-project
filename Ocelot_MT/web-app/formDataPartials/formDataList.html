@@ -1,0 +1,31 @@
+<div>
+	<div class="btn-group pull-right">
+		<a href="#/formData/create" class="btn btn-primary">Create FormData</a>
+	</div>
+	<!--<h2>Palette List</h2>-->
+</div>
+
+<div class="row">
+	<div class="col-md-10">
+
+		<i class="glyphicon glyphicon-search"></i>
+		<input type="text" ng-model="query" placeholder="Search">
+
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="form in forms">
+				<td><a href="#/formData/{{form.id}}">{{form.key}}</a></td>
+				<td ng-click="delete(form)">
+					<div class="btn btn-xs btn-danger glyphicon glyphicon-trash"></div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

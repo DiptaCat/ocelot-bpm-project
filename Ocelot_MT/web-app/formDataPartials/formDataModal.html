@@ -1,0 +1,57 @@
+<div class="modal-header">
+	<h2>{{item.name}}</h2>
+</div>
+
+<div class="modal-body">
+	<table class="table" style="max-width: 600px">
+		<thead class="table-header">
+		<tr>
+			<th>Id</th>
+			<th>Type</th>
+			<th>Value</th>
+			<th style="max-width: 50px; text-align: right">
+				<a class="btn btn-mini" ng-click="addField()"><i class="glyphicon glyphicon-plus"></i></a>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-show="!item.value || item.value.length <= 0">
+			<td>
+				No propertys found
+			</td>
+		</tr>
+		<tr ng-repeat="field in item.value"><!--ng-show="property.fields && property.fields.length > 0"-->
+			<td>
+				<input ng-model="field.name" type="text">
+			</td>
+			<td>
+				<select ng-model="field.type" ng-click="resetValue(field)">
+					<option value="string">String</option>
+					<option value="boolean">Boolean</option>
+				</select>
+			</td>
+			<td>
+				<div ng-switch on="field.type">
+					<div ng-switch-when="boolean">
+						<input ng-model="field.value" type="checkbox">
+					</div>
+
+					<div ng-switch-default>
+						<input ng-model="field.value">
+					</div>
+				</div>
+			</td>
+			<td style="text-align: right; vertical-align: middle">
+				<a ng-click="removeField($index)">
+					<i class="btn btn-danger glyphicon glyphicon-trash"></i>
+				</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

@@ -68,9 +68,15 @@ class UrlMappings {
 			action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
 		}
 
+		/* TODO: Form Data */
+		"/api/formData" {
+			controller = 'formData'
+			action = [GET: 'list', POST: 'save']
+		}
 
-
-
-
+		"/api/formData/$formId" {
+			controller = 'formData'
+			action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
+		}
     }
 }

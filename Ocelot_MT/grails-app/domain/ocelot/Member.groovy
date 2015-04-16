@@ -7,7 +7,7 @@ class Member {
 	Date dateCreated
     Palette palette
 
-	static hasMany = [models: Model]
+	static hasMany = [models: Model/*, forms: FormData*/]
 	//static mappedBy = [ favourites: "none"]
 
 	static constraints = {
@@ -17,7 +17,7 @@ class Member {
 
 	static mapping = {
 		autoTimestamp true
-		models nullable: true
+		//models nullable: true
 		/*favourites joinTable: [name: 'FavModels', column: 'ModelId', key: 'UserId']
 		favourites cascade: 'save-update'*/
 	}

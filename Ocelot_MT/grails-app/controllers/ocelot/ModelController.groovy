@@ -19,7 +19,6 @@ class ModelController extends RestfulController{
 
         def models = Model.findAllByUser(session.user, params)
 
-
         if(models){
             respond models.collect{ Model m ->
                 [
