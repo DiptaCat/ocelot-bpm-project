@@ -173,69 +173,6 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $http, $modal, $wind
 		});
 	};
 	//TODO order prop?
-
-	$scope.forms = FormData.query();
-	$scope.formK = "";
-
-	$scope.selectKey = function () {
-		console.log($scope.item);
-		var list = $scope.item.props;
-		console.log(list);
-
-		/*var i = 0;
-		 while (i < list.length) {
-		 if (list[i].name == 'formKey') {
-		 $scope.formK = list[i].value;
-		 break;
-		 }
-		 i++;
-		 }*/
-	};
-	$scope.selectKey();
-
-	$scope.changeData = function (form) {
-		var list = $scope.item.props;
-		console.log(list);
-		var i = 0;
-		while (i < list.length) {
-			if (list[i].name == 'formData') {
-				list[i].value = JSON.parse(form.fields);
-			}
-			if (list[i].name == 'formKey') {
-				list[i].value = form.key;
-			}
-			i++;
-		}
-	};
-
-	$scope.addFormField = function (property) {
-
-		var modalInstance = $modal.open({
-			templateUrl: 'formDataPartials/formDataModal.html',
-			controller: 'ModalInstanceCtrl',
-			size: 'lg',
-			resolve: {
-				item: function () {
-					return property;
-				}
-			}
-		});
-
-		modalInstance.result.then(function (modifiedItem) {
-
-				var list = $scope.item.props;
-				var i = 0;
-				while (i < list.length) {
-					if (list[i].name == 'formData') {
-						list[i].value = modifiedItem.value;
-						console.log(list[i]);
-					}
-					i++;
-				}
-			}, function () {
-			}
-		);
-	};
 });
 
 ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstance, item) {
@@ -279,7 +216,7 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
 });
 
 
-ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, PaletteItem, Category, ModelService, Model) {
+ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, PaletteItem, Category, ModelService, Model, FormData, $modal) {
 	$scope.bpmnId = ModelService.getId();
 	$scope.bpmnName = ModelService.getName();
 	$scope.bpmnDescription = ModelService.getDescription();
@@ -336,7 +273,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 	// information of the selected info
 	$scope.selectedCanvas = function (item) {
 		$scope.canvasSelectedItem = item;
-		console.log("", item);
+		//console.log("", item);
 
 		if (!$scope.bpmnInfo[item.id]) {
 			//Search the properties in the palette and copy their properties
@@ -345,6 +282,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 		}
 
 		$scope.itemInfo = $scope.bpmnInfo[item.id];
+		console.log($scope.itemInfo);
 	};
 
 	$scope.filterByLvl = function (item) {
@@ -409,6 +347,69 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 
 		});
 	};
+
+	$scope.forms = FormData.query();
+	$scope.formK = "";
+
+	$scope.selectKey = function () {
+		console.log($scope.itemInfo);
+		var list = $scope.itemInfo;
+		console.log(list);
+
+		/*var i = 0;
+		 while (i < list.length) {
+		 if (list[i].name == 'formKey') {
+		 $scope.formK = list[i].value;
+		 break;
+		 }
+		 i++;
+		 }*/
+	};
+	$scope.selectKey();
+
+	$scope.changeData = function (form) {
+		var list = $scope.itemInfo;
+		console.log(list);
+		var i = 0;
+		while (i < list.length) {
+			if (list[i].name == 'formData') {
+				list[i].value = JSON.parse(form.fields);
+			}
+			if (list[i].name == 'formKey') {
+				list[i].value = form.key;
+			}
+			i++;
+		}
+	};
+
+	$scope.addFormField = function (property) {
+
+		var modalInstance = $modal.open({
+			templateUrl: 'formDataPartials/formDataModal.html',
+			controller: 'ModalInstanceCtrl',
+			size: 'lg',
+			resolve: {
+				item: function () {
+					return property;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (modifiedItem) {
+
+				var list = $scope.itemInfo;
+				var i = 0;
+				while (i < list.length) {
+					if (list[i].name == 'formData') {
+						list[i].value = modifiedItem.value;
+						console.log(list[i]);
+					}
+					i++;
+				}
+			}, function () {
+			}
+		);
+	};
 });
 
 ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, Category, PaletteItem, FormData, $modal) {
@@ -419,22 +420,6 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
 
 	$scope.forms = FormData.query();
 	$scope.formK = "";
-
-	$scope.selectKey = function () {
-		console.log($scope.item);
-		var list = $scope.item.props;
-		console.log(list);
-
-		/*var i = 0;
-		while (i < list.length) {
-			if (list[i].name == 'formKey') {
-				$scope.formK = list[i].value;
-				break;
-			}
-			i++;
-		}*/
-	};
-	$scope.selectKey();
 
 	$scope.changeData = function (form) {
 		var list = $scope.item.props;

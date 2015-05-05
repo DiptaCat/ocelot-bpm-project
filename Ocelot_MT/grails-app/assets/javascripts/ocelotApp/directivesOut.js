@@ -45791,7 +45791,10 @@ app.directive('paletteModeler', function () {
 app.directive('properties', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'modelerPartials/properties.html'
+		templateUrl: function() {
+			return 'modelerPartials/properties.html?' + +new Date();
+		}
+		//templateUrl: 'modelerPartials/properties.html'
 	}
 });
 

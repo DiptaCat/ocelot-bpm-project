@@ -1,3 +1,5 @@
+<!--{{itemInfo}}-->
+
 <div>
 	<table class="table">
 		<thead class="table-header">
@@ -7,20 +9,14 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-show="!item.props || item.props.length <= 0">
+		<tr ng-show="!itemInfo || itemInfo.length <= 0">
 			<td>
 				No items found
 			</td>
 		</tr>
-		<tr ng-show="item.props && item.props.length > 0" ng-repeat="property in item.props">
+		<tr ng-show="itemInfo && itemInfo.length > 0" ng-repeat="property in itemInfo">
 			<td>
 				<input ng-model="property.name" type="text" placeholder="name">
-			</td>
-			<td>
-				<select ng-model="property.type" ng-click="resetValue(property)">
-					<option value="string">String</option>
-					<option value="boolean">Boolean</option>
-				</select>
 			</td>
 			<td>
 				<div ng-if="property.name == 'formData'">
