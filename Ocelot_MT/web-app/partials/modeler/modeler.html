@@ -1,0 +1,42 @@
+<div>
+	<h2 class="page-header">{{bpmnName}}</h2>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+
+		<palette-modeler id="palette" class="col-md-2"></palette-modeler>
+
+		Filter by:
+		<select ng-model="level">
+			<option value=1>Level 1</option>
+			<option value=2>Level 2</option>
+			<option value=3>Level 3</option>
+			<option value=4>Level 4</option>
+			<option value=5>Level 5</option>
+		</select>
+
+		<div id="col2" class="col-md-10">
+			<div id="modeler" draw-modeler="paletteSelectedItem" style="border: 1px solid black">
+				<div id="buttons" class="btn-group"
+					 style="border-bottom: 1px solid black; border-right: 1px solid black;">
+					<button ng-click="saveModel()" class="btn btn-xs btn-info glyphicon glyphicon-save"
+							style="font-size:15px;"> Save
+					</button>
+					<button ng-click="downloadSVG()" class="btn btn-xs btn-success glyphicon glyphicon-picture"
+							style="font-size:15px;"> SVG
+					</button>
+					<button id="#exportAndSave" ng-click="exportAndSave()"
+							class="btn btn-xs btn-warning glyphicon glyphicon-download" style="font-size:15px;">
+						BPMN.XML
+					</button>
+				</div>
+			</div>
+
+			<div id="properties" style="border: 1px solid lightgrey; max-height: 15em; overflow: scroll;">
+				<properties class="selected"></properties>
+			</div>
+
+		</div>
+	</div>
+</div>

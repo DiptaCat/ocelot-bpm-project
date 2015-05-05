@@ -3,8 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-grails.project.target.level = 1.6
-grails.project.source.level = 1.6
+grails.project.target.level = 1.7
+grails.project.source.level = 1.7
 
 
 grails.project.fork = [
@@ -74,7 +74,7 @@ grails.project.dependency.resolution = {
 	plugins {
 
         // plugins for the build system only
-        build ":tomcat:7.0.55"
+        build ":tomcat:7.0.55.2"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
@@ -84,7 +84,7 @@ grails.project.dependency.resolution = {
 
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.18"
+        runtime ":hibernate:3.6.10.19"
         //runtime ":hibernate4:4.3.6.1"
         runtime ":jquery:1.11.1"
 
