@@ -1,5 +1,10 @@
-<div class="modal-header">
+<div class="modal-header" >
 	<h2>{{item.name}}</h2>
+
+	<select ng-model="formK" style="position: absolute; left: 10em; top: 15px">
+		<option value="">Select a key</option>
+		<option ng-repeat="form in forms" value="form" ng-click="changeData(form)">{{form.key}}</option>
+	</select>
 </div>
 
 <div class="modal-body">

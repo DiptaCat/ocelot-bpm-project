@@ -59,10 +59,7 @@
 					<button ng-click="addFormField(property)" class="btn btn-sm btn-info">Add Form Field</button>
 				</div>
 				<div ng-if="property.name == 'formKey'">
-					<select ng-model="formK">
-						<option value="">Select a key</option>
-						<option ng-repeat="form in forms" value="form" ng-click="changeData(form)">{{form.key}}</option>
-					</select>
+					<input ng-model="property.value" type="text" placeholder="form key">
 				</div>
 				<div ng-if="property.name != 'formData' && property.name != 'formKey'">
 					<div ng-switch on="property.type">
