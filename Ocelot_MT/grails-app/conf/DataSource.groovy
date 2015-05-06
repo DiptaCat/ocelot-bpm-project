@@ -2,16 +2,10 @@ dataSource {
 	pooled = true
 	jmxExport = true
 
-	/*
+
 	driverClassName = "org.h2.Driver"
 	username = "sa"
 	password = ""
-	*/
-
-	driverClassName = "org.postgresql.Driver"
-	dialect = "org.hibernate.dialect.PostgreSQLDialect"
-	username = "ocelotuser"
-	password = "ocelotbpmn"
 }
 
 
@@ -29,8 +23,7 @@ environments {
 		dataSource {
 			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
 
-			//url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			url = "jdbc:postgresql://localhost/ocelot"
+			url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 		}
 	}
 	test {
