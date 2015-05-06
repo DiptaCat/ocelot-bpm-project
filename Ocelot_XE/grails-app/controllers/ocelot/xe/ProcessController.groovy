@@ -62,6 +62,7 @@ class ProcessController {
 
     def upload() {
         def f = request.getFile('myFile')
+        //def f = request.
 
         if (f.empty) {
             flash.error = 'ERROR: File cannot be empty'
@@ -74,7 +75,7 @@ class ProcessController {
             flash.message = 'The file was uploaded'
 
         }catch(Exception e){
-            flash.error = 'ERROR: File cannot be read'
+            flash.error = e.message//'ERROR: File cannot be read'
         }
         redirect(action:'index')
     }

@@ -167,10 +167,7 @@
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/Ocelot_XE.iml" filepath="$PROJECT_DIR$/Ocelot_XE.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Ocelot_XE-grailsPlugins.iml" filepath="$PROJECT_DIR$/Ocelot_XE-grailsPlugins.iml" />
-    </modules>
+    <modules />
   </component>
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/grails-app/processes/VacationProcess.bpmn" />

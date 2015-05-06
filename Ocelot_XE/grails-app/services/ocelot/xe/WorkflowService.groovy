@@ -57,7 +57,7 @@ class WorkflowService {
         }
 
         DeploymentEntity d = (DeploymentEntity) repositoryService.createDeployment()
-                .name(fileName.toString())
+                .name(processName.toString())
                 .addString(processName + ".bpmn20.xml", xmlString)
                 .deploy()
 
