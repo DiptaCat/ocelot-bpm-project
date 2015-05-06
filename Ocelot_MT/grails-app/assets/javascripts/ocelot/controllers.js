@@ -285,14 +285,15 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 	$scope.selectedCanvas = function (item) {
 		$scope.canvasSelectedItem = item;
 		console.log(item.businessObject.name);
+		var props;
 
 		if (!$scope.bpmnInfo[item.id]) {
 			//Search the properties in the palette and copy their properties
 			console.log(item.id + "\n" + item.type);
 			if (item.type == "bpmn:Task") {
-				var props = JSON.parse(JSON.stringify($scope.cItemsProps[item.businessObject.name]));
+				props = JSON.parse(JSON.stringify($scope.cItemsProps[item.businessObject.name]));
 			} else {
-				var props = JSON.parse(JSON.stringify(paletteProps[item.type]));
+				props = JSON.parse(JSON.stringify(paletteProps[item.type]));
 			}
 			console.log(props);
 			$scope.bpmnInfo[item.id] = props;

@@ -11,7 +11,7 @@
 </div>
 
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="list"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
 </div>
 
 <div id="create-${domainClass.propertyName}" class="content scaffold-create" role="main">
@@ -34,7 +34,7 @@
             <i class="icon-ok"></i>
             \${message(code: 'default.button.create.label', default: 'Create')}
         </button>
-        <button type="submit" name="_action_list" class="btn btn-sm">
+        <button type="submit" name="_action_index" class="btn btn-sm">
             \${message(code: 'default.button.cancel.label', default: 'Cancel')}
         </button>
     </fieldset>

@@ -32,8 +32,8 @@
                                 <td>${process.id}</td>
                                 <td>${process.name}</td>
                                 <td>${process.description}</td>
-                                <td><g:link class="edit btn btn-sm btn-grey" action="deploy" id="${process.id}">
-                                    <g:message code="deployment.button.deploy" default="Deploy"/>
+                                <td><g:link class="edit btn btn-sm btn-primary" action="deploy" id="${process.id}">
+                                    <i class="icon-cloud-download"></i> <g:message code="deployment.button.deploy" default="Deploy"/>
                                 </g:link></td>
                             </tr>
                         </g:each>

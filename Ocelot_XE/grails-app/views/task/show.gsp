@@ -4,7 +4,9 @@
     <meta name="layout" content="main"/>
     <title>New</title>
 </head>
-
+<div class="page-header">
+    <h1><g:message code="default.perform.task.label" default="Perform Task" /></h1>
+</div>
 <g:form action="update">
     <table class="table table-striped table-bordered" align="center">
         <tr>
@@ -27,8 +29,8 @@
         </g:each>
     </table>
     <fieldset class="buttons">
-        <g:submitButton name="save" class="edit btn btn-sm btn-grey" value="${message(code: 'default.button.save.label', default: 'Save')}" />
-        <g:submitButton name="complete" class="edit btn btn-sm btn-grey" value="${message(code: 'default.button.complete.label', default: 'Complete')}" />
+        <g:submitButton name="save" class="edit btn btn-sm btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+        <g:submitButton name="complete" class="edit btn btn-sm btn-primary" value="${message(code: 'default.button.complete.label', default: 'Complete')}" />
         <g:hiddenField name="taskId" value="${taskId}" />
     </fieldset>
 </g:form>
