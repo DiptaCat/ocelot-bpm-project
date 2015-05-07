@@ -20,9 +20,10 @@
 	<table class="table" style="max-width: 600px">
 		<thead class="table-header">
 		<tr>
-			<th>name</th>
-			<th>type</th>
-			<th>default value</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default Value</th>
 			<th style="max-width: 50px; text-align: right">
 				<a class="btn btn-xs" ng-click="addField()"><i class="glyphicon glyphicon-plus"></i></a>
 			</th>
@@ -35,6 +36,9 @@
 			</td>
 		</tr>
 		<tr ng-show="item.fields.length > 0" ng-repeat="field in item.fields">
+			<td>
+				<input type="text" ng-model="field.id">
+			</td>
 			<td>
 				<input ng-model="field.name" type="text" placeholder="name">
 			</td>

@@ -14,7 +14,7 @@
 		</tr>
 		<tr ng-show="itemInfo && itemInfo.length > 0" ng-repeat="property in itemInfo">
 			<td>
-				<input ng-model="property.name" type="text" placeholder="name">
+				<input ng-model="property.name" type="text" disabled placeholder="name">
 			</td>
 			<td>
 				<div ng-if="property.name == 'formData'">

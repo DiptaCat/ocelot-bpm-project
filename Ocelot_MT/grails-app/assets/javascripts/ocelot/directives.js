@@ -56,7 +56,7 @@ app.directive('properties', function () {
 	return {
 		restrict: 'E',
 		templateUrl: function() {
-			return 'partials/modeler/properties.html?' + +new Date();
+			return 'partials/modeler/properties.html?' + new Date();
 		}
 		//templateUrl: 'modelerPartials/properties.html'
 	}

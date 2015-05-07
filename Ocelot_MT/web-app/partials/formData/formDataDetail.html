@@ -20,8 +20,9 @@
 	<thead class="table-header">
 	<tr>
 		<th>Id</th>
+		<th>Name</th>
 		<th>Type</th>
-		<th>Value</th>
+		<th>Default Value</th>
 		<th style="max-width: 50px; text-align: right">
 			<a class="btn btn-mini" ng-click="addField()"><i class="glyphicon glyphicon-plus"></i></a>
 		</th>
@@ -33,7 +34,10 @@
 			No items found
 		</td>
 	</tr>
-	<tr ng-repeat="field in item.fields"> <!--ng-show="item.fields && item.fields.length > 0"-->
+	<tr ng-repeat="field in item.fields">
+		<td>
+			<input type="text" ng-model="field.id">
+		</td>
 		<td>
 			<input ng-model="field.name" type="text">
 		</td>

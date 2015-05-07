@@ -12,6 +12,7 @@
 		<thead class="table-header">
 		<tr>
 			<th>Id</th>
+			<th>Name</th>
 			<th>Type</th>
 			<th>Value</th>
 			<th style="max-width: 50px; text-align: right">
@@ -25,7 +26,10 @@
 				No propertys found
 			</td>
 		</tr>
-		<tr ng-repeat="field in item.value"><!--ng-show="property.fields && property.fields.length > 0"-->
+		<tr ng-repeat="field in item.value">
+			<td>
+				<input type="text" ng-model="field.id">
+			</td>
 			<td>
 				<input ng-model="field.name" type="text">
 			</td>

@@ -61,13 +61,18 @@ class ModelController extends RestfulController{
 	@Transactional
 	def update() {
 
+        def jsonReq = request.JSON
         def model = Model.get params.id
 
         if(model.user.name != session.user.name){
             render status: UNAUTHORIZED
         }else{
-            model.properties = request.JSON
+            model.properties = jsonReq
             model.user = session.user
+            model.json = jsonReq.json
+
+            //println(model.json);
+
             model.save flush: true, failOnError: true
 
             render status: OK

@@ -94,7 +94,7 @@ ocelotControllers.controller('ModelCtrl', function ($scope, $http, $modal, $wind
 	$scope.createBpmn = function () {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/modeler/modelerModal.html',
+			templateUrl: 'partials/modeler/modelerModal.html?' + +new Date(),
 			controller: 'ModalInstanceCtrl',
 			size: 'lg',
 			resolve: {
@@ -192,7 +192,7 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
 	};
 
 	$scope.addField = function () {
-		var field = {"name": "", "value": "", "type": "string"};
+		var field = {"id": "", "name": "", "value": "", "type": "string"};
 
 		$scope.item.value = $scope.item.value || [];
 
@@ -224,13 +224,30 @@ ocelotControllers.controller('ModalInstanceCtrl', function ($scope, $modalInstan
 
 
 ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, PaletteItem, Category, ModelService, Model, $modal) {
-	$scope.bpmnId = ModelService.getId();
-	$scope.bpmnName = ModelService.getName();
-	$scope.bpmnDescription = ModelService.getDescription();
-	$scope.bpmnXML = ModelService.getXML();
-	$scope.bpmnInfo = ModelService.getInfo();
-	$scope.bpmnSVG = "";
+	if (!Model.id) {
+		$scope.bpmnId = ModelService.getId();
+		$scope.bpmnName = ModelService.getName();
+		$scope.bpmnDescription = ModelService.getDescription();
+		$scope.bpmnXML = ModelService.getXML();
+		$scope.bpmnInfo = ModelService.getInfo();
+		$scope.bpmnSVG = "";
+	} else {
+		$scope.bpmnId = Model.id;
+		$scope.bpmnName = Model.name;
+		$scope.bpmnDescription = Model.description;
+		$scope.bpmnXML = Model.xml;
+		$scope.bpmnInfo = Model.json;
+		$scope.bpmnSVG = Model.svg;
+	}
 
+	/*$scope.bpmnId = ModelService.getId();
+	 $scope.bpmnName = ModelService.getName();
+	 $scope.bpmnDescription = ModelService.getDescription();
+	 $scope.bpmnXML = ModelService.getXML();
+	 $scope.bpmnInfo = ModelService.getInfo();*/
+
+
+	console.log("Bpmn Info:", $scope.bpmnInfo);
 	//Get all categories available
 	$scope.paletteId = 1;
 	$scope.categoryGroup = {};
@@ -284,7 +301,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 	// information of the selected info
 	$scope.selectedCanvas = function (item) {
 		$scope.canvasSelectedItem = item;
-		console.log(item.businessObject.name);
+		//console.log("Name: ", item.businessObject.name);
 		var props;
 
 		if (!$scope.bpmnInfo[item.id]) {
@@ -295,9 +312,11 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 			} else {
 				props = JSON.parse(JSON.stringify(paletteProps[item.type]));
 			}
-			console.log(props);
+			console.log("Props: ", props);
 			$scope.bpmnInfo[item.id] = props;
 		}
+
+		console.log("bpmnInfo: ", $scope.bpmnInfo);
 
 		$scope.itemInfo = $scope.bpmnInfo[item.id];
 		//console.log($scope.itemInfo);
@@ -323,7 +342,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 				name: $scope.bpmnName,
 				description: $scope.bpmnDescription,
 				xml: $scope.bpmnXML,
-				json: $scope.bpmnInfo,
+				json: JSON.parse(JSON.stringify($scope.bpmnInfo)),
 				svg: $scope.bpmnSVG
 			});
 		} else {
@@ -369,7 +388,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 	$scope.addFormField = function (property) {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/formData/formDataModal.html',
+			templateUrl: 'partials/formData/formDataModal.html?' + new Date(),
 			controller: 'ModalInstanceCtrl',
 			size: 'lg',
 			resolve: {
@@ -386,7 +405,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 				while (i < list.length) {
 					if (list[i].name == 'formData') {
 						list[i].value = modifiedItem.value;
-						console.log(list[i]);
+						//console.log(list[i]);
 						break;
 					}
 					i++;
@@ -406,7 +425,7 @@ ocelotControllers.controller('PaletteItemCtrl', function ($scope, $routeParams, 
 	$scope.addFormField = function (property) {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/formData/formDataModal.html',
+			templateUrl: 'partials/formData/formDataModal.html?' + new Date(),
 			controller: 'ModalInstanceCtrl',
 			size: 'lg',
 			resolve: {
@@ -476,7 +495,7 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
 		description: "Place a description here",
 		icon: "No Icon",
 		category: {id: 1},
-		activated: false,
+		activated: true,
 		props: [{"name": "formKey", "type": "string", "value": "", "extension": "camunda"}, {
 			"name": "formData",
 			"type": "string",
@@ -526,7 +545,7 @@ ocelotControllers.controller('CreatePaletteItemCtrl', function ($scope, $routePa
 	$scope.addFormField = function (property) {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/formData/formDataModal.html',
+			templateUrl: 'partials/formData/formDataModal.html?' + new Date(),
 			controller: 'ModalInstanceCtrl',
 			size: 'lg',
 			resolve: {
@@ -569,7 +588,7 @@ ocelotControllers.controller('CreateFormCtrl', function ($scope, $routeParams, $
 	};
 
 	$scope.addField = function () {
-		var field = {"name": "", "value": "", "type": "string"};
+		var field = {"id": "", "name": "", "value": "", "type": "string"};
 
 		$scope.item.fields = $scope.item.fields || [];
 
@@ -603,6 +622,7 @@ ocelotControllers.controller('FormCtrl', function ($scope, $routeParams, $locati
 		FormData.delete({formId: id}).$promise.then(function () {
 			var list = $scope.forms;
 			var i = 0;
+
 			while (i < list.length) {
 				if (list[i].id == id) {
 					break;
@@ -620,8 +640,8 @@ ocelotControllers.controller('FormCtrl', function ($scope, $routeParams, $locati
 ocelotControllers.controller('DetailFormCtrl', function ($scope, $routeParams, $location, FormData) {
 	$scope.item = FormData.get({formId: $routeParams.formId});
 
-	$scope.addField = function () {
-		var field = {"name": "", "value": "", "type": "string"};
+	$scope.addField = function () { //test = test.toLowerCase().replace(/ /g, '');
+		var field = {"id": "", "name": "", "value": "", "type": "string"};
 
 		$scope.item.fields = $scope.item.fields || [];
 
