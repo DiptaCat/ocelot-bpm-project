@@ -55,36 +55,28 @@ class PropertyService {
 
 						//formData is an extensionElements subnode
 						ExtensionElements extensionElements = modelInstance.newInstance(ExtensionElements.class)
-						CamundaFormData formData = extensionElements.addExtensionElement(CamundaFormData.class)
-
-						//node.addChildElement(extensionElements)
-						node.setExtensionElements(extensionElements)
-
-						def extension = extensionElements.getElementsQuery().list()
-						def exten = node.getExtensionElements()
-						def nodeElements = exten.getElementsQuery().list()
-
-						println("node: " + node)
-						println("Extension elements: " + extension)
-						println("node Extension elements: " + nodeElements)
-
-						CamundaFormField formField = modelInstance.newInstance(CamundaFormField)
+						CamundaFormData formData = modelInstance.newInstance(CamundaFormData.class)
+						CamundaFormField formField
 
 						JSONArray values = jsonArray[z].value
 
 						//Find and insert the given camunda:formField
 						for (int y = 0; y < values.size(); y++) {
+							formField = modelInstance.newInstance(CamundaFormField.class)
+
 							formField.camundaId = values[y].id
 							formField.camundaLabel = values[y].name
 							formField.camundaType = values[y].type
 							formField.camundaDefaultValue = values[y].value
 
 							//Add camunda:formField to camunda:formData
-							formData.addChildElement(formField)
+							formData.camundaFormFields.add(formField)
 						}
 
+						extensionElements.addChildElement(formData)
+
 						//Add camunda:formData to the given task
-						node.addChildElement(formData)
+						node.addChildElement(extensionElements)
 					}
 				}
 			}
