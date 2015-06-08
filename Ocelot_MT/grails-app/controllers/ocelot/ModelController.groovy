@@ -71,8 +71,6 @@ class ModelController extends RestfulController{
             model.user = session.user
             model.json = jsonReq.json
 
-            //println(model.json);
-
             model.save flush: true, failOnError: true
 
             render status: OK
@@ -105,8 +103,6 @@ class ModelController extends RestfulController{
 	}
 
 	def export() {
-
-        println "export $params"
 
 		def model = null
 

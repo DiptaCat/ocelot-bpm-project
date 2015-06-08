@@ -19,7 +19,6 @@
 <table class="table" style="max-width: 600px">
 	<thead class="table-header">
 	<tr>
-		<th>Id</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Default Value</th>
@@ -35,9 +34,6 @@
 		</td>
 	</tr>
 	<tr ng-repeat="field in item.fields">
-		<td>
-			<input type="text" ng-model="field.id">
-		</td>
 		<td>
 			<input ng-model="field.name" type="text">
 		</td>

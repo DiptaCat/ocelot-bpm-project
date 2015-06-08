@@ -63,7 +63,7 @@ class BootStrap {
 				}
 			}
 
-			def palette = new Palette(name: "TestPalette")
+			def palette = new Palette()
 
 			user.palette = palette
 			user.save flush: true, failOnError: true

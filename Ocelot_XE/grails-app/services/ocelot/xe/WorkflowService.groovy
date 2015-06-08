@@ -80,11 +80,11 @@ class WorkflowService {
 	private def extractBpmn(modelStream) throws Exception {
 
 		BpmnModelInstance modelInstance = Bpmn.readModelFromStream(modelStream)
-		//handleBpmnExtension(modelInstance)
+		handleBpmnExtension(modelInstance)
 		Bpmn.convertToString(modelInstance)
 	}
 
-	private def handleBpmnExtension(modelInstance) {
+	private static def handleBpmnExtension(modelInstance) {
 
 		Collection<ExtensionElements> extensionElements = modelInstance.getModelElementsByType(ExtensionElements.class)
 		println "Size => " + extensionElements.size()

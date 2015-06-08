@@ -6,10 +6,13 @@ import org.camunda.bpm.model.bpmn.Bpmn
 import org.camunda.bpm.model.bpmn.BpmnModelInstance
 import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants
 import org.camunda.bpm.model.bpmn.impl.instance.BaseElementImpl
+import org.camunda.bpm.model.bpmn.impl.instance.TaskImpl
 import org.camunda.bpm.model.bpmn.impl.instance.camunda.CamundaFormDataImpl
 import org.camunda.bpm.model.bpmn.instance.BaseElement
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements
 import org.camunda.bpm.model.bpmn.instance.StartEvent
+import org.camunda.bpm.model.bpmn.instance.Task
+import org.camunda.bpm.model.bpmn.instance.UserTask
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormData
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFormField
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty

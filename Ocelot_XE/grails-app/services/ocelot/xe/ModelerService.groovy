@@ -16,8 +16,6 @@ class ModelerService {
 
         def resp = rest.get(url)
 
-        println "$url -> ${resp.json}"
-
         resp.json
     }
 
@@ -28,8 +26,6 @@ class ModelerService {
         def url = grailsApplication.config.ocelot.mt.rest.export + "/" + modelId
 
         def resp = rest.get(url)
-
-        println "$url -> ${resp.json}"
 
         resp.json
     }

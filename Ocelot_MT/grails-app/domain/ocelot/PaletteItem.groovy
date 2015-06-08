@@ -9,8 +9,6 @@ class PaletteItem extends APaletteItem {
 	static belongsTo = [category: CategoryItem]
 
 	static constraints = {
-//        properties column: "properties", sqlType: "varchar(5000)"
-//        icon column: "icon", sqlType: "varchar(5000)"
 		props nullable: true
 	}
 

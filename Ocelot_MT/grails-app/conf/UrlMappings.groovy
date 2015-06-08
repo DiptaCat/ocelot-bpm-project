@@ -37,17 +37,12 @@ class UrlMappings {
 
         "/api/model/export/$id" {
             controller = 'model'
-            action = [POST: 'exportToFile']
+            action = [POST: 'exportToFile', GET: 'export']
         }
 
         "/api/models" {
             controller = 'model'
             action = [GET: 'list']
-        }
-
-        "/api/model/export/$id" {
-            controller = 'model'
-            action = [GET: 'export']
         }
 
         "/api/category"(controller: 'categoryItem', action: 'index', method: 'GET')
@@ -68,7 +63,6 @@ class UrlMappings {
 			action = [GET: 'show', PUT: 'update', POST: 'update', DELETE: 'delete']
 		}
 
-		/* TODO: Form Data */
 		"/api/formData" {
 			controller = 'formData'
 			action = [GET: 'list', POST: 'save']

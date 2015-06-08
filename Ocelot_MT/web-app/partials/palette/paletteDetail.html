@@ -49,10 +49,12 @@
 				<input ng-model="property.name" type="text" placeholder="name">
 			</td>
 			<td>
-				<select ng-model="property.type" ng-click="resetValue(property)">
-					<option value="string">String</option>
-					<option value="boolean">Boolean</option>
-				</select>
+				<div ng-if="property.name != 'formData' && property.name != 'formKey'">
+					<select ng-model="property.type" ng-click="resetValue(property)">
+						<option value="string">String</option>
+						<option value="boolean">Boolean</option>
+					</select>
+				</div>
 			</td>
 			<td>
 				<div ng-if="property.name == 'formData'">
