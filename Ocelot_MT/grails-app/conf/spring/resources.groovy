@@ -1,8 +1,10 @@
 import util.CategoryItemMarshaller
 import util.CustomObjectMarshallers
 import util.CustomPaletteItemMarshaller
+import util.ModelMarshaller
 import util.PaletteItemMarshaller
 import util.PaletteMarshaller
+import util.FormDataMarshaller
 
 // Place your Spring DSL code here
 beans = {
@@ -11,7 +13,9 @@ beans = {
 				new PaletteItemMarshaller(),
                 new CustomPaletteItemMarshaller(),
 				new PaletteMarshaller(),
-				new CategoryItemMarshaller()
+				new CategoryItemMarshaller(),
+				new FormDataMarshaller(),
+				new ModelMarshaller()
 		]
 	}
 }

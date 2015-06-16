@@ -1,0 +1,68 @@
+<div>
+	<div class="btn-group pull-right">
+		<a href="#/formData" class="btn btn-primary">List Forms</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-10">
+		<h2>{{item.key}}</h2>
+
+		Name:
+		<input type="text" ng-model="item.key">
+
+		Description:
+		<input type="text" ng-model="item.description">
+	</div>
+</div>
+
+<div>
+	<table class="table" style="max-width: 600px">
+		<thead class="table-header">
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default Value</th>
+			<th style="max-width: 50px; text-align: right">
+				<a class="btn btn-xs" ng-click="addField()"><i class="glyphicon glyphicon-plus"></i></a>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-show="item.fields.length <= 0">
+			<td>
+				No items found
+			</td>
+		</tr>
+		<tr ng-show="item.fields.length > 0" ng-repeat="field in item.fields">
+			<td>
+				<input ng-model="field.name" type="text" placeholder="name">
+			</td>
+			<td>
+				<select ng-model="field.type" ng-click="resetValue(field)">
+					<option value="string">string</option>
+					<option value="boolean">boolean</option>
+				</select>
+			</td>
+			<td>
+				<div ng-switch on="field.type">
+					<div ng-switch-when="boolean">
+						<input ng-model="field.value" type="checkbox">
+					</div>
+					<div ng-switch-when="string">
+						<input ng-model="field.value">
+					</div>
+				</div>
+			</td>
+			<td style="text-align: right; vertical-align: middle">
+				<a class="btn btn-xs" ng-click="removeField($index)"><i class="glyphicon glyphicon-trash"></i></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="row  bottom btn-group pull-right">
+	<a href="#/formData" class="btn btn-primary">Cancel</a>
+	<button type="button" class="btn btn-primary" ng-click="save()" translate="">Create New Form</button>
+</div>

@@ -7,125 +7,137 @@ import grails.transaction.Transactional
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
-class ModelController extends RestfulController{
+class ModelController extends RestfulController {
 
-    static responseFormats = ['json']
+	static responseFormats = ['json']
 
 	def propertyService
 
 	def index() {
-        params.max = Math.min(params.max ?: 10, 100)
-        params.offset = params.offset == null ? 0 : params.offset
+		params.max = Math.min(params.max ?: 10, 100)
+		params.offset = params.offset == null ? 0 : params.offset
 
-        def models = Model.findAllByUser(session.user, params)
+		def models = Model.findAllByUser(session.user, params)
 
+		if (models) {
+			respond models.collect { Model m ->
+				[
+						id         : m.id,
+						svg        : m.svg,
+						name       : m.name,
+						description: m.description
+				]
+			}
+		}
 
-        if(models){
-            respond models.collect{ Model m ->
-                [
-                        id : m.id,
-                        svg : m.svg,
-                        name : m.name,
-                        description: m.description
-                ]
-            }
-        }
-
-        []
+		[]
 	}
 
 	def show() {
-        //TODO check user
-        def member = session.user
+		//TODO check user
+		def member = session.user
 
-        def model = Model.get params.id
+		def model = Model.get params.id
 
-        if(model.user.id == member.id){
-            respond model
-        }else{
-            render status: UNAUTHORIZED
-        }
+		if (model.user.id == member.id) {
+			respond model
+		} else {
+			render status: UNAUTHORIZED
+		}
 
 
 	}
 
 	@Transactional
 	def save() {
-        def model = new Model(request.JSON)
-        model.user = session.user
+		def param = request.JSON
 
-        model.save flush: true, failOnError: true
+		def model = new Model()
 
-        render status: CREATED
+		model.name = param.name
+		model.description = param.description
+		model.xml = param.xml
+		model.json = param.json
+		model.svg = param.svg
+		model.user = session.user
+
+		model.save flush: true
+
+		render status: CREATED
 	}
 
 	@Transactional
 	def update() {
 
-        def model = Model.get params.id
+		def jsonReq = request.JSON
+		def model = Model.get params.id
 
-        if(model.user.name != session.user.name){
-            render status: UNAUTHORIZED
-        }else{
-            model.properties = request.JSON
-            model.user = session.user
-            model.save flush: true, failOnError: true
+		if (model.user.name != session.user.name) {
+			render status: UNAUTHORIZED
+		} else {
+			model.properties = jsonReq
+			model.user = session.user
+			model.json = jsonReq.json
 
-            render status: OK
-        }
+			model.save flush: true, failOnError: true
+
+			render status: OK
+		}
 	}
 
 
 	@Transactional
 	def delete() {
-        //TODO check user
-        def member = session.user
+		//TODO check user
+		def member = session.user
 
-        Model model = Model.get params.id
+		Model model = Model.get params.id
 
-        if(model == null){
-            render status: NOT_FOUND
-        }else if(model.user.id == member.id){
-            model.delete flush: true
-            render status: OK
-        }else{
-            render status: UNAUTHORIZED
-        }
-    }
+		if (model == null) {
+			render status: NOT_FOUND
+		} else if (model.user.id == member.id) {
+			model.delete flush: true
+			render status: OK
+		} else {
+			render status: UNAUTHORIZED
+		}
+	}
 
 	def list() {
 
-		def response = Model.list().collect{ [id: it.id, name: it.name, description: it.description] }
+		def response = Model.list().collect { [id: it.id, name: it.name, description: it.description] }
 		response = [numModels: Model.count, models: response]
 		respond response
 	}
 
 	def export() {
 
-        println "export $params"
-
 		def model = null
 
 		try {
 			model = Model.get(params.id)
 
-		} catch (e) { render status: BAD_REQUEST }
+		} catch (e) {
+			render status: BAD_REQUEST
+		}
 
 		if (model) {
 
-            def response = [
-                    id: model.id,
-                    name: model.name,
-                    description: model.description,
-                    dateCreated: model.dateCreated,
-                    lastUpdated: model.lastUpdated,
-                    temporal: model.temporal,
-                    svg: model.svg,
-                    bpmn: propertyService.injectAttributes(model.xml, model.json)
-            ]
+			def response = [
+					id         : model.id,
+					name       : model.name,
+					description: model.description,
+					dateCreated: model.dateCreated,
+					lastUpdated: model.lastUpdated,
+					temporal   : model.temporal,
+					svg        : model.svg,
+					bpmn       : propertyService.injectAttributes(model.xml, model.json)
+			]
 
-            respond response
+			respond response
 
-		} else { render status: NOT_FOUND }
+		} else {
+			render status: NOT_FOUND
+		}
 	}
 }

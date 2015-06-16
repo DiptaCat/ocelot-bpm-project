@@ -2,7 +2,7 @@
 	<div class="navbar-container" id="navbar-container">
 		<div class="navbar-header pull-left">
 			<div style="margin-top: 2px">
-				<a href="palette#/modelerIndex"><asset:image src="dipta_logo.png" width="168" height="43" alt="Diputació de Tarragona"/></a>
+				<a href="palette#/modelerIndex"><asset:image src="dipta_logo.png" width="168" height="43"/></a>
 			</div>
 		</div>
 

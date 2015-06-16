@@ -13,6 +13,9 @@
 
 		<li><a href="${createLink(uri: '/palette#/palette')}"><i class="glyphicon glyphicon-list-alt"></i> <span
 				class="menu-text">Palette</span></a></li>
+
+		<li><a href="${createLink(uri: '/palette#/formData')}"><i class=" glyphicon glyphicon-align-justify"></i> <span
+				class="menu-text">Form Data</span></a></li>
 	</ul>
 
 	<div class="sidebar-collapse" id="sidebar-collapse">

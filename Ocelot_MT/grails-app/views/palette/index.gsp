@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-app="ocelot">
+<div ng-app="ocelotApp">
 	<div ng-view></div>
 </div>
 

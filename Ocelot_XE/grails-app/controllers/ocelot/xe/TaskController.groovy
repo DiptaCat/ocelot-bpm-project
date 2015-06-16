@@ -4,86 +4,70 @@ import org.camunda.bpm.engine.task.Task
 
 class TaskController {
 
-    static allowedMethods = [update: "POST"]
+	static allowedMethods = [update: "POST"]
 
-    def workflowService
+	def workflowService
 
-    def index() {
+	def index() {
 
-        def assignedTasks = []
-        def at = workflowService.getAssignedTasks(session.user)
-        at.each { Task t ->
-            def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
-            def exp = new Expando(id:t.id, name:t.name, processId: t.processDefinitionId, processName:pd.name, date:t.createTime, assignee:t.assignee)
-            assignedTasks << exp
-        }
+		def assignedTasks = []
+		def at = workflowService.getAssignedTasks(session.user)
+		at.each { Task t ->
+			def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
+			def exp = new Expando(id: t.id, name: t.name, processId: t.processDefinitionId, processName: pd.name, date: t.createTime, assignee: t.assignee)
+			assignedTasks << exp
+		}
 
-        def unassignedTaks =[]
-        def ut = workflowService.getUnassignedTasks()
-        ut.each { Task t ->
-            def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
-            def exp = new Expando(id:t.id, name:t.name, processId: t.processDefinitionId, processName:pd.name, date:t.createTime)
-            unassignedTaks << exp
-        }
-        [assigned: assignedTasks, unassigned: unassignedTaks]
-    }
+		def unassignedTaks = []
+		def ut = workflowService.getUnassignedTasks()
+		ut.each { Task t ->
+			def pd = workflowService.getProcessDefinitionById(t.processDefinitionId)
+			def exp = new Expando(id: t.id, name: t.name, processId: t.processDefinitionId, processName: pd.name, date: t.createTime)
+			unassignedTaks << exp
+		}
+		[assigned: assignedTasks, unassigned: unassignedTaks]
+	}
 
-    def claim() {
-        workflowService.claimTask(params.id, session.user)
-        redirect(action:'index')
-    }
+	def claim() {
+		workflowService.claimTask(params.id, session.user)
+		redirect(action: 'index')
+	}
 
-    def unclaim() {
-        workflowService.unclaimTask(params.id)
-        redirect(action:'index')
-    }
+	def unclaim() {
+		workflowService.unclaimTask(params.id)
+		redirect(action: 'index')
+	}
 
-    def show(String id){
+	def show(String id) {
+		def vars = workflowService.getTaskVars(params.id)
 
-        //external form ?
-        def formKey = workflowService.getTaskFormKey(params.id)
+		def formData = workflowService.getTaskFormData(params.id)
+		formData.each { property ->
+			property.defaultValue = vars."${property.id}"
+		}
 
-        if (formKey) {
-            redirect uri:"$formKey/$id"
-        }
-        else { //or generate form
+		[formData: formData, taskId: params.id]
+	}
 
-            def vars = workflowService.getTaskVars(params.id)
+	def update() {
 
-            def formData = workflowService.getTaskFormData(params.id)
-            formData.each { property ->
-                property.defaultValue = vars."${property.id}"
-            }
+		def formData = workflowService.getTaskFormData(params.taskId)
 
-            [formData:formData, taskId:params.id]
-        }
-    }
+		def vars = [:]
+		formData.each { property ->
 
-    def update(){
+			if (property.type.toString().contains('BooleanFormType')) {
+				vars."${property.id}" = (params."${property.id}"?.toLowerCase() == 'on')
+			} else vars."${property.id}" = params."${property.id}"
 
-        def formData = workflowService.getTaskFormData(params.taskId)
+		}
 
-        def vars = [:]
-        formData.each { property ->
+		if (params.save) {
+			workflowService.saveTask(params.taskId, vars, session.user)
+		} else {
+			workflowService.completeTask(params.taskId, vars, session.user)
+		}
+		redirect(action: 'index')
 
-            if (property.type.toString().contains('BooleanFormType')) {
-                vars."${property.id}" = (params."${property.id}"?.toLowerCase() == 'on')
-            }
-            else vars."${property.id}" = params."${property.id}"
-
-        }
-
-        if (params.save) {
-            workflowService.saveTask(params.taskId, vars, session.user)
-        }
-        else {
-            workflowService.completeTask(params.taskId, vars, session.user)
-        }
-        redirect(action:'index')
-
-    }
-
-
-
-
+	}
 }

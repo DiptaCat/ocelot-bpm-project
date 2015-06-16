@@ -8,7 +8,7 @@
  * Created by sergi on 08/08/14.
  */
 
-var app = angular.module('ocelot', [
+var ocelotApp = angular.module('ocelotApp', [
 	'ui.bootstrap',
 	'ngRoute',
 	'ocelotControllers',
@@ -17,7 +17,7 @@ var app = angular.module('ocelot', [
 	'ocelotFilters'
 ]);
 
-app.config(function ($routeProvider) {
+ocelotApp.config(function ($routeProvider) {
 	$routeProvider.
 		when('/palette', {
 			templateUrl: 'partials/palette/paletteList.html',
@@ -39,6 +39,18 @@ app.config(function ($routeProvider) {
             templateUrl: 'partials/modeler/modelerIndex.html',
             controller: 'ModelCtrl'
         }).
+		when('/formData', {	//TODO: make sure the controller is correct
+			templateUrl: 'partials/formData/formDataList.html',
+			controller: 'FormCtrl'
+		}).
+		when('/formData/create', {
+			templateUrl: 'partials/formData/formDataCreate.html',
+			controller: 'CreateFormCtrl'
+		}).
+		when('/formData/:formId', {
+			templateUrl: 'partials/formData/formDataDetail.html',
+			controller: 'DetailFormCtrl'
+		}).
 		otherwise({
 			redirectTo: '/palette'
 		});

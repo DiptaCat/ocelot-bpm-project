@@ -20,14 +20,14 @@
 		<select ng-init="category = item.category" ng-model="item.category"
 				ng-options="category.name for category in categories track by category.id"></select>
 
-        Level:
-        <select ng-model="item.level">
-            <option value=1>Level 1</option>
-            <option value=2>Level 2</option>
-            <option value=3>Level 3</option>
-            <option value=4>Level 4</option>
-            <option value=5>Level 5</option>
-        </select>
+		Level:
+		<select ng-model="item.level">
+			<option value=1>Level 1</option>
+			<option value=2>Level 2</option>
+			<option value=3>Level 3</option>
+			<option value=4>Level 4</option>
+			<option value=5>Level 5</option>
+		</select>
 
 		Activated:
 		<td ng-click="changeActivated()">{{item.activated | checkmark}}</td>
@@ -46,26 +46,31 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-show="item.props.length <= 0">
+		<tr ng-show="!item.props || item.props.length <= 0">
 			<td>
 				No items found
 			</td>
 		</tr>
-		<tr ng-show="item.props.length > 0" ng-repeat="property in item.props">
+		<tr ng-show="item.props && item.props.length > 0" ng-repeat="property in item.props">
 			<td>
 				<input ng-model="property.name" type="text" placeholder="name">
 			</td>
 			<td>
-				<select ng-model="property.type" ng-click="resetValue(property)">
-					<option value="string">string</option>
-					<option value="boolean">boolean</option>
-				</select>
+				<div ng-if="property.name != 'formData' && property.name != 'formKey'">
+					<select ng-model="property.type" ng-click="resetValue(property)">
+						<option value="string">String</option>
+						<option value="boolean">Boolean</option>
+					</select>
+				</div>
 			</td>
 			<td>
 				<div ng-if="property.name == 'formData'">
-					<button ng-click="addFormField(model)" class="btn btn-sm btn-info">Add Form Field</button>
+					<button ng-click="addFormField(property)" class="btn btn-sm btn-info">Add Form Field</button>
 				</div>
-				<div ng-if="property.name != 'formData'">
+				<div ng-if="property.name == 'formKey'">
+					<input ng-model="property.value" type="text" placeholder="form key">
+				</div>
+				<div ng-if="property.name != 'formData' && property.name != 'formKey'">
 					<div ng-switch on="property.type">
 						<div ng-switch-when="boolean">
 							<input ng-model="property.value" type="checkbox">
