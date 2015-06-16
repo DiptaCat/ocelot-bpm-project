@@ -246,6 +246,7 @@ ocelotControllers.controller('ModelerCtrl', function ($scope, $http, Palette, Pa
 	}
 
 	console.log("Bpmn Info:", $scope.bpmnInfo);
+
 	//Get all categories available
 	$scope.paletteId = 1;
 	$scope.categoryGroup = {};
