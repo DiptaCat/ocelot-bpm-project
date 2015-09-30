@@ -73,8 +73,7 @@ grails.project.dependency.resolution = {
 
         // other plugins
         compile ":rest-client-builder:2.1.0"
-        compile ":camunda:0.4.0"
-
+        compile ":camunda:0.5.0"
 
     }
 }
